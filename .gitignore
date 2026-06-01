@@ -7,12 +7,16 @@ local.properties
 
 # Log/OS Files
 *.log
+*.db
+*.sqlite
 
 # Android Studio generated files and folders
 captures/
 .externalNativeBuild/
 .cxx/
 *.apk
+*.ap_
+*.aab
 output.json
 
 # IntelliJ
@@ -31,3 +35,21 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
+.DS_Store
+
+/local.properties
