@@ -23,3 +23,4 @@ rootProject.name = "Arkham Cards"
 include(":app")
 include(":domain")
 include(":data")
+include(":di")
