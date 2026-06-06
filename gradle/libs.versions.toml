@@ -21,6 +21,9 @@ serializationJson = "1.11.0"
 collectionsImmutable = "0.4.0"
 coroutines = "1.11.0"
 
+firebaseBom = "34.14.0"
+crashlytics = "3.0.7"
+perf = "2.0.2"
 gms = "4.4.4"
 playServicesBase = "18.10.0"
 
@@ -77,6 +80,12 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 # Apollo
 apollo-runtime = { group = "com.apollographql.apollo", name = "apollo-runtime", version.ref = "apollo" }
 
+# Firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
+
 # UI extras
 compose-charts = { group = "io.github.ehsannarmani", name = "compose-charts", version.ref = "charts" }
 reorderable = { group = "sh.calvin.reorderable", name = "reorderable", version.ref = "reorderable" }
@@ -107,4 +116,6 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
 gms = { id = "com.google.gms.google-services", version.ref = "gms" }
+crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
+performance = { id = "com.google.firebase.firebase-perf", version.ref = "perf" }
 

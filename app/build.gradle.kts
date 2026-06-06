@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.gms)
+    alias(libs.plugins.crashlytics)
+    alias(libs.plugins.performance)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -52,7 +54,7 @@ kotlin {
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":data"))
+    implementation(project(":di"))
 
     //Import In-app updates
     implementation(libs.play.app.update)
@@ -75,6 +77,12 @@ dependencies {
 
     //Import reorderable lists
     implementation(libs.reorderable)
+
+    //Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.perf)
 
     //Hilt
     implementation(libs.hilt.android)
