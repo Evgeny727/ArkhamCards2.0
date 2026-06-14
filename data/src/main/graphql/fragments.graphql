@@ -1,0 +1,150 @@
+fragment TabooSet on taboo_set {
+  id
+  name
+  code
+  active
+  date
+  card_count
+  cards {
+    code
+  }
+  current
+}
+fragment EncounterSet on card_encounter_set {
+  code
+  name
+}
+fragment Pack on pack {
+  code
+  cycle_code
+  real_name
+  position
+  official
+  reprint
+  chapter
+}
+fragment Cycle on cycle {
+  code
+  real_name
+  position
+  official
+  chapter
+}
+fragment SingleCard on all_card {
+  advanced_for
+  alt_art_investigator
+  alternate_of_code
+  alternate_required_code
+  back_illustrator
+  back_link_id
+  backimageurl
+  clues
+  clues_fixed
+  code
+  cost
+  customization_options
+  deck_limit
+  deck_options
+  deck_requirements
+  doom
+  double_sided
+  duplicate_of_code
+  encounter_code
+  encounter_position
+  enemy_damage
+  enemy_horror
+  enemy_fight
+  enemy_evade
+  errata_date
+  exceptional
+  exile
+  faction_code
+  faction2_code
+  faction3_code
+  gender
+  heals_damage
+  heals_horror
+  health
+  health_per_investigator
+  hidden
+  id
+  illustrator
+  imageurl
+  investigator_id
+  is_unique
+  linked
+  linked_card {
+    code
+  }
+  myriad
+  official
+  pack_code
+  pack_position
+  parallel_of_code
+  permanent
+  position
+  preview
+  quantity
+  real_back_flavor
+  real_back_name
+  real_back_subname
+  real_back_text
+  real_back_traits
+  real_customization_change
+  real_customization_text
+  real_encounter_set_name
+  real_flavor
+  real_name
+  real_pack_name
+  real_slot
+  real_subname
+  real_taboo_original_back_text
+  real_taboo_original_text
+  real_taboo_text_change
+  real_text
+  real_traits
+  replacement_for
+  reprint_of_code
+  restrictions
+  sanity
+  shroud
+  side_deck_options
+  side_deck_requirements
+  signature_for
+  simple_deck_requirements
+  simple_side_deck_requirements
+  skill_agility
+  skill_combat
+  skill_intellect
+  skill_wild
+  skill_willpower
+  spoiler
+  stage
+  subtype_code
+  taboo_placeholder
+  taboo_set_id
+  taboo_xp
+  tags
+  type_code
+  vengeance
+  victory
+  xp
+}
+fragment CoreCardText on all_card_text {
+  back_flavor
+  back_name
+  back_subname
+  back_text
+  back_traits
+  customization_change
+  customization_text
+  flavor
+  name
+  slot
+  subname
+  taboo_original_back_text
+  taboo_original_text
+  taboo_text_change
+  text
+  traits
+}

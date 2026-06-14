@@ -1,3 +1,6 @@
+@file:OptIn(ApolloExperimental::class)
+
+import com.apollographql.apollo.annotations.ApolloExperimental
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -68,7 +71,8 @@ apollo {
         packageName.set("com.arkhamcards.v2")
         schemaFiles.from("src/main/graphql/schema.graphqls")
         addTypename.set("always")
+        generateApolloEnums.set(true)
         mapScalarToKotlinString("timestamptz")
-        //mapScalar("jsonb", "kotlinx.serialization.json.JsonElement", "com.arkhamcards.v2.data.objects.JsonElementAdapter")
+        mapScalar("jsonb", "kotlinx.serialization.json.JsonElement", "com.arkhamcards.v2.data.objects.JsonElementAdapter")
     }
 }

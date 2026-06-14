@@ -1,0 +1,79 @@
+package com.arkhamcards.v2.data.mapper.db
+
+import com.arkhamcards.v2.GetTranslationDataQuery
+import com.arkhamcards.v2.data.local.meta.CycleEntity
+import com.arkhamcards.v2.data.local.meta.EncounterSetEntity
+import com.arkhamcards.v2.data.local.meta.FactionEntity
+import com.arkhamcards.v2.data.local.meta.PackEntity
+import com.arkhamcards.v2.data.local.meta.TabooSetEntity
+import com.arkhamcards.v2.fragment.Cycle
+import com.arkhamcards.v2.fragment.EncounterSet
+import com.arkhamcards.v2.fragment.Pack
+import com.arkhamcards.v2.fragment.TabooSet
+import com.arkhamcards.v2.type.Faction_name
+
+/**
+ * Extension function to convert [Cycle] to [CycleEntity]
+ */
+fun Cycle.toEntity(name: String): CycleEntity {
+    return CycleEntity(
+        code = code,
+        realName = real_name,
+        name = name,
+        position = position,
+        official = official,
+        chapter = chapter,
+    )
+}
+
+/**
+ * Extension function to convert [Pack] to [PackEntity]
+ */
+fun Pack.toEntity(name: String): PackEntity {
+    return PackEntity(
+        code = code,
+        cycleCode = cycle_code,
+        realName = real_name,
+        name = name,
+        position = position,
+        official = official,
+        reprint = reprint,
+        chapter = chapter,
+    )
+}
+
+/**
+ * Extension function to convert [EncounterSet] to [EncounterSetEntity]
+ */
+fun EncounterSet.toEntity(): EncounterSetEntity {
+    return EncounterSetEntity(
+        code = code,
+        name = name,
+    )
+}
+
+/**
+ * Extension function to convert [TabooSet] to [TabooSetEntity]
+ */
+fun TabooSet.toEntity(): TabooSetEntity {
+    return TabooSetEntity(
+        id = id,
+        name = name,
+        code = code,
+        active = active,
+        date = date,
+        cardCount = card_count,
+        cards = cards.map { it.code },
+        current = current
+    )
+}
+
+/**
+ * Extension function to convert [GetTranslationDataQuery.Faction_name] to [FactionEntity]
+ */
+fun GetTranslationDataQuery.Faction_name.toEntity(): FactionEntity {
+    return FactionEntity(
+        code = code,
+        name = name
+    )
+}
