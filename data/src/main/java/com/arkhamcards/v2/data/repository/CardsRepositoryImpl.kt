@@ -2,6 +2,7 @@ package com.arkhamcards.v2.data.repository
 
 import androidx.room.withTransaction
 import com.arkhamcards.v2.data.local.ArkhamDatabase
+import com.arkhamcards.v2.data.local.cards.patches.CardPatchRegistry
 import com.arkhamcards.v2.data.mapper.db.toEntity
 import com.arkhamcards.v2.data.remote.CardsRemoteDataSource
 import com.arkhamcards.v2.domain.TimestampNormilizer
@@ -22,11 +23,19 @@ class CardsRepositoryImpl @Inject constructor(
         val playerCards = cardsRemoteDataSource.fetchAllPlayerCards(locale).dataAssertNoErrors
         val encounterCards = cardsRemoteDataSource.fetchAllEncounterCards(locale).dataAssertNoErrors
 
+        val cardPatches = CardPatchRegistry()
+
         val playerEntities = playerCards.all_card.map {
-            it.singleCard.toEntity(it.translations[0].coreCardText)
+            it.singleCard.toEntity(
+                it.translations[0].coreCardText,
+                cardPatches.resolve(it.singleCard.code
+                ))
         }
         val encounterEntities = encounterCards.all_card.map {
-            it.singleCard.toEntity(it.translations[0].coreCardText)
+            it.singleCard.toEntity(
+                it.translations[0].coreCardText,
+                cardPatches.resolve(it.singleCard.code)
+            )
         }
         val cardTypeEntities = translationData.card_type_name.map { it.toEntity() }
         val cardSubtypeEntities = translationData.card_subtype_name.map { it.toEntity() }

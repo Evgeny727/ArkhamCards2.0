@@ -6,14 +6,17 @@ import com.arkhamcards.v2.data.local.cards.CardSubtypeEntity
 import com.arkhamcards.v2.data.local.cards.CardTypeEntity
 import com.arkhamcards.v2.data.local.cards.Skills
 import com.arkhamcards.v2.data.local.cards.Translation
+import com.arkhamcards.v2.data.local.cards.patches.CardPatch
+import com.arkhamcards.v2.data.local.cards.patches.resolve
 import com.arkhamcards.v2.fragment.CoreCardText
 import com.arkhamcards.v2.fragment.SingleCard
 
 /**
  * Extension function to convert [SingleCard] with [CoreCardText] to [CardEntity]
  */
-fun SingleCard.toEntity(coreCardText: CoreCardText): CardEntity {
+fun SingleCard.toEntity(coreCardText: CoreCardText, cardPatch: CardPatch): CardEntity {
     val translation = coreCardText.toTranslation()
+    val patchValues = cardPatch.values
     return CardEntity(
         id = id,
         code = code,
@@ -21,24 +24,27 @@ fun SingleCard.toEntity(coreCardText: CoreCardText): CardEntity {
         altArtInvestigator = alt_art_investigator,
         alternateOfCode = alternate_of_code,
         alternateRequiredCode = alternate_required_code,
-        backLinkId = back_link_id,
+        backLinkId = patchValues.backLinkId.resolve(back_link_id),
         backIllustrator = back_illustrator,
         clues = clues,
         cluesFixed = clues_fixed,
         cost = cost,
         customizationOptions = customization_options,
-        deckLimit = deck_limit,
+        deckLimit = patchValues.deckLimit.resolve(deck_limit),
         deckOptions = deck_options,
         deckRequirements = deck_requirements,
         doom = doom,
+        doomPerInvestigator = patchValues.doomPerInvestigator.resolve(),
         doubleSided = double_sided,
-        duplicateOfCode = duplicate_of_code,
+        duplicateOfCode = patchValues.duplicateOf.resolve(duplicate_of_code),
         encounterCode = encounter_code,
         encounterPosition = encounter_position,
         enemyDamage = enemy_damage,
         enemyHorror = enemy_horror,
         enemyFight = enemy_fight,
+        enemyFightPerInvestigator = patchValues.enemyFightPerInvestigator.resolve(),
         enemyEvade = enemy_evade,
+        enemyEvadePerInvestigator = patchValues.enemyEvadePerInvestigator.resolve(),
         errataDate = errata_date,
         exceptional = exceptional,
         exile = exile,
@@ -46,16 +52,13 @@ fun SingleCard.toEntity(coreCardText: CoreCardText): CardEntity {
         faction2Code = faction2_code,
         faction3Code = faction3_code,
         gender = gender?.rawValue,
-        healsDamage = heals_damage,
-        healsHorror = heals_horror,
+        gameBeginAttribute = patchValues.gameBeginAttribute.resolve(),
         health = health,
         healthPerInvestigator = health_per_investigator,
-        hidden = hidden,
+        hidden = patchValues.hidden.resolve(hidden),
         illustrator = illustrator,
         investigatorId = investigator_id,
         isUnique = is_unique,
-        linked = linked,
-        linkedCard = linked_card?.code,
         myriad = myriad,
         official = official,
         packCode = pack_code,
@@ -63,7 +66,7 @@ fun SingleCard.toEntity(coreCardText: CoreCardText): CardEntity {
         parallelOfCode = parallel_of_code,
         permanent = permanent,
         position = position,
-        preview = preview,
+        preview = patchValues.preview.resolve(preview),
         realBackFlavor = real_back_flavor,
         realBackName = real_back_name,
         realBackSubname = real_back_subname,
@@ -83,10 +86,11 @@ fun SingleCard.toEntity(coreCardText: CoreCardText): CardEntity {
         realText = real_text,
         realTraits = real_traits,
         replacementFor = replacement_for,
-        reprintOfCode = reprint_of_code,
+        reprintOfCode = patchValues.reprintOf.resolve(reprint_of_code),
         restrictions = restrictions,
         sanity = sanity,
-        shroud = shroud,
+        shroud = patchValues.shroud.resolve(shroud),
+        shroudPerInvestigator = patchValues.shroudPerInvestigator.resolve(),
         sideDeckOptions = side_deck_options,
         sideDeckRequirements = side_deck_requirements,
         signatureFor = signature_for,
@@ -94,7 +98,7 @@ fun SingleCard.toEntity(coreCardText: CoreCardText): CardEntity {
         simpleSideDeckRequirements = simple_side_deck_requirements,
         skills = Skills(
             skillWillpower = skill_willpower,
-            skillIntellect = skill_intellect,
+            skillIntellect = patchValues.skillIntellect.resolve(skill_intellect),
             skillCombat = skill_combat,
             skillAgility = skill_agility,
             skillWild = skill_wild
@@ -102,7 +106,7 @@ fun SingleCard.toEntity(coreCardText: CoreCardText): CardEntity {
         spoiler = spoiler,
         stage = stage,
         subTypeCode = subtype_code,
-        tags = tags,
+        tags = patchValues.tags.resolve(tags),
         xp = xp,
         vengeance = vengeance,
         victory = victory,

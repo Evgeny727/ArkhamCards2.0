@@ -77,6 +77,8 @@ data class CardEntity(
     @ColumnInfo("deck_requirements")
     val deckRequirements: JsonElement?,
     val doom: Int?,
+    @ColumnInfo("doom_per_investigator")
+    val doomPerInvestigator: Boolean?,
     @ColumnInfo("double_sided")
     val doubleSided: Boolean?,
     @ColumnInfo("duplicate_of_code")
@@ -91,8 +93,12 @@ data class CardEntity(
     val enemyHorror: Int?,
     @ColumnInfo("enemy_fight")
     val enemyFight: Int?,
+    @ColumnInfo("enemy_fight_per_investigator")
+    val enemyFightPerInvestigator: Boolean?,
     @ColumnInfo("enemy_evade")
     val enemyEvade: Int?,
+    @ColumnInfo("enemy_evade_per_investigator")
+    val enemyEvadePerInvestigator: Boolean?,
     @ColumnInfo("errata_date")
     val errataDate: String?,
     val exceptional: Boolean?,
@@ -104,10 +110,8 @@ data class CardEntity(
     @ColumnInfo("faction3_code")
     val faction3Code: String?,
     val gender: String?,
-    @ColumnInfo("heals_damage")
-    val healsDamage: Boolean?,
-    @ColumnInfo("heals_horror")
-    val healsHorror: Boolean?,
+    @ColumnInfo("game_begin_attribute")
+    val gameBeginAttribute: String?,
     val health: Int?,
     @ColumnInfo("health_per_investigator")
     val healthPerInvestigator: Boolean?,
@@ -117,9 +121,6 @@ data class CardEntity(
     val investigatorId: String?,
     @ColumnInfo("is_unique")
     val isUnique: Boolean?,
-    val linked: Boolean?,
-    @ColumnInfo("linked_card")
-    val linkedCard: String?,
     val myriad: Boolean?,
     val official: Boolean,
     @ColumnInfo("pack_code")
@@ -174,6 +175,8 @@ data class CardEntity(
     val restrictions: JsonElement?,
     val sanity: Int?,
     val shroud: Int?,
+    @ColumnInfo("shroud_per_investigator")
+    val shroudPerInvestigator: Boolean?,
     @ColumnInfo("side_deck_options")
     val sideDeckOptions: JsonElement?,
     @ColumnInfo("side_deck_requirements")

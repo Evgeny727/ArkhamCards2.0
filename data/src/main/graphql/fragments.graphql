@@ -62,8 +62,6 @@ fragment SingleCard on all_card {
   faction2_code
   faction3_code
   gender
-  heals_damage
-  heals_horror
   health
   health_per_investigator
   hidden
@@ -72,10 +70,6 @@ fragment SingleCard on all_card {
   imageurl
   investigator_id
   is_unique
-  linked
-  linked_card {
-    code
-  }
   myriad
   official
   pack_code
