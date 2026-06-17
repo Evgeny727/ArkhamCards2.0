@@ -3,11 +3,11 @@
 
     <style name="Theme.ArkhamCards" parent="Theme.AppCompat.Light.NoActionBar" />
 
-    <style name="Theme.RangersCards.Splash" parent="Theme.SplashScreen">
+    <style name="Theme.ArkhamCards.Splash" parent="Theme.SplashScreen">
         <!-- Set the splash screen background color -->
         <item name="windowSplashScreenBackground">@color/ic_launcher_background</item>
         <!-- Set the splash screen icon drawable -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.ArkhamCards</item>
     </style>
 </resources>

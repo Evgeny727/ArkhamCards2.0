@@ -1,9 +1,9 @@
 package com.arkhamcards.v2
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -43,7 +43,7 @@ import com.google.firebase.crashlytics.crashlytics
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: AppViewModel
     private lateinit var firebaseAnalytics: FirebaseAnalytics
@@ -60,7 +60,6 @@ class MainActivity : ComponentActivity() {
         if (isPlayServicesAvailable == ConnectionResult.SUCCESS) maybeCheckForUpdate()
 
         enableEdgeToEdge()
-
         firebaseAnalytics = Firebase.analytics
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN) {}
         val crashlytics = Firebase.crashlytics
