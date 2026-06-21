@@ -91,7 +91,9 @@ class MainActivity : AppCompatActivity() {
                 isDataLoaded = true
                 ArkhamCardsTheme(currentTheme, langTag) {
                     Scaffold(
-                        modifier = Modifier.fillMaxSize().safeContentPadding()
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .safeContentPadding()
                     ) { innerPadding ->
                         val cardsState by viewModel.cardsSyncState.collectAsState()
                         LaunchedEffect(Unit) {

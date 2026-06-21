@@ -14,13 +14,12 @@ import com.arkhamcards.v2.data.local.meta.FactionEntity
 import com.arkhamcards.v2.data.local.meta.PackEntity
 import com.arkhamcards.v2.data.local.meta.TabooSetEntity
 import com.arkhamcards.v2.data.objects.JsonElementConverter
-import com.arkhamcards.v2.data.objects.StringListConverter
 
 @Database(entities = [CardEntity::class, CycleEntity::class, PackEntity::class, EncounterSetEntity::class, TabooSetEntity::class,
     FactionEntity::class, CardTypeEntity::class, CardSubtypeEntity::class],
     version = 1,
     exportSchema = false)
-@TypeConverters(JsonElementConverter::class, StringListConverter::class)
+@TypeConverters(JsonElementConverter::class)
 abstract class ArkhamDatabase : RoomDatabase() {
     abstract fun cardsDao(): CardsDao
     abstract fun metaDao(): MetaDao

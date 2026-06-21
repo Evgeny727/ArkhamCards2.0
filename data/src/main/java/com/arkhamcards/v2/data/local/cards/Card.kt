@@ -3,7 +3,13 @@ package com.arkhamcards.v2.data.local.cards
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.arkhamcards.v2.data.local.meta.EncounterSetEntity
+import com.arkhamcards.v2.data.local.meta.FactionEntity
+import com.arkhamcards.v2.data.local.meta.PackEntity
+import com.arkhamcards.v2.data.local.meta.TabooSetEntity
 import kotlinx.serialization.json.JsonElement
 
 data class Skills(
@@ -48,7 +54,71 @@ data class Translation(
     val traits: String?
 )
 
-@Entity(tableName = "card")
+@Entity(
+    tableName = "card",
+    foreignKeys = [
+        ForeignKey(
+            entity = EncounterSetEntity::class,
+            parentColumns = ["code"],
+            childColumns = ["encounter_code"],
+            deferred = true,
+        ),
+        ForeignKey(
+            entity = FactionEntity::class,
+            parentColumns = ["code"],
+            childColumns = ["faction_code"],
+            deferred = true,
+        ),
+        ForeignKey(
+            entity = FactionEntity::class,
+            parentColumns = ["code"],
+            childColumns = ["faction2_code"],
+            deferred = true,
+        ),
+        ForeignKey(
+            entity = FactionEntity::class,
+            parentColumns = ["code"],
+            childColumns = ["faction3_code"],
+            deferred = true,
+        ),
+        ForeignKey(
+            entity = PackEntity::class,
+            parentColumns = ["code"],
+            childColumns = ["pack_code"],
+            deferred = true,
+        ),
+        ForeignKey(
+            entity = CardSubtypeEntity::class,
+            parentColumns = ["code"],
+            childColumns = ["subtype_code"],
+            deferred = true,
+        ),
+        ForeignKey(
+            entity = CardTypeEntity::class,
+            parentColumns = ["code"],
+            childColumns = ["type_code"],
+            deferred = true,
+        ),
+        ForeignKey(
+            entity = TabooSetEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["taboo_set_id"],
+            deferred = true,
+        ),
+    ],
+    indices = [
+        Index("encounter_code"),
+        Index("faction_code"),
+        Index("faction2_code"),
+        Index("faction3_code"),
+        Index("pack_code"),
+        Index("subtype_code"),
+        Index("type_code"),
+        Index("code"),
+        Index("taboo_set_id"),
+        Index(value = ["taboo_set_id", "code"], unique = true)
+    ]
+)
 data class CardEntity(
     @PrimaryKey val id: String,
     val code: String,
@@ -183,10 +253,6 @@ data class CardEntity(
     val sideDeckRequirements: JsonElement?,
     @ColumnInfo("signature_for")
     val signatureFor: String?,
-    @ColumnInfo("simple_deck_requirements")
-    val simpleDeckRequirements: JsonElement?,
-    @ColumnInfo("simple_side_deck_requirements")
-    val simpleSideDeckRequirements: JsonElement?,
     @Embedded
     val skills: Skills?,
     val spoiler: Boolean?,
@@ -208,8 +274,6 @@ data class CardEntity(
     //Taboo fields
     @ColumnInfo("taboo_xp")
     val tabooXp: Int?,
-    @ColumnInfo("taboo_placeholder")
-    val tabooPlaceholder: Boolean?,
     @ColumnInfo("taboo_set_id")
     val tabooSetId: Int?,
 

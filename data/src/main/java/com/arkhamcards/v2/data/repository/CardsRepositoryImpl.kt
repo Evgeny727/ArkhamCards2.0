@@ -55,9 +55,9 @@ class CardsRepositoryImpl @Inject constructor(
             metaDao.upsertPacks(packEntities)
             metaDao.upsertEncounterSets(encounterSetEntities)
             metaDao.upsertTabooSets(tabooSetEntities)
-            cardsDao.upsertAllCards(playerEntities + encounterEntities)
             cardsDao.upsertCardTypes(cardTypeEntities)
             cardsDao.upsertCardSubtypes(cardSubtypeEntities)
+            cardsDao.upsertAllCards(playerEntities + encounterEntities)
         }
 
         val updatedAt = playerCards.all_card_updated_by_version.getOrNull(0)

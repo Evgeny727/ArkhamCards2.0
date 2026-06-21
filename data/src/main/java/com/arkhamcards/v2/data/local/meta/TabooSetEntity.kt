@@ -13,6 +13,5 @@ data class TabooSetEntity(
     val date: String?,
     @ColumnInfo(name = "card_count")
     val cardCount: Int?,
-    val cards: List<String>, // List of card codes
     val current: Boolean
 )

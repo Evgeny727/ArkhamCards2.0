@@ -63,7 +63,6 @@ fun TabooSet.toEntity(): TabooSetEntity {
         active = active,
         date = date,
         cardCount = card_count,
-        cards = cards.map { it.code },
         current = current
     )
 }

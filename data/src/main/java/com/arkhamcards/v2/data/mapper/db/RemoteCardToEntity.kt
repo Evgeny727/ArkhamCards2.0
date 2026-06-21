@@ -32,7 +32,7 @@ fun SingleCard.toEntity(coreCardText: CoreCardText, cardPatch: CardPatch): CardE
         customizationOptions = customization_options,
         deckLimit = patchValues.deckLimit.resolve(deck_limit),
         deckOptions = deck_options,
-        deckRequirements = deck_requirements,
+        deckRequirements = simple_deck_requirements,
         doom = doom,
         doomPerInvestigator = patchValues.doomPerInvestigator.resolve(),
         doubleSided = double_sided,
@@ -92,10 +92,8 @@ fun SingleCard.toEntity(coreCardText: CoreCardText, cardPatch: CardPatch): CardE
         shroud = patchValues.shroud.resolve(shroud),
         shroudPerInvestigator = patchValues.shroudPerInvestigator.resolve(),
         sideDeckOptions = side_deck_options,
-        sideDeckRequirements = side_deck_requirements,
+        sideDeckRequirements = simple_side_deck_requirements,
         signatureFor = signature_for,
-        simpleDeckRequirements = simple_deck_requirements,
-        simpleSideDeckRequirements = simple_side_deck_requirements,
         skills = Skills(
             skillWillpower = skill_willpower,
             skillIntellect = patchValues.skillIntellect.resolve(skill_intellect),
@@ -105,7 +103,10 @@ fun SingleCard.toEntity(coreCardText: CoreCardText, cardPatch: CardPatch): CardE
         ),
         spoiler = spoiler,
         stage = stage,
-        subTypeCode = subtype_code,
+        subTypeCode = when(code) {
+            "zcxc_00264" -> "weakness" //Fix subtype for fanmade card
+            else -> subtype_code
+        },
         tags = patchValues.tags.resolve(tags),
         xp = xp,
         vengeance = vengeance,
@@ -115,8 +116,10 @@ fun SingleCard.toEntity(coreCardText: CoreCardText, cardPatch: CardPatch): CardE
         imageurl = imageurl,
         backimageurl = backimageurl,
         tabooXp = taboo_xp,
-        tabooPlaceholder = taboo_placeholder,
-        tabooSetId = taboo_set_id,
+        tabooSetId = when(taboo_set_id) {
+            0 -> null //Fix taboo set id for original cards which are/were in any taboo set
+            else -> taboo_set_id
+        },
         translation = translation
     )
 }
