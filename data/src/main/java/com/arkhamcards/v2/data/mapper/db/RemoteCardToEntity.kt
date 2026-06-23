@@ -8,15 +8,29 @@ import com.arkhamcards.v2.data.local.cards.Skills
 import com.arkhamcards.v2.data.local.cards.Translation
 import com.arkhamcards.v2.data.local.cards.patches.CardPatch
 import com.arkhamcards.v2.data.local.cards.patches.resolve
+import com.arkhamcards.v2.data.local.meta.CycleEntity
+import com.arkhamcards.v2.data.local.meta.PackEntity
+import com.arkhamcards.v2.data.objects.CardSortOrder.sortByFactionOrder
+import com.arkhamcards.v2.data.objects.CardSortOrder.sortBySlotOrder
+import com.arkhamcards.v2.data.objects.CardSortOrder.sortByTypeOrder
+import com.arkhamcards.v2.data.objects.normalizeForSearch
 import com.arkhamcards.v2.fragment.CoreCardText
 import com.arkhamcards.v2.fragment.SingleCard
 
 /**
  * Extension function to convert [SingleCard] with [CoreCardText] to [CardEntity]
  */
-fun SingleCard.toEntity(coreCardText: CoreCardText, cardPatch: CardPatch): CardEntity {
+fun SingleCard.toEntity(
+    coreCardText: CoreCardText,
+    cardPatch: CardPatch,
+    cycles: Map<String, CycleEntity>,
+    packs: Map<String, PackEntity>,
+    locale: String
+): CardEntity {
     val translation = coreCardText.toTranslation()
     val patchValues = cardPatch.values
+    val pack = packs[pack_code]
+    val cycle = cycles[pack?.cycleCode]
     return CardEntity(
         id = id,
         code = code,
@@ -120,7 +134,38 @@ fun SingleCard.toEntity(coreCardText: CoreCardText, cardPatch: CardPatch): CardE
             0 -> null //Fix taboo set id for original cards which are/were in any taboo set
             else -> taboo_set_id
         },
-        translation = translation
+        translation = translation,
+        sortByType = sortByTypeOrder(this),
+        sortByFaction = sortByFactionOrder(this),
+        sortByPack = (cycle?.position ?: 0) * 200 + (pack?.position ?: 0),
+        sortByCycle = cycle?.position ?: 0,
+        sortBySlot = sortBySlotOrder(real_slot, permanent, type_code.rawValue),
+        searchName = listOfNotNull(translation.name, translation.subname)
+            .joinToString(" ")
+            .normalizeForSearch(),
+        searchNameBack = listOfNotNull(translation.backName, translation.backSubname)
+            .joinToString(" ")
+            .normalizeForSearch(),
+        searchGame = listOfNotNull(translation.text, translation.traits, translation.customizationText)
+                .joinToString(" ")
+                .normalizeForSearch(),
+        searchGameBack = listOfNotNull(translation.backText, translation.backTraits)
+            .joinToString(" ")
+            .normalizeForSearch(),
+        searchFlavor = translation.flavor?.normalizeForSearch() ?: "",
+        searchFlavorBack = translation.backFlavor?.normalizeForSearch() ?: "",
+        searchRealName = if (locale == "en") null else
+            listOfNotNull(real_name, real_subname, real_back_name, real_back_subname)
+                .joinToString(" ")
+                .normalizeForSearch(),
+        searchRealGame = if (locale == "en") null else
+            listOfNotNull(real_text, real_back_text, real_customization_text)
+                .joinToString(" ")
+                .normalizeForSearch(),
+        searchRealFlavor = if (locale == "en") null else
+            listOfNotNull(real_flavor, real_back_flavor)
+                .joinToString(" ")
+                .normalizeForSearch(),
     )
 }
 

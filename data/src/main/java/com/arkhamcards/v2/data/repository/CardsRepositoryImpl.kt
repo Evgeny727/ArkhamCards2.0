@@ -25,18 +25,6 @@ class CardsRepositoryImpl @Inject constructor(
 
         val cardPatches = CardPatchRegistry()
 
-        val playerEntities = playerCards.all_card.map {
-            it.singleCard.toEntity(
-                it.translations[0].coreCardText,
-                cardPatches.resolve(it.singleCard.code
-                ))
-        }
-        val encounterEntities = encounterCards.all_card.map {
-            it.singleCard.toEntity(
-                it.translations[0].coreCardText,
-                cardPatches.resolve(it.singleCard.code)
-            )
-        }
         val cardTypeEntities = translationData.card_type_name.map { it.toEntity() }
         val cardSubtypeEntities = translationData.card_subtype_name.map { it.toEntity() }
         val factionEntities = translationData.faction_name.map { it.toEntity() }
@@ -48,6 +36,28 @@ class CardsRepositoryImpl @Inject constructor(
         }
         val encounterSetEntities = translationData.card_encounter_set.map { it.encounterSet.toEntity() }
         val tabooSetEntities = playerCards.taboo_set.map { it.tabooSet.toEntity() }
+
+        val packMap = packEntities.associateBy { it.code }
+        val cycleMap = cycleEntities.associateBy { it.code }
+
+        val playerEntities = playerCards.all_card.map {
+            it.singleCard.toEntity(
+                it.translations[0].coreCardText,
+                cardPatches.resolve(it.singleCard.code),
+                cycleMap,
+                packMap,
+                locale
+            )
+        }
+        val encounterEntities = encounterCards.all_card.map {
+            it.singleCard.toEntity(
+                it.translations[0].coreCardText,
+                cardPatches.resolve(it.singleCard.code),
+                cycleMap,
+                packMap,
+                locale
+            )
+        }
 
         db.withTransaction {
             metaDao.upsertFactions(factionEntities)

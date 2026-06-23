@@ -280,5 +280,37 @@ data class CardEntity(
 
     //Translation
     @Embedded
-    val translation: Translation
+    val translation: Translation,
+
+    //Sort fields
+    @ColumnInfo("sort_by_type")
+    val sortByType: Int,
+    @ColumnInfo("sort_by_faction")
+    val sortByFaction: Int,
+    @ColumnInfo("sort_by_pack")
+    val sortByPack: Int,
+    @ColumnInfo("sort_by_cycle")
+    val sortByCycle: Int,
+    @ColumnInfo("sort_by_slot")
+    val sortBySlot: Int,
+
+    //Search fields
+    @ColumnInfo("search_name")
+    val searchName: String,
+    @ColumnInfo("search_name_back")
+    val searchNameBack: String,
+    @ColumnInfo("search_game")
+    val searchGame: String,
+    @ColumnInfo("search_game_back")
+    val searchGameBack: String,
+    @ColumnInfo("search_flavor")
+    val searchFlavor: String,
+    @ColumnInfo("search_flavor_back")
+    val searchFlavorBack: String,
+    @ColumnInfo("search_real_name")
+    val searchRealName: String?,
+    @ColumnInfo("search_real_game")
+    val searchRealGame: String?,
+    @ColumnInfo("search_real_flavor")
+    val searchRealFlavor: String?
 )

@@ -40,7 +40,7 @@ query getPlayerCards($locale: String!, $version: Int!) {
     where: {
       version: { _lte: $version }
       encounter_code: { _is_null: true }
-      taboo_placeholder: { _neq: true }
+      taboo_placeholder: { _is_null: true }
     }
   ) {
     ...SingleCard
