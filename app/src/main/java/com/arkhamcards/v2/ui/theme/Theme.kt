@@ -1,7 +1,6 @@
 package com.arkhamcards.v2.ui.theme
 
 import android.app.Activity
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -31,7 +30,7 @@ object CustomTheme {
 
 @Composable
 fun ArkhamCardsTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean,
     lang: String,
     content: @Composable () -> Unit
 ) {

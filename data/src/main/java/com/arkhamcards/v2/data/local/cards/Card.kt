@@ -116,7 +116,8 @@ data class Translation(
         Index("type_code"),
         Index("code"),
         Index("taboo_set_id"),
-        Index(value = ["taboo_set_id", "code"], unique = true)
+        Index(value = ["taboo_set_id", "code"], unique = true),
+        Index("xp"),
     ]
 )
 data class CardEntity(
@@ -134,6 +135,8 @@ data class CardEntity(
     val backLinkId: String?,
     @ColumnInfo("back_illustrator")
     val backIllustrator: String?,
+    @ColumnInfo("back_type")
+    val backType: String?,
     val clues: Int?,
     @ColumnInfo("clues_fixed")
     val cluesFixed: Boolean?,
@@ -197,6 +200,7 @@ data class CardEntity(
     val packCode: String,
     @ColumnInfo("pack_position")
     val packPosition: Int,
+    val parallel: Boolean,
     @ColumnInfo("parallel_of_code")
     val parallelOfCode: String?,
     val permanent: Boolean?,
@@ -312,5 +316,5 @@ data class CardEntity(
     @ColumnInfo("search_real_game")
     val searchRealGame: String?,
     @ColumnInfo("search_real_flavor")
-    val searchRealFlavor: String?
+    val searchRealFlavor: String?,
 )

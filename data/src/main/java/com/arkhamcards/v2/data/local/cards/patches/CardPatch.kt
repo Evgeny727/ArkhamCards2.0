@@ -29,6 +29,7 @@ data class EntityPatch(
     val shroud: PatchValue<Int?> = PatchValue.Unset,
     val skillIntellect: PatchValue<Int?> = PatchValue.Unset,
     val deckLimit: PatchValue<Int?> = PatchValue.Unset,
+    val backType: PatchValue<String?> = PatchValue.Unset,
 ) {
     fun merge(other: EntityPatch): EntityPatch = EntityPatch(
         duplicateOf = duplicateOf.merge(other.duplicateOf),

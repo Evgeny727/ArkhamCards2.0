@@ -10,4 +10,6 @@ interface CardsRepository {
 
     suspend fun isCardsUpdateAvailable(locale: String, savedTimestamp: String?): Result<Boolean>
 
+    fun loadCache(): Boolean
+
 }

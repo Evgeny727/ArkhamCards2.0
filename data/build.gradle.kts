@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.apollo)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
