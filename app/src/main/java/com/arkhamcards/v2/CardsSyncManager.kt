@@ -25,9 +25,9 @@ class CardsSyncManager @Inject constructor(private val cardsRepository: CardsRep
     val errors: SharedFlow<Throwable> = _errors
 
     suspend fun ensureCardsReady(language: String) {
-//        if (!cardsRepository.isCardsTableExists()) download(language)
-//        else checkForUpdate(language)
-        download(language)
+        if (!cardsRepository.isCardsTableExists()) download(language)
+        //else checkForUpdate(language)
+        //download(language)
     }
 
     suspend fun checkForUpdate(language: String) {

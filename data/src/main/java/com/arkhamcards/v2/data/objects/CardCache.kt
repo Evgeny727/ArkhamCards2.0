@@ -1,13 +1,11 @@
 package com.arkhamcards.v2.data.objects
 
-import android.util.Log
 import com.arkhamcards.v2.data.local.cards.CardCacheData
 import com.arkhamcards.v2.data.local.cards.CardEntity
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import java.util.Locale
 
 private val REGEX_SKILL_BOOST = Regex("""\+\d+?\s\[(.+?)\]""")
 private val USES_REGEX = Regex("""Uses\s\(\d+?\s(\w+?)\)""")
@@ -178,7 +176,7 @@ object CardCache {
                     val investigator = cardsMap[key]
 
                     if (investigator == null) {
-                        Log.e("MissingInvestigator","Missing investigator for $key")
+                        //TODO:log missing investigator to crashlytics
                         continue
                     }
 
@@ -400,7 +398,7 @@ object CardCache {
         val firstLine = cardText.indexOf('\n')
         if (firstLine == -1) return
         val usesMatch = USES_REGEX.find(cardText.substring(0, firstLine))?.groupValues?.getOrNull(1)
-            ?.lowercase(Locale.ROOT)
+            ?.lowercase()
 
         if (usesMatch != null) {
             val value = if (usesMatch == "charge") "charges" else usesMatch

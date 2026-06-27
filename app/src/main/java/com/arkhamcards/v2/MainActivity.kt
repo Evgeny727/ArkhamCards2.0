@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             viewModel = hiltViewModel<AppViewModel>(this)
-            val lang = Locale.current.toLanguageTag().take(2)
+            val lang = Locale.current.toLanguageTag()
             val langTag = if (lang.equals("zh-CN", ignoreCase = true)) lang
                 else lang.substringBefore("-")
             val theme = 2 //by viewModel.themeState.collectAsState()

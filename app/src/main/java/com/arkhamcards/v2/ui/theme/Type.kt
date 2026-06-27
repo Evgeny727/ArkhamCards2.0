@@ -78,6 +78,14 @@ val Arkhamic = FontFamily(
     Font(R.font.arkhamic, FontWeight.Normal),
 )
 
+//icon fonts
+val EncounterIconsFont = FontFamily(
+    Font(R.font.encounter_icons),
+)
+val AppIconsFont = FontFamily(
+    Font(R.font.app_icons),
+)
+
 internal fun typography(
     colorScheme: CustomColors,
     lang: String,
