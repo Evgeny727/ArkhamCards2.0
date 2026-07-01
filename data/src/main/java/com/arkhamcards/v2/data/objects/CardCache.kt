@@ -2,6 +2,8 @@ package com.arkhamcards.v2.data.objects
 
 import com.arkhamcards.v2.data.local.cards.CardCacheData
 import com.arkhamcards.v2.data.local.cards.CardEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
@@ -98,7 +100,7 @@ object CardCache {
         basePrints = mutableMapOf()
     }
 
-    fun createCache(cardsList: List<CardEntity>) {
+    suspend fun createCache(cardsList: List<CardEntity>) = withContext(Dispatchers.Default) {
         clearCache()
 
         val cardsMap = cardsList.associateBy { it.id }

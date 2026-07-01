@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_more_than_5_cards_not_guardian_neutral">Bạn không thể có nhiều hơn 5 lá bài không phải là Guardian hoặc Neutral</string>
+    <string name="error_more_than_5_cards_not_seeker_neutral">Bạn không thể có nhiều hơn 5 lá bài không phải là Seeker hoặc Neutral</string>
+    <string name="error_more_than_5_cards_not_rogue_neutral">Bạn không thể có nhiều hơn 5 lá bài không phải là Rogue hoặc Neutral</string>
+    <string name="error_more_than_5_cards_not_mystic_neutral">Bạn không thể có nhiều hơn 5 lá bài không phải là Mystic hoặc Neutral</string>
+    <string name="error_more_than_5_cards_not_survivor_neutral">Bạn không thể có nhiều hơn 5 lá bài không phải là Survivor hoặc Neutral</string>
+    <string name="error_at_least_7_cards_from_3_different_factions">Bạn phải có tối thiểu 7 lá bài từ 3 faction khác nhau</string>
+    <string name="error_more_than_15_level01_seeker_mystic_cards">Bạn không thể có nhiều hơn 15 lá bài Seeker và/hoặc Mystic cấp độ 0-1</string>
+    <string name="error_more_than_5_guardian_mystic_cards">Bạn không thể có nhiều hơn 5 lá bài Guardian và/hoặc Mystic</string>
+    <string name="error_more_than_5_level0_mystic_cards">Bạn không thể có nhiều hơn 5 lá bài Mystic cấp độ 0</string>
+    <string name="error_more_than_5_level0_survivor_cards">Bạn không thể có nhiều hơn 5 lá bài Survivor cấp độ 0</string>
+    <string name="error_more_than_5_level0_guardian_cards">Bạn không thể có nhiều hơn 5 lá bài Guardian cấp độ 0</string>
+    <string name="error_more_than_5_level0_seeker_cards">Bạn không thể có nhiều hơn 5 lá bài Seeker cấp độ 0</string>
+    <string name="error_more_than_5_level0_rogue_cards">Bạn không thể có nhiều hơn 5 lá bài Rogue cấp độ 0</string>
+    <string name="each_investigator_earns_experience_victory">Mỗi điều tra viên nhận điểm kinh nghiệm bằng tổng giá trị Victory của các lá bài trong khu vực trưng bày thành tích.</string>
+    <string name="in_your_campaign_log_record_that">Trong Nhật ký Chiến dịch của bạn, hãy ghi lại rằng:</string>
+    <string name="choose_lead_investigator">Chọn trưởng nhóm</string>
+    <string name="lead_investigator">Trưởng Nhóm</string>
+    <string name="placing_doom_on_the_agenda">Đặt doom vào trên agenda</string>
+    <string name="taking_three_damage_and_three_horror">Nhận 3 chấn thương thể chất và 3 chấn thương tinh thần</string>
+    <string name="investigators">Điều Tra Viên</string>
+    <string name="add_investigator">Thêm Điều Tra Viên</string>
+    <string name="the_investigators_must_decide_choose_one">Điều tra viên phải đưa ra quyết định (chọn một):</string>
+    <string name="continue_text">Tiếp tục</string>
+    <plurals name="set_encounter_set_aside_out_of_play">
+        <item quantity="other">Đặt các bộ bài encounter %s sang một bên, ngoài vùng chơi.</item>
+    </plurals>
+    <plurals name="gather_all_cards_from_encounter_set">
+        <item quantity="other">Tập hợp tất cả lá bài từ các bộ bài encounter %s.</item>
+    </plurals>
+    <plurals name="set_is_indicated_by_the_following_icon">
+        <item quantity="other">%s Các bộ bài này được xác định bằng biểu tượng sau:</item>
+    </plurals>
+    <string name="campaign_log">Nhật ký chiến dịch</string>
+    <string name="record_in_campaign_log">Ghi lại trong nhật ký chiến dịch</string>
+    <string name="scenario_ended">Màn chơi Kết thúc</string>
+    <string name="choose_entry_to_add_to_campaign_log">Chọn mục để thêm vào nhật ký chiến dịch:</string>
+    <string name="start_playing_the_scenario_now">Bắt đầu màn chơi.</string>
+    <string name="investigator_earns_card_advanced">%s nhận được %s (Advanced).</string>
+    <string name="investigator_earns_card">%s nhận được %s.</string>
+    <string name="add_card">Thêm %s:</string>
+    <string name="choose_investigator_to_add_card">Chọn một điều tra viên để thêm %s vào chồng bài của điều tra viên đó:</string>
+    <string name="in_your_campaign_log_section_record_name">Trong Nhật Ký Chiến Dịch của bạn, dưới phần "%s", ghi lại %s. </string>
+    <string name="in_your_campaign_log_cross_out">Trong Nhật ký Chiến dịch của bạn, gạch bỏ <i>%s</i></string>
+    <string name="in_your_campaign_log_section_cross_out">Trong Nhật ký Chiến dịch của bạn, dưới phần "%s", gạch bỏ <i>%s</i>.</string>
+    <string name="in_your_campaign_log_record_log_text">Trong Nhật ký Chiến dịch của bạn, ghi lại <i>%s</i></string>
+    <string name="in_your_campaign_log_section_record_log_text">Trong Nhật ký Chiến dịch của bạn, dưới phần "%s", ghi lại <i>%s</i>.</string>
+    <string name="in_your_campaign_log_record_text">Trong Nhật ký Chiến dịch của bạn, ghi lại <i>%s</i></string>
+    <string name="tokens0_and_tokens1">%s và %s</string>
+    <string name="add_token_to_the_chaos_bag">Thêm %s vào túi hỗn mang.</string>
+    <string name="remove_token_from_the_chaos_bag">Loại bỏ %s khỏi túi hỗn mang.</string>
+    <string name="expedition_team">Đội Thám Hiểm</string>
+    <string name="in_the_section_of_the_campaign_log_cross_out_name">Trong phần %s của Nhật ký Chiến Dịch, gạch bỏ %s,</string>
+    <string name="in_the_section_of_the_campaign_log_write_mia_to_name">Trong phần %s của Nhật ký Chiến Dịch, viết "MIA" kế bên %s.</string>
+    <string name="in_the_section_of_the_campaign_log_cross_out_mia_to_name">Trong phần %s của Nhật ký Chiến Dịch, gạch bỏ "MIA" kế bên %s.</string>
+    <string name="investigator_removes_card_advanced">%s loại bỏ %s (Advanced)</string>
+    <string name="investigator_removes_card">%s loại bỏ %s</string>
+    <string name="remove_card_length">Loại bỏ %s (%s)</string>
+    <string name="heal_physical_or_mental_trauma_your_choice">Bạn có thể chữa lành 1 sang chấn thể chất hoặc tinh thần <i>(your choice)</i></string>
+    <string name="suffer_physical_or_mental_trauma_your_choice">Bạn nhận 1 sang chấn thể chất hoặc tinh thần <i>(your choice)</i>.</string>
+    <string name="use_app_to_randomize_weaknesses_question">Bạn có muốn sử dụng app để ngẫu nhiên điểm yếu?</string>
+    <string name="because_you_are_playing_on_difficulty">Bởi vì bạn đang chơi ở độ khó <b>%s</b>:</string>
+    <string name="because_you_have_already_completed_scenario">Bởi vì bạn đã hoàn thành <b>%s</b>:</string>
+    <string name="because_you_not_completed_scenario">Bởi vì bạn chưa hoàn thành <b>%s</b>:</string>
+    <string name="does_any_investigator_have_card_in_deck">Có bất kỳ điều tra viên nào có "%s" trong chồng bài của họ?</string>
+    <string name="was_investigator_with_card_in_deck_defeated">Có một điều tra viên nào có "%s" trong chồng bài của mình khi bị hạ gục?</string>
+    <string name="for_each_investigator_with_card_in_deck">Cho mỗi điều tra viên với "%s" trong chồng bài của họ:</string>
+    <plurals name="investigators_must_read_prompt_plural">
+        <item quantity="other">%s phải đọc <b>%s</b>.</item>
+    </plurals>
+    <plurals name="because_there_is_player_count_in_game_plural">
+        <item quantity="other">Bởi vì có %s người chơi trong màn chơi:</item>
+    </plurals>
+    <string name="if_the_lead_investigator_was_killed">Nếu trưởng nhóm <b>bị giết</b>.</string>
+    <string name="if_all_investigators_were_killed">Nếu tất cả điều tra viên <b>killed</b>.</string>
+    <string name="if_the_lead_investigator_was_driven_insane">Nếu trưởng nhóm trở nên <b>điên loạn</b>.</string>
+    <string name="if_all_investigators_were_driven_insane">Nếu tất cả điều tra viên trở nên <b>điên loạn</b>.</string>
+    <string name="if_the_lead_investigator_is_still_alive">Nếu trưởng nhóm vẫn còn sống.</string>
+    <string name="if_all_investigators_are_still_alive">Nếu tất cả điều tra viên vẫn còn sống.</string>
+    <string name="check_campaign_log_if_text">Kiểm tra Nhật ký Chiến dịch. <i>Nếu %s</i></string>
+    <string name="check_section_if_text">Kiểm tra %s. <i>Nếu %s</i></string>
+    <string name="error_more_than_15_level01_guardian_survivor_cards">Bạn không thể có nhiều hơn 15 lá bài Guardian và/hoặc Survivor cấp độ 0-1</string>
+</resources>

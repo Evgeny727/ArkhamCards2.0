@@ -74,4 +74,15 @@ class AppViewModel @Inject constructor(
         return if (SUPPORTED_LANGUAGES.contains(locale)) locale else "en"
     }
 
+    fun resolveLanguageTag(language: String): String {
+        return if (language.startsWith("zh-Hans") ||
+            language.startsWith("zh-CN") ||
+            language.startsWith("zh-SG")) "zh"
+        else if (language.startsWith("zh-Hant") ||
+            language.startsWith("zh-TW") ||
+            language.startsWith("zh-HK") ||
+            language.startsWith("zh-MO")) "zh-cn"
+        else language
+    }
+
 }

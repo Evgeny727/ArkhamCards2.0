@@ -1,7 +1,7 @@
 package com.arkhamcards.v2.ui.theme
 
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -279,4 +279,4 @@ val typography = CustomTypography(
     underline = SpanStyle(textDecoration = TextDecoration.Underline),
 )
 
-val LocalCustomTypography = staticCompositionLocalOf { typography }
+val LocalCustomTypography = compositionLocalOf { typography }

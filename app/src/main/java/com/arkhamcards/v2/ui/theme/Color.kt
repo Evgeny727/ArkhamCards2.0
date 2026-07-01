@@ -1,10 +1,8 @@
 package com.arkhamcards.v2.ui.theme
 
-import android.R
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.core.graphics.toColor
 
 // Grayscale
 val Light30 = Color(0xFFFFFBF2)
@@ -470,4 +468,4 @@ val LightColorScheme = CustomColors(
     ),
 )
 
-val LocalCustomColors = staticCompositionLocalOf { LightColorScheme }
+val LocalCustomColors = compositionLocalOf { LightColorScheme }

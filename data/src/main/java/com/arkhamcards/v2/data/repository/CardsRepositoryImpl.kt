@@ -14,6 +14,8 @@ import com.arkhamcards.v2.domain.TimestampNormilizer
 import com.arkhamcards.v2.domain.model.cards.CardsUpdatedAt
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
@@ -112,7 +114,7 @@ class CardsRepositoryImpl @Inject constructor(
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    private fun saveCache() {
+    private suspend fun saveCache() = withContext(Dispatchers.IO) {
         File(context.filesDir, "card_cache.json")
             .outputStream()
             .buffered()
@@ -120,16 +122,17 @@ class CardsRepositoryImpl @Inject constructor(
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    override fun loadCache(): Boolean {
+    override suspend fun loadCache(): Boolean = withContext(Dispatchers.IO) {
+
         val file = File(context.filesDir, "card_cache.json")
 
-        if (!file.exists()) { return false }
+        if (!file.exists()) { return@withContext false }
 
         val data: CardCacheData =
             file.inputStream().buffered().use(json::decodeFromStream)
 
         CardCache.load(data)
 
-        return true
+        return@withContext true
     }
 }

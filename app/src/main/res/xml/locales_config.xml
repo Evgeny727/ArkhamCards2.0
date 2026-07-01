@@ -9,8 +9,8 @@
     <locale android:name="pt"/>
     <locale android:name="pl"/>
     <locale android:name="ko"/>
-    <locale android:name="zh"/>
-    <locale android:name="zh-cn"/>
+    <locale android:name="zh-Hant"/>
+    <locale android:name="zh-Hans"/>
     <locale android:name="vi"/>
     <locale android:name="uk"/>
     <locale android:name="cs"/>
