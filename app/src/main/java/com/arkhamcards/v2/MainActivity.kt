@@ -36,9 +36,6 @@ import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.firebase.Firebase
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.analytics
-import com.google.firebase.analytics.logEvent
 import com.google.firebase.crashlytics.crashlytics
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,7 +43,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: AppViewModel
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private var appUpdateManager: AppUpdateManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,8 +56,6 @@ class MainActivity : AppCompatActivity() {
         if (isPlayServicesAvailable == ConnectionResult.SUCCESS) maybeCheckForUpdate()
 
         enableEdgeToEdge()
-        firebaseAnalytics = Firebase.analytics
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN) {}
         val crashlytics = Firebase.crashlytics
 //        crashlytics.setCustomKeys {
 //            key("current_level", 3)
