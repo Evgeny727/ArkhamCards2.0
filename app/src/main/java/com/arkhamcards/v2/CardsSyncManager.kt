@@ -1,12 +1,13 @@
 package com.arkhamcards.v2
 
-import android.util.Log
 import com.arkhamcards.v2.domain.repository.CardsRepository
+import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 sealed interface CardsSyncState {
@@ -16,27 +17,38 @@ sealed interface CardsSyncState {
     object Ready : CardsSyncState
 }
 
-class CardsSyncManager @Inject constructor(private val cardsRepository: CardsRepository) {
+sealed interface CardsCacheState {
+    object Idle : CardsCacheState
+    object Loading : CardsCacheState
+    object Ready : CardsCacheState
+    object Error : CardsCacheState
+}
+
+class CardsSyncManager @Inject constructor(
+    private val cardsRepository: CardsRepository,
+    private val userPreferencesRepository: UserPreferencesRepository
+) {
 
     private val _state = MutableStateFlow<CardsSyncState>(CardsSyncState.Idle)
     val state: StateFlow<CardsSyncState> = _state.asStateFlow()
 
+    private val _cacheState = MutableStateFlow<CardsCacheState>(CardsCacheState.Idle)
+    val cacheState: StateFlow<CardsCacheState> = _cacheState.asStateFlow()
+
     private val _errors = MutableSharedFlow<Throwable>(extraBufferCapacity = 1)
     val errors: SharedFlow<Throwable> = _errors
 
+    private val cardsUpdatedAt = userPreferencesRepository.cardsUpdatedAt
+
     suspend fun ensureCardsReady(language: String) {
         if (!cardsRepository.isCardsTableExists()) download(language)
-        //else checkForUpdate(language)
-        //download(language)
+        else checkForUpdate(language)
     }
 
     suspend fun checkForUpdate(language: String) {
         fetchCardsUpdate(language) { updateAvailable ->
             if (updateAvailable) _state.value = CardsSyncState.UpdateAvailable
-            else {
-                _state.value = if (cardsRepository.loadCache()) CardsSyncState.Ready
-                else CardsSyncState.UpdateAvailable
-            }
+            else loadCache()
         }
     }
 
@@ -45,7 +57,10 @@ class CardsSyncManager @Inject constructor(private val cardsRepository: CardsRep
         fetchCardsUpdate(language) { updateAvailable ->
             if (updateAvailable) {
                 cardsRepository.downloadAllCards(language)
-                    .onSuccess { _state.value = CardsSyncState.Ready }
+                    .onSuccess {
+                        userPreferencesRepository.saveCardsUpdatedTimestamp(it)
+                        _state.value = CardsSyncState.Ready
+                    }
                     .onFailure {
                         _errors.tryEmit(it)
                         _state.value = CardsSyncState.Ready
@@ -56,13 +71,13 @@ class CardsSyncManager @Inject constructor(private val cardsRepository: CardsRep
         }
     }
 
-    private suspend fun fetchCardsUpdate(
+    private suspend inline fun fetchCardsUpdate(
         language: String,
         block: suspend (Boolean) -> Unit
-    ): Result<Boolean> {
-        return cardsRepository.isCardsUpdateAvailable(
+    ) {
+        cardsRepository.isCardsUpdateAvailable(
             language,
-            null
+            cardsUpdatedAt.first()
         )
             .onSuccess { block(it) }
             .onFailure {
@@ -75,16 +90,23 @@ class CardsSyncManager @Inject constructor(private val cardsRepository: CardsRep
         _state.value = CardsSyncState.Loading
 
         cardsRepository.downloadAllCards(language)
-            .onSuccess { _state.value = CardsSyncState.Ready }
+            .onSuccess {
+                userPreferencesRepository.saveCardsUpdatedTimestamp(it)
+                _state.value = CardsSyncState.Ready
+            }
             .onFailure {
-                Log.e("Error", it.message.toString())
                 _errors.tryEmit(it)
                 _state.value = CardsSyncState.Ready
             }
     }
 
-    fun cancelUpdateDialog() {
-        _state.value = if (cardsRepository.loadCache()) CardsSyncState.Ready
-        else CardsSyncState.UpdateAvailable
+    suspend fun loadCache() {
+        _cacheState.value = CardsCacheState.Loading
+        val cacheReady = cardsRepository.loadCache()
+
+        if (cacheReady) _cacheState.value = CardsCacheState.Ready
+        else _cacheState.value = CardsCacheState.Error
+
+        _state.value = CardsSyncState.Ready
     }
 }

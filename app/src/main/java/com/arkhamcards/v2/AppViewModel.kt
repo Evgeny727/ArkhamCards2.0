@@ -4,20 +4,24 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class UiErrorState(val exception: Throwable)
 
-val SUPPORTED_LANGUAGES = setOf("es", "ru", "en", "de", "fr", "pl", "ko", "zh", "zh-cn", "it", "pt", "vi", "uk", "cs",)
-val AUDIO_LANGUAGES = setOf("es", "ru", "en", "de", "pl",)
+val SUPPORTED_LANGUAGES = setOf("es", "ru", "en", "de", "fr", "pl", "ko", "zh", "zh-cn", "it", "pt", "vi", "uk", "cs")
+val AUDIO_LANGUAGES = setOf("es", "ru", "en", "de", "pl")
 
 @HiltViewModel
 class AppViewModel @Inject constructor(
-    private val cardsSyncManager: CardsSyncManager
+    private val cardsSyncManager: CardsSyncManager,
+    private val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
 
     private val _events = MutableSharedFlow<UiErrorState>(extraBufferCapacity = 1)
@@ -26,6 +30,13 @@ class AppViewModel @Inject constructor(
     fun emitError(throwable: Throwable) = _events.tryEmit(UiErrorState(throwable))
 
     val cardsSyncState = cardsSyncManager.state
+    val cardsCacheState = cardsSyncManager.cacheState
+
+    val themeState = userPreferencesRepository.isDarkTheme.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = null
+    )
 
     init {
         observeCardsErrors()
@@ -39,40 +50,39 @@ class AppViewModel @Inject constructor(
         }
     }
 
-    suspend fun checkIfCardsReady() {
-        val language = "en" //coerceLanguage(userUiState.value.language)
-        cardsSyncManager.ensureCardsReady(language)
+    suspend fun checkIfCardsReady(language: String) {
+        cardsSyncManager.ensureCardsReady(language.dataLanguage)
     }
 
-    fun confirmCardsUpdate() {
+    fun confirmCardsUpdate(language: String) {
         viewModelScope.launch {
-            val language = "en".dataLanguage //coerceLanguage(userUiState.value.language)
-            cardsSyncManager.download(language)
+            cardsSyncManager.download(language.dataLanguage)
         }
     }
 
-    fun cancelCardsUpdate() = cardsSyncManager.cancelUpdateDialog()
+    fun cancelCardsUpdate() {
+        if (cardsCacheState != CardsCacheState.Loading) {
+            viewModelScope.launch {
+                cardsSyncManager.loadCache()
+            }
+        }
+    }
 
-    fun updateCardsIfAvailable() {
+    fun updateCardsIfAvailable(language: String) {
         viewModelScope.launch {
-            val language = "en" //coerceLanguage(userUiState.value.language)
-            cardsSyncManager.updateCardsIfUpdateAvailable(language)
+            cardsSyncManager.updateCardsIfUpdateAvailable(language.dataLanguage)
         }
     }
 
     fun updateLocale(locale: String) {
         AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locale))
         viewModelScope.launch {
-            cardsSyncManager.download(coerceLanguage(locale))
+            cardsSyncManager.download(locale.dataLanguage)
         }
     }
 
     private val String.dataLanguage: String
         get() = if (this in SUPPORTED_LANGUAGES) this else "en"
-
-    private fun coerceLanguage(locale: String): String {
-        return if (SUPPORTED_LANGUAGES.contains(locale)) locale else "en"
-    }
 
     fun resolveLanguageTag(language: String): String {
         return if (language.startsWith("zh-Hans") ||

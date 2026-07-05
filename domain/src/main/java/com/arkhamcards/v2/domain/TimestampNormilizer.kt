@@ -5,6 +5,8 @@ import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
+private const val WEEK_MILLIS = 7L * 24 * 60 * 60 * 1000
+
 object TimestampNormilizer {
 
     fun getCurrentDateTime(): String {
@@ -56,11 +58,22 @@ object TimestampNormilizer {
         // Parse the timestamps
         val date1: Date? = format.parse(timestamp1Fixed)
         val date2: Date? = format.parse(timestamp2Fixed)
+
         if (date1 == null || date2 == null) return true
-        return when {
-            date1.before(date2) -> true
-            date1.after(date2) -> false
-            else -> false
+
+        return date1.before(date2)
+    }
+
+    fun isAtLeastWeekApart(timestamp1: String?, timestamp2: String?): Boolean {
+        if (timestamp1.isNullOrBlank() || timestamp2.isNullOrBlank()) return false
+
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US).apply {
+            timeZone = TimeZone.getTimeZone("UTC")
         }
+
+        val date1 = format.parse(fixFraction(timestamp1) ?: return false) ?: return false
+        val date2 = format.parse(fixFraction(timestamp2) ?: return false) ?: return false
+
+        return kotlin.math.abs(date2.time - date1.time) >= WEEK_MILLIS
     }
 }

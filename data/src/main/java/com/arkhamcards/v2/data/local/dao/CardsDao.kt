@@ -1,6 +1,7 @@
 package com.arkhamcards.v2.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import com.arkhamcards.v2.data.local.cards.CardEntity
@@ -20,4 +21,7 @@ interface CardsDao {
 
     @Query("SELECT EXISTS(SELECT 1 FROM card)")
     suspend fun isExists(): Boolean
+
+    @Query("DELETE FROM card")
+    suspend fun deleteAllCards()
 }

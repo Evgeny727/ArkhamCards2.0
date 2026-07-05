@@ -10,8 +10,9 @@ import com.arkhamcards.v2.data.mapper.db.toEntity
 import com.arkhamcards.v2.data.objects.CardCache
 import com.arkhamcards.v2.data.objects.CardCache.createCache
 import com.arkhamcards.v2.data.remote.CardsRemoteDataSource
-import com.arkhamcards.v2.domain.TimestampNormilizer
-import com.arkhamcards.v2.domain.model.cards.CardsUpdatedAt
+import com.arkhamcards.v2.domain.TimestampNormilizer.compareTimestamps
+import com.arkhamcards.v2.domain.TimestampNormilizer.getCurrentDateTime
+import com.arkhamcards.v2.domain.TimestampNormilizer.isAtLeastWeekApart
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -79,6 +80,8 @@ class CardsRepositoryImpl @Inject constructor(
         }
 
         db.withTransaction {
+            cardsDao.deleteAllCards()
+            metaDao.deleteAll()
             metaDao.upsertFactions(factionEntities)
             metaDao.upsertCycles(cycleEntities)
             metaDao.upsertPacks(packEntities)
@@ -93,21 +96,28 @@ class CardsRepositoryImpl @Inject constructor(
         saveCache()
 
         val updatedAt = playerCards.all_card_updated_by_version.getOrNull(0)
-        CardsUpdatedAt(
+        val compared = compareTimestamps(
             updatedAt?.cards_updated_at.toString(),
             updatedAt?.translation_updated_at.toString(),
         )
+        if (compared) updatedAt?.translation_updated_at.toString()
+        else updatedAt?.cards_updated_at.toString()
     }
 
     override suspend fun isCardsTableExists(): Boolean = cardsDao.isExists()
 
     override suspend fun isCardsUpdateAvailable(locale: String, savedTimestamp: String?) = runCatching {
+        val currentTimestamp = getCurrentDateTime()
+        if (!isAtLeastWeekApart(savedTimestamp, currentTimestamp))
+            return@runCatching false
+
         val cardsUpdatedAt = cardsRemoteDataSource.fetchCardsUpdatedAt(locale).dataAssertNoErrors
             .all_card_updated.getOrNull(0)
-        TimestampNormilizer.compareTimestamps(
+
+        compareTimestamps(
             savedTimestamp,
             cardsUpdatedAt?.cards_updated_at.toString()
-        ) || TimestampNormilizer.compareTimestamps(
+        ) || compareTimestamps(
             savedTimestamp,
             cardsUpdatedAt?.translation_updated_at.toString()
         )

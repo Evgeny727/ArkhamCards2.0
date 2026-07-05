@@ -1,6 +1,7 @@
 package com.arkhamcards.v2.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Query
 import androidx.room.Upsert
 import com.arkhamcards.v2.data.local.meta.CycleEntity
 import com.arkhamcards.v2.data.local.meta.EncounterSetEntity
@@ -24,4 +25,27 @@ interface MetaDao {
 
     @Upsert
     suspend fun upsertFactions(factions: List<FactionEntity>)
+
+    @Query("DELETE FROM cycle")
+    suspend fun deleteAllCycles()
+
+    @Query("DELETE FROM pack")
+    suspend fun deleteAllPacks()
+
+    @Query("DELETE FROM encounter_set")
+    suspend fun deleteAllEncounterSets()
+
+    @Query("DELETE FROM taboo_set")
+    suspend fun deleteAllTabooSets()
+
+    @Query("DELETE FROM faction")
+    suspend fun deleteAllFactions()
+
+    suspend fun deleteAll() {
+        deleteAllPacks()
+        deleteAllCycles()
+        deleteAllEncounterSets()
+        deleteAllTabooSets()
+        deleteAllFactions()
+    }
 }
