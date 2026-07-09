@@ -11,14 +11,13 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arkhamcards.v2.R
+import com.arkhamcards.v2.ui.utils.appSp
 
 @Immutable
 data class CustomTypography(
-    val cardHeaderHeight: Dp,
+    val scaleFactor: Float = 1f,
     val cursive: TextStyle,
     val searchLabel: TextStyle,
     val smallLabel: TextStyle,
@@ -89,110 +88,111 @@ val AppIconsFont = FontFamily(
 internal fun typography(
     colorScheme: CustomColors,
     lang: String,
+    scaleFactor: Float = 1f,
     usePingFang: Boolean
 ): CustomTypography {
     val italicFont = if (usePingFang) PingFangTC else Alegreya
     val gameFont = if (lang == "ru") TeutonicRU else Arkhamic
     return typography.copy(
-        cardHeaderHeight = 18.dp + if (lang == "zh" || lang == "zh-CN") 24.dp else 22.dp,
+        scaleFactor = scaleFactor,
         cursive = TextStyle(
             fontFamily = Caveat,
-            fontSize = 22.sp,
-            lineHeight = 24.sp,
+            fontSize = 22.appSp(scaleFactor),
+            lineHeight = 24.appSp(scaleFactor),
             color = colorScheme.d30
         ),
         searchLabel = TextStyle(
             fontFamily = Alegreya,
-            fontSize = 16.sp,
-            lineHeight = 20.sp,
+            fontSize = 16.appSp(scaleFactor),
+            lineHeight = 20.appSp(scaleFactor),
             color = colorScheme.l20
         ),
         smallLabel = TextStyle(
             fontFamily = Alegreya,
-            fontSize = 15.sp,
-            lineHeight = 18.sp,
+            fontSize = 15.appSp(scaleFactor),
+            lineHeight = 18.appSp(scaleFactor),
             letterSpacing = 0.3.sp,
             color = colorScheme.lightText
         ),
         smallButtonLabel = TextStyle(
             fontFamily = italicFont,
             fontStyle = FontStyle.Italic,
-            fontSize = 14.sp,
-            lineHeight = if (lang == "zh" || lang == "zh-CN") 17.sp else 16.sp,
+            fontSize = 14.appSp(scaleFactor),
+            lineHeight = (if (lang == "zh" || lang == "zh-CN") 17 else 16).appSp(scaleFactor),
             letterSpacing = 0.3.sp,
             color = colorScheme.lightText
         ),
         small = TextStyle(
             fontFamily = Alegreya,
-            fontSize = 16.sp,
-            lineHeight = 18.sp,
+            fontSize = 16.appSp(scaleFactor),
+            lineHeight = 18.appSp(scaleFactor),
             color = colorScheme.darkText
         ),
         tiny = TextStyle(
             fontFamily = Alegreya,
-            fontSize = 12.sp,
-            lineHeight = if (lang == "zh" || lang == "zh-CN") 16.sp else 14.sp,
+            fontSize = 12.appSp(scaleFactor),
+            lineHeight = (if (lang == "zh" || lang == "zh-CN") 16 else 14).appSp(scaleFactor),
             color = colorScheme.darkText
         ),
         menuText = TextStyle(
             fontFamily = Alegreya,
             fontWeight = FontWeight.Medium,
-            fontSize = 18.sp,
-            lineHeight = 20.sp,
+            fontSize = 18.appSp(scaleFactor),
+            lineHeight = 20.appSp(scaleFactor),
             color = colorScheme.d30,
         ),
         cardName = TextStyle(
             fontFamily = Alegreya,
             fontWeight = FontWeight.Medium,
-            fontSize = 20.sp,
-            lineHeight = if (lang == "zh" || lang == "zh-CN") 22.sp else 20.sp,
+            fontSize = 20.appSp(scaleFactor),
+            lineHeight = (if (lang == "zh" || lang == "zh-CN") 22 else 20).appSp(scaleFactor),
             color = colorScheme.darkText,
         ),
         cardTraits = TextStyle(
             fontFamily = italicFont,
             fontStyle = FontStyle.Italic,
-            fontSize = 16.sp,
-            lineHeight = 18.sp,
+            fontSize = 16.appSp(scaleFactor),
+            lineHeight = 18.appSp(scaleFactor),
             color = colorScheme.lightText
         ),
         counter = TextStyle(
             fontFamily = Alegreya,
             fontWeight = FontWeight.Medium,
-            fontSize = 24.sp,
-            lineHeight = if (lang == "zh" || lang == "zh-CN") 28.sp else 26.sp,
+            fontSize = 24.appSp(scaleFactor),
+            lineHeight = (if (lang == "zh" || lang == "zh-CN") 28 else 26).appSp(scaleFactor),
             color = colorScheme.d10,
         ),
         large = TextStyle(
             fontFamily = Alegreya,
             fontWeight = FontWeight.Medium,
-            fontSize = 18.sp,
-            lineHeight = if (lang == "zh" || lang == "zh-CN") 22.sp else 20.sp,
+            fontSize = 18.appSp(scaleFactor),
+            lineHeight = (if (lang == "zh" || lang == "zh-CN") 22 else 20).appSp(scaleFactor),
             color = colorScheme.darkText,
         ),
         header = TextStyle(
             fontFamily = Alegreya,
             fontWeight = FontWeight.Medium,
-            fontSize = 22.sp,
-            lineHeight = if (lang == "zh" || lang == "zh-CN") 26.sp else 24.sp,
+            fontSize = 22.appSp(scaleFactor),
+            lineHeight = (if (lang == "zh" || lang == "zh-CN") 26 else 24).appSp(scaleFactor),
             color = colorScheme.darkText,
         ),
         button = TextStyle(
             fontFamily = Alegreya,
-            fontSize = 18.sp,
-            lineHeight = if (lang == "zh" || lang == "zh-CN") 22.sp else 20.sp,
+            fontSize = 18.appSp(scaleFactor),
+            lineHeight = (if (lang == "zh" || lang == "zh-CN") 22 else 20).appSp(scaleFactor),
             color = colorScheme.l30,
         ),
         subHeaderText = TextStyle(
             fontFamily = Alegreya,
             fontWeight = FontWeight.Medium,
-            fontSize = 18.sp,
-            lineHeight = 22.sp,
+            fontSize = 18.appSp(scaleFactor),
+            lineHeight = 22.appSp(scaleFactor),
             color = colorScheme.d10,
         ),
         text = TextStyle(
             fontFamily = Alegreya,
-            fontSize = 18.sp,
-            lineHeight = 22.sp,
+            fontSize = 18.appSp(scaleFactor),
+            lineHeight = 22.appSp(scaleFactor),
             color = colorScheme.darkText,
         ),
         regular = TextStyle(
@@ -217,37 +217,36 @@ internal fun typography(
         simpleTitleFont = TextStyle(
             fontFamily = Alegreya,
             fontWeight = FontWeight.Medium,
-            fontSize = 28.sp,
-            lineHeight = 36.sp,
+            fontSize = 28.appSp(scaleFactor),
+            lineHeight = 36.appSp(scaleFactor),
             color = colorScheme.darkText,
         ),
         gameFont = TextStyle(
             fontFamily = gameFont,
-            fontSize = 18.sp,
-            lineHeight = 26.sp,
+            fontSize = 18.appSp(scaleFactor),
+            lineHeight = 26.appSp(scaleFactor),
             color = colorScheme.darkText,
         ),
         mediumGameFont = TextStyle(
             fontFamily = gameFont,
-            fontSize = 24.sp,
-            lineHeight = 30.sp,
+            fontSize = 24.appSp(scaleFactor),
+            lineHeight = 30.appSp(scaleFactor),
             color = colorScheme.darkText,
         ),
         bigGameFont = TextStyle(
             fontFamily = gameFont,
-            fontSize = 28.sp,
-            lineHeight = 36.sp,
+            fontSize = 28.appSp(scaleFactor),
+            lineHeight = 36.appSp(scaleFactor),
             color = colorScheme.darkText,
         ),
         dialogLabel = TextStyle(
-            fontSize = 16.sp, //13 for iOS
+            fontSize = 16.appSp(scaleFactor), //13 for iOS
             color = colorScheme.darkText,
         ),
     )
 }
 
 val typography = CustomTypography(
-    cardHeaderHeight = 40.dp,
     cursive = TextStyle(),
     searchLabel = TextStyle(),
     smallLabel = TextStyle(),

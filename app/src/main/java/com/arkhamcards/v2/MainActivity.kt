@@ -4,28 +4,18 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.arkhamcards.v2.ui.navigation.ArkhamNavHost
 import com.arkhamcards.v2.ui.theme.ArkhamCardsTheme
 import com.arkhamcards.v2.ui.theme.CustomTheme
 import com.google.android.gms.common.ConnectionResult
@@ -39,6 +29,8 @@ import com.google.firebase.Firebase
 import com.google.firebase.crashlytics.crashlytics
 import dagger.hilt.android.AndroidEntryPoint
 
+val LocalThemeIsDark = compositionLocalOf { false }
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -49,13 +41,13 @@ class MainActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
         var isDataLoaded = false
         splashScreen.setKeepOnScreenCondition { !isDataLoaded }
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         val isPlayServicesAvailable = GoogleApiAvailability.getInstance()
             .isGooglePlayServicesAvailable(this)
         if (isPlayServicesAvailable == ConnectionResult.SUCCESS) maybeCheckForUpdate()
 
-        enableEdgeToEdge()
         val crashlytics = Firebase.crashlytics
 //        crashlytics.setCustomKeys {
 //            key("current_level", 3)
@@ -71,9 +63,9 @@ class MainActivity : AppCompatActivity() {
         setContent {
             viewModel = hiltViewModel<AppViewModel>(this)
             val lang = Locale.current.toLanguageTag()
-            val langTag = if (lang.equals("zh-CN", ignoreCase = true)) lang
-                else lang.substringBefore("-")
-            val theme = 2 //by viewModel.themeState.collectAsState()
+            val langTag = viewModel.resolveLanguageTag(lang)
+            val scaleFactor by viewModel.scaleFactorState.collectAsState()
+            val theme by viewModel.themeState.collectAsState()
             // Collecting user's theme from shared preferences via viewmodel - false = light, true = dark
             val currentTheme = when(theme) {
                 0 -> false
@@ -83,28 +75,13 @@ class MainActivity : AppCompatActivity() {
             }
             if (currentTheme != null) {
                 isDataLoaded = true
-                ArkhamCardsTheme(currentTheme, langTag) {
-                    Scaffold(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .safeDrawingPadding()
-                    ) { innerPadding ->
-                        val cardsState by viewModel.cardsSyncState.collectAsState()
-                        LaunchedEffect(Unit) {
-                            viewModel.checkIfCardsReady()
-                            //TODO: Add error collecting
-                        }
-                        // if (cardsState is CardsSyncState.UpdateAvailable) TODO: Show update dialog
-                        Crossfade(cardsState) {
-                            when (it) {
-                                CardsSyncState.Loading ->
-                                    CardsDownloadingCircularProgressIndicator()
-
-                                else -> Greeting(
-                                    name = "Android${CustomTheme.language.colon} ${CustomTheme.language.languageTag}",
-                                    modifier = Modifier.padding(innerPadding)
-                                )
-                            }
+                ArkhamCardsTheme(currentTheme, langTag, scaleFactor) {
+                    CompositionLocalProvider(LocalThemeIsDark provides currentTheme) {
+                        Surface(
+                            modifier = Modifier.fillMaxSize(),
+                            color = CustomTheme.colors.background
+                        ) {
+                            ArkhamNavHost(viewModel)
                         }
                     }
                 }
@@ -154,36 +131,5 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
             }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun CardsDownloadingCircularProgressIndicator() {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = CustomTheme.colors.l30
-    ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(16.dp)
-        ) {
-//            Text(
-//                text = stringResource(id = R.string.cards_updating),
-//                color = CustomTheme.colors.d30,
-//                style = CustomTheme.typography.headline
-//            )
-            CircularProgressIndicator(
-                modifier = Modifier.size(32.dp),
-                color = CustomTheme.colors.m)
-        }
     }
 }

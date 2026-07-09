@@ -32,20 +32,27 @@ object CustomTheme {
 fun ArkhamCardsTheme(
     darkTheme: Boolean,
     lang: String,
+    scaleFactor: Float = 1f,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
-    val typography = typography(colorScheme, lang, usePingFang = false)
+    val typography = typography(colorScheme, lang, scaleFactor, usePingFang = false)
     val language = language(lang)
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.l30.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+            window.apply {
+                statusBarColor = colorScheme.background.toArgb()
+                navigationBarColor = colorScheme.background.toArgb()
+            }
+            WindowCompat.getInsetsController(window, view).apply {
+                isAppearanceLightStatusBars = !darkTheme
+                isAppearanceLightNavigationBars = !darkTheme
+            }
         }
     }
     CompositionLocalProvider(

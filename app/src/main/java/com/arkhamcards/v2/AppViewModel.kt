@@ -32,6 +32,12 @@ class AppViewModel @Inject constructor(
     val cardsSyncState = cardsSyncManager.state
     val cardsCacheState = cardsSyncManager.cacheState
 
+    val scaleFactorState = userPreferencesRepository.scaleFactor.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = 1f
+    )
+
     val themeState = userPreferencesRepository.isDarkTheme.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
