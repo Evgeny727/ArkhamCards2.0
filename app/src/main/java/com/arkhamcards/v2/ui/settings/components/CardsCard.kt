@@ -1,14 +1,20 @@
 package com.arkhamcards.v2.ui.settings.components
 
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import com.arkhamcards.v2.R
 import com.arkhamcards.v2.domain.model.settings.Collection
+import com.arkhamcards.v2.ui.components.ArkhamRoundedCardHeader
+import com.arkhamcards.v2.ui.components.ArkhamRoundedFactionCard
+import com.arkhamcards.v2.ui.components.ArkhamSquareButton
 import com.arkhamcards.v2.ui.components.ArkhamSurfaceButton
 import com.arkhamcards.v2.ui.components.ArkhamSurfaceButtonGroup
+import com.arkhamcards.v2.ui.components.Faction
+import com.arkhamcards.v2.ui.components.iconSize
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.theme.CustomTheme
 import com.arkhamcards.v2.ui.theme.LocalLanguage
@@ -28,23 +34,30 @@ fun CardsCard(
     val languageTag = LocalLanguage.current.languageTag
     val languageName = Locale.forLanguageTag(languageTag).displayLanguage
 
-    ArkhamSurfaceButtonGroup(modifier) {
-        ArkhamLanguageSurfaceButton(languageName, onLanguageChange)
+    ArkhamRoundedFactionCard(
+        faction = Faction.Neutral,
+        header = { ArkhamRoundedCardHeader(
+            title = stringResource(R.string.cards),
+            faction = Faction.Neutral,
+        ) },
+    ) {
+        ArkhamSurfaceButtonGroup(modifier) {
+            ArkhamLanguageSurfaceButton(languageName, onLanguageChange)
 
-        HorizontalDivider(color = CustomTheme.colors.divider)
+            HorizontalDivider(color = CustomTheme.colors.divider)
 
-        ArkhamCollectionSurfaceButton(
-            collection = collection,
-            ignoreCollection = ignoreCollection,
-            navigateToCollection = navigateToCollection
-        )
+            ArkhamCollectionSurfaceButton(
+                collection = collection,
+                ignoreCollection = ignoreCollection,
+                navigateToCollection = navigateToCollection
+            )
 
-        HorizontalDivider(color = CustomTheme.colors.divider)
+            HorizontalDivider(color = CustomTheme.colors.divider)
 
-        ArkhamTabooSurfaceButton(tabooSetId, setTaboo)
+            ArkhamTabooSurfaceButton(tabooSetId, setTaboo)
 
-        //TODO:Add card pool button
-        //HorizontalDivider(color = CustomTheme.colors.divider)
+            //TODO:Add card pool button
+            //HorizontalDivider(color = CustomTheme.colors.divider)
 
 //        ArkhamSurfaceButton(
 //            title = stringResource(R.string.card_pool),
@@ -52,6 +65,27 @@ fun CardsCard(
 //            valueLabel = languageName,
 //            onClick = {}
 //        )
+        }
+
+        ArkhamSquareButton(
+            title = stringResource(R.string.check_for_card_updates),
+            onClick = { updateCards(languageTag) },
+            icon = { color ->
+                Text(
+                    text = AppIcon.Arkhamdb.glyph,
+                    fontFamily = AppIcon.Arkhamdb.fontFamily,
+                    color = color,
+                    fontSize = iconSize(AppIcon.Arkhamdb)
+                )
+            }
+        )
+
+        //TODO:Add rules button
+//    ArkhamSquareButton(
+//        title = stringResource(R.string.check_for_card_updates),
+//        onClick = { updateCards(languageTag) },
+//        icon = {}
+//    )
     }
 }
 

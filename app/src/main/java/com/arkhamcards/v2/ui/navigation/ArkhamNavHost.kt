@@ -51,8 +51,6 @@ import androidx.navigation.compose.rememberNavController
 import com.arkhamcards.v2.AppViewModel
 import com.arkhamcards.v2.CardsSyncState
 import com.arkhamcards.v2.R
-import com.arkhamcards.v2.ui.components.ArkhamSwitch
-import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.settings.Settings
 import com.arkhamcards.v2.ui.settings.SettingsAbout
 import com.arkhamcards.v2.ui.settings.SettingsScreen
@@ -75,7 +73,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
 
     //TopAppBar values
     var title by rememberSaveable { mutableStateOf("") }
-    var subtitle by rememberSaveable { mutableStateOf("") }
+    var subtitle by rememberSaveable { mutableStateOf<String?>(null) }
     val baseColor = CustomTheme.colors.background
     val baseContentColor = CustomTheme.colors.d30
     var color by remember { mutableStateOf(baseColor) }
@@ -152,6 +150,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                 ) {
                     composable<Settings> {
                         val settingsViewModel = hiltViewModel<SettingsViewModel>()
+                        var spoilerValue by remember { mutableStateOf(false) }
 
                         SettingsScreen(
                             viewModel = settingsViewModel,
@@ -165,13 +164,30 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                         title = stringResource(BottomBarItem.Settings.label)
                     }
                     composable<SettingsAbout> {
-//                        val settingsViewModel = hiltViewModel<SettingsViewModel>()
-//
-//                        SettingsScreen(
-//                            viewModel = settingsViewModel,
-//                            emitError = viewModel::emitError,
-//                            innerPadding = innerPadding
-//                        )
+                    }
+                }
+                navigation<BottomBarItem.Cards>(
+                    startDestination = Settings
+                ) {
+                    composable<Settings> {
+
+                        title = stringResource(BottomBarItem.Cards.label)
+                    }
+                }
+                navigation<BottomBarItem.Decks>(
+                    startDestination = Settings
+                ) {
+                    composable<Settings> {
+
+                        title = stringResource(BottomBarItem.Decks.label)
+                    }
+                }
+                navigation<BottomBarItem.Campaigns>(
+                    startDestination = Settings
+                ) {
+                    composable<Settings> {
+
+                        title = stringResource(BottomBarItem.Campaigns.label)
                     }
                 }
             }

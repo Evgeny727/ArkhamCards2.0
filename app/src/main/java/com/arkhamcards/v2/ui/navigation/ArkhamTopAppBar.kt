@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -76,7 +77,8 @@ fun ArkhamAppBarAction(
     text: String? = null
 ) {
     if (iconGlyph != null) Box(
-        modifier = Modifier.size(32.dp).clickable(onClick = onClick),
+        modifier = Modifier.size(32.dp).clip(CustomTheme.shapes.circle)
+            .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -86,7 +88,8 @@ fun ArkhamAppBarAction(
             color = contentColor
         )
     } else if (text != null)  Box(
-        modifier = Modifier.padding(4.dp).clickable(onClick = onClick),
+        modifier = Modifier.padding(4.dp).clip(CustomTheme.shapes.circle)
+            .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
         Text(

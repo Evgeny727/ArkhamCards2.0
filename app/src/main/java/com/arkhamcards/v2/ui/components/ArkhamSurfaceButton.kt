@@ -111,7 +111,10 @@ fun ArkhamSurfaceButtonGroup(
         shape = CustomTheme.shapes.large,
         color = CustomTheme.colors.l20
     ) {
-        Column(modifier = Modifier.padding(8.dp)) {
+        Column(
+            modifier = Modifier.padding(8.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
             content()
         }
     }
