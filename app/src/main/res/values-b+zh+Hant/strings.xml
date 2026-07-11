@@ -1157,7 +1157,6 @@
     <string name="please_close_and_restart_the_app">請關閉並重新打開此APP</string>
     <string name="reset_card_database">重置卡牌資料庫</string>
     <string name="mythos_busters">Mythos Busters</string>
-    <string name="support_on_text">感謝%s和%s podcast上的粉絲持續地提供支持，使這個APP成為可能。</string>
     <string name="database_cleared">卡牌資料庫已重置。\n\n請關閉並重新打開此APP，以啟動卡牌資料的完全同步。</string>
     <string name="beta_testing">Beta測試</string>
     <string name="edit_weakness_cards">編輯弱點卡</string>
@@ -1647,5 +1646,12 @@
     <string name="relationship_level">友好度</string>
     <string name="image_cache_cleared">圖片緩存已清除</string>
     <string name="clear_image_cache">清除圖片緩存</string>
+    <string name="smaller">較小</string>
+    <string name="medium">適中</string>
+    <string name="large">較大</string>
+    <string name="xlarge">特大</string>
+    <string name="xxlarge">超大</string>
+    <string name="font_size">字型大小</string>
+    <string name="font_size_warning_text">此選項能調整APP字型大小，但可能會影響某些螢幕畫面的布局。</string>
     <string name="experience_cost_for_decks_that_include_investigator_discount_for_each_other_player">經驗花費: 牌組包括%s的玩家必須花費%s經驗，其他調查員則必須花費%s經驗</string>
 </resources>

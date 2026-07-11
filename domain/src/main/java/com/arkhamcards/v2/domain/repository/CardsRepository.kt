@@ -6,7 +6,7 @@ interface CardsRepository {
 
     suspend fun isCardsTableExists(): Boolean
 
-    suspend fun isCardsUpdateAvailable(locale: String, savedTimestamp: String?): Result<Boolean>
+    suspend fun isCardsUpdateAvailable(locale: String, savedTimestamp: String?, forced: Boolean): Result<Boolean>
 
     suspend fun loadCache(): Boolean
 

@@ -3,7 +3,6 @@ package com.arkhamcards.v2.ui.navigation
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.EaseIn
@@ -40,9 +39,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -51,6 +52,10 @@ import androidx.navigation.compose.rememberNavController
 import com.arkhamcards.v2.AppViewModel
 import com.arkhamcards.v2.CardsSyncState
 import com.arkhamcards.v2.R
+import com.arkhamcards.v2.ui.campaigns.Campaigns
+import com.arkhamcards.v2.ui.cards.Cards
+import com.arkhamcards.v2.ui.decks.Decks
+import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.settings.Settings
 import com.arkhamcards.v2.ui.settings.SettingsAbout
 import com.arkhamcards.v2.ui.settings.SettingsScreen
@@ -109,9 +114,16 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
         } },
     ) { innerPadding ->
         val languageTag = LocalLanguage.current.languageTag
+        val resources = LocalResources.current
         LaunchedEffect(Unit) {
             viewModel.checkIfCardsReady(languageTag)
-            //TODO: Add error collecting
+            viewModel.events.collect { error ->
+                val message = when (error.exception) {
+                    else -> error.exception.localizedMessage ?:
+                        resources.getString(R.string.unknown_error)
+                }
+                snackbarHostState.showSnackbar(message)
+            }
         }
         // if (cardsState is CardsSyncState.UpdateAvailable) TODO: Show update dialog
         Box(
@@ -150,48 +162,85 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                 ) {
                     composable<Settings> {
                         val settingsViewModel = hiltViewModel<SettingsViewModel>()
-                        var spoilerValue by remember { mutableStateOf(false) }
+                        val theme by viewModel.themeState.collectAsState()
 
                         SettingsScreen(
+                            theme = theme ?: 2,
                             viewModel = settingsViewModel,
                             onLanguageChange = viewModel::updateLocale,
                             updateCards = viewModel::updateCardsIfAvailable,
                             navigateToCollection = {},
+                            navigateToAbout = { navController.navigateSingleTop(SettingsAbout) },
+                            navigateToBackup = {},
+                            navigateToDiagnostics = {},
                             emitError = viewModel::emitError,
                             innerPadding = innerPadding
                         )
 
                         title = stringResource(BottomBarItem.Settings.label)
+                        subtitle = null
+                        color = baseColor
+                        contentColor = baseContentColor
+                        rightActions = null
+                        leftAction = null
                     }
                     composable<SettingsAbout> {
+
+                        title = stringResource(R.string.about_arkham_cards)
+                        subtitle = null
+                        color = baseColor
+                        contentColor = baseContentColor
+                        rightActions = null
+                        leftAction = { color ->
+                            ArkhamAppBarAction(
+                                contentColor = color,
+                                onClick = navController::navigateUp,
+                                iconGlyph = AppIcon.ArrowBack,
+                            )
+                        }
                     }
                 }
                 navigation<BottomBarItem.Cards>(
-                    startDestination = Settings
+                    startDestination = Cards
                 ) {
-                    composable<Settings> {
+                    composable<Cards> {
 
                         title = stringResource(BottomBarItem.Cards.label)
+                        subtitle = null
+                        color = baseColor
+                        contentColor = baseContentColor
+                        rightActions = null
+                        leftAction = null
                     }
                 }
                 navigation<BottomBarItem.Decks>(
-                    startDestination = Settings
+                    startDestination = Decks
                 ) {
-                    composable<Settings> {
+                    composable<Decks> {
 
                         title = stringResource(BottomBarItem.Decks.label)
+                        subtitle = null
+                        color = baseColor
+                        contentColor = baseContentColor
+                        rightActions = null
+                        leftAction = null
                     }
                 }
                 navigation<BottomBarItem.Campaigns>(
-                    startDestination = Settings
+                    startDestination = Campaigns
                 ) {
-                    composable<Settings> {
+                    composable<Campaigns> {
 
                         title = stringResource(BottomBarItem.Campaigns.label)
+                        subtitle = null
+                        color = baseColor
+                        contentColor = baseContentColor
+                        rightActions = null
+                        leftAction = null
                     }
                 }
             }
-            AnimatedVisibility(cardsState is CardsSyncState.Loading) {
+            if (cardsState is CardsSyncState.Loading) {
                 CardsDownloadingCircularProgressIndicator()
             }
         }
@@ -221,4 +270,8 @@ fun CardsDownloadingCircularProgressIndicator() {
                 color = CustomTheme.colors.m)
         }
     }
+}
+
+internal fun <T: Any> NavHostController.navigateSingleTop(route: T) = navigate(route) {
+    launchSingleTop = true
 }

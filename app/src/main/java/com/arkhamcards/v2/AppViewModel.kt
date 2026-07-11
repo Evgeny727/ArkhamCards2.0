@@ -57,12 +57,12 @@ class AppViewModel @Inject constructor(
     }
 
     suspend fun checkIfCardsReady(language: String) {
-        cardsSyncManager.ensureCardsReady(language.dataLanguage)
+        cardsSyncManager.ensureCardsReady(language)
     }
 
     fun confirmCardsUpdate(language: String) {
         viewModelScope.launch {
-            cardsSyncManager.download(language.dataLanguage)
+            cardsSyncManager.download(language)
         }
     }
 
@@ -75,20 +75,19 @@ class AppViewModel @Inject constructor(
     }
 
     fun updateCardsIfAvailable(language: String) {
-        viewModelScope.launch {
-            cardsSyncManager.updateCardsIfUpdateAvailable(language.dataLanguage)
+        if (cardsSyncState != CardsSyncState.Loading) {
+            viewModelScope.launch {
+                cardsSyncManager.updateCardsIfUpdateAvailable(language)
+            }
         }
     }
 
     fun updateLocale(locale: String) {
         AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locale))
         viewModelScope.launch {
-            cardsSyncManager.download(locale.dataLanguage)
+            cardsSyncManager.download(locale)
         }
     }
-
-    private val String.dataLanguage: String
-        get() = if (this in SUPPORTED_LANGUAGES) this else "en"
 
     fun resolveLanguageTag(language: String): String {
         return if (language.startsWith("zh-Hans") ||
@@ -98,7 +97,7 @@ class AppViewModel @Inject constructor(
             language.startsWith("zh-TW") ||
             language.startsWith("zh-HK") ||
             language.startsWith("zh-MO")) "zh-cn"
-        else language
+        else language.substringBefore("-")
     }
 
 }

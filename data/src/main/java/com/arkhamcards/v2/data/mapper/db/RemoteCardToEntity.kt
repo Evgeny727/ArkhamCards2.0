@@ -21,13 +21,13 @@ import com.arkhamcards.v2.fragment.SingleCard
  * Extension function to convert [SingleCard] with [CoreCardText] to [CardEntity]
  */
 fun SingleCard.toEntity(
-    coreCardText: CoreCardText,
+    coreCardText: CoreCardText?,
     cardPatch: CardPatch,
     cycles: Map<String, CycleEntity>,
     packs: Map<String, PackEntity>,
     locale: String
 ): CardEntity {
-    val translation = coreCardText.toTranslation()
+    val translation = coreCardText.toTranslation(this)
     val patchValues = cardPatch.values
     val pack = packs[pack_code]
     val cycle = cycles[pack?.cycleCode]
@@ -174,23 +174,23 @@ fun SingleCard.toEntity(
 /**
  * Extension function to convert [CoreCardText] to [Translation]
  */
-fun CoreCardText.toTranslation(): Translation = Translation(
-    backFlavor = back_flavor,
-    backName = back_name,
-    backSubname = back_subname,
-    backText = back_text,
-    backTraits = back_traits,
-    customizationChange = customization_change,
-    customizationText = customization_text,
-    flavor = flavor,
-    name = name,
-    slot = slot,
-    subname = subname,
-    tabooOriginalBackText = taboo_original_back_text,
-    tabooOriginalText = taboo_original_text,
-    tabooTextChange = taboo_text_change,
-    text = text,
-    traits = traits
+fun CoreCardText?.toTranslation(card: SingleCard): Translation = Translation(
+    backFlavor = this?.back_flavor ?: card.real_back_flavor,
+    backName = this?.back_name ?: card.real_back_name,
+    backSubname = this?.back_subname ?: card.real_back_subname,
+    backText = this?.back_text ?: card.real_back_text,
+    backTraits = this?.back_traits ?: card.real_back_traits,
+    customizationChange = this?.customization_change ?: card.real_customization_change,
+    customizationText = this?.customization_text ?: card.real_customization_text,
+    flavor = this?.flavor ?: card.real_flavor,
+    name = this?.name ?: card.real_name,
+    slot = this?.slot ?: card.real_slot,
+    subname = this?.subname ?: card.real_subname,
+    tabooOriginalBackText = this?.taboo_original_back_text ?: card.real_taboo_original_back_text,
+    tabooOriginalText = this?.taboo_original_text ?: card.real_taboo_original_text,
+    tabooTextChange = this?.taboo_text_change ?: card.real_taboo_text_change,
+    text = this?.text ?: card.real_text,
+    traits = this?.traits ?: card.real_traits
 )
 
 /**

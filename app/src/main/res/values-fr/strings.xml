@@ -1189,7 +1189,6 @@
     <string name="please_close_and_restart_the_app">Veuillez fermer et redémarrer l\'application</string>
     <string name="reset_card_database">Réinitialiser la base de données de cartes</string>
     <string name="mythos_busters">Mythos Busters</string>
-    <string name="support_on_text">Cette application existe grâce au soutien continu de nos fans sur %s et sur le podcast %s.</string>
     <string name="database_cleared">La base de données de cartes a été réinitialisée.\n\nVeuillez fermer et redémarrer l\'application pour activer la synchronisation complète des données de cartes.</string>
     <string name="beta_testing">Test bêta</string>
     <string name="edit_weakness_cards">Modifier les Cartes Faiblesse</string>
@@ -1628,7 +1627,6 @@
         <item quantity="one">%s XP</item>
         <item quantity="many">%s XP</item>
     </plurals>
-    <string name="app_made_possible_by_support_on_patreon_and_mythos_busters_podcast">Cette application existe grâce au soutien continu de nos fans sur Patreon et sur le podcast Mythos Busters.</string>
     <string name="travel_here_without_stopping">Voyager ici sans faire escale</string>
     <plurals name="read_status_report_symbols">
         <item quantity="one">Lisez le rapport de situation : %s</item>
@@ -1845,4 +1843,11 @@
     <string name="contains_cards_not_in_the_selected_card_pool">Contient des cartes qui ne sont pas dans le pool choisi.</string>
     <string name="fanmade_challenge_scenario_by_creator">Scénario Défi Fan-Made créé par %s</string>
     <string name="experience_cost_for_decks_that_include_investigator_discount_for_each_other_player">Coût en points d’expérience: %s pour les decks incluant %s, %s pour chaque autre joueur</string>
+    <string name="smaller">Petit</string>
+    <string name="medium">Moyen</string>
+    <string name="large">Grand</string>
+    <string name="xlarge">Très grand</string>
+    <string name="xxlarge">Immense</string>
+    <string name="font_size">Taille de la police</string>
+    <string name="font_size_warning_text">Peut être utilisé pour agrandir la taille du texte mais peut impacter la mise en page.</string>
 </resources>

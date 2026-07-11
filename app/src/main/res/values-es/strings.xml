@@ -1188,7 +1188,6 @@
     <string name="please_close_and_restart_the_app">Por favor cierra y reinicia la aplicación</string>
     <string name="reset_card_database">Reiniciar base de datos de cartas</string>
     <string name="mythos_busters">Mythos Busters</string>
-    <string name="support_on_text">Esta aplicación solo es posible gracias al continuo apoyo de nuestros mecenas en %s y del podcast de %s.</string>
     <string name="database_cleared">La base de datos de las cartas se ha reiniciado.\n\nPor favor cierra la aplicación y reiníciala para provocar la sincronización completa de los datos.</string>
     <string name="beta_testing">Pruebas beta</string>
     <string name="edit_weakness_cards">Editar carta Debilidad</string>
@@ -1650,7 +1649,6 @@
         <item quantity="one">%s XP</item>
         <item quantity="many">%s XP</item>
     </plurals>
-    <string name="app_made_possible_by_support_on_patreon_and_mythos_busters_podcast">Esta aplicación es posible gracias al continuo apoyo de nuestros mecenas en Patreon y al podcast de Mythos Busters.</string>
     <string name="travel_here_without_stopping">Viajar aquí sin detenerse</string>
     <plurals name="read_status_report_symbols">
         <item quantity="one">Leer informe de estado: %s</item>
@@ -1887,4 +1885,11 @@
     <string name="scenario_results">Resultado del escenario</string>
     <string name="fanmade_challenge_scenario_by_creator">Escenario desafío fanmade creado por %s</string>
     <string name="experience_cost_for_decks_that_include_investigator_discount_for_each_other_player">Coste de experiencia: %s para mazos que incluyan %s, %s para el resto</string>
+    <string name="smaller">Pequeña</string>
+    <string name="medium">Mediana</string>
+    <string name="large">Grande</string>
+    <string name="xlarge">Muy grande</string>
+    <string name="xxlarge">Gigante</string>
+    <string name="font_size">Tamaño fuente</string>
+    <string name="font_size_warning_text">Puedes modificar el tamaño de las letras de la aplicación. Esto puede afectar al diseño de algunas pantallas.</string>
 </resources>

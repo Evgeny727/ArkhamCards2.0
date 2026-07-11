@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
+import javax.inject.Singleton
 
 sealed interface CardsSyncState {
     object Idle : CardsSyncState
@@ -24,6 +25,7 @@ sealed interface CardsCacheState {
     object Error : CardsCacheState
 }
 
+@Singleton
 class CardsSyncManager @Inject constructor(
     private val cardsRepository: CardsRepository,
     private val userPreferencesRepository: UserPreferencesRepository
@@ -41,6 +43,7 @@ class CardsSyncManager @Inject constructor(
     private val cardsUpdatedAt = userPreferencesRepository.cardsUpdatedAt
 
     suspend fun ensureCardsReady(language: String) {
+        if (_state.value == CardsSyncState.Loading) return
         if (!cardsRepository.isCardsTableExists()) download(language)
         else checkForUpdate(language)
     }
@@ -54,7 +57,7 @@ class CardsSyncManager @Inject constructor(
 
     suspend fun updateCardsIfUpdateAvailable(language: String) {
         _state.value = CardsSyncState.Loading
-        fetchCardsUpdate(language) { updateAvailable ->
+        fetchCardsUpdate(language, forced = true) { updateAvailable ->
             if (updateAvailable) {
                 cardsRepository.downloadAllCards(language)
                     .onSuccess {
@@ -73,11 +76,13 @@ class CardsSyncManager @Inject constructor(
 
     private suspend inline fun fetchCardsUpdate(
         language: String,
+        forced: Boolean = false,
         block: suspend (Boolean) -> Unit
     ) {
         cardsRepository.isCardsUpdateAvailable(
             language,
-            cardsUpdatedAt.first()
+            cardsUpdatedAt.first(),
+            forced
         )
             .onSuccess { block(it) }
             .onFailure {

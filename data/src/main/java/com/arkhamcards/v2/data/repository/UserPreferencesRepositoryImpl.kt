@@ -46,6 +46,17 @@ class UserPreferencesRepositoryImpl @Inject constructor(
         }.map { preferences ->
             preferences[SCALE_FACTOR] ?: 1f
         }
+    override val showFanmadeCards: Flow<Boolean> = dataStore.data
+        .catch {
+            if (it is IOException) {
+                Log.e(TAG, "Error reading fanmade cards preferences.", it)
+                emit(emptyPreferences())
+            } else {
+                throw it
+            }
+        }.map { preferences ->
+            preferences[FANMADE_CARDS] ?: false
+        }
     override val isIncludeEnglishSearchResults: Flow<Boolean> = dataStore.data
         .catch {
             if (it is IOException) {
@@ -137,6 +148,7 @@ class UserPreferencesRepositoryImpl @Inject constructor(
         val THEME = intPreferencesKey("theme")
         val SCALE_FACTOR = floatPreferencesKey("scale_factor")
         const val TAG = "UserPreferencesRepo"
+        val FANMADE_CARDS = booleanPreferencesKey("fanmade_cards")
         val INCLUDE_ENGLISH_SEARCH_RESULTS = booleanPreferencesKey("english_results")
         val TABOO = intPreferencesKey("taboo")
         val COLLECTION = stringPreferencesKey("collection")
@@ -155,6 +167,12 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override suspend fun saveScaleFactorPreference(scaleFactor: Float) {
         dataStore.edit { preferences ->
             preferences[SCALE_FACTOR] = scaleFactor
+        }
+    }
+
+    override suspend fun saveShowFanmadeCards(showFanmadeCards: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[FANMADE_CARDS] = showFanmadeCards
         }
     }
 

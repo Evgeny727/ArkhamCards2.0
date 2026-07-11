@@ -1177,7 +1177,6 @@
     <string name="please_close_and_restart_the_app">Bitte die App beenden und neu starten</string>
     <string name="reset_card_database">Kartendatenbank zurücksetzen</string>
     <string name="mythos_busters">Mythos Busters</string>
-    <string name="support_on_text">Die App wird durch die fortwährende Unterstützung der Fans auf %s und den %s Podcast ermöglicht.</string>
     <string name="database_cleared">Die Kartendatenbank wurde zurückgesetzt.\n\nBitte die App beenden und neu starten um eine vollständige Synchronisation der Kartendaten anzustoßen.</string>
     <string name="beta_testing">Betatest</string>
     <string name="edit_weakness_cards">Schwäche Karten ändern</string>
@@ -1619,7 +1618,6 @@
         <item quantity="one">%s XP</item>
         <item quantity="other">%s XP</item>
     </plurals>
-    <string name="app_made_possible_by_support_on_patreon_and_mythos_busters_podcast">Diese App wird durch die anhaltende Unterstützung unserer Fans auf Patreon und des Mythos Busters-Podcasts ermöglicht.</string>
     <string name="travel_here_without_stopping">Reise hierher ohne anzuhalten</string>
     <plurals name="read_status_report_symbols">
         <item quantity="one">Gelesener Statusbericht: %s</item>
@@ -1855,5 +1853,12 @@
     <string name="none_released_yet">Bisher keine veröffentlicht</string>
     <string name="chapter_1">Kapitel 1</string>
     <string name="chapter_2">Kapitel 2</string>
+    <string name="smaller">Kleiner</string>
+    <string name="medium">Mittel</string>
+    <string name="large">Groß</string>
+    <string name="xlarge">Extra-Groß</string>
+    <string name="xxlarge">Extra-Extra-Groß</string>
+    <string name="font_size">Schriftgröße</string>
+    <string name="font_size_warning_text">Hiermit kann die Schrift in der App vergrößert werden. Dies kann allerdings das Bildschirmlayout beeinflussen.</string>
     <string name="this_draft_uses_the_decks_selected_card_pool">Dieser Draft nutzt den gewählten Kartenpool des Decks.</string>
 </resources>

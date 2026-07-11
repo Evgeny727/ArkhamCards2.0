@@ -1191,7 +1191,6 @@
     <string name="please_close_and_restart_the_app">Por favor, reinicie o aplicativo</string>
     <string name="reset_card_database">Redefinir banco de dados de carta</string>
     <string name="mythos_busters">Destruidores de Mythos</string>
-    <string name="support_on_text">Este aplicativo é possível graças ao apoio contínuo de nossos fãs em %s e o podcast %s.</string>
     <string name="database_cleared">O banco de dados de cartas foi redefinido.\n\nPor favor, feche o aplicativo e reinicie-o para acionar uma sincronização completa das cartas.</string>
     <string name="beta_testing">Teste beta</string>
     <string name="edit_weakness_cards">Editar cartas de fraqueza</string>
@@ -1356,4 +1355,11 @@
         <item quantity="one">%s XP</item>
         <item quantity="many">%s XP</item>
     </plurals>
+    <string name="smaller">Pequeno</string>
+    <string name="medium">Médio</string>
+    <string name="large">Grande</string>
+    <string name="xlarge">Extra Grande</string>
+    <string name="xxlarge">Muito Grande</string>
+    <string name="font_size">Tamanho da Fonte</string>
+    <string name="font_size_warning_text">Isso pode ser usado para aumentar o tamanho da fonte no app, embora possa afetar o layout em algumas telas.</string>
 </resources>

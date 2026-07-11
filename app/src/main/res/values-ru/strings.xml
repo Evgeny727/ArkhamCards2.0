@@ -1206,7 +1206,6 @@
     <string name="please_close_and_restart_the_app">Перезапустите приложение</string>
     <string name="reset_card_database">Сбросить базу карт</string>
     <string name="mythos_busters">Mythos Busters</string>
-    <string name="support_on_text">Arkham Cards существует благодаря фанатам игры на (%s) и подкасту %s.</string>
     <string name="database_cleared">База карт очищена.\n\nПерезапустите приложение, чтобы загрузить актуальную базу карт.</string>
     <string name="beta_testing">Бета-тестирование</string>
     <string name="can_upload_campaigns">Теперь вы можете загрузить свою кампанию на сервер Arkham Cards, чтобы синхронизировать её между устройствами и поделиться ею с друзьями.</string>
@@ -1861,4 +1860,13 @@
     <string name="contains_cards_that_are_not_in_the_selected_card_pool">Содержит карты не из выбранного пула карт.</string>
     <string name="fanmade_challenge_scenario_by_creator">Фанатский сценарий-испытание от %s</string>
     <string name="experience_cost_for_decks_that_include_investigator_discount_for_each_other_player">Цена в опыте: %s для игрока за %s, %s для всех остальных игроков</string>
+    <string name="smaller">Мелкий</string>
+    <string name="medium">Средний</string>
+    <string name="large">Большой</string>
+    <string name="xlarge">X-Большой</string>
+    <string name="xxlarge">XX-Большой</string>
+    <string name="font_size">Размер шрифта</string>
+    <string name="font_size_warning_text">Эта настройка может повлиять на расположение элементов на некоторых экранах.</string>
+
+    <string name="support_text">Поддержите Arkham Cards на Patreon</string>
 </resources>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">Arkham Cards</string>
+    <string name="app_name" translatable="false">Arkham Cards</string>
+
+    <string name="support_text">Support Arkham Cards on Patreon</string>
 
     //Strings from ArkhamCards
     <string name="guardian">Guardian</string>
@@ -1193,7 +1195,6 @@
     <string name="please_close_and_restart_the_app">Please close and restart the app</string>
     <string name="reset_card_database">Reset card database</string>
     <string name="mythos_busters">Mythos Busters</string>
-    <string name="support_on_text">This app is made possible by the continued support of our fans on %s and the %s podcast.</string>
     <string name="database_cleared">The card database has been reset.\n\nPlease close the app and restart it to trigger a full sync of card data.</string>
     <string name="beta_testing">Beta testing</string>
     <string name="edit_weakness_cards">Edit Weakness Cards</string>
@@ -1666,7 +1667,6 @@
         <item quantity="one">%s XP</item>
         <item quantity="other">%s XP</item>
     </plurals>
-    <string name="app_made_possible_by_support_on_patreon_and_mythos_busters_podcast">This app is made possible by the continued support of our fans on Patreon and the Mythos Busters podcast.</string>
     <string name="travel_here_without_stopping">Travel here without stopping</string>
     <plurals name="read_status_report_symbols">
         <item quantity="one">Read status report: %s</item>
@@ -1921,5 +1921,12 @@
     <string name="none_released_yet">None released yet</string>
     <string name="chapter_1">Chapter 1</string>
     <string name="chapter_2">Chapter 2</string>
+    <string name="smaller">Smaller</string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
+    <string name="xlarge">X-Large</string>
+    <string name="xxlarge">XX-Large</string>
+    <string name="font_size">Font Size</string>
+    <string name="font_size_warning_text">This can be used to make the app font size larger, though it may impact layout on some screens.</string>
     <string name="this_draft_uses_the_decks_selected_card_pool">This draft uses the deck\'s selected card pool.</string>
 </resources>

@@ -1187,7 +1187,6 @@
     <string name="please_close_and_restart_the_app">Per favore chiudi e riavvia l’App</string>
     <string name="reset_card_database">Ripristina il database delle carte</string>
     <string name="mythos_busters">Mythos Busters</string>
-    <string name="support_on_text">Questa App è resa possibile dal supporto continuo dei nostri sostenitori su %s e il podcast %s.</string>
     <string name="database_cleared">Il database delle carte è stato ripristinato. Per favore chiudi l’App e riavviala per avviare una sincronizzazione completa dei dati delle carte.</string>
     <string name="updated_today">Aggiornato oggi</string>
     <string name="updated_yesterday">Aggiornato ieri</string>
@@ -1663,7 +1662,6 @@
         <item quantity="one">%s PE</item>
         <item quantity="many">%s PE</item>
     </plurals>
-    <string name="app_made_possible_by_support_on_patreon_and_mythos_busters_podcast">Questa applicazione è resa possibile dal continuo supporto dei nostri fan su Patreon e del podcast Mythos Busters.</string>
     <string name="travel_here_without_stopping">Viaggia qui senza fermarti</string>
     <plurals name="read_status_report_symbols">
         <item quantity="one">Leggere rapporto sullo stato: %s</item>
@@ -1918,5 +1916,12 @@
     <string name="none_released_yet">Non ancora rilasciato</string>
     <string name="chapter_1">Capitolo 1</string>
     <string name="chapter_2">Capitolo 2</string>
+    <string name="smaller">Piccola</string>
+    <string name="medium">Media</string>
+    <string name="large">Grande</string>
+    <string name="xlarge">Molto grande</string>
+    <string name="xxlarge">Enorme</string>
+    <string name="font_size">Dimensione dei caratteri</string>
+    <string name="font_size_warning_text">Puoi impostare una dimensione maggiore dei caratteri dell’App, tuttavia su alcuni schermi può avere effetti sulla disposizione del testo.</string>
     <string name="this_draft_uses_the_decks_selected_card_pool">Questo draft utilizza il mazzo di carte selezionato.</string>
 </resources>

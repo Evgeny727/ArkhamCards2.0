@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+import kotlin.math.abs
 
 private const val WEEK_MILLIS = 7L * 24 * 60 * 60 * 1000
 
@@ -12,17 +13,13 @@ object TimestampNormilizer {
     fun getCurrentDateTime(): String {
         // Get the current time
         val now = Date()
-        // Create a formatter using the pattern "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
-        // The "XXX" pattern is supported in API 24 and formats the timezone as +00:00
-        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US)
-        sdf.timeZone = TimeZone.getTimeZone("UTC")
-        val formatted = sdf.format(now)
-        // Replace trailing "Z" with "+00:00" if necessary
-        return if (formatted.endsWith("Z")) {
-            formatted.substring(0, formatted.length - 1) + "+00:00"
-        } else {
-            formatted
+        // Create a formatter using the pattern "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US).apply {
+            timeZone = TimeZone.getTimeZone("UTC")
         }
+        val formatted = sdf.format(now)
+
+        return formatted
     }
 
     // It ensures the fraction has exactly 3 digits.
@@ -52,8 +49,9 @@ object TimestampNormilizer {
         val timestamp1Fixed = fixFraction(timestamp1)
         val timestamp2Fixed = fixFraction(timestamp2)
         // Define the date format
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault())
-        format.timeZone = TimeZone.getTimeZone("UTC") // Set the timezone to UTC
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US).apply {
+            timeZone = TimeZone.getTimeZone("UTC")
+        }
 
         // Parse the timestamps
         val date1: Date? = format.parse(timestamp1Fixed)
@@ -67,13 +65,13 @@ object TimestampNormilizer {
     fun isAtLeastWeekApart(timestamp1: String?, timestamp2: String?): Boolean {
         if (timestamp1.isNullOrBlank() || timestamp2.isNullOrBlank()) return false
 
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US).apply {
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US).apply {
             timeZone = TimeZone.getTimeZone("UTC")
         }
 
         val date1 = format.parse(fixFraction(timestamp1) ?: return false) ?: return false
         val date2 = format.parse(fixFraction(timestamp2) ?: return false) ?: return false
 
-        return kotlin.math.abs(date2.time - date1.time) >= WEEK_MILLIS
+        return abs(date2.time - date1.time) >= WEEK_MILLIS
     }
 }

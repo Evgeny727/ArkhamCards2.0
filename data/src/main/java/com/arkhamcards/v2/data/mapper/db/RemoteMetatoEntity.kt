@@ -10,7 +10,6 @@ import com.arkhamcards.v2.fragment.Cycle
 import com.arkhamcards.v2.fragment.EncounterSet
 import com.arkhamcards.v2.fragment.Pack
 import com.arkhamcards.v2.fragment.TabooSet
-import com.arkhamcards.v2.type.Faction_name
 
 /**
  * Extension function to convert [Cycle] to [CycleEntity]
@@ -45,10 +44,10 @@ fun Pack.toEntity(name: String): PackEntity {
 /**
  * Extension function to convert [EncounterSet] to [EncounterSetEntity]
  */
-fun EncounterSet.toEntity(): EncounterSetEntity {
+fun EncounterSet.toEntity(translation: EncounterSet?): EncounterSetEntity {
     return EncounterSetEntity(
         code = code,
-        name = name,
+        name = translation?.name ?: name,
     )
 }
 

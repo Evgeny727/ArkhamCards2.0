@@ -1157,7 +1157,6 @@
     <string name="please_close_and_restart_the_app">앱을 종료하고 다시 시작하여 주십시오</string>
     <string name="reset_card_database">카드 데이터베이스 초기화</string>
     <string name="mythos_busters">Mythos Busters</string>
-    <string name="support_on_text">이 앱은 %s 및 %s 팟캐스트의 팬 분들에게 받은 지속적인 후원 덕분에 만들어질 수 있었습니다.</string>
     <string name="database_cleared">카드 데이터베이스를 초기화합니다.\n\n카드 데이터의 완전한 동기화 작업을 위해 앱을 종료하고 재시작하여 주십시오.</string>
     <string name="beta_testing">베타 테스트</string>
     <string name="edit_weakness_cards">약점 카드 수정</string>
@@ -1609,7 +1608,6 @@
     <plurals name="value_xp">
         <item quantity="other">%s점</item>
     </plurals>
-    <string name="app_made_possible_by_support_on_patreon_and_mythos_busters_podcast">이 앱은 Patreon과 Mythos Busters 팟캐스트에 보내주신 팬 여러분의 지속적인 성원에 힘입어 만들어졌습니다.</string>
     <string name="travel_here_without_stopping">멈추지 않고 여행하기</string>
     <plurals name="read_status_report_symbols">
         <item quantity="other">상태 보고서 읽기: %s</item>
@@ -1812,4 +1810,11 @@
     <string name="alternate_version">대체 버전</string>
     <string name="investigator_expansion">조사자 확장</string>
     <string name="alternate_versions">대체 버전</string>
+    <string name="smaller">작음</string>
+    <string name="medium">중간</string>
+    <string name="large">큼</string>
+    <string name="xlarge">더 큼</string>
+    <string name="xxlarge">훨씬 더 큼</string>
+    <string name="font_size">글자 크기</string>
+    <string name="font_size_warning_text">앱의 글자 크기를 크게 하기 위해 사용되며, 이로 인해 일부 화면의 배열에 영향을 미칠 수도 있습니다.</string>
 </resources>

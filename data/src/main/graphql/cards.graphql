@@ -21,12 +21,15 @@ query getTranslationData($locale: String!) {
   card_encounter_set(where: { locale: { _eq: $locale } }) {
     ...EncounterSet
   }
-  cycle(order_by: { position: asc }) {
+  english_encounters: card_encounter_set(where: { locale: { _eq: "en" } }) {
+    ...EncounterSet
+  }
+  cycle {
     ...Cycle
     translations(where: { locale: { _eq: $locale } }) {
       name
     }
-    packs(order_by: { position: asc }) {
+    packs {
       ...Pack
       translations(where: { locale: { _eq: $locale } }) {
         name

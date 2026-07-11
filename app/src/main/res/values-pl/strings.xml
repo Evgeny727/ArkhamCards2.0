@@ -1218,7 +1218,6 @@
     <string name="please_close_and_restart_the_app">Zamknij i uruchom ponownie</string>
     <string name="reset_card_database">Resetuj bazę danych kart</string>
     <string name="mythos_busters">Mythos Busters</string>
-    <string name="support_on_text">Rozwijanie tej aplikacji jest możliwe dzięki ciągłemu wsparciu naszych fanów na %s i podkaście %s.</string>
     <string name="database_cleared">Baza danych kart została zresetowana.\n\nZamknij aplikację i uruchom ją ponownie, aby przeprowadzić pełną synchronizację danych karty.</string>
     <string name="beta_testing">Testy wersji beta</string>
     <string name="edit_weakness_cards">Edytuj Karty Osłabienia</string>
@@ -1665,7 +1664,6 @@
         <item quantity="few">%s XP</item>
         <item quantity="many">%s XP</item>
     </plurals>
-    <string name="app_made_possible_by_support_on_patreon_and_mythos_busters_podcast">Ta aplikacja powstała dzięki stałemu wsparciu naszych fanów na Patreon i podcastu Mythos Busters.</string>
     <string name="travel_here_without_stopping">Podróżuj tutaj bez zatrzymywania się</string>
     <plurals name="read_status_report_symbols">
         <item quantity="one">Przeczytaj raport sytuacyjny: %s</item>
@@ -1872,4 +1870,11 @@
     <string name="alternate_version">Alternatywna wersja</string>
     <string name="investigator_expansion">Rozszerzenie badaczy</string>
     <string name="alternate_versions">Alternatywne wersje</string>
+    <string name="smaller">Mała</string>
+    <string name="medium">Średnia</string>
+    <string name="large">Duża</string>
+    <string name="xlarge">Bardzo duża</string>
+    <string name="xxlarge">Największa</string>
+    <string name="font_size">Rozmiar czcionki</string>
+    <string name="font_size_warning_text">Można to wykorzystać do zwiększenia rozmiaru czcionki aplikacji, ale może to wpłynąć na układ wyświetlania na niektórych ekranach.</string>
 </resources>

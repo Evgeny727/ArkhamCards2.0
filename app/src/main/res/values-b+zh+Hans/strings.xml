@@ -1159,7 +1159,6 @@
     <string name="database_reset">重置资料库</string>
     <string name="please_close_and_restart_the_app">请关闭并重新打开此APP</string>
     <string name="reset_card_database">重置卡牌资料库</string>
-    <string name="support_on_text">感谢%s和%s 博客节目粉丝持续地提供支持，使这个APP成为可能。</string>
     <string name="database_cleared">卡牌资料库已重置。\n\n请关闭并重新打开此APP，以启动卡牌资料的完全同步。</string>
     <string name="beta_testing">Beta测试</string>
     <string name="edit_weakness_cards">编辑弱点卡</string>
@@ -1589,7 +1588,6 @@
     <plurals name="value_xp">
         <item quantity="other">%s点经验</item>
     </plurals>
-    <string name="app_made_possible_by_support_on_patreon_and_mythos_busters_podcast">这款应用得以问世，离不开我们在Patreon平台上的粉丝以及Mythos Busters播客节目的持续支持。</string>
     <string name="travel_here_without_stopping">旅行到这里但不停留</string>
     <plurals name="read_status_report_symbols">
         <item quantity="other">阅读近况报告：%s</item>
@@ -1814,5 +1812,12 @@
     <string name="none_released_yet">尚未发布</string>
     <string name="chapter_1">第一季</string>
     <string name="chapter_2">第二季</string>
+    <string name="smaller">较小</string>
+    <string name="medium">适中</string>
+    <string name="large">较大</string>
+    <string name="xlarge">特大</string>
+    <string name="xxlarge">超大</string>
+    <string name="font_size">字型大小</string>
+    <string name="font_size_warning_text">此选项能调整APP字型大小，但可能会影响某些萤幕画面的布局。</string>
     <string name="this_draft_uses_the_decks_selected_card_pool">此轮抽使用该牌组选定的卡牌池。</string>
 </resources>

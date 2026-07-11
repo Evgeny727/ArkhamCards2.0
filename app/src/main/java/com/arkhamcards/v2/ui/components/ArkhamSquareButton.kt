@@ -26,6 +26,10 @@ import androidx.compose.ui.unit.sp
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.icons.PackIcon
 import com.arkhamcards.v2.ui.theme.CustomTheme
+import com.arkhamcards.v2.ui.theme.Dark10
+import com.arkhamcards.v2.ui.theme.Dark20
+import com.arkhamcards.v2.ui.theme.Dark30
+import com.arkhamcards.v2.ui.theme.Light30
 
 @Composable
 fun ArkhamSquareButton(
@@ -137,9 +141,9 @@ private fun buttonColors(type: ArkhamButtonColor): ArkhamButtonColors =
             background = CustomTheme.colors.warn,
             ripple = CustomTheme.colors.faction.survivor.lightBackground,
             icon = Color.White,
-            text = CustomTheme.colors.l30,
-            detail = CustomTheme.colors.l30,
-            disabledText = CustomTheme.colors.l30
+            text = Light30,
+            detail = Light30,
+            disabledText = Light30
         )
         ArkhamButtonColor.RedOutline -> ArkhamButtonColors(
             background = CustomTheme.colors.d30,
@@ -152,10 +156,10 @@ private fun buttonColors(type: ArkhamButtonColor): ArkhamButtonColors =
         ArkhamButtonColor.Gold -> ArkhamButtonColors(
             background = CustomTheme.colors.upgrade,
             ripple = CustomTheme.colors.faction.dual.lightBackground,
-            icon = CustomTheme.colors.d20,
-            text = CustomTheme.colors.d30,
-            detail = CustomTheme.colors.d30,
-            disabledText = CustomTheme.colors.d10
+            icon = Dark20,
+            text = Dark30,
+            detail = Dark30,
+            disabledText = Dark10
         )
         ArkhamButtonColor.LightGray -> ArkhamButtonColors(
             background = CustomTheme.colors.l20,
@@ -202,5 +206,7 @@ internal fun iconSize(icon: Any): TextUnit = when (icon) {
     AppIcon.Edit -> 28
     AppIcon.Upgrade -> 28
     AppIcon.Dismiss -> 28
+    AppIcon.MythosBusters -> 34
+    AppIcon.Copy -> 26
     else -> 28
 }.sp

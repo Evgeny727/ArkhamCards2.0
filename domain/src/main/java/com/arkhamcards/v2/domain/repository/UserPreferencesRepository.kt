@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface UserPreferencesRepository {
     val isDarkTheme: Flow<Int>
     val scaleFactor: Flow<Float>
+    val showFanmadeCards: Flow<Boolean>
     val isIncludeEnglishSearchResults: Flow<Boolean>
     val tabooSetId: Flow<Int>
     val collection: Flow<Collection>
@@ -17,6 +18,7 @@ interface UserPreferencesRepository {
 
     suspend fun saveThemePreference(theme: Int)
     suspend fun saveScaleFactorPreference(scaleFactor: Float)
+    suspend fun saveShowFanmadeCards(showFanmadeCards: Boolean)
     suspend fun saveIncludeEnglishSearchResults(isIncludeEnglishSearchResults: Boolean)
     suspend fun saveTabooSetPreference(tabooSetId: Int)
     suspend fun saveCollectionPreference(collection: Collection)

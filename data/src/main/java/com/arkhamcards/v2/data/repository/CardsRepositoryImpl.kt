@@ -1,6 +1,7 @@
 package com.arkhamcards.v2.data.repository
 
 import android.content.Context
+import android.util.Log
 import androidx.room.withTransaction
 import com.arkhamcards.v2.data.local.ArkhamDatabase
 import com.arkhamcards.v2.data.local.cards.CardCacheData
@@ -49,12 +50,17 @@ class CardsRepositoryImpl @Inject constructor(
         val cardSubtypeEntities = translationData.card_subtype_name.map { it.toEntity() }
         val factionEntities = translationData.faction_name.map { it.toEntity() }
         val cycleEntities = translationData.cycle.map {
-            it.cycle.toEntity(it.translations[0].name)
+            it.cycle.toEntity(it.translations.getOrNull(0)?.name ?: it.cycle.real_name)
         }
         val packEntities = translationData.cycle.flatMap { cycle ->
-            cycle.packs.map { it.pack.toEntity(it.translations[0].name) }
+            cycle.packs.map {
+                it.pack.toEntity(it.translations.getOrNull(0)?.name ?: it.pack.real_name)
+            }
         }
-        val encounterSetEntities = translationData.card_encounter_set.map { it.encounterSet.toEntity() }
+        val translatedEncountersMap = translationData.card_encounter_set.associateBy { it.encounterSet.code }
+        val encounterSetEntities = translationData.english_encounters.map {
+            it.encounterSet.toEntity(translatedEncountersMap[it.encounterSet.code]?.encounterSet)
+        }
         val tabooSetEntities = playerCards.taboo_set.map { it.tabooSet.toEntity() }
 
         val packMap = packEntities.associateBy { it.code }
@@ -62,7 +68,7 @@ class CardsRepositoryImpl @Inject constructor(
 
         val playerEntities = playerCards.all_card.map {
             it.singleCard.toEntity(
-                it.translations[0].coreCardText,
+                it.translations.getOrNull(0)?.coreCardText,
                 cardPatches.resolve(it.singleCard.code),
                 cycleMap,
                 packMap,
@@ -71,13 +77,15 @@ class CardsRepositoryImpl @Inject constructor(
         }
         val encounterEntities = encounterCards.all_card.map {
             it.singleCard.toEntity(
-                it.translations[0].coreCardText,
+                it.translations.getOrNull(0)?.coreCardText,
                 cardPatches.resolve(it.singleCard.code),
                 cycleMap,
                 packMap,
                 locale
             )
         }
+
+        val allCards = playerEntities + encounterEntities
 
         db.withTransaction {
             cardsDao.deleteAllCards()
@@ -86,13 +94,14 @@ class CardsRepositoryImpl @Inject constructor(
             metaDao.upsertCycles(cycleEntities)
             metaDao.upsertPacks(packEntities)
             metaDao.upsertEncounterSets(encounterSetEntities)
+            Log.e("transaction", "upsertEncounterSets: ${encounterSetEntities.size}")
             metaDao.upsertTabooSets(tabooSetEntities)
             cardsDao.upsertCardTypes(cardTypeEntities)
             cardsDao.upsertCardSubtypes(cardSubtypeEntities)
-            cardsDao.upsertAllCards(playerEntities + encounterEntities)
+            cardsDao.upsertAllCards(allCards)
         }
 
-        createCache(playerEntities + encounterEntities)
+        createCache(allCards)
         saveCache()
 
         val updatedAt = playerCards.all_card_updated_by_version.getOrNull(0)
@@ -106,9 +115,9 @@ class CardsRepositoryImpl @Inject constructor(
 
     override suspend fun isCardsTableExists(): Boolean = cardsDao.isExists()
 
-    override suspend fun isCardsUpdateAvailable(locale: String, savedTimestamp: String?) = runCatching {
+    override suspend fun isCardsUpdateAvailable(locale: String, savedTimestamp: String?, forced: Boolean) = runCatching {
         val currentTimestamp = getCurrentDateTime()
-        if (!isAtLeastWeekApart(savedTimestamp, currentTimestamp))
+        if (!forced && !isAtLeastWeekApart(savedTimestamp, currentTimestamp))
             return@runCatching false
 
         val cardsUpdatedAt = cardsRemoteDataSource.fetchCardsUpdatedAt(locale).dataAssertNoErrors

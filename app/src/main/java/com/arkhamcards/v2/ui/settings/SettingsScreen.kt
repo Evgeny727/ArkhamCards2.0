@@ -5,32 +5,36 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.arkhamcards.v2.R
-import com.arkhamcards.v2.domain.model.settings.Collection
-import com.arkhamcards.v2.ui.components.ArkhamSurfaceButton
-import com.arkhamcards.v2.ui.components.ArkhamSurfaceButtonGroup
 import com.arkhamcards.v2.ui.settings.components.CardsCard
+import com.arkhamcards.v2.ui.settings.components.SettingsCard
+import com.arkhamcards.v2.ui.settings.components.SocialsCard
+import com.arkhamcards.v2.ui.settings.components.SupportCard
 import com.arkhamcards.v2.ui.theme.CustomTheme
+import com.arkhamcards.v2.ui.theme.LocalLanguage
 import com.arkhamcards.v2.ui.utils.applyScaffoldPaddings
 
 @Composable
 fun SettingsScreen(
+    theme: Int,
     viewModel: SettingsViewModel,
     onLanguageChange: (String) -> Unit,
     navigateToCollection: () -> Unit,
     updateCards: (String) -> Unit,
+    navigateToAbout: () -> Unit,
+    navigateToBackup: () -> Unit,
+    navigateToDiagnostics: () -> Unit,
     emitError: (Throwable) -> Unit,
     innerPadding: PaddingValues,
     modifier: Modifier = Modifier,
 ) {
+    val settingsUiState by viewModel.settingsUiState.collectAsState()
+    val showFanmadeCards by viewModel.showFanmadeCardsState.collectAsState()
     val includeEnglish by viewModel.isIncludeEnglishSearchResultsState.collectAsState()
     val collection by viewModel.collectionState.collectAsState()
     val ignoreCollection by viewModel.ignoreCollectionState.collectAsState()
@@ -42,41 +46,10 @@ fun SettingsScreen(
         }
     }
 
-    SettingsScreenContent(
-        onLanguageChange = onLanguageChange,
-        onThemeChange = viewModel::selectTheme,
-        onScaleFactorChange = viewModel::setScaleFactor,
-        onEnglishSearchResultsChange = viewModel::setEnglishSearchResults,
-        isIncludeEnglishSearchResults = includeEnglish,
-        navigateToCollection = navigateToCollection,
-        collection = collection,
-        ignoreCollection = ignoreCollection,
-        onTabooSetChange = viewModel::setTaboo,
-        tabooSetId = tabooSetId,
-        updateCards = updateCards,
-        paddingValues = innerPadding,
-        modifier = modifier
-    )
-}
+    val languageTag = LocalLanguage.current.languageTag
 
-@Composable
-private fun SettingsScreenContent(
-    onLanguageChange: (String) -> Unit,
-    onThemeChange: (Int) -> Unit,
-    onScaleFactorChange: (Float) -> Unit,
-    onEnglishSearchResultsChange: (Boolean) -> Unit,
-    isIncludeEnglishSearchResults: Boolean,
-    navigateToCollection: () -> Unit,
-    collection: Collection,
-    ignoreCollection: Boolean,
-    onTabooSetChange: (Int) -> Unit,
-    tabooSetId: Int,
-    updateCards: (String) -> Unit,
-    paddingValues: PaddingValues,
-    modifier: Modifier = Modifier,
-) {
     LazyColumn(
-        modifier = modifier.applyScaffoldPaddings(paddingValues)
+        modifier = modifier.applyScaffoldPaddings(innerPadding)
             .fillMaxSize()
             .background(CustomTheme.colors.l10),
         contentPadding = PaddingValues(8.dp),
@@ -92,27 +65,45 @@ private fun SettingsScreenContent(
 //        }
         item("cards_card") {
             CardsCard(
-                onLanguageChange,
-                collection,
-                ignoreCollection,
-                navigateToCollection,
-                setTaboo = onTabooSetChange,
-                tabooSetId,
-                updateCards,
+                onLanguageChange = onLanguageChange,
+                collection = collection,
+                ignoreCollection = ignoreCollection,
+                navigateToCollection = navigateToCollection,
+                setTaboo = viewModel::setTaboo,
+                tabooSetId = tabooSetId,
+                updateCards = updateCards,
             )
         }
-        item("settings_card") {
 
+        item("settings_card") {
+            SettingsCard(
+                themeInt = theme,
+                onThemeChange = viewModel::selectTheme,
+                scaleFactor = CustomTheme.typography.scaleFactor,
+                onScaleChange = viewModel::setScaleFactor,
+                showFanmadeCards = showFanmadeCards,
+                onFanmadeCardsChange = viewModel::setFanmadeCards,
+                includeEnglishSearchResults = includeEnglish,
+                onIncludeEnglishResultsChange = viewModel::setEnglishSearchResults,
+                isLoading = settingsUiState is SettingsUiState.Loading,
+            )
         }
+
         //TODO: add narration card
 //        item("narration_card") {
 //            Text(text = "Settings", style = CustomTheme.typography.header)
 //        }
-        item("socials_card") {
 
+        if (languageTag == "ru" || languageTag == "es") item("socials_card") {
+            SocialsCard(languageTag)
         }
-        item("support_card") {
 
+        item("support_card") {
+            SupportCard(
+                navigateToAbout = navigateToAbout,
+                navigateToBackUp = navigateToBackup,
+                navigateToDiagnostics = navigateToDiagnostics,
+            )
         }
     }
 }

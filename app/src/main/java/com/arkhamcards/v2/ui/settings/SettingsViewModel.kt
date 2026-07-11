@@ -8,17 +8,27 @@ import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+sealed interface SettingsUiState {
+    object Idle : SettingsUiState
+    object Loading : SettingsUiState
+}
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
+
+    private val _settingsUiState = MutableStateFlow<SettingsUiState>(SettingsUiState.Idle)
+    val settingsUiState: StateFlow<SettingsUiState> = _settingsUiState.asStateFlow()
 
     private val _errors = MutableSharedFlow<UiErrorState>(extraBufferCapacity = 1)
     val errors: SharedFlow<UiErrorState> = _errors
@@ -26,6 +36,13 @@ class SettingsViewModel @Inject constructor(
     fun emitError(throwable: Throwable) {
         _errors.tryEmit(UiErrorState(throwable))
     }
+
+    val showFanmadeCardsState: StateFlow<Boolean> =
+        userPreferencesRepository.showFanmadeCards.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = false
+        )
 
     val isIncludeEnglishSearchResultsState: StateFlow<Boolean> =
         userPreferencesRepository.isIncludeEnglishSearchResults.stateIn(
@@ -79,6 +96,12 @@ class SettingsViewModel @Inject constructor(
     fun setIgnoreCollection(ignoreCollection: Boolean) {
         viewModelScope.launch {
             userPreferencesRepository.saveIgnoreCollectionPreference(ignoreCollection)
+        }
+    }
+
+    fun setFanmadeCards(showFanmadeCards: Boolean) {
+        viewModelScope.launch {
+            userPreferencesRepository.saveShowFanmadeCards(showFanmadeCards)
         }
     }
 
