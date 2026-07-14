@@ -37,4 +37,8 @@ object DataModule {
             .build()
     }
 
+    @Provides
+    @Singleton
+    fun provideMetaDao(db: ArkhamDatabase) = db.metaDao()
+
 }

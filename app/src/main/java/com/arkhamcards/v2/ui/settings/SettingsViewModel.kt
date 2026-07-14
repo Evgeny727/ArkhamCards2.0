@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arkhamcards.v2.UiErrorState
 import com.arkhamcards.v2.domain.model.settings.Collection
+import com.arkhamcards.v2.domain.repository.MetaRepository
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.persistentListOf
@@ -24,7 +25,8 @@ sealed interface SettingsUiState {
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val metaRepository: MetaRepository
 ) : ViewModel() {
 
     private val _settingsUiState = MutableStateFlow<SettingsUiState>(SettingsUiState.Idle)
@@ -67,6 +69,12 @@ class SettingsViewModel @Inject constructor(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = 0
+    )
+
+    val tabooSetsListState = metaRepository.getTaboos().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = persistentListOf()
     )
 
     fun selectTheme(theme: Int) {

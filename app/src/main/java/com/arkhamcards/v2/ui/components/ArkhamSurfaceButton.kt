@@ -1,5 +1,6 @@
 package com.arkhamcards.v2.ui.components
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +28,7 @@ fun ArkhamSurfaceButton(
     valueLabel: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    loading: Boolean = false,
     editable: Boolean = true,
     icon: IconGlyph? = null,
     valueLabelDescription: String? = null,
@@ -50,12 +53,18 @@ fun ArkhamSurfaceButton(
                     modifier = Modifier.size(32.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = icon.glyph,
-                        fontFamily = icon.fontFamily,
-                        fontSize = iconSize,
-                        color = CustomTheme.colors.m
-                    )
+                    Crossfade(loading) {
+                        if (it) {
+                            CircularProgressIndicator(modifier = Modifier.size(28.dp), color = CustomTheme.colors.m)
+                        } else {
+                            Text(
+                                text = icon.glyph,
+                                fontFamily = icon.fontFamily,
+                                fontSize = iconSize,
+                                color = CustomTheme.colors.m
+                            )
+                        }
+                    }
                 }
             }
 

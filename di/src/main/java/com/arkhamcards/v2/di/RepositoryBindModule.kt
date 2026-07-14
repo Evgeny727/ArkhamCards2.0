@@ -1,8 +1,10 @@
 package com.arkhamcards.v2.di
 
 import com.arkhamcards.v2.data.repository.CardsRepositoryImpl
+import com.arkhamcards.v2.data.repository.MetaRepositoryImpl
 import com.arkhamcards.v2.data.repository.UserPreferencesRepositoryImpl
 import com.arkhamcards.v2.domain.repository.CardsRepository
+import com.arkhamcards.v2.domain.repository.MetaRepository
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import dagger.Binds
 import dagger.Module
@@ -17,4 +19,7 @@ interface RepositoryBindModule {
 
     @Binds
     fun bindUserPreferencesRepository(impl: UserPreferencesRepositoryImpl): UserPreferencesRepository
+
+    @Binds
+    fun bindMetaRepository(impl: MetaRepositoryImpl): MetaRepository
 }

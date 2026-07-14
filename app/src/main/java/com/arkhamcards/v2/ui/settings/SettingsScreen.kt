@@ -39,6 +39,7 @@ fun SettingsScreen(
     val collection by viewModel.collectionState.collectAsState()
     val ignoreCollection by viewModel.ignoreCollectionState.collectAsState()
     val tabooSetId by viewModel.tabooSetIdState.collectAsState()
+    val tabooSetsList by viewModel.tabooSetsListState.collectAsState()
 
     LaunchedEffect(Unit) {
         viewModel.errors.collect {
@@ -71,7 +72,9 @@ fun SettingsScreen(
                 navigateToCollection = navigateToCollection,
                 setTaboo = viewModel::setTaboo,
                 tabooSetId = tabooSetId,
+                tabooSetsList = tabooSetsList,
                 updateCards = updateCards,
+                loading = settingsUiState is SettingsUiState.Loading
             )
         }
 

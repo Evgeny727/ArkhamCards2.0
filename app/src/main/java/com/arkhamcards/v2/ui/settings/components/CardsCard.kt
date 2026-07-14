@@ -2,7 +2,9 @@ package com.arkhamcards.v2.ui.settings.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
@@ -17,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.arkhamcards.v2.R
 import com.arkhamcards.v2.SUPPORTED_LANGUAGES
+import com.arkhamcards.v2.domain.model.meta.TabooSet
 import com.arkhamcards.v2.domain.model.settings.Collection
 import com.arkhamcards.v2.ui.components.ArkhamCheckboxButton
 import com.arkhamcards.v2.ui.components.ArkhamDialog
@@ -25,11 +28,13 @@ import com.arkhamcards.v2.ui.components.ArkhamRoundedFactionCard
 import com.arkhamcards.v2.ui.components.ArkhamSquareButton
 import com.arkhamcards.v2.ui.components.ArkhamSurfaceButton
 import com.arkhamcards.v2.ui.components.ArkhamSurfaceButtonGroup
+import com.arkhamcards.v2.ui.components.ArkhamTabooSetButton
 import com.arkhamcards.v2.ui.components.Faction
 import com.arkhamcards.v2.ui.components.iconSize
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.theme.CustomTheme
 import com.arkhamcards.v2.ui.theme.LocalLanguage
+import kotlinx.collections.immutable.ImmutableList
 import java.util.Locale
 
 @Composable
@@ -40,7 +45,9 @@ fun CardsCard(
     navigateToCollection: () -> Unit,
     setTaboo: (Int) -> Unit,
     tabooSetId: Int,
+    tabooSetsList: ImmutableList<TabooSet>,
     updateCards: (String) -> Unit,
+    loading: Boolean,
     modifier: Modifier = Modifier
 ) {
     val languageTag = LocalLanguage.current.languageTag
@@ -65,7 +72,13 @@ fun CardsCard(
 
             HorizontalDivider(color = CustomTheme.colors.divider)
 
-            ArkhamTabooSurfaceButton(tabooSetId, setTaboo)
+            ArkhamTabooSetButton(
+                tabooSetId,
+                tabooSetsList,
+                includeCurrent = true,
+                loading = loading,
+                onTabooSetChange = setTaboo
+            )
 
             //TODO:Add card pool button
             //HorizontalDivider(color = CustomTheme.colors.divider)
@@ -172,24 +185,5 @@ private fun ArkhamCollectionSurfaceButton(
         icon = AppIcon.CardOutline,
         valueLabel = collectionValue,
         onClick = navigateToCollection
-    )
-}
-
-@Composable
-private fun ArkhamTabooSurfaceButton(
-    tabooSetId: Int,
-    onTabooSetChange: (Int) -> Unit
-) {
-    val tabooSetName = when (tabooSetId) {
-        100 -> ""
-        0 -> stringResource(R.string.none)
-        else -> ""
-    }
-
-    ArkhamSurfaceButton(
-        title = stringResource(R.string.taboo_set),
-        icon = AppIcon.Taboo,
-        valueLabel = tabooSetName,
-        onClick = {}
     )
 }

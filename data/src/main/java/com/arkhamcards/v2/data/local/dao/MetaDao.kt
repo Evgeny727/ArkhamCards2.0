@@ -8,6 +8,7 @@ import com.arkhamcards.v2.data.local.meta.EncounterSetEntity
 import com.arkhamcards.v2.data.local.meta.FactionEntity
 import com.arkhamcards.v2.data.local.meta.PackEntity
 import com.arkhamcards.v2.data.local.meta.TabooSetEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MetaDao {
@@ -48,4 +49,7 @@ interface MetaDao {
         deleteAllTabooSets()
         deleteAllFactions()
     }
+
+    @Query("SELECT * FROM taboo_set ORDER BY date DESC")
+    fun getTaboos(): Flow<List<TabooSetEntity>>
 }
