@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 sealed interface CardsSyncState {
     object Idle : CardsSyncState
-    object Loading : CardsSyncState
+    data class Loading(val progress: Float) : CardsSyncState
     object UpdateAvailable : CardsSyncState
     object Ready : CardsSyncState
 }
@@ -43,7 +43,7 @@ class CardsSyncManager @Inject constructor(
     private val cardsUpdatedAt = userPreferencesRepository.cardsUpdatedAt
 
     suspend fun ensureCardsReady(language: String) {
-        if (_state.value == CardsSyncState.Loading) return
+        if (_state.value is CardsSyncState.Loading) return
         if (!cardsRepository.isCardsTableExists()) download(language)
         else checkForUpdate(language)
     }
@@ -56,10 +56,13 @@ class CardsSyncManager @Inject constructor(
     }
 
     suspend fun updateCardsIfUpdateAvailable(language: String) {
-        _state.value = CardsSyncState.Loading
+        _state.value = CardsSyncState.Loading(0.0f)
         fetchCardsUpdate(language, forced = true) { updateAvailable ->
             if (updateAvailable) {
-                cardsRepository.downloadAllCards(language)
+                _state.value = CardsSyncState.Loading(0.05f)
+                cardsRepository.downloadAllCards(language) { newValue ->
+                    _state.value = CardsSyncState.Loading(newValue)
+                }
                     .onSuccess {
                         userPreferencesRepository.saveCardsUpdatedTimestamp(it)
                         _state.value = CardsSyncState.Ready
@@ -92,9 +95,11 @@ class CardsSyncManager @Inject constructor(
     }
 
     suspend fun download(language: String) {
-        _state.value = CardsSyncState.Loading
+        _state.value = CardsSyncState.Loading(0.0f)
 
-        cardsRepository.downloadAllCards(language)
+        cardsRepository.downloadAllCards(language) { newValue ->
+            _state.value = CardsSyncState.Loading(newValue)
+        }
             .onSuccess {
                 userPreferencesRepository.saveCardsUpdatedTimestamp(it)
                 _state.value = CardsSyncState.Ready

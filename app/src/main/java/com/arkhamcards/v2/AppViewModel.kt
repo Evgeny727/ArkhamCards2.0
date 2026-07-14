@@ -75,7 +75,7 @@ class AppViewModel @Inject constructor(
     }
 
     fun updateCardsIfAvailable(language: String) {
-        if (cardsSyncState != CardsSyncState.Loading) {
+        if (cardsSyncState.value !is CardsSyncState.Loading) {
             viewModelScope.launch {
                 cardsSyncManager.updateCardsIfUpdateAvailable(language)
             }

@@ -248,14 +248,14 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                 }
             }
             if (cardsState is CardsSyncState.Loading) {
-                CardsDownloadingCircularProgressIndicator()
+                CardsDownloadingProgressIndicator((cardsState as CardsSyncState.Loading).progress)
             }
         }
     }
 }
 
 @Composable
-fun CardsDownloadingCircularProgressIndicator() {
+fun CardsDownloadingProgressIndicator(progress: Float) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = CustomTheme.colors.background
@@ -271,11 +271,40 @@ fun CardsDownloadingCircularProgressIndicator() {
                 style = CustomTheme.typography.text
             )
             Spacer(modifier = Modifier.height(8.dp))
-            //TODO: replace with linear progress indicator
-            CircularProgressIndicator(
-                modifier = Modifier.size(32.dp),
-                color = CustomTheme.colors.m)
+            val animatedProgress by animateFloatAsState(
+                targetValue = progress,
+                animationSpec = tween(),
+                label = ""
+            )
+            CustomLinearProgressBar(animatedProgress)
         }
+    }
+}
+
+@Composable
+private fun CustomLinearProgressBar(
+    progress: Float,
+    modifier: Modifier = Modifier,
+    height: Dp = 20.dp,
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth(0.6f)
+            .height(height)
+            .border(
+                width = 2.dp,
+                color = CustomTheme.colors.d10,
+                shape = CustomTheme.shapes.small
+            )
+    ) {
+        Box(
+            modifier = Modifier
+                .padding(4.dp)
+                .fillMaxHeight()
+                .fillMaxWidth(progress.coerceIn(0f, 1f))
+                .clip(CustomTheme.shapes.small)
+                .background(CustomTheme.colors.d10)
+        )
     }
 }
 

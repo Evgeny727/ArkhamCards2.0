@@ -39,10 +39,13 @@ class CardsRepositoryImpl @Inject constructor(
     private val cardsDao = db.cardsDao()
     private val metaDao = db.metaDao()
 
-    override suspend fun downloadAllCards(locale: String) = runCatching {
+    override suspend fun downloadAllCards(locale: String, onProgress: (Float) -> Unit) = runCatching {
         val translationData = cardsRemoteDataSource.fetchAllTranslationData(locale).dataAssertNoErrors
+        onProgress(0.15f)
         val playerCards = cardsRemoteDataSource.fetchAllPlayerCards(locale).dataAssertNoErrors
+        onProgress(0.30f)
         val encounterCards = cardsRemoteDataSource.fetchAllEncounterCards(locale).dataAssertNoErrors
+        onProgress(0.45f)
 
         val cardPatches = CardPatchRegistry()
 
@@ -78,6 +81,7 @@ class CardsRepositoryImpl @Inject constructor(
                 locale
             )
         }
+        onProgress(0.50f)
         val encounterEntities = encounterCards.all_card.map {
             val pack = packMap[it.singleCard.pack_code]!!
             val cycle = cycleMap[pack.cycleCode]!!
@@ -90,6 +94,7 @@ class CardsRepositoryImpl @Inject constructor(
                 locale
             )
         }
+        onProgress(0.55f)
 
         val allCards = playerEntities + encounterEntities
 
@@ -106,15 +111,21 @@ class CardsRepositoryImpl @Inject constructor(
             cardsDao.upsertCardSubtypes(cardSubtypeEntities)
             cardsDao.upsertAllCards(allCards)
         }
+        onProgress(0.85f)
 
         createCache(allCards)
+        onProgress(0.93f)
         saveCache()
+        onProgress(0.97f)
 
         val updatedAt = playerCards.all_card_updated_by_version.getOrNull(0)
         val compared = compareTimestamps(
             updatedAt?.cards_updated_at.toString(),
             updatedAt?.translation_updated_at.toString(),
         )
+
+        onProgress(1.0f)
+
         if (compared) updatedAt?.translation_updated_at.toString()
         else updatedAt?.cards_updated_at.toString()
     }

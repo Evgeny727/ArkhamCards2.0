@@ -2,7 +2,7 @@ package com.arkhamcards.v2.domain.repository
 
 interface CardsRepository {
 
-    suspend fun downloadAllCards(locale: String): Result<String>
+    suspend fun downloadAllCards(locale: String, onProgress: (Float) -> Unit): Result<String>
 
     suspend fun isCardsTableExists(): Boolean
 
