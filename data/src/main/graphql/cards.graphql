@@ -18,7 +18,7 @@ query getTranslationData($locale: String!) {
     code
     name
   }
-  card_encounter_set(where: { locale: { _eq: $locale } }) {
+  card_encounter_set(where: { locale: { _eq: $locale _neq: "en" } }) {
     ...EncounterSet
   }
   english_encounters: card_encounter_set(where: { locale: { _eq: "en" } }) {

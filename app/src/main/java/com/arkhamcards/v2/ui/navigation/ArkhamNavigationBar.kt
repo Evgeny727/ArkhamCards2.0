@@ -51,7 +51,7 @@ fun ArkhamNavigationBar(
 
                 ArkhamNavigationBarItem(
                     onClick = { if (selected) {
-                        navController.popBackStack(bottomNavItem, false)
+                        navController.popBackStack(bottomNavItem.startDestination, false)
                     } else {
                         navController.navigate(bottomNavItem) {
                             popUpTo(navController.graph.findStartDestination().id) {
@@ -98,7 +98,7 @@ fun RowScope.ArkhamNavigationBarItem(
                 enabled = enabled,
                 indication = ripple(
                     color = CustomTheme.colors.m,
-                    radius = 60.dp
+                    radius = 40.dp
                 ),
                 interactionSource = remember { MutableInteractionSource() },
                 onClick = onClick

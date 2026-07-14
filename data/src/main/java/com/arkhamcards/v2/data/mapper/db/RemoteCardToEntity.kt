@@ -23,14 +23,12 @@ import com.arkhamcards.v2.fragment.SingleCard
 fun SingleCard.toEntity(
     coreCardText: CoreCardText?,
     cardPatch: CardPatch,
-    cycles: Map<String, CycleEntity>,
-    packs: Map<String, PackEntity>,
+    cycle: CycleEntity,
+    pack: PackEntity,
     locale: String
 ): CardEntity {
     val translation = coreCardText.toTranslation(this)
     val patchValues = cardPatch.values
-    val pack = packs[pack_code]
-    val cycle = cycles[pack?.cycleCode]
     return CardEntity(
         id = id,
         code = code,
@@ -45,6 +43,7 @@ fun SingleCard.toEntity(
         cluesFixed = clues_fixed,
         cost = cost,
         customizationOptions = customization_options,
+        cycleCode = cycle.code,
         deckLimit = patchValues.deckLimit.resolve(deck_limit),
         deckOptions = deck_options,
         deckRequirements = simple_deck_requirements,
@@ -78,7 +77,7 @@ fun SingleCard.toEntity(
         official = official,
         packCode = pack_code,
         packPosition = pack_position,
-        parallel = pack?.cycleCode == "parallel",
+        parallel = pack.cycleCode == "parallel",
         parallelOfCode = parallel_of_code,
         permanent = permanent,
         position = position,
@@ -139,8 +138,8 @@ fun SingleCard.toEntity(
         translation = translation,
         sortByType = sortByTypeOrder(this),
         sortByFaction = sortByFactionOrder(this),
-        sortByPack = (cycle?.position ?: 0) * 200 + (pack?.position ?: 0),
-        sortByCycle = cycle?.position ?: 0,
+        sortByPack = cycle.position * 200 + pack.position,
+        sortByCycle = cycle.position,
         sortBySlot = sortBySlotOrder(real_slot, permanent, type_code.rawValue),
         searchName = listOfNotNull(translation.name, translation.subname)
             .joinToString(" ")

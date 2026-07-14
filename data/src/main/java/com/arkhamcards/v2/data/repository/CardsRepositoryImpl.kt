@@ -67,20 +67,26 @@ class CardsRepositoryImpl @Inject constructor(
         val cycleMap = cycleEntities.associateBy { it.code }
 
         val playerEntities = playerCards.all_card.map {
+            val pack = packMap[it.singleCard.pack_code]!!
+            val cycle = cycleMap[pack.cycleCode]!!
+
             it.singleCard.toEntity(
                 it.translations.getOrNull(0)?.coreCardText,
                 cardPatches.resolve(it.singleCard.code),
-                cycleMap,
-                packMap,
+                cycle,
+                packMap[it.singleCard.pack_code]!!,
                 locale
             )
         }
         val encounterEntities = encounterCards.all_card.map {
+            val pack = packMap[it.singleCard.pack_code]!!
+            val cycle = cycleMap[pack.cycleCode]!!
+
             it.singleCard.toEntity(
                 it.translations.getOrNull(0)?.coreCardText,
                 cardPatches.resolve(it.singleCard.code),
-                cycleMap,
-                packMap,
+                cycle,
+                packMap[it.singleCard.pack_code]!!,
                 locale
             )
         }

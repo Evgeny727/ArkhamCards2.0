@@ -8,20 +8,23 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.EaseIn
 import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
@@ -38,9 +41,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -87,7 +92,9 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
     var leftAction: @Composable ((Color) -> Unit)? by remember { mutableStateOf(null) }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize().safeDrawingPadding(),
+        modifier = Modifier
+            .fillMaxSize()
+            .safeDrawingPadding(),
         containerColor = CustomTheme.colors.background,
         topBar = {
             ArkhamTopAppBar(
@@ -158,7 +165,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                 }
             ) {
                 navigation<BottomBarItem.Settings>(
-                    startDestination = Settings
+                    startDestination = BottomBarItem.Settings.startDestination
                 ) {
                     composable<Settings> {
                         val settingsViewModel = hiltViewModel<SettingsViewModel>()
@@ -201,7 +208,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                     }
                 }
                 navigation<BottomBarItem.Cards>(
-                    startDestination = Cards
+                    startDestination = BottomBarItem.Cards.startDestination
                 ) {
                     composable<Cards> {
 
@@ -214,7 +221,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                     }
                 }
                 navigation<BottomBarItem.Decks>(
-                    startDestination = Decks
+                    startDestination = BottomBarItem.Decks.startDestination
                 ) {
                     composable<Decks> {
 
@@ -227,7 +234,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                     }
                 }
                 navigation<BottomBarItem.Campaigns>(
-                    startDestination = Campaigns
+                    startDestination = BottomBarItem.Campaigns.startDestination
                 ) {
                     composable<Campaigns> {
 

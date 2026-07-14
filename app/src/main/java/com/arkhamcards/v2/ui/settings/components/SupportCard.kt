@@ -41,7 +41,7 @@ fun SupportCard(
         ) },
     ) {
         ArkhamSquareButton(
-            title = stringResource(R.string.support_text),
+            title = stringResource(R.string.patreon_button),
             onClick = remember { {
                 context.openLink(patreonLink)
             } },

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ImpliedQuantity">
+    <string name="latest_taboo_set">Актуальный</string>
     <string name="name_campaign_a">%s (Кампания А)</string>
     <string name="name_campaign_b">%s (Кампания Б)</string>
     <string name="too_many_offclass_cards_for_versatile">«Разносторонний» не позволяет иметь так много внеклассовых карт</string>
@@ -904,7 +905,7 @@
     <string name="xp_earned">Полученный опыт</string>
     <string name="adjustment">Коррекция:</string>
     <string name="adjust_xp">Корректировать опыт</string>
-    <string name="select_taboo_list">Список табу</string>
+    <string name="select_taboo_list">Выбрать список табу</string>
     <plurals name="size_card">
         <item quantity="one">%s карта</item>
         <item quantity="few">%s карты</item>
@@ -1184,7 +1185,7 @@
     <string name="disable_to_choose_individual_packs_to_show">Отключите, чтобы видеть отдельные дополнения</string>
     <string name="all_cards_are_shown_throughout_the_app">В приложении отображаются все карты</string>
     <string name="set_collection_to_limit_cards">Укажите состав вашей коллекции, чтобы видеть в приложении только те карты, что у вас есть.</string>
-    <string name="all_cycles_and_packs">Все кампании и дополнения</string>
+    <string name="all_cycles_and_packs">Все циклы и дополнения</string>
     <string name="record_that">Записать что…</string>
     <string name="player_card_entries_only">Только записи о картах игроков</string>
     <string name="accept_friend_request">Принять запрос в друзья</string>
@@ -1867,6 +1868,4 @@
     <string name="xxlarge">XX-Большой</string>
     <string name="font_size">Размер шрифта</string>
     <string name="font_size_warning_text">Эта настройка может повлиять на расположение элементов на некоторых экранах.</string>
-
-    <string name="support_text">Поддержите Arkham Cards на Patreon</string>
 </resources>

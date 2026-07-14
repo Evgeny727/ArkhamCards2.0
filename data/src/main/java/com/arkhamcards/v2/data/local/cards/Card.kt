@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.arkhamcards.v2.data.local.meta.CycleEntity
 import com.arkhamcards.v2.data.local.meta.EncounterSetEntity
 import com.arkhamcards.v2.data.local.meta.FactionEntity
 import com.arkhamcards.v2.data.local.meta.PackEntity
@@ -88,6 +89,12 @@ data class Translation(
             deferred = true,
         ),
         ForeignKey(
+            entity = CycleEntity::class,
+            parentColumns = ["code"],
+            childColumns = ["cycle_code"],
+            deferred = true,
+        ),
+        ForeignKey(
             entity = CardSubtypeEntity::class,
             parentColumns = ["code"],
             childColumns = ["subtype_code"],
@@ -112,6 +119,7 @@ data class Translation(
         Index("faction2_code"),
         Index("faction3_code"),
         Index("pack_code"),
+        Index("cycle_code"),
         Index("subtype_code"),
         Index("type_code"),
         Index("code"),
@@ -143,6 +151,8 @@ data class CardEntity(
     val cost: Int?,
     @ColumnInfo("customization_options")
     val customizationOptions: JsonElement?,
+    @ColumnInfo("cycle_code")
+    val cycleCode: String,
     @ColumnInfo("deck_limit")
     val deckLimit: Int?,
     @ColumnInfo("deck_options")
