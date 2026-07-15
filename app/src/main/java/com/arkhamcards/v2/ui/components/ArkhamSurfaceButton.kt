@@ -39,7 +39,7 @@ fun ArkhamSurfaceButton(
     Surface(
         modifier = modifier.fillMaxWidth(),
         onClick = onClick,
-        enabled = editable,
+        enabled = editable && !loading,
         shape = CustomTheme.shapes.large,
         color = Color.Transparent,
     ) {

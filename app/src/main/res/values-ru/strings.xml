@@ -1751,7 +1751,7 @@
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">Прошло уже больше недели с тех пор, как вы проверяли наличие новых карт.</string>
     <string name="chinese_simplified_translators">• Китайский (Упрощённый): %s</string>
     <string name="narration">Голосовое сопровождение</string>
-    <string name="these_cards_might_have_been_updated_from_a_new_taboo_list_or_contain_minor_corrections">Эти карты могут быть обновлены, взяты из нового списка табу или содержать незначительные исправления.</string>
+    <string name="these_cards_might_have_been_updated">Эти карты могут быть обновлены, взяты из нового списка табу или содержать незначительные исправления.</string>
     <string name="create_new_deck">Создать колоду</string>
     <string name="attachments">Прикрепления</string>
     <string name="bewitching">Очарование</string>

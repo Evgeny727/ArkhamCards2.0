@@ -1724,7 +1724,7 @@
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">Es ist mehr als eine Woche her, dass du nach neuen Karten gesucht hast.</string>
     <string name="chinese_simplified_translators">Chinesisch (vereinfacht): %s</string>
     <string name="narration">Erzählung</string>
-    <string name="these_cards_might_have_been_updated_from_a_new_taboo_list_or_contain_minor_corrections">Diese Karten wurden möglicherweise anhand einer neuen Tabu-Liste aktualisiert oder enthalten kleinere Korrekturen.</string>
+    <string name="these_cards_might_have_been_updated">Diese Karten wurden möglicherweise anhand einer neuen Tabu-Liste aktualisiert oder enthalten kleinere Korrekturen.</string>
     <string name="fatigue">Erschöpfung</string>
     <string name="create_new_deck">Erstelle ein neues Deck</string>
     <string name="attachments">Anhänge</string>

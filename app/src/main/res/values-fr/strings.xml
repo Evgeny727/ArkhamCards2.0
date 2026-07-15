@@ -1743,7 +1743,7 @@
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">Cela fait plus d\'une semaine que vous n\'avez pas vérifié les mises à jour des cartes.</string>
     <string name="chinese_simplified_translators">Chinois (Simplifié): %s</string>
     <string name="narration">Narration</string>
-    <string name="these_cards_might_have_been_updated_from_a_new_taboo_list_or_contain_minor_corrections">Il se peut que ces cartes aient été mises à jour dans la liste des tabous ou qu\'elles contiennent de corrections mineures.</string>
+    <string name="these_cards_might_have_been_updated">Il se peut que ces cartes aient été mises à jour dans la liste des tabous ou qu\'elles contiennent de corrections mineures.</string>
     <string name="create_new_deck">Créer un nouveau deck</string>
     <string name="timeline">Ligne du Temps</string>
     <string name="attachments">Attachements</string>

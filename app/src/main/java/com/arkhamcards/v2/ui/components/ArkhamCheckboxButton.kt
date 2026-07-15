@@ -38,7 +38,7 @@ fun ArkhamCheckboxButton(
             .clip(CustomTheme.shapes.medium)
             .toggleable(
                 value = isSelected,
-                enabled = enabled,
+                enabled = enabled && !loading,
                 onValueChange = onValueChange
             ),
         shape = CustomTheme.shapes.large,

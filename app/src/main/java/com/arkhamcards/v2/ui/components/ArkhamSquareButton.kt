@@ -1,5 +1,6 @@
 package com.arkhamcards.v2.ui.components
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
@@ -38,6 +40,7 @@ fun ArkhamSquareButton(
     modifier: Modifier = Modifier,
     detail: String? = null,
     enabled: Boolean = true,
+    loading: Boolean = false,
     colors: ArkhamButtonColor = ArkhamButtonColor.Default,
     icon: (@Composable (Color) -> Unit)? = null,
 ) {
@@ -50,7 +53,7 @@ fun ArkhamSquareButton(
             indication = ripple(
                 color = palette.ripple
             ),
-            enabled = enabled,
+            enabled = enabled && !loading,
             onClick = onClick
         ),
         color = palette.background,
@@ -75,7 +78,16 @@ fun ArkhamSquareButton(
                     modifier = Modifier.size(32.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    icon(palette.icon)
+                    Crossfade(loading) {
+                        if (it) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(28.dp),
+                                color = palette.icon
+                            )
+                        } else {
+                            icon(palette.icon)
+                        }
+                    }
                 }
             }
 

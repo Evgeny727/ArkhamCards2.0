@@ -1698,7 +1698,7 @@
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">你已经超过一周没有查看新卡牌了。</string>
     <string name="chinese_simplified_translators">中文(简体): %s</string>
     <string name="narration">旁白</string>
-    <string name="these_cards_might_have_been_updated_from_a_new_taboo_list_or_contain_minor_corrections">这些卡牌可能已根据新的禁卡表进行了更新，或是包含了一些细微的修正内容。</string>
+    <string name="these_cards_might_have_been_updated">这些卡牌可能已根据新的禁卡表进行了更新，或是包含了一些细微的修正内容。</string>
     <string name="ages_unwound">纪元失序</string>
     <string name="create_new_deck">创建一个新牌组</string>
     <string name="market_deck">市场牌堆</string>

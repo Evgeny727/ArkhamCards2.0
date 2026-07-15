@@ -1765,7 +1765,7 @@
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">Ha pasado más de una semana desde que revisaste si había nuevas cartas.</string>
     <string name="chinese_simplified_translators">Chino (Simplificado): %s</string>
     <string name="narration">Narración</string>
-    <string name="these_cards_might_have_been_updated_from_a_new_taboo_list_or_contain_minor_corrections">Pueden ser cartas que se hayan actualizado, corregido, o cartas de la lista de tabúes.</string>
+    <string name="these_cards_might_have_been_updated">Pueden ser cartas que se hayan actualizado, corregido, o cartas de la lista de tabúes.</string>
     <string name="fatigue">Fatiga</string>
     <string name="the_colour_out_of_oz">El color de Oz</string>
     <string name="preparations">Preparativos</string>

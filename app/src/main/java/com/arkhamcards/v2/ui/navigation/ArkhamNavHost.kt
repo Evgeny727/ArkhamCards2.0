@@ -55,10 +55,14 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.arkhamcards.v2.AppViewModel
+import com.arkhamcards.v2.CardsCacheState
 import com.arkhamcards.v2.CardsSyncState
 import com.arkhamcards.v2.R
 import com.arkhamcards.v2.ui.campaigns.Campaigns
 import com.arkhamcards.v2.ui.cards.Cards
+import com.arkhamcards.v2.ui.components.ArkhamAlertButton
+import com.arkhamcards.v2.ui.components.ArkhamAlertButtonStyle
+import com.arkhamcards.v2.ui.components.ArkhamAlertDialog
 import com.arkhamcards.v2.ui.decks.Decks
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.settings.Settings
@@ -74,6 +78,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val cardsState by viewModel.cardsSyncState.collectAsState()
+    val cardsCacheState by viewModel.cardsCacheState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
 
     val activity = LocalActivity.current
@@ -132,7 +137,22 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                 snackbarHostState.showSnackbar(message)
             }
         }
-        // if (cardsState is CardsSyncState.UpdateAvailable) TODO: Show update dialog
+        if (cardsState is CardsSyncState.UpdateAvailable) ArkhamAlertDialog(
+            title = stringResource(R.string.new_cards_available),
+            description = stringResource(R.string.these_cards_might_have_been_updated),
+            onDismiss = viewModel::cancelCardsUpdate,
+        ) {
+            ArkhamAlertButton(
+                text = stringResource(R.string.not_now),
+                style = ArkhamAlertButtonStyle.CANCEL,
+                loading = cardsCacheState is CardsCacheState.Loading,
+                onClick = viewModel::cancelCardsUpdate
+            )
+            ArkhamAlertButton(
+                text = stringResource(R.string.download_cards),
+                loading = cardsCacheState is CardsCacheState.Loading,
+            ) { viewModel.confirmCardsUpdate(languageTag) }
+        }
         Box(
             modifier = Modifier.fillMaxSize()
         ) {

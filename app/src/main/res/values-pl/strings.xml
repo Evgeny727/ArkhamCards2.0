@@ -1765,7 +1765,7 @@
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">Minął już ponad tydzień odkąd ostatnio sprawdzałeś czy są nowe karty.</string>
     <string name="chinese_simplified_translators">chiński (uproszczony): %s</string>
     <string name="narration">Narracja</string>
-    <string name="these_cards_might_have_been_updated_from_a_new_taboo_list_or_contain_minor_corrections">Karty te mogły zostać zaktualizowane z nowej listy tabu, bądź zawierać drobne poprawki.</string>
+    <string name="these_cards_might_have_been_updated">Karty te mogły zostać zaktualizowane z nowej listy tabu, bądź zawierać drobne poprawki.</string>
     <string name="create_new_deck">Stwórz nową talię</string>
     <string name="bewitching">Zły urok</string>
     <string name="hunch_deck">Talia przeczuć</string>

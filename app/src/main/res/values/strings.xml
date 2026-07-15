@@ -1784,7 +1784,7 @@
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">It has been more than a week since you checked for new cards.</string>
     <string name="chinese_simplified_translators">Chinese (Simplified): %s</string>
     <string name="narration">Narration</string>
-    <string name="these_cards_might_have_been_updated_from_a_new_taboo_list_or_contain_minor_corrections">These cards might have been updated, from a new taboo list, or contain minor corrections.</string>
+    <string name="these_cards_might_have_been_updated">These cards might have been updated, from a new taboo list, or contain minor corrections.</string>
     <string name="fatigue">Fatigue</string>
     <string name="the_colour_out_of_oz">The Colour Out of Oz</string>
     <string name="preparations">Preparations</string>
