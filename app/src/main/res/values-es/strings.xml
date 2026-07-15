@@ -23,6 +23,7 @@
     <plurals name="scenarios_count_completed_plural">
         <item quantity="one">%s escenario completado</item>
         <item quantity="many">%s escenarios completados</item>
+        <item quantity="other">%s escenarios completados</item>
     </plurals>
     <string name="xp_available_experience">%s de experiencia disponible</string>
     <string name="deck_experience_required">%s de experiencia requerida</string>
@@ -300,6 +301,7 @@
     <plurals name="card_count_total_card_count">
         <item quantity="one">%s carta (%s en total)</item>
         <item quantity="many">%s cartas (%s en total)</item>
+        <item quantity="other">%s cartas (%s en total)</item>
     </plurals>
     <string name="delete_this_upgrade">Eliminar esta mejora (%s)</string>
     <string name="delete_all_versions">Eliminar todas las versiones</string>
@@ -397,6 +399,7 @@
     <plurals name="count_card">
         <item quantity="one">%s carta</item>
         <item quantity="many">%s cartas</item>
+        <item quantity="other">%s cartas</item>
     </plurals>
     <string name="secondary_class">Clase Secundaria</string>
     <string name="preferences">Preferencias</string>
@@ -506,14 +509,17 @@
     <plurals name="set_encounter_set_aside_out_of_play">
         <item quantity="one">Coloca el conjunto de encuentros %s aparte, fuera de juego.</item>
         <item quantity="many">Coloca los conjuntos de encuentros %s aparte, fuera de juego.</item>
+        <item quantity="other">Coloca los conjuntos de encuentros %s aparte, fuera de juego.</item>
     </plurals>
     <plurals name="gather_all_cards_from_encounter_set">
         <item quantity="one">Reúne todas las cartas del siguiente conjunto de encuentros: %s.</item>
         <item quantity="many">Reúne todas las cartas de los siguientes conjuntos de encuentros: %s.</item>
+        <item quantity="other">Reúne todas las cartas de los siguientes conjuntos de encuentros: %s.</item>
     </plurals>
     <plurals name="set_is_indicated_by_the_following_icon">
         <item quantity="one">%s Este conjunto viene indicado por el siguiente icono:</item>
         <item quantity="many">%s Estos conjuntos vienen indicados por los siguientes iconos:</item>
+        <item quantity="other">%s Estos conjuntos vienen indicados por los siguientes iconos:</item>
     </plurals>
     <string name="choose_investigators">Elige los investigadores</string>
     <string name="campaign_cards">Cartas de la Campaña</string>
@@ -531,16 +537,19 @@
     <plurals name="check_campaign_log_count_mark_section">
         <item quantity="one">Revisa el registro de campaña. Como hay %s marca en \'%s\':</item>
         <item quantity="many">Revisa el registro de campaña. Como hay %s marcas en \'%s\':</item>
+        <item quantity="other">Revisa el registro de campaña. Como hay %s marcas en \'%s\':</item>
     </plurals>
     <plurals name="check_campaign_log_count_entry_section">
         <item quantity="one">Revisa el registro de campaña. Como hay %s entrada en \'%s\':</item>
         <item quantity="many">Revisa el registro de campaña. Como hay %s entradas en \'%s\':</item>
+        <item quantity="other">Revisa el registro de campaña. Como hay %s entradas en \'%s\':</item>
     </plurals>
     <string name="check_campaign_log_because_entry">Revisa el registro de campaña. Como <i>%s</i>:</string>
     <string name="check_campaign_log_is_the_section_not_crossed_off">Revisa el registro de campaña, ¿está <i>%s</i> sin tachar?</string>
     <plurals name="investigators_must_read_prompt_plural">
         <item quantity="one">%s debe leer <b>%s</b>.</item>
         <item quantity="many">%s deben leer <b>%s</b>.</item>
+        <item quantity="other">%s deben leer </item>
     </plurals>
     <string name="does_any_investigator_have_card_in_deck">¿Algún investigador tiene "%s" en su mazo?</string>
     <string name="was_investigator_with_card_in_deck_defeated">¿El investigador con "%s" en su mazo fue derrotado?</string>
@@ -548,6 +557,7 @@
     <plurals name="because_there_is_player_count_in_game_plural">
         <item quantity="one">Como hay %s jugador en el juego:</item>
         <item quantity="many">Como hay %s jugadores en el juego:</item>
+        <item quantity="other">Como hay %s jugadores en el juego:</item>
     </plurals>
     <string name="if_the_lead_investigator_was_killed">Si el investigador jefe ha <b>muerto</b>.</string>
     <string name="if_all_investigators_were_killed">Si todos los investigadores han <b>muerto</b>.</string>
@@ -590,6 +600,7 @@
     <plurals name="each_investigator_pays_xp_cost_to_play_this_scenario">
         <item quantity="one">Cada investigador paga %s punto de experiencia para jugar este escenario.</item>
         <item quantity="many">Cada investigador paga %s puntos de experiencia para jugar este escenario.</item>
+        <item quantity="other">Cada investigador paga %s puntos de experiencia para jugar este escenario.</item>
     </plurals>
     <string name="import_data">Importar datos</string>
     <string name="upgrade_version_spent_xp_available_xp">Mejora %s: %s de %s XP</string>
@@ -668,14 +679,17 @@
     <plurals name="count_resupply">
         <item quantity="one">%s reabastecimiento</item>
         <item quantity="many">%s reabastecimiento</item>
+        <item quantity="other">%s reabastecimiento</item>
     </plurals>
     <plurals name="count_supply_point">
         <item quantity="one">%s punto de suministros</item>
         <item quantity="many">%s puntos de suministros</item>
+        <item quantity="other">%s puntos de suministros</item>
     </plurals>
     <plurals name="xp_general_resupply_xp">
         <item quantity="one">%s general / %s XP</item>
         <item quantity="many">%s general / %s XP</item>
+        <item quantity="other">%s general / %s XP</item>
     </plurals>
     <string name="side_scenarios_cannot_be_added_until_the_previous_following_interludes_completed">No pueden añadirse historias secundarias a una campaña hasta que el escenario previo y los interludios siguientes sean completados.</string>
     <string name="unexpected_file_type">Tipo de archivo inesperado</string>
@@ -688,6 +702,7 @@
     <plurals name="investigator_scenario_count">
         <item quantity="one">(%s - %s escenario</item>
         <item quantity="many">%s - %s escenarios</item>
+        <item quantity="other">%s - %s escenarios</item>
     </plurals>
     <string name="import_text">Importar</string>
     <string name="missing_decks">Faltan mazos</string>
@@ -782,10 +797,12 @@
     <plurals name="this_upgrade_will_cost_count_experience">
         <item quantity="one">Esta mejora costará %s de experiencia.</item>
         <item quantity="many">Estas mejoras costarán %s de experiencia.</item>
+        <item quantity="other">Estas mejoras costarán %s de experiencia.</item>
     </plurals>
     <plurals name="two_random_cards_will_be_chosen_among_the_following_choice">
         <item quantity="one">Dos versiones mejoradas al azar se elegirán entre la siguiente opción:\n\n%s</item>
         <item quantity="many">Dos versiones mejoradas al azar se elegirán entre las siguientes opciones:\n\n%s</item>
+        <item quantity="other">Dos versiones mejoradas al azar se elegirán entre las siguientes opciones:\n\n%s</item>
     </plurals>
     <string name="edit_collection_in_settings">Puedes editar tu colección en Ajustes para ajustar las opciones posibles.</string>
     <string name="additional_options_upgrade_fortune_gambit_card"><b>Opciones adicionales</b>: Cuando mejores una carta [[Fortuna]] o [[Gambito]], en lugar de eso puedes pagar el coste de experiencia completo de la versión de nivel superior y dejar la versión de nivel inferior en tu mazo (no cuenta para el tamaño de tu mazo ni para la cantidad de copias de esa carta en tu mazo).</string>
@@ -833,14 +850,17 @@
     <plurals name="card_count_total_count">
         <item quantity="one">%s · %s en total</item>
         <item quantity="many">%s · %s en total</item>
+        <item quantity="other">%s · %s en total</item>
     </plurals>
     <plurals name="bonded_card_count">
         <item quantity="one">%s enlazada</item>
         <item quantity="many">%s enlazadas</item>
+        <item quantity="other">%s enlazadas</item>
     </plurals>
     <plurals name="unspent_xp">
         <item quantity="one">%s disponible</item>
         <item quantity="many">%s disponibles</item>
+        <item quantity="other">%s disponibles</item>
     </plurals>
     <string name="deck_is_invalid">El mazo no es válido</string>
     <string name="show_splash_cards">Mostrar cartas limitadas de otras clases</string>
@@ -883,6 +903,7 @@
     <plurals name="size_card">
         <item quantity="one">%s carta</item>
         <item quantity="many">%s cartas</item>
+        <item quantity="other">%s cartas</item>
     </plurals>
     <string name="select_parallel_investigator">Selecciona investigador paralelo</string>
     <string name="upgrade_experience">Experiencia para mejoras</string>
@@ -913,10 +934,12 @@
     <plurals name="count_cycle">
         <item quantity="one">%s ciclo</item>
         <item quantity="many">%s ciclos</item>
+        <item quantity="other">%s ciclos</item>
     </plurals>
     <plurals name="count_pack">
         <item quantity="one">%s pack</item>
         <item quantity="many">%s packs</item>
+        <item quantity="other">%s packs</item>
     </plurals>
     <string name="support">Soporte</string>
     <string name="account_name">Nombre de la cuenta</string>
@@ -926,10 +949,12 @@
     <plurals name="count_pending_request">
         <item quantity="one">%s solicitud pendiente</item>
         <item quantity="many">%s solicitudes pendientes</item>
+        <item quantity="other">%s solicitudes pendientes</item>
     </plurals>
     <plurals name="count_friend">
         <item quantity="one">%s amigo</item>
         <item quantity="many">%s amigos</item>
+        <item quantity="other">%s amigos</item>
     </plurals>
     <string name="choose_a_handle">Elige un nombre</string>
     <string name="arkham_cards_account">Cuenta de Arkham Cards</string>
@@ -1006,6 +1031,7 @@
     <plurals name="xp_unspent_plural">
         <item quantity="one">%s XP disponible</item>
         <item quantity="many">%s XP disponibles</item>
+        <item quantity="other">%s XP disponibles</item>
     </plurals>
     <string name="tap_to_draw">Toca para robar</string>
     <string name="draw_another_token">Robar otra</string>
@@ -1161,6 +1187,7 @@
     <plurals name="tokens_total_token">
         <item quantity="one">%s/%s ficha</item>
         <item quantity="many">%s/%s fichas</item>
+        <item quantity="other">%s/%s fichas</item>
     </plurals>
     <string name="show_all_cards">Mostrar todas las cartas</string>
     <string name="disable_to_choose_individual_packs_to_show">Deselecciona para mostrar packs individualmente</string>
@@ -1203,6 +1230,7 @@
     <plurals name="input_choose_quantity">
         <item quantity="one">%s (choose %s)</item>
         <item quantity="many">%s (choose %s)</item>
+        <item quantity="other">%s (choose %s)</item>
     </plurals>
     <string name="select_more">Seleccionar más</string>
     <string name="record_damage_horror">Guardar daño/horror:</string>
@@ -1324,6 +1352,7 @@
     <plurals name="count_card_parentheses">
         <item quantity="one">(%s carta)</item>
         <item quantity="many">(%s cartas)</item>
+        <item quantity="other">(%s cartas)</item>
     </plurals>
     <string name="collection_overlap">Solapamiento de colección</string>
     <string name="deck_overlap">Solapamiento de mazos</string>
@@ -1480,6 +1509,7 @@
     <plurals name="the_friends_campaign_that_you_have_participated_in_will_have_your_decks_removed">
         <item quantity="one">Tus mazos se eliminarán de la campaña con amigos en la que has participado:</item>
         <item quantity="many">Tus mazos se eliminarán de las %s campañas con amigos en la que has participado:</item>
+        <item quantity="other">Tus mazos se eliminarán de las %s campañas con amigos en la que has participado:</item>
     </plurals>
     <string name="i_understand_that_all_data_will_be_deleted_permanently">Entiendo que todos mis datos serán eliminados de forma permanente.</string>
     <string name="confirm_account_deletion">Confirmar cancelación de la cuenta</string>
@@ -1488,6 +1518,7 @@
     <plurals name="the_campaign_that_you_have_uploaded_to_this_account_will_be_deleted">
         <item quantity="one">La campaña que has sincronizado con esta cuenta se eliminará:</item>
         <item quantity="many">Las %s campañas que has sincronizado con esta cuenta se eliminarán:</item>
+        <item quantity="other">Las %s campañas que has sincronizado con esta cuenta se eliminarán:</item>
     </plurals>
     <string name="beta">Beta</string>
     <string name="check_for_card_updates">Buscar nuevas cartas</string>
@@ -1502,10 +1533,12 @@
     <plurals name="name_quantity_card">
         <item quantity="one">Nombra %s carta</item>
         <item quantity="many">Nombra %s cartas</item>
+        <item quantity="other">Nombra %s cartas</item>
     </plurals>
     <plurals name="named_card">
         <item quantity="one">Carta nombrada</item>
         <item quantity="many">Cartas nombradas</item>
+        <item quantity="other">Cartas nombradas</item>
     </plurals>
     <string name="in_deck">En el mazo</string>
     <string name="select_additional_cards">Selecciona cartas adicionales</string>
@@ -1516,10 +1549,12 @@
     <plurals name="choose_quantity_trait">
         <item quantity="one">Elige %s rasgo</item>
         <item quantity="many">Elige %s rasgos</item>
+        <item quantity="other">Elige %s rasgos</item>
     </plurals>
     <plurals name="chosen_trait">
         <item quantity="one">Rasgo elegido</item>
         <item quantity="many">Rasgos elegidos</item>
+        <item quantity="other">Rasgos elegidos</item>
     </plurals>
     <string name="add_trait">Añadir rasgo</string>
     <string name="embark">Embarcar</string>
@@ -1545,6 +1580,7 @@
     <plurals name="free_cards_additional_level_0_card_may_be_added">
         <item quantity="one">Se puede añadir al mazo %s carta adicional de nivel 0 sin gastar experiencia.</item>
         <item quantity="many">Se pueden añadir al mazo %s cartas adicionales de nivel 0 sin gastar experiencia.</item>
+        <item quantity="other">Se pueden añadir al mazo %s cartas adicionales de nivel 0 sin gastar experiencia.</item>
     </plurals>
     <string name="difficulty_override">Sobrescribir dificultad</string>
     <string name="easy_standard">Fácil/Normal</string>
@@ -1557,6 +1593,7 @@
     <plurals name="used_available_used">
         <item quantity="one">%s / %s utilizada</item>
         <item quantity="many">%s / %s utilizadas</item>
+        <item quantity="other">%s / %s utilizadas</item>
     </plurals>
     <string name="error_more_than_15_level01_guardian_survivor_cards">No puedes llevar más de 15 cartas Guardián y/o Superviviente de nivel 0-1</string>
     <string name="recomputing_deck_changes">Recalculando cambios del mazo…</string>
@@ -1575,12 +1612,14 @@
     <plurals name="travel_cost_time">
         <item quantity="one">Coste del viaje: %s de tiempo</item>
         <item quantity="many">Coste del viaje: %s de tiempo</item>
+        <item quantity="other">Coste del viaje: %s de tiempo</item>
     </plurals>
     <string name="do_you_want_to_use_the_app_to_randomize_choices">¿Quieres usar la aplicación para aleatorizar las elecciones?</string>
     <string name="the_cell_travels_from_depart_to_arrive">La célula viaja de %s a %s.</string>
     <plurals name="mark_time_in_your_campaign_log">
         <item quantity="one">Marca %s de <b>tiempo</b> en tu registro de campaña.</item>
         <item quantity="many">Marca %s de <b>tiempo</b> en tu registro de campaña.</item>
+        <item quantity="other">Marca %s de </item>
     </plurals>
     <string name="this_includes_the_cost_of_experience_cost_of_playing_the_sidestory">Esto incluye el coste de experiencia de jugar la historia secundaria.</string>
     <string name="deck_owned_by_other_player_campaign_saving_changes">Este mazo pertenece a otro jugador. Puedes guardar los cambios ahora y se les dará la oportunidad de guardar sus mazos la próxima vez que abran la aplicación.</string>
@@ -1607,10 +1646,12 @@
     <plurals name="mark_distance_time">
         <item quantity="one">Marcar %s de tiempo</item>
         <item quantity="many">Marcar %s de tiempo</item>
+        <item quantity="other">Marcar %s de tiempo</item>
     </plurals>
     <plurals name="travel_time_distance">
         <item quantity="one">Tiempo de viaje: %s</item>
         <item quantity="many">Tiempo de viaje: %s</item>
+        <item quantity="other">Tiempo de viaje: %s</item>
     </plurals>
     <string name="secret_locked">Secreto / Bloqueado</string>
     <string name="cannot_stop_here_until_unlocked">No puedes detenerte aquí hasta que se desbloquee</string>
@@ -1642,21 +1683,25 @@
     <plurals name="scenario_visit_attempt">
         <item quantity="one">%s: visita %s</item>
         <item quantity="many">%s: visita %s</item>
+        <item quantity="other">%s: visita %s</item>
     </plurals>
     <string name="search_english_card_names">Buscar cartas en inglés</string>
     <string name="include_english_results_when_searching">Incluir resultados en inglés al buscar</string>
     <plurals name="value_xp">
         <item quantity="one">%s XP</item>
         <item quantity="many">%s XP</item>
+        <item quantity="other">%s XP</item>
     </plurals>
     <string name="travel_here_without_stopping">Viajar aquí sin detenerse</string>
     <plurals name="read_status_report_symbols">
         <item quantity="one">Leer informe de estado: %s</item>
         <item quantity="many">Leer informes de estado: %s</item>
+        <item quantity="other">Leer informes de estado: %s</item>
     </plurals>
     <plurals name="mark_time_time_cell_travels_from_depart_to_arrive_on_the_way_to_somewhere_else">
         <item quantity="one">Marca %s de <b>tiempo</b> mientras la célula viaja desde %s hasta %s de camino a otro lugar.</item>
         <item quantity="many">Marca %s de <b>tiempo</b> mientras la célula viaja desde %s hasta %s de camino a otro lugar.</item>
+        <item quantity="other">Marca %s de </item>
     </plurals>
     <string name="error_more_than_5_cards_not_seeker_neutral_paradox_traited">No puedes llevar más de 5 cartas que no sean Buscador, Neutral o tengan el rasgo Paradoja.</string>
     <string name="min">Mín.</string>
@@ -1759,6 +1804,7 @@
     <plurals name="it_looks_like_your_app_is_missing_card_count">
         <item quantity="one">Parece que a tu app le falta %s carta.</item>
         <item quantity="many">Parece que a tu app le faltan %s cartas.</item>
+        <item quantity="other">Parece que a tu app le faltan %s cartas.</item>
     </plurals>
     <string name="some_decks_may_not_load_fully_and_campaigns_might_appear_incomplete_until_this_is_fixed">Algunos mazos y campañas no se cargarán por completo hasta que no se solucione.</string>
     <string name="download_cards">Descargar cartas</string>
@@ -1787,51 +1833,63 @@
     <plurals name="limit_of_limit_card">
         <item quantity="one">Límite de %s carta</item>
         <item quantity="many">Límite de %s cartas</item>
+        <item quantity="other">Límite de %s cartas</item>
     </plurals>
     <string name="draft">Draft</string>
     <plurals name="act_count">
         <item quantity="one">Acto: %s</item>
         <item quantity="many">Actos: %s</item>
+        <item quantity="other">Actos: %s</item>
     </plurals>
     <plurals name="agenda_count">
         <item quantity="one">Plan: %s</item>
         <item quantity="many">Planes: %s</item>
+        <item quantity="other">Planes: %s</item>
     </plurals>
     <plurals name="location_count">
         <item quantity="one">Lugar: %s</item>
         <item quantity="many">Lugares: %s</item>
+        <item quantity="other">Lugares: %s</item>
     </plurals>
     <plurals name="enemy_count">
         <item quantity="one">Enemigo: %s</item>
         <item quantity="many">Enemigos: %s</item>
+        <item quantity="other">Enemigos: %s</item>
     </plurals>
     <plurals name="enemy_location_count">
         <item quantity="one">Lugar-Enemigo: %s</item>
         <item quantity="many">Lugares-Enemigo: %s</item>
+        <item quantity="other">Lugares-Enemigo: %s</item>
     </plurals>
     <plurals name="treachery_count">
         <item quantity="one">Traición: %s</item>
         <item quantity="many">Traiciones: %s</item>
+        <item quantity="other">Traiciones: %s</item>
     </plurals>
     <plurals name="story_count">
         <item quantity="one">Historia: %s</item>
         <item quantity="many">Historia: %s</item>
+        <item quantity="other">Historia: %s</item>
     </plurals>
     <plurals name="key_count">
         <item quantity="one">Llave: %s</item>
         <item quantity="many">Llaves: %s</item>
+        <item quantity="other">Llaves: %s</item>
     </plurals>
     <plurals name="asset_count">
         <item quantity="one">Apoyo: %s</item>
         <item quantity="many">Apoyos: %s</item>
+        <item quantity="other">Apoyos: %s</item>
     </plurals>
     <plurals name="scenario_reference">
         <item quantity="one">Referencia de escenario</item>
         <item quantity="many">Referencias de escenario: %s</item>
+        <item quantity="other">Referencias de escenario: %s</item>
     </plurals>
     <plurals name="unknown_count">
         <item quantity="one">Desconocido: %s</item>
         <item quantity="many">Desconocidos: %s</item>
+        <item quantity="other">Desconocidos: %s</item>
     </plurals>
     <string name="campaign_required">Requiere campaña</string>
     <string name="you_must_select_a_campaign">Debes seleccionar una campaña.</string>

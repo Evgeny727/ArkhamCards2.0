@@ -34,14 +34,17 @@ fun ArkhamTopAppBar(
     modifier: Modifier = Modifier,
 ) {
     Surface(
-        modifier = modifier.fillMaxWidth().heightIn(min = 52.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .heightIn(min = 52.dp),
         color = color,
         shadowElevation = 4.dp
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 8.dp)
                 .fillMaxWidth()
         ) {
             leftAction?.invoke(contentColor)
@@ -65,7 +68,9 @@ fun ArkhamTopAppBar(
                     )
                 }
             }
-            if (rightActions != null) rightActions(contentColor)
+            if (rightActions != null) Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                rightActions(contentColor)
+            }
         }
     }
 }
@@ -78,7 +83,9 @@ fun ArkhamAppBarAction(
     text: String? = null
 ) {
     if (iconGlyph != null) Box(
-        modifier = Modifier.size(32.dp).clip(CustomTheme.shapes.circle)
+        modifier = Modifier
+            .size(32.dp)
+            .clip(CustomTheme.shapes.circle)
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
@@ -89,7 +96,9 @@ fun ArkhamAppBarAction(
             color = contentColor
         )
     } else if (text != null)  Box(
-        modifier = Modifier.padding(4.dp).clip(CustomTheme.shapes.circle)
+        modifier = Modifier
+            .padding(4.dp)
+            .clip(CustomTheme.shapes.circle)
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {

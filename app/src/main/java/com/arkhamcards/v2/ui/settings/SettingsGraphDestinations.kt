@@ -7,3 +7,9 @@ object Settings
 
 @Serializable
 object SettingsAbout
+
+@Serializable
+object SettingsBackup
+
+@Serializable
+object SettingsDiagnostics

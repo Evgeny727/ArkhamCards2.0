@@ -25,6 +25,7 @@
         <item quantity="one">%s scenariusz ukończony</item>
         <item quantity="few">%s scenariusze ukończone</item>
         <item quantity="many">%s scenariuszy ukończonych</item>
+        <item quantity="other">%s scenariuszy ukończonych</item>
     </plurals>
     <string name="xp_available_experience">%s dostępnego doświadczenia</string>
     <string name="deck_experience_required">%s wymaganego doświadczenia</string>
@@ -306,6 +307,7 @@
         <item quantity="one">%s Karta (%s Razem)</item>
         <item quantity="few">%s Karty (%s Razem)</item>
         <item quantity="many">%s Kart (%s Razem)</item>
+        <item quantity="other">%s Kart (%s Razem)</item>
     </plurals>
     <string name="delete_this_upgrade">Usuń to ulepszenie (%s)</string>
     <string name="delete_all_versions">Usuń wszystkie wersje</string>
@@ -401,6 +403,7 @@
         <item quantity="one">%s Karta</item>
         <item quantity="few">%s Karty</item>
         <item quantity="many">%s Kart</item>
+        <item quantity="other">%s Kart</item>
     </plurals>
     <string name="secondary_class">Klasa Poboczna</string>
     <string name="preferences">Preferencje</string>
@@ -513,16 +516,19 @@
         <item quantity="one">Odłóż zestaw spotkań %s na bok, poza grę.</item>
         <item quantity="few">Odłóż zestawy spotkań %s na bok, poza grę.</item>
         <item quantity="many">Odłóż zestawy spotkań %s na bok, poza grę.</item>
+        <item quantity="other">Odłóż zestawy spotkań %s na bok, poza grę.</item>
     </plurals>
     <plurals name="gather_all_cards_from_encounter_set">
         <item quantity="one">Zbierz wszystkie karty z zestawu spotkań %s.</item>
         <item quantity="few">Zbierz wszystkie karty z następujących zestawów spotkań: %s.</item>
         <item quantity="many">Zbierz wszystkie karty z następujących zestawów spotkań: %s.</item>
+        <item quantity="other">Zbierz wszystkie karty z następujących zestawów spotkań: %s.</item>
     </plurals>
     <plurals name="set_is_indicated_by_the_following_icon">
         <item quantity="one">%s Zestaw ten jest oznaczony następującym symbolem:</item>
         <item quantity="few">%s Zestawy te są oznaczone następującymi symbolami:</item>
         <item quantity="many">%s Zestawy te są oznaczone następującymi symbolami:</item>
+        <item quantity="other">%s Zestawy te są oznaczone następującymi symbolami:</item>
     </plurals>
     <string name="choose_investigators">Wybierz Badaczy</string>
     <string name="campaign_cards">Karty kampanii</string>
@@ -542,11 +548,13 @@
         <item quantity="one">Sprawdź Dziennik kampanii. Ponieważ w sekcji \'%s\' znajduje się %s kreska</item>
         <item quantity="few">Sprawdź Dziennik kampanii. Ponieważ w sekcji \'%s\' znajdują się %s kreski</item>
         <item quantity="many">Sprawdź Dziennik kampanii. Ponieważ w sekcji \'%s\' znajduje się %s kresek</item>
+        <item quantity="other">Sprawdź Dziennik kampanii. Ponieważ w sekcji \'%s\' znajduje się %s kresek</item>
     </plurals>
     <plurals name="check_campaign_log_count_entry_section">
         <item quantity="one">Sprawdź Dziennik kampanii. Ponieważ w sekcji \'%s\' znajduje się %s wpis</item>
         <item quantity="few">Sprawdź Dziennik kampanii. Ponieważ w sekcji \'%s\' znajdują się %s wpisy</item>
         <item quantity="many">Sprawdź Dziennik kampanii. Ponieważ w sekcji \'%s\' znajduje się %s wpisów</item>
+        <item quantity="other">Sprawdź Dziennik kampanii. Ponieważ w sekcji \'%s\' znajduje się %s wpisów</item>
     </plurals>
     <string name="check_campaign_log_because_entry">Sprawdź Dziennik kampanii. Ponieważ <i>%s</i></string>
     <string name="check_campaign_log_is_the_section_not_crossed_off">Sprawdź w Dzienniku kampanii, czy zaznaczono <i>%s</i> ?</string>
@@ -554,6 +562,7 @@
         <item quantity="one">%s musi przeczytać <b>%s</b>.</item>
         <item quantity="few">%s muszą przeczytać <b>%s</b>.</item>
         <item quantity="many">%s muszą przeczytać <b>%s</b>.</item>
+        <item quantity="other">%s muszą przeczytać </item>
     </plurals>
     <string name="does_any_investigator_have_card_in_deck">Czy jakiś Badacz ma kartę „%s” w swojej talii?</string>
     <string name="was_investigator_with_card_in_deck_defeated">Czy Badacz z kartą „%s” w talii został pokonany?</string>
@@ -562,6 +571,7 @@
         <item quantity="one">Ponieważ w grze jest %s Badacz:</item>
         <item quantity="few">Ponieważ w grze jest %s Badaczy:</item>
         <item quantity="many">Ponieważ w grze jest %s Badaczy:</item>
+        <item quantity="other">Ponieważ w grze jest %s Badaczy:</item>
     </plurals>
     <string name="if_the_lead_investigator_was_killed">Jeśli główny badacz został <b>zabity</b>.</string>
     <string name="if_all_investigators_were_killed">Jeśli wszyscy badacze zostali <b>zabici</b>.</string>
@@ -607,6 +617,7 @@
         <item quantity="one">Każdy badacz płaci %s punkt doświadczenia, aby rozegrać ten scenariusz.</item>
         <item quantity="few">Każdy badacz płaci %s punkty doświadczenia, aby rozegrać ten scenariusz.</item>
         <item quantity="many">Każdy badacz płaci %s punktów doświadczenia, aby rozegrać ten scenariusz.</item>
+        <item quantity="other">Każdy badacz płaci %s punktów doświadczenia, aby rozegrać ten scenariusz.</item>
     </plurals>
     <string name="import_data">Importuj dane</string>
     <string name="upgrade_version_spent_xp_available_xp">Ulepszenie %s: %s z %s XP</string>
@@ -687,16 +698,19 @@
         <item quantity="one">%s odzyskany zasób</item>
         <item quantity="few">%s odzyskane zasoby</item>
         <item quantity="many">%s odzyskanych zasobów</item>
+        <item quantity="other">%s odzyskanych zasobów</item>
     </plurals>
     <plurals name="count_supply_point">
         <item quantity="one">%s punkt zasobów</item>
         <item quantity="few">%s punkty zasobów</item>
         <item quantity="many">%s punktów zasobów</item>
+        <item quantity="other">%s punktów zasobów</item>
     </plurals>
     <plurals name="xp_general_resupply_xp">
         <item quantity="one">%s ogólny / %s XP</item>
         <item quantity="few">%s ogólne / %s XP</item>
         <item quantity="many">%s ogólnych / %s XP</item>
+        <item quantity="other">%s ogólnych / %s XP</item>
     </plurals>
     <string name="side_scenarios_cannot_be_added_until_the_previous_following_interludes_completed">Scenariusze poboczne nie mogą zostać dodane do kampanii, dopóki poprzedni scenariusz i kolejne antrakty nie zostaną zakończone.</string>
     <string name="unexpected_file_type">Niespodziewany typ pliku</string>
@@ -710,6 +724,7 @@
         <item quantity="one">(%s - %s scenariusz</item>
         <item quantity="few">(%s - %s scenariusze</item>
         <item quantity="many">(%s - %s scenariuszy</item>
+        <item quantity="other">(%s - %s scenariuszy</item>
     </plurals>
     <string name="import_text">Importuj</string>
     <string name="missing_decks">Brakujące talie</string>
@@ -805,11 +820,13 @@
         <item quantity="one">To ulepszenie będzie kosztować %s punkt doświadczenia.</item>
         <item quantity="few">To ulepszenie będzie kosztować %s punkty doświadczenia.</item>
         <item quantity="many">To ulepszenie będzie kosztować %s punktów doświadczenia.</item>
+        <item quantity="other">To ulepszenie będzie kosztować %s punktów doświadczenia.</item>
     </plurals>
     <plurals name="two_random_cards_will_be_chosen_among_the_following_choice">
         <item quantity="one">Dwie losowe karty zostaną wybrane spośród następującego wyboru:\n\n%s</item>
         <item quantity="few">Dwie losowe karty zostaną wybrane spośród następującego wyboru:\n\n%s</item>
         <item quantity="many">Dwie losowe karty zostaną wybrane spośród następującego wyboru:\n\n%s</item>
+        <item quantity="other">Dwie losowe karty zostaną wybrane spośród następującego wyboru:\n\n%s</item>
     </plurals>
     <string name="edit_collection_in_settings">Możesz edytować swoją kolekcję w Ustawieniach, aby dostosować odpowiednie opcje.</string>
     <string name="additional_options_upgrade_fortune_gambit_card"><b>Dodatkowe opcje:</b> Kiedy ulepszasz kartę [[Fortune]] lub [[Gambit]], możesz zamiast tego zapłacić pełny koszt doświadczenia w wersji z wyższego poziomu i pozostawić wersję z niższego poziomu w swojej talii (nie liczy się do rozmiaru twojej talii ani liczby kopii tej karty w twojej talii).</string>
@@ -858,16 +875,19 @@
         <item quantity="one">%s · %s łącznie</item>
         <item quantity="few">%s · %s łącznie</item>
         <item quantity="many">%s · %s łącznie</item>
+        <item quantity="other">%s · %s łącznie</item>
     </plurals>
     <plurals name="bonded_card_count">
         <item quantity="one">%s związana</item>
         <item quantity="few">%s związane</item>
         <item quantity="many">%s związanych</item>
+        <item quantity="other">%s związanych</item>
     </plurals>
     <plurals name="unspent_xp">
         <item quantity="one">%s niewydany</item>
         <item quantity="few">%s niewydane</item>
         <item quantity="many">%s niewydanych</item>
+        <item quantity="other">%s niewydanych</item>
     </plurals>
     <string name="deck_is_invalid">Talia jest nieprawidłowa</string>
     <string name="show_splash_cards">Pokaż karty powitalne</string>
@@ -911,6 +931,7 @@
         <item quantity="one">%s Karta</item>
         <item quantity="few">%s Karty</item>
         <item quantity="many">%s Kart</item>
+        <item quantity="other">%s Kart</item>
     </plurals>
     <string name="select_parallel_investigator">Wybierz badacza z równoległego świata</string>
     <string name="upgrade_experience">Dodaj doświadczenia</string>
@@ -942,11 +963,13 @@
         <item quantity="one">%s cykl</item>
         <item quantity="few">%s cykle</item>
         <item quantity="many">%s cykli</item>
+        <item quantity="other">%s cykli</item>
     </plurals>
     <plurals name="count_pack">
         <item quantity="one">%s zestaw</item>
         <item quantity="few">%s zestawy</item>
         <item quantity="many">%s zestawów</item>
+        <item quantity="other">%s zestawów</item>
     </plurals>
     <string name="support">Wsparcie</string>
     <string name="account_name">Nazwa konta</string>
@@ -957,11 +980,13 @@
         <item quantity="one">%s oczekujące żądanie</item>
         <item quantity="few">%s oczekujące żądania</item>
         <item quantity="many">%s oczekujących żądań</item>
+        <item quantity="other">%s oczekujących żądań</item>
     </plurals>
     <plurals name="count_friend">
         <item quantity="one">%s znajomy</item>
         <item quantity="few">%s znajomych</item>
         <item quantity="many">%s znajomych</item>
+        <item quantity="other">%s znajomych</item>
     </plurals>
     <string name="choose_a_handle">Wybierz nazwę</string>
     <string name="arkham_cards_account">Konto Arkham Cards</string>
@@ -1038,6 +1063,7 @@
         <item quantity="one">%s XP niewydany</item>
         <item quantity="few">%s XP niewydane</item>
         <item quantity="many">%s XP niewydanych</item>
+        <item quantity="other">%s XP niewydanych</item>
     </plurals>
     <string name="tap_to_draw">Dotknij by wylosować</string>
     <string name="draw_another_token">Wylosuj kolejny</string>
@@ -1191,6 +1217,7 @@
         <item quantity="one">%s/%s żetonów</item>
         <item quantity="few">%s/%s żetonów</item>
         <item quantity="many">%s/%s żetonów</item>
+        <item quantity="other">%s/%s żetonów</item>
     </plurals>
     <string name="show_all_cards">Pokazuj wszystkie karty</string>
     <string name="disable_to_choose_individual_packs_to_show">Wyłącz, aby wybrać poszczególne zestawy do pokazywania</string>
@@ -1268,6 +1295,7 @@
         <item quantity="one">%s (wybierz %s)</item>
         <item quantity="few">%s (wybierz %s)</item>
         <item quantity="many">%s (wybierz %s)</item>
+        <item quantity="other">%s (wybierz %s)</item>
     </plurals>
     <string name="deck_owned_by_other_player_campaign_saving">Ta talia jest własnością innego gracza. Możesz teraz zapisać ulepszenie, a będzie on miał możliwość zapisania zmian w swojej talii, gdy następnym razem otworzy aplikację.</string>
     <string name="changes_recorded_campaign_text">Zmiany zostały zapisane. Możesz zastosować te zmiany do swojej talii na głównym ekranie kampanii dla twojego Badacza.</string>
@@ -1356,6 +1384,7 @@
         <item quantity="one">(%s karta)</item>
         <item quantity="few">(%s karty)</item>
         <item quantity="many">(%s kart)</item>
+        <item quantity="other">(%s kart)</item>
     </plurals>
     <string name="collection_overlap">Pokrywanie się kolekcji</string>
     <string name="deck_overlap">Pokrywanie się talii</string>
@@ -1479,6 +1508,7 @@
         <item quantity="one">Twoje talie zostaną usunięte z kampanii znajomych, w której brałeś udział:</item>
         <item quantity="few">Twoje talie zostaną usunięte z %s kampanii znajomych, w których brałeś udział:</item>
         <item quantity="many">Twoje talie zostaną usunięte z %s kampanii znajomych, w których brałeś udział:</item>
+        <item quantity="other">Twoje talie zostaną usunięte z %s kampanii znajomych, w których brałeś udział:</item>
     </plurals>
     <string name="i_understand_that_all_data_will_be_deleted_permanently">Rozumiem, że wszystkie dane zostaną trwale usunięte.</string>
     <string name="confirm_account_deletion">Potwierdź usunięcie konta</string>
@@ -1487,6 +1517,7 @@
         <item quantity="one">Kampania przesłana na to konto zostanie usunięta:</item>
         <item quantity="few">%s kampanie przesłane na to konto zostaną usunięte:</item>
         <item quantity="many">%s kampanii przesłanych na to konto zostanie usuniętych:</item>
+        <item quantity="other">%s kampanii przesłanych na to konto zostanie usuniętych:</item>
     </plurals>
     <string name="beta">Beta</string>
     <string name="check_for_card_updates">Aktualizuj dane kart</string>
@@ -1502,11 +1533,13 @@
         <item quantity="one">Wskaż %s kartę</item>
         <item quantity="few">Wskaż %s karty</item>
         <item quantity="many">Wskaż %s kart</item>
+        <item quantity="other">Wskaż %s kart</item>
     </plurals>
     <plurals name="named_card">
         <item quantity="one">Wskazana karta</item>
         <item quantity="few">Wskazane karty</item>
         <item quantity="many">Wskazane karty</item>
+        <item quantity="other">Wskazane karty</item>
     </plurals>
     <string name="select_additional_cards">Wybierz dodatkowe karty</string>
     <string name="map">Mapa</string>
@@ -1516,11 +1549,13 @@
         <item quantity="one">Wybierz %s cechę</item>
         <item quantity="few">Wybierz %s cechy</item>
         <item quantity="many">Wybierz %s cech</item>
+        <item quantity="other">Wybierz %s cech</item>
     </plurals>
     <plurals name="chosen_trait">
         <item quantity="one">Wybrana cecha</item>
         <item quantity="few">Wybrane cechy</item>
         <item quantity="many">Wybrane cechy</item>
+        <item quantity="other">Wybrane cechy</item>
     </plurals>
     <string name="add_trait">Dodaj cechę</string>
     <string name="embark">Wyrusz</string>
@@ -1553,6 +1588,7 @@
         <item quantity="one">%s dodatkowa karta o poziomie 0 może zostać dodana to talii bez wydawania punktów doświadczenia.</item>
         <item quantity="few">Do %s dodatkowych kart o poziomie 0 może zostać dodanych to talii bez wydawania punktów doświadczenia.</item>
         <item quantity="many">Do %s dodatkowych kart o poziomie 0 może zostać dodanych to talii bez wydawania punktów doświadczenia.</item>
+        <item quantity="other">Do %s dodatkowych kart o poziomie 0 może zostać dodanych to talii bez wydawania punktów doświadczenia.</item>
     </plurals>
     <string name="difficulty_override">Nadpisz poziom trudności</string>
     <string name="easy_standard">Łatwy / Standardowy</string>
@@ -1566,6 +1602,7 @@
         <item quantity="one">Użyte %s / %s</item>
         <item quantity="few">Użyte %s / %s</item>
         <item quantity="many">Użyte %s / %s</item>
+        <item quantity="other">Użyte %s / %s</item>
     </plurals>
     <string name="error_more_than_15_level01_guardian_survivor_cards">Nie możesz mieć więcej niż 15 kart Strażnika i/lub Ocalałego o poziomie 0-1</string>
     <string name="recomputing_deck_changes">Przeliczanie zmian talii…</string>
@@ -1586,6 +1623,7 @@
         <item quantity="one">Koszt podróży: %s pole czasu</item>
         <item quantity="few">Koszt podróży: %s pola czasu</item>
         <item quantity="many">Koszt podróży: %s pól czasu</item>
+        <item quantity="other">Koszt podróży: %s pól czasu</item>
     </plurals>
     <string name="do_you_want_to_use_the_app_to_randomize_choices">Czy chcesz używać aplikacji do losowania wyborów?</string>
     <string name="the_cell_travels_from_depart_to_arrive">Komórka podróżuje z %s do %s.</string>
@@ -1593,6 +1631,7 @@
         <item quantity="one">Zaznacz %s pole <b>czasu</b> w Dzienniku Kampanii.</item>
         <item quantity="few">Zaznacz %s pola <b>czasu</b> w Dzienniku Kampanii.</item>
         <item quantity="many">Zaznacz %s pól <b>czasu</b> w Dzienniku Kampanii.</item>
+        <item quantity="other">Zaznacz %s pól </item>
     </plurals>
     <string name="this_includes_the_cost_of_experience_cost_of_playing_the_sidestory">Zawiera koszt doświadczenia za rozegranie historii pobocznej.</string>
     <string name="deck_owned_by_other_player_campaign_saving_changes">Ta talia należy do innego gracza. Możesz teraz zapisać zmiany, a gracz będzie miał możliwość zapisania ich w swojej talii przy następnym otwarciu aplikacji.</string>
@@ -1619,11 +1658,13 @@
         <item quantity="one">Zaznacz %s pole czasu</item>
         <item quantity="few">Zaznacz %s pola czasu</item>
         <item quantity="many">Zaznacz %s pól czasu</item>
+        <item quantity="other">Zaznacz %s pól czasu</item>
     </plurals>
     <plurals name="travel_time_distance">
         <item quantity="one">Czas podróży: %s</item>
         <item quantity="few">Czas podróży: %s</item>
         <item quantity="many">Czas podróży: %s</item>
+        <item quantity="other">Czas podróży: %s</item>
     </plurals>
     <string name="secret_locked">Sekretna / Zablokowana</string>
     <string name="cannot_stop_here_until_unlocked">Nie możecie się tu zatrzymać przed odblokowaniem</string>
@@ -1656,6 +1697,7 @@
         <item quantity="one">%s: Odwiedź %s</item>
         <item quantity="few">%s: Odwiedź %s</item>
         <item quantity="many">%s: Odwiedź %s</item>
+        <item quantity="other">%s: Odwiedź %s</item>
     </plurals>
     <string name="search_english_card_names">Szukaj wśród angielskich nazw kart</string>
     <string name="include_english_results_when_searching">Uwzględnij angielski przy szukaniu</string>
@@ -1663,17 +1705,20 @@
         <item quantity="one">%s XP</item>
         <item quantity="few">%s XP</item>
         <item quantity="many">%s XP</item>
+        <item quantity="other">%s XP</item>
     </plurals>
     <string name="travel_here_without_stopping">Podróżuj tutaj bez zatrzymywania się</string>
     <plurals name="read_status_report_symbols">
         <item quantity="one">Przeczytaj raport sytuacyjny: %s</item>
         <item quantity="few">Przeczytaj raporty sytuacyjne: %s</item>
         <item quantity="many">Przeczytaj raporty sytuacyjne: %s</item>
+        <item quantity="other">Przeczytaj raporty sytuacyjne: %s</item>
     </plurals>
     <plurals name="mark_time_time_cell_travels_from_depart_to_arrive_on_the_way_to_somewhere_else">
         <item quantity="one">Zaznacz %s pole <b>czasu</b>, ponieważ komórka przemieszcza się z %s do %s w drodze do innego miejsca.</item>
         <item quantity="few">Zaznacz %s pola <b>czasu</b>, ponieważ komórka przemieszcza się z %s do %s w drodze do innego miejsca.</item>
         <item quantity="many">Zaznacz %s pól <b>czasu</b>, ponieważ komórka przemieszcza się z %s do %s w drodze do innego miejsca.</item>
+        <item quantity="other">Zaznacz %s pól </item>
     </plurals>
     <string name="error_more_than_5_cards_not_seeker_neutral_paradox_traited">Nie możesz mieć więcej niż 5 kart, które nie są kartami Poszukiwacza, neutralnymi lub z cechą Paradoks.</string>
     <string name="min">Min</string>
@@ -1759,6 +1804,7 @@
         <item quantity="one">Wygląda na to, że w twojej aplikacji brakuje %s karty.</item>
         <item quantity="few">Wygląda na to, że w twojej aplikacji brakuje %s kart.</item>
         <item quantity="many">Wygląda na to, że w twojej aplikacji brakuje %s kart.</item>
+        <item quantity="other">Wygląda na to, że w twojej aplikacji brakuje %s kart.</item>
     </plurals>
     <string name="some_decks_may_not_load_fully_and_campaigns_might_appear_incomplete_until_this_is_fixed">Niektóre talie mogą nie zostać w pełni załadowane, a kampanie mogą wydawać się niekompletne, dopóki ten problem nie zostanie rozwiązany.</string>
     <string name="download_cards">Pobierz karty</string>
@@ -1777,62 +1823,74 @@
         <item quantity="one">Limit %s karty</item>
         <item quantity="few">Limit %s kart</item>
         <item quantity="many">Limit %s kart</item>
+        <item quantity="other">Limit %s kart</item>
     </plurals>
     <string name="draft">Draft</string>
     <plurals name="act_count">
         <item quantity="one">Akt: %s</item>
         <item quantity="few">Akty: %s</item>
         <item quantity="many">Akty: %s</item>
+        <item quantity="other">Akty: %s</item>
     </plurals>
     <plurals name="agenda_count">
         <item quantity="one">Tajemnica: %s</item>
         <item quantity="few">Tajemnice: %s</item>
         <item quantity="many">Tajemnice: %s</item>
+        <item quantity="other">Tajemnice: %s</item>
     </plurals>
     <plurals name="location_count">
         <item quantity="one">Lokalizacja: %s</item>
         <item quantity="few">Lokalizacje: %s</item>
         <item quantity="many">Lokalizacje: %s</item>
+        <item quantity="other">Lokalizacje: %s</item>
     </plurals>
     <plurals name="enemy_count">
         <item quantity="one">Wróg: %s</item>
         <item quantity="few">Wrogowie: %s</item>
         <item quantity="many">Wrogowie: %s</item>
+        <item quantity="other">Wrogowie: %s</item>
     </plurals>
     <plurals name="enemy_location_count">
         <item quantity="one">Wróg-lokalizacja: %s</item>
         <item quantity="few">Wrogowie-lokalizacje: %s</item>
         <item quantity="many">Wrogowie-lokalizacje: %s</item>
+        <item quantity="other">Wrogowie-lokalizacje: %s</item>
     </plurals>
     <plurals name="treachery_count">
         <item quantity="one">Podstęp: %s</item>
         <item quantity="few">Podstępy: %s</item>
         <item quantity="many">Podstępy: %s</item>
+        <item quantity="other">Podstępy: %s</item>
     </plurals>
     <plurals name="story_count">
         <item quantity="one">Fabularna: %s</item>
         <item quantity="few">Fabularne: %s</item>
         <item quantity="many">Fabularne: %s</item>
+        <item quantity="other">Fabularne: %s</item>
     </plurals>
     <plurals name="key_count">
         <item quantity="one">Klucz: %s</item>
         <item quantity="few">Klucze: %s</item>
         <item quantity="many">Klucze: %s</item>
+        <item quantity="other">Klucze: %s</item>
     </plurals>
     <plurals name="asset_count">
         <item quantity="one">Atut: %s</item>
         <item quantity="few">Atuty: %s</item>
         <item quantity="many">Atuty: %s</item>
+        <item quantity="other">Atuty: %s</item>
     </plurals>
     <plurals name="scenario_reference">
         <item quantity="one">Karta pomocy scenariusza</item>
         <item quantity="few">Karty pomocy scenariusza: %s</item>
         <item quantity="many">Karty pomocy scenariusza: %s</item>
+        <item quantity="other">Karty pomocy scenariusza: %s</item>
     </plurals>
     <plurals name="unknown_count">
         <item quantity="one">Nieznana: %s</item>
         <item quantity="few">Nieznane: %s</item>
         <item quantity="many">Nieznane: %s</item>
+        <item quantity="other">Nieznane: %s</item>
     </plurals>
     <string name="campaign_required">Wymagana kampania</string>
     <string name="you_must_select_a_campaign">Musisz wybrać kampanię.</string>
