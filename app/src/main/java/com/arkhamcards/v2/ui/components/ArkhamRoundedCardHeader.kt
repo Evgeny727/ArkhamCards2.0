@@ -8,10 +8,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.ui.theme.CustomTheme
 
 @Composable
@@ -39,10 +41,7 @@ fun ArkhamRoundedCardHeader(
     }
 }
 
-enum class Faction {
-    Guardian, Seeker, Rogue, Mystic, Survivor, Neutral, Mythos, Dual, Dead
-}
-
+@ReadOnlyComposable
 @Composable
 fun factionColor(faction: Faction) = with(CustomTheme.colors.faction) {
     when (faction) {

@@ -2,21 +2,30 @@ package com.arkhamcards.v2.data.repository
 
 import android.content.Context
 import android.util.Log
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.map
+import androidx.room.RoomRawQuery
 import androidx.room.withTransaction
 import com.arkhamcards.v2.data.local.ArkhamDatabase
 import com.arkhamcards.v2.data.local.cards.CardCacheData
 import com.arkhamcards.v2.data.local.cards.patches.CardPatchRegistry
 import com.arkhamcards.v2.data.mapper.db.toData
 import com.arkhamcards.v2.data.mapper.db.toEntity
+import com.arkhamcards.v2.data.mapper.domain.cards.toDomain
 import com.arkhamcards.v2.data.objects.CardCache
 import com.arkhamcards.v2.data.objects.CardCache.createCache
 import com.arkhamcards.v2.data.remote.CardsRemoteDataSource
 import com.arkhamcards.v2.domain.TimestampNormilizer.compareTimestamps
 import com.arkhamcards.v2.domain.TimestampNormilizer.getCurrentDateTime
 import com.arkhamcards.v2.domain.TimestampNormilizer.isAtLeastWeekApart
+import com.arkhamcards.v2.domain.model.cards.CardListItem
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -170,5 +179,87 @@ class CardsRepositoryImpl @Inject constructor(
         CardCache.load(data)
 
         return@withContext true
+    }
+
+    override fun searchPaginatedCardsFlow(): Flow<PagingData<CardListItem>> {
+        val rawQuery = buildSearchCardsQuery()
+
+        return Pager(
+            config = PagingConfig(
+                pageSize = 100,
+                enablePlaceholders = false,
+                initialLoadSize = 300,
+                maxSize = 2000
+            ),
+            pagingSourceFactory = { cardsDao.searchCardsRaw(rawQuery) }
+        ).flow.map { pagingData ->
+            pagingData.map { it.toDomain() }
+        }
+    }
+
+    private fun buildSearchCardsQuery(): RoomRawQuery {
+        return RoomRawQuery(
+            sql = """
+                SELECT
+                    c.id,
+                    c.thumbnailurl,
+                
+                    c.cost,
+                    c.xp,
+                    c.permanent,
+                
+                    c.taboo_xp,
+                    c.taboo_set_id,
+                
+                    c.type_code,
+                    t.name AS typeName,
+                
+                    c.subtype_code,
+                    st.name AS subTypeName,
+                
+                    c.faction_code,
+                    f.name AS factionName,
+                    c.faction2_code,
+                    c.faction3_code,
+                
+                    c.pack_code,
+                    p.name AS packName,
+                    c.pack_position,
+                
+                    c.encounter_code,
+                    e.name AS encounterName,
+                
+                    c.cycle_code,
+                    cy.name AS cycleName,
+                
+                    c.name,
+                    c.subname,
+                
+                    c.skill_willpower,
+                    c.skill_intellect,
+                    c.skill_combat,
+                    c.skill_agility,
+                    c.skill_wild,
+                
+                    c.parallel,
+                    c.is_unique,
+                    c.slot,
+                    c.stage
+                FROM card c
+                JOIN card_type t
+                    ON c.type_code = t.code
+                LEFT JOIN card_subtype st
+                    ON c.subtype_code = st.code
+                JOIN faction f
+                    ON c.faction_code = f.code
+                JOIN pack p
+                    ON c.pack_code = p.code
+                LEFT JOIN encounter_set e
+                    ON c.encounter_code = e.code
+                JOIN cycle cy
+                    ON c.cycle_code = cy.code
+            """.trimIndent(),
+            onBindStatement = { statement -> }
+        )
     }
 }

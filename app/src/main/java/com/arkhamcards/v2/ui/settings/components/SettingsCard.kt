@@ -22,7 +22,7 @@ import com.arkhamcards.v2.ui.components.ArkhamRoundedCardHeader
 import com.arkhamcards.v2.ui.components.ArkhamRoundedFactionCard
 import com.arkhamcards.v2.ui.components.ArkhamSurfaceButton
 import com.arkhamcards.v2.ui.components.ArkhamSurfaceButtonGroup
-import com.arkhamcards.v2.ui.components.Faction
+import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.theme.CustomTheme
 import com.arkhamcards.v2.ui.theme.LocalLanguage

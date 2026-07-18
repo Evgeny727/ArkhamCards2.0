@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.ui.theme.CustomTheme
 
 @Composable

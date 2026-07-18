@@ -60,13 +60,18 @@ import com.arkhamcards.v2.CardsSyncState
 import com.arkhamcards.v2.R
 import com.arkhamcards.v2.ui.campaigns.Campaigns
 import com.arkhamcards.v2.ui.cards.Cards
+import com.arkhamcards.v2.ui.cards.CardsScreen
+import com.arkhamcards.v2.ui.cards.CardsViewModel
 import com.arkhamcards.v2.ui.components.ArkhamAlertButton
 import com.arkhamcards.v2.ui.components.ArkhamAlertButtonStyle
 import com.arkhamcards.v2.ui.components.ArkhamAlertDialog
+import com.arkhamcards.v2.ui.components.ArkhamSwitch
 import com.arkhamcards.v2.ui.decks.Decks
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.settings.Settings
 import com.arkhamcards.v2.ui.settings.SettingsAbout
+import com.arkhamcards.v2.ui.settings.SettingsBackup
+import com.arkhamcards.v2.ui.settings.SettingsDiagnostics
 import com.arkhamcards.v2.ui.settings.SettingsScreen
 import com.arkhamcards.v2.ui.settings.SettingsViewModel
 import com.arkhamcards.v2.ui.theme.CustomTheme
@@ -158,7 +163,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = BottomBarItem.Settings,
+                startDestination = BottomBarItem.Cards,
                 enterTransition = {
                     if (initialState.destination.parent == targetState.destination.parent) {
                         fadeIn(
@@ -198,8 +203,8 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                             updateCards = viewModel::updateCardsIfAvailable,
                             navigateToCollection = {},
                             navigateToAbout = { navController.navigateSingleTop(SettingsAbout) },
-                            navigateToBackup = {},
-                            navigateToDiagnostics = {},
+                            navigateToBackup = { navController.navigateSingleTop(SettingsBackup) },
+                            navigateToDiagnostics = { navController.navigateSingleTop(SettingsDiagnostics) },
                             emitError = viewModel::emitError,
                             innerPadding = innerPadding
                         )
@@ -213,7 +218,43 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                     }
                     composable<SettingsAbout> {
 
+                        //TODO: add about screen
+
                         title = stringResource(R.string.about_arkham_cards)
+                        subtitle = null
+                        color = baseColor
+                        contentColor = baseContentColor
+                        rightActions = null
+                        leftAction = { color ->
+                            ArkhamAppBarAction(
+                                contentColor = color,
+                                onClick = navController::navigateUp,
+                                iconGlyph = AppIcon.ArrowBack,
+                            )
+                        }
+                    }
+                    composable<SettingsBackup> {
+
+                        //TODO: add backup screen
+
+                        title = stringResource(R.string.backup_data)
+                        subtitle = null
+                        color = baseColor
+                        contentColor = baseContentColor
+                        rightActions = null
+                        leftAction = { color ->
+                            ArkhamAppBarAction(
+                                contentColor = color,
+                                onClick = navController::navigateUp,
+                                iconGlyph = AppIcon.ArrowBack,
+                            )
+                        }
+                    }
+                    composable<SettingsDiagnostics> {
+
+                        //TODO: add diagnostics screen
+
+                        title = stringResource(R.string.diagnostics)
                         subtitle = null
                         color = baseColor
                         contentColor = baseContentColor
@@ -232,12 +273,38 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                 ) {
                     composable<Cards> {
 
-                        title = stringResource(BottomBarItem.Cards.label)
+                        val cardsViewModel = hiltViewModel<CardsViewModel>()
+                        val spoilerState by cardsViewModel.spoilerState.collectAsState()
+
+                        CardsScreen(
+                            viewModel = cardsViewModel,
+                            emitError = viewModel::emitError,
+                            innerPadding = innerPadding
+                        )
+
+                        title = stringResource(if (spoilerState) R.string.encounter_cards
+                            else R.string.player_cards)
                         subtitle = null
                         color = baseColor
                         contentColor = baseContentColor
-                        rightActions = null
-                        leftAction = null
+                        rightActions = {
+                            ArkhamAppBarAction(
+                                contentColor = CustomTheme.colors.m,
+                                onClick = {  },
+                                iconGlyph = AppIcon.Filter,
+                            )
+                            ArkhamAppBarAction(
+                                contentColor = CustomTheme.colors.m,
+                                onClick = {  },
+                                iconGlyph = AppIcon.Sort,
+                            )
+                        }
+                        leftAction = {
+                            ArkhamSwitch(
+                                value = spoilerState,
+                                onValueChange = cardsViewModel::toggleSpoiler
+                            )
+                        }
                     }
                 }
                 navigation<BottomBarItem.Decks>(

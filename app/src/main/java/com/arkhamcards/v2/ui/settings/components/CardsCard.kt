@@ -2,9 +2,7 @@ package com.arkhamcards.v2.ui.settings.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
@@ -29,7 +27,7 @@ import com.arkhamcards.v2.ui.components.ArkhamSquareButton
 import com.arkhamcards.v2.ui.components.ArkhamSurfaceButton
 import com.arkhamcards.v2.ui.components.ArkhamSurfaceButtonGroup
 import com.arkhamcards.v2.ui.components.ArkhamTabooSetButton
-import com.arkhamcards.v2.ui.components.Faction
+import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.ui.components.iconSize
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.theme.CustomTheme

@@ -75,7 +75,7 @@ fun ArkhamCheckboxButton(
                 description?.let {
                     Text(
                         text = it,
-                        style = CustomTheme.typography.smallLabel,
+                        style = CustomTheme.typography.run { smallLabel + italic },
                         color = CustomTheme.colors.darkText
                     )
                 }

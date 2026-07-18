@@ -145,7 +145,7 @@ internal fun typography(
             fontFamily = Alegreya,
             fontWeight = FontWeight.Medium,
             fontSize = 20.appSp(scaleFactor),
-            lineHeight = (if (lang == "zh" || lang == "zh-CN") 22 else 20).appSp(scaleFactor),
+            lineHeight = (if (lang == "zh" || lang == "zh-CN") 24 else 22).appSp(scaleFactor),
             color = colorScheme.darkText,
         ),
         cardTraits = TextStyle(
@@ -198,6 +198,7 @@ internal fun typography(
         regular = TextStyle(
             fontFamily = Alegreya,
             fontWeight = FontWeight.Normal,
+            fontStyle = FontStyle.Normal
         ),
         bold = TextStyle(
             fontFamily = Alegreya,

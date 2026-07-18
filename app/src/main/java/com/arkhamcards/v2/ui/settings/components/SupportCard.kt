@@ -17,7 +17,7 @@ import com.arkhamcards.v2.ui.components.ArkhamButtonColor
 import com.arkhamcards.v2.ui.components.ArkhamRoundedCardHeader
 import com.arkhamcards.v2.ui.components.ArkhamRoundedFactionCard
 import com.arkhamcards.v2.ui.components.ArkhamSquareButton
-import com.arkhamcards.v2.ui.components.Faction
+import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.ui.components.iconSize
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.utils.openEmail

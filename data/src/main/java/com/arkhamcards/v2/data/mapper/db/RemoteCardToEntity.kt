@@ -17,6 +17,8 @@ import com.arkhamcards.v2.data.objects.normalizeForSearch
 import com.arkhamcards.v2.fragment.CoreCardText
 import com.arkhamcards.v2.fragment.SingleCard
 
+const val ARKHAM_BUILD_BASE_IMAGE_URL = "https://cdn.arkham.build/"
+
 /**
  * Extension function to convert [SingleCard] with [CoreCardText] to [CardEntity]
  */
@@ -29,18 +31,20 @@ fun SingleCard.toEntity(
 ): CardEntity {
     val translation = coreCardText.toTranslation(this)
     val patchValues = cardPatch.values
+    //TODO: impl back types for all cards
+    val backType = patchValues.backType.resolve() ?: ""
     return CardEntity(
         id = id,
         code = code,
         advancedFor = advanced_for,
-        altArtInvestigator = alt_art_investigator,
+        altArtInvestigator = alt_art_investigator ?: false,
         alternateOfCode = alternate_of_code,
         alternateRequiredCode = alternate_required_code,
         backLinkId = patchValues.backLinkId.resolve(back_link_id),
         backIllustrator = back_illustrator,
-        backType = patchValues.backType.resolve(),
+        backType = backType,
         clues = clues,
-        cluesFixed = clues_fixed,
+        cluesFixed = clues_fixed ?: false,
         cost = cost,
         customizationOptions = customization_options,
         cycleCode = cycle.code,
@@ -48,40 +52,40 @@ fun SingleCard.toEntity(
         deckOptions = deck_options,
         deckRequirements = simple_deck_requirements,
         doom = doom,
-        doomPerInvestigator = patchValues.doomPerInvestigator.resolve(),
-        doubleSided = double_sided,
+        doomPerInvestigator = patchValues.doomPerInvestigator.resolve() ?: false,
+        doubleSided = double_sided ?: false,
         duplicateOfCode = patchValues.duplicateOf.resolve(duplicate_of_code),
         encounterCode = encounter_code,
         encounterPosition = encounter_position,
         enemyDamage = enemy_damage,
         enemyHorror = enemy_horror,
         enemyFight = enemy_fight,
-        enemyFightPerInvestigator = patchValues.enemyFightPerInvestigator.resolve(),
+        enemyFightPerInvestigator = patchValues.enemyFightPerInvestigator.resolve() ?: false,
         enemyEvade = enemy_evade,
-        enemyEvadePerInvestigator = patchValues.enemyEvadePerInvestigator.resolve(),
+        enemyEvadePerInvestigator = patchValues.enemyEvadePerInvestigator.resolve() ?: false,
         errataDate = errata_date,
-        exceptional = exceptional,
-        exile = exile,
+        exceptional = exceptional ?: false,
+        exile = exile ?: false,
         factionCode = faction_code,
         faction2Code = faction2_code,
         faction3Code = faction3_code,
         gender = gender?.rawValue,
         gameBeginAttribute = patchValues.gameBeginAttribute.resolve(),
         health = health,
-        healthPerInvestigator = health_per_investigator,
-        hidden = patchValues.hidden.resolve(hidden),
+        healthPerInvestigator = health_per_investigator ?: false,
+        hidden = patchValues.hidden.resolve(hidden) ?: false,
         illustrator = illustrator,
         investigatorId = investigator_id,
-        isUnique = is_unique,
-        myriad = myriad,
+        isUnique = is_unique ?: false,
+        myriad = myriad ?: false,
         official = official,
         packCode = pack_code,
         packPosition = pack_position,
         parallel = pack.cycleCode == "parallel",
         parallelOfCode = parallel_of_code,
-        permanent = permanent,
+        permanent = permanent ?: false,
         position = position,
-        preview = patchValues.preview.resolve(preview),
+        preview = patchValues.preview.resolve(preview) ?: false,
         realBackFlavor = real_back_flavor,
         realBackName = real_back_name,
         realBackSubname = real_back_subname,
@@ -105,7 +109,7 @@ fun SingleCard.toEntity(
         restrictions = restrictions,
         sanity = sanity,
         shroud = patchValues.shroud.resolve(shroud),
-        shroudPerInvestigator = patchValues.shroudPerInvestigator.resolve(),
+        shroudPerInvestigator = patchValues.shroudPerInvestigator.resolve() ?: false,
         sideDeckOptions = side_deck_options,
         sideDeckRequirements = simple_side_deck_requirements,
         signatureFor = signature_for,
@@ -116,7 +120,7 @@ fun SingleCard.toEntity(
             skillAgility = skill_agility,
             skillWild = skill_wild
         ),
-        spoiler = spoiler,
+        spoiler = spoiler ?: false,
         stage = stage,
         subTypeCode = when(code) {
             "zcxc_00264" -> "weakness" //Fix subtype for fanmade card
@@ -128,6 +132,8 @@ fun SingleCard.toEntity(
         victory = victory,
         quantity = quantity,
         typeCode = type_code.rawValue,
+        //Exclude thumbnail for random basic weakness
+        thumbnailurl = if (official && id != "01000") ARKHAM_BUILD_BASE_IMAGE_URL + "thumbnails/${code}.webp" else null,
         imageurl = imageurl,
         backimageurl = backimageurl,
         tabooXp = taboo_xp,

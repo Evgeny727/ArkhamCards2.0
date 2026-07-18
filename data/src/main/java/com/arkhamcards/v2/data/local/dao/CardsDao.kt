@@ -1,10 +1,13 @@
 package com.arkhamcards.v2.data.local.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Query
+import androidx.room.RawQuery
+import androidx.room.RoomRawQuery
 import androidx.room.Upsert
 import com.arkhamcards.v2.data.local.cards.CardEntity
+import com.arkhamcards.v2.data.local.cards.CardListItemEntity
 import com.arkhamcards.v2.data.local.cards.CardSubtypeEntity
 import com.arkhamcards.v2.data.local.cards.CardTypeEntity
 
@@ -24,4 +27,7 @@ interface CardsDao {
 
     @Query("DELETE FROM card")
     suspend fun deleteAllCards()
+
+    @RawQuery(observedEntities = [CardEntity::class])
+    fun searchCardsRaw(query: RoomRawQuery): PagingSource<Int, CardListItemEntity>
 }

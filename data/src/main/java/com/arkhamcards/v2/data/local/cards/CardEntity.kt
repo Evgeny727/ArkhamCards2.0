@@ -134,7 +134,7 @@ data class CardEntity(
     @ColumnInfo("advanced_for")
     val advancedFor: String?,
     @ColumnInfo("alt_art_investigator")
-    val altArtInvestigator: Boolean?,
+    val altArtInvestigator: Boolean,
     @ColumnInfo("alternate_of_code")
     val alternateOfCode: String?,
     @ColumnInfo("alternate_required_code")
@@ -144,10 +144,10 @@ data class CardEntity(
     @ColumnInfo("back_illustrator")
     val backIllustrator: String?,
     @ColumnInfo("back_type")
-    val backType: String?,
+    val backType: String,
     val clues: Int?,
     @ColumnInfo("clues_fixed")
-    val cluesFixed: Boolean?,
+    val cluesFixed: Boolean,
     val cost: Int?,
     @ColumnInfo("customization_options")
     val customizationOptions: JsonElement?,
@@ -161,9 +161,9 @@ data class CardEntity(
     val deckRequirements: JsonElement?,
     val doom: Int?,
     @ColumnInfo("doom_per_investigator")
-    val doomPerInvestigator: Boolean?,
+    val doomPerInvestigator: Boolean,
     @ColumnInfo("double_sided")
-    val doubleSided: Boolean?,
+    val doubleSided: Boolean,
     @ColumnInfo("duplicate_of_code")
     val duplicateOfCode: String?,
     @ColumnInfo("encounter_code")
@@ -177,15 +177,15 @@ data class CardEntity(
     @ColumnInfo("enemy_fight")
     val enemyFight: Int?,
     @ColumnInfo("enemy_fight_per_investigator")
-    val enemyFightPerInvestigator: Boolean?,
+    val enemyFightPerInvestigator: Boolean,
     @ColumnInfo("enemy_evade")
     val enemyEvade: Int?,
     @ColumnInfo("enemy_evade_per_investigator")
-    val enemyEvadePerInvestigator: Boolean?,
+    val enemyEvadePerInvestigator: Boolean,
     @ColumnInfo("errata_date")
     val errataDate: String?,
-    val exceptional: Boolean?,
-    val exile: Boolean?,
+    val exceptional: Boolean,
+    val exile: Boolean,
     @ColumnInfo("faction_code")
     val factionCode: String,
     @ColumnInfo("faction2_code")
@@ -197,14 +197,14 @@ data class CardEntity(
     val gameBeginAttribute: String?,
     val health: Int?,
     @ColumnInfo("health_per_investigator")
-    val healthPerInvestigator: Boolean?,
-    val hidden: Boolean?,
+    val healthPerInvestigator: Boolean,
+    val hidden: Boolean,
     val illustrator: String?,
     @ColumnInfo("investigator_id")
     val investigatorId: String?,
     @ColumnInfo("is_unique")
-    val isUnique: Boolean?,
-    val myriad: Boolean?,
+    val isUnique: Boolean,
+    val myriad: Boolean,
     val official: Boolean,
     @ColumnInfo("pack_code")
     val packCode: String,
@@ -213,9 +213,9 @@ data class CardEntity(
     val parallel: Boolean,
     @ColumnInfo("parallel_of_code")
     val parallelOfCode: String?,
-    val permanent: Boolean?,
+    val permanent: Boolean,
     val position: Int,
-    val preview: Boolean?,
+    val preview: Boolean,
     @ColumnInfo("real_back_flavor")
     val realBackFlavor: String?,
     @ColumnInfo("real_back_name")
@@ -260,7 +260,7 @@ data class CardEntity(
     val sanity: Int?,
     val shroud: Int?,
     @ColumnInfo("shroud_per_investigator")
-    val shroudPerInvestigator: Boolean?,
+    val shroudPerInvestigator: Boolean,
     @ColumnInfo("side_deck_options")
     val sideDeckOptions: JsonElement?,
     @ColumnInfo("side_deck_requirements")
@@ -268,8 +268,8 @@ data class CardEntity(
     @ColumnInfo("signature_for")
     val signatureFor: String?,
     @Embedded
-    val skills: Skills?,
-    val spoiler: Boolean?,
+    val skills: Skills,
+    val spoiler: Boolean,
     val stage: Int?,
     @ColumnInfo("subtype_code")
     val subTypeCode: String?,
@@ -282,6 +282,7 @@ data class CardEntity(
     val typeCode: String,
 
     //Image fields
+    val thumbnailurl: String?,
     val imageurl: String?,
     val backimageurl: String?,
 
