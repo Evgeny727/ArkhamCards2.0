@@ -209,6 +209,14 @@ class CardsRepositoryImpl @Inject constructor(
     ): RoomRawQuery {
         return RoomRawQuery(
             sql = """
+                WITH selected_taboo AS (
+                    SELECT CASE
+                        WHEN ? = 0 THEN NULL
+                        WHEN ? = 100 THEN (SELECT MAX(id) FROM taboo_set)
+                        ELSE ?
+                    END AS id
+                )
+                
                 SELECT
                     c.id,
                     c.thumbnailurl,
@@ -269,10 +277,44 @@ class CardsRepositoryImpl @Inject constructor(
                     ON c.encounter_code = e.code
                 JOIN cycle cy
                     ON c.cycle_code = cy.code
+                CROSS JOIN selected_taboo taboo
                 WHERE c.encounter_code IS ${if (spoilerState) "NOT NULL" else "NULL"} AND c.hidden = 0
                 ${if (searchPreferences.showFanMade) "" else " AND (c.official = 1 AND c.preview = 0)"}
+                ${if (spoilerState) "" 
+                else """ AND
+                 (
+                    -- No taboo selected -> originals only
+                    (taboo.id IS NULL AND c.taboo_set_id IS NULL)
+    
+                    OR
+                    
+                    (taboo.id IS NOT NULL AND 
+                        (
+                            -- Selected taboo version
+                            c.taboo_set_id = taboo.id
+            
+                            OR
+            
+                            -- Original version if no taboo override exists
+                            (c.taboo_set_id IS NULL
+                                AND NOT EXISTS (
+                                    SELECT 1 FROM card t WHERE t.taboo_set_id = taboo.id AND t.code = c.code
+                                )
+                            )
+                        )
+                    )
+                 )
+                """.trimIndent() 
+                }
             """.trimIndent(),
-            onBindStatement = { statement -> }
+            onBindStatement = { statement ->
+                var index = 1
+                with(searchPreferences) {
+                    repeat(3) {
+                        statement.bindInt(index++, tabooSetId)
+                    }
+                }
+            }
         )
     }
 }

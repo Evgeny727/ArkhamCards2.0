@@ -151,6 +151,7 @@ class UserPreferencesRepositoryImpl @Inject constructor(
             CardsSearchPreferences(
                 includeEnglish = preferences[INCLUDE_ENGLISH_SEARCH_RESULTS] ?: false,
                 showFanMade = preferences[FANMADE_CARDS] ?: false,
+                tabooSetId = preferences[TABOO] ?: 0,
                 playerSortOrder = preferences[CARDS_SORT_ORDER_PLAYER]?.split(",")
                     ?.filter { it.isNotBlank() } ?: emptyList(),
                 mythosSortOrder = preferences[CARDS_SORT_ORDER_MYTHOS]?.split(",")
