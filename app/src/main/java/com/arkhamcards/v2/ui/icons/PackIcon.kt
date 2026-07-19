@@ -925,7 +925,7 @@ enum class PackIcon(
             "zau_unravelling_years" -> UnravellingYears
             "zau", "zau_ages_unwound" -> AgesUnwound
             "tablet" -> AppIcon.Tablet
-            "zcx", "zcem" -> ZcxCircusExMortis
+            "zcx", "zcxc", "zcem" -> ZcxCircusExMortis
             "zgoo" -> Onigawa
             "zdh" -> Darkham
             else -> byPackCode[packCode]

@@ -21,6 +21,7 @@ import com.arkhamcards.v2.domain.TimestampNormilizer.compareTimestamps
 import com.arkhamcards.v2.domain.TimestampNormilizer.getCurrentDateTime
 import com.arkhamcards.v2.domain.TimestampNormilizer.isAtLeastWeekApart
 import com.arkhamcards.v2.domain.model.cards.CardListItem
+import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -181,8 +182,12 @@ class CardsRepositoryImpl @Inject constructor(
         return@withContext true
     }
 
-    override fun searchPaginatedCardsFlow(): Flow<PagingData<CardListItem>> {
-        val rawQuery = buildSearchCardsQuery()
+    override fun searchPaginatedCardsFlow(
+        spoilerState: Boolean,
+        searchQuery: String,
+        searchPreferences: CardsSearchPreferences
+    ): Flow<PagingData<CardListItem>> {
+        val rawQuery = buildSearchCardsQuery(spoilerState, searchQuery, searchPreferences)
 
         return Pager(
             config = PagingConfig(
@@ -197,7 +202,11 @@ class CardsRepositoryImpl @Inject constructor(
         }
     }
 
-    private fun buildSearchCardsQuery(): RoomRawQuery {
+    private fun buildSearchCardsQuery(
+        spoilerState: Boolean,
+        searchQuery: String,
+        searchPreferences: CardsSearchPreferences
+    ): RoomRawQuery {
         return RoomRawQuery(
             sql = """
                 SELECT
@@ -260,6 +269,8 @@ class CardsRepositoryImpl @Inject constructor(
                     ON c.encounter_code = e.code
                 JOIN cycle cy
                     ON c.cycle_code = cy.code
+                WHERE c.encounter_code IS ${if (spoilerState) "NOT NULL" else "NULL"} AND c.hidden = 0
+                ${if (searchPreferences.showFanMade) "" else " AND (c.official = 1 AND c.preview = 0)"}
             """.trimIndent(),
             onBindStatement = { statement -> }
         )

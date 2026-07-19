@@ -10,6 +10,7 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
+import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
 import com.arkhamcards.v2.domain.model.settings.Collection
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import kotlinx.collections.immutable.ImmutableList
@@ -137,6 +138,27 @@ class UserPreferencesRepositoryImpl @Inject constructor(
         }.map { preferences ->
             preferences[CARDS_SORT_ORDER_MYTHOS]?.split(",")?.filter { it.isNotBlank() }
                 ?.toImmutableList() ?: persistentListOf()
+        }
+    override val cardsSearchPreferences: Flow<CardsSearchPreferences> = dataStore.data
+        .catch {
+            if (it is IOException) {
+                Log.e(TAG, "Error reading cards search preferences.", it)
+                emit(emptyPreferences())
+            } else {
+                throw it
+            }
+        }.map { preferences ->
+            CardsSearchPreferences(
+                includeEnglish = preferences[INCLUDE_ENGLISH_SEARCH_RESULTS] ?: false,
+                showFanMade = preferences[FANMADE_CARDS] ?: false,
+                playerSortOrder = preferences[CARDS_SORT_ORDER_PLAYER]?.split(",")
+                    ?.filter { it.isNotBlank() } ?: emptyList(),
+                mythosSortOrder = preferences[CARDS_SORT_ORDER_MYTHOS]?.split(",")
+                    ?.filter { it.isNotBlank() } ?: emptyList(),
+                ignoreCollection = preferences[IGNORE_COLLECTION] ?: true,
+                collection = preferences[COLLECTION]?.let { json.decodeFromString<Collection>(it) }
+                    ?: Collection(persistentListOf(), persistentListOf())
+            )
         }
 
     private val json = Json {

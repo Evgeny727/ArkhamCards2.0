@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.arkhamcards.v2.UiErrorState
+import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -57,28 +58,22 @@ class CardsViewModel @Inject constructor(
         viewModelScope.launch { _scrollToTop.emit(Unit) }
     }
 
-    private val _includeEnglish = userPreferencesRepository.isIncludeEnglishSearchResults.stateIn(
+    private val _cardsSearchPreferences = userPreferencesRepository.cardsSearchPreferences.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000L),
-        initialValue = false
+        initialValue = CardsSearchPreferences()
     )
 
-    private val _showFanMade = userPreferencesRepository.showFanmadeCards.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000L),
-        initialValue = false
-    )
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val searchResults = combine(
         _spoilerState,
         _searchQuery,
-        _includeEnglish,
-        _showFanMade
-    ) { spoilerState, searchQuery, includeEnglish, showFanMade ->
-        spoilerState to searchQuery
-    }.flatMapLatest { (spoilerState, searchQuery) ->
-        cardsRepository.searchPaginatedCardsFlow()
+        _cardsSearchPreferences
+    ) { spoilerState, searchQuery, cardsSearchPreferences ->
+        Triple(spoilerState, searchQuery, cardsSearchPreferences)
+    }.flatMapLatest { (spoilerState, searchQuery, searchPreferences) ->
+        cardsRepository.searchPaginatedCardsFlow(spoilerState, searchQuery, searchPreferences)
     }.cachedIn(viewModelScope)
 
 }
