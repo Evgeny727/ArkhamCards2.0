@@ -123,10 +123,11 @@ fun RowScope.CardListItemName(
             isUnique = cardListItem.isUnique,
             packCode = cardListItem.packCode,
             packPosition = cardListItem.packPosition,
+            reprintPackCode = cardListItem.reprintPackCode,
             factionColor = factionColor,
             invalid = invalid
         )
-        CardListItemSubname(cardListItem, factionColor)
+        CardListItemSubname(cardListItem)
     }
 }
 
@@ -136,6 +137,7 @@ fun CardListItemNameRow(
     isUnique: Boolean,
     packCode: String,
     packPosition: Int,
+    reprintPackCode: String?,
     factionColor: FactionColors,
     invalid: Boolean
 ) {
@@ -165,7 +167,7 @@ fun CardListItemNameRow(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            val packIcon = PackIcon.fromPackCode(packCode)
+            val packIcon = PackIcon.fromPackCode(reprintPackCode ?: packCode)
             Text(
                 text = packIcon.glyph,
                 fontFamily = packIcon.fontFamily,
@@ -182,10 +184,7 @@ fun CardListItemNameRow(
 }
 
 @Composable
-fun CardListItemSubname(
-    cardListItem: CardListItem,
-    factionColor: FactionColors,
-) {
+fun CardListItemSubname(cardListItem: CardListItem) {
     val subname = cardListItem.subname ?:
         if (cardListItem.type == CardType.Act || cardListItem.type == CardType.Agenda
             || cardListItem.type == CardType.Scenario) {

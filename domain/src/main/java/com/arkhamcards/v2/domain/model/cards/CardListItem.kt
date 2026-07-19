@@ -31,6 +31,7 @@ data class CardListItem(
     val packCode: String,
     val packPosition: Int,
     val encounterCode: String?,
+    val reprintPackCode: String?,
 
     //Name
     val name: String,

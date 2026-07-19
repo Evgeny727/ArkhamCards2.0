@@ -47,6 +47,8 @@ data class CardListItemEntity(
     @ColumnInfo(name = "cycle_code")
     val cycleCode: String,
     val cycleName: String,
+    @ColumnInfo(name = "reprint_pack_code")
+    val reprintPackCode: String?,
 
     //Name
     val name: String,

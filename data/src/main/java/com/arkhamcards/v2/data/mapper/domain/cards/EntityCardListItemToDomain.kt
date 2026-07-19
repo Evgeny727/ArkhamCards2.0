@@ -23,6 +23,7 @@ fun CardListItemEntity.toDomain() = CardListItem(
     packCode = packCode,
     packPosition = packPosition,
     encounterCode = encounterCode,
+    reprintPackCode = reprintPackCode,
     name = name,
     subname = subname,
     skillWillpower = skills.skillWillpower,

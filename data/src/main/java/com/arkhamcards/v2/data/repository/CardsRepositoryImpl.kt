@@ -231,6 +231,8 @@ class CardsRepositoryImpl @Inject constructor(
                 
                     c.cycle_code,
                     cy.name AS cycleName,
+                    
+                    c.reprint_pack_code,
                 
                     c.name,
                     c.subname,

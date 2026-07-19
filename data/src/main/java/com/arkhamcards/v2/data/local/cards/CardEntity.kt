@@ -89,6 +89,12 @@ data class Translation(
             deferred = true,
         ),
         ForeignKey(
+            entity = PackEntity::class,
+            parentColumns = ["code"],
+            childColumns = ["reprint_pack_code"],
+            deferred = true,
+        ),
+        ForeignKey(
             entity = CycleEntity::class,
             parentColumns = ["code"],
             childColumns = ["cycle_code"],
@@ -119,6 +125,7 @@ data class Translation(
         Index("faction2_code"),
         Index("faction3_code"),
         Index("pack_code"),
+        Index("reprint_pack_code"),
         Index("cycle_code"),
         Index("subtype_code"),
         Index("type_code"),
@@ -216,6 +223,8 @@ data class CardEntity(
     val permanent: Boolean,
     val position: Int,
     val preview: Boolean,
+    @ColumnInfo("reprint_pack_code")
+    val reprintPackCode: String?,
     @ColumnInfo("real_back_flavor")
     val realBackFlavor: String?,
     @ColumnInfo("real_back_name")

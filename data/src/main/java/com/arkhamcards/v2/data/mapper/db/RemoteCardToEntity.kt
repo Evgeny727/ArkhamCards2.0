@@ -19,6 +19,8 @@ import com.arkhamcards.v2.fragment.SingleCard
 
 const val ARKHAM_BUILD_BASE_IMAGE_URL = "https://cdn.arkham.build/"
 
+val REPRINT_PACKS = setOf("dwl", "ptc", "tfa", "tcu", "tde", "tic")
+
 /**
  * Extension function to convert [SingleCard] with [CoreCardText] to [CardEntity]
  */
@@ -31,8 +33,14 @@ fun SingleCard.toEntity(
 ): CardEntity {
     val translation = coreCardText.toTranslation(this)
     val patchValues = cardPatch.values
+
     //TODO: impl back types for all cards
     val backType = patchValues.backType.resolve() ?: ""
+
+    val reprintPackCode = if (cycle.code in REPRINT_PACKS) {
+        cycle.code + if (encounter_code != null) "p" else "c"
+    } else null
+
     return CardEntity(
         id = id,
         code = code,
@@ -86,6 +94,7 @@ fun SingleCard.toEntity(
         permanent = permanent ?: false,
         position = position,
         preview = patchValues.preview.resolve(preview) ?: false,
+        reprintPackCode = reprintPackCode,
         realBackFlavor = real_back_flavor,
         realBackName = real_back_name,
         realBackSubname = real_back_subname,
