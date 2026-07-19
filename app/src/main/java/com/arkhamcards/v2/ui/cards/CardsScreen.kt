@@ -66,7 +66,7 @@ fun CardsScreen(
         items(
             count = searchResults.itemCount,
             key = searchResults.itemKey { it.id },
-            contentType = searchResults.itemContentType { it }
+            contentType = searchResults.itemContentType { it::class }
         ) { index ->
             val item = searchResults[index] ?: return@items
             CardListItem(

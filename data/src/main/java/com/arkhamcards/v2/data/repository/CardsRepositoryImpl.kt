@@ -191,10 +191,11 @@ class CardsRepositoryImpl @Inject constructor(
 
         return Pager(
             config = PagingConfig(
-                pageSize = 100,
+                pageSize = 70,
+                prefetchDistance = 140,
                 enablePlaceholders = false,
                 initialLoadSize = 300,
-                maxSize = 2000
+                maxSize = 600
             ),
             pagingSourceFactory = { cardsDao.searchCardsRaw(rawQuery) }
         ).flow.map { pagingData ->
