@@ -227,7 +227,7 @@ fun CardListItemSubname(cardListItem: CardListItem) {
         }
 
         if (cardListItem.parallel) Text(
-            text = AppIcon.Parallel.glyph,
+            text = AppIcon.Parallel1.glyph,
             fontFamily = AppIconsFont,
             style = CustomTheme.typography.run { cardTraits + regular }
         )

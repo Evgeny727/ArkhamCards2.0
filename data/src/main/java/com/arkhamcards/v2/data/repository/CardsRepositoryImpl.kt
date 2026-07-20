@@ -210,103 +210,122 @@ class CardsRepositoryImpl @Inject constructor(
     ): RoomRawQuery {
         return RoomRawQuery(
             sql = """
-                WITH selected_taboo AS (
-                    SELECT CASE
-                        WHEN ? = 0 THEN NULL
-                        WHEN ? = 100 THEN (SELECT MAX(id) FROM taboo_set)
-                        ELSE ?
-                    END AS id
-                )
-                
-                SELECT
-                    c.id,
-                    c.thumbnailurl,
-                
-                    c.cost,
-                    c.xp,
-                    c.permanent,
-                
-                    c.taboo_xp,
-                    c.taboo_set_id,
-                
-                    c.type_code,
-                    t.name AS typeName,
-                
-                    c.subtype_code,
-                    st.name AS subTypeName,
-                
-                    c.faction_code,
-                    f.name AS factionName,
-                    c.faction2_code,
-                    c.faction3_code,
-                
-                    c.pack_code,
-                    p.name AS packName,
-                    c.pack_position,
-                
-                    c.encounter_code,
-                    e.name AS encounterName,
-                
-                    c.cycle_code,
-                    cy.name AS cycleName,
+                WITH filtered_cards AS (
+                    WITH selected_taboo AS (
+                        SELECT CASE
+                            WHEN ? = 0 THEN NULL
+                            WHEN ? = 100 THEN (SELECT MAX(id) FROM taboo_set)
+                            ELSE ?
+                        END AS id
+                    )
                     
-                    c.reprint_pack_code,
-                
-                    c.name,
-                    c.subname,
-                
-                    c.skill_willpower,
-                    c.skill_intellect,
-                    c.skill_combat,
-                    c.skill_agility,
-                    c.skill_wild,
-                
-                    c.parallel,
-                    c.is_unique,
-                    c.slot,
-                    c.stage
-                FROM card c
-                JOIN card_type t
-                    ON c.type_code = t.code
-                LEFT JOIN card_subtype st
-                    ON c.subtype_code = st.code
-                JOIN faction f
-                    ON c.faction_code = f.code
-                JOIN pack p
-                    ON c.pack_code = p.code
-                LEFT JOIN encounter_set e
-                    ON c.encounter_code = e.code
-                JOIN cycle cy
-                    ON c.cycle_code = cy.code
-                CROSS JOIN selected_taboo taboo
-                WHERE c.encounter_code IS ${if (spoilerState) "NOT NULL" else "NULL"} AND c.hidden = 0
-                ${if (searchPreferences.showFanMade) "" else " AND (c.official = 1 AND c.preview = 0)"}
-                ${if (spoilerState) "" 
-                else """ AND
-                 (
-                    -- No taboo selected -> originals only
-                    (taboo.id IS NULL AND c.taboo_set_id IS NULL)
-    
-                    OR
+                    SELECT
+                        c.id,
+                        c.code,
+                        c.duplicate_of_code,
+                        c.thumbnailurl,
                     
-                    (taboo.id IS NOT NULL AND 
-                        (
-                            -- Selected taboo version
-                            c.taboo_set_id = taboo.id
-            
-                            OR
-            
-                            -- Original version if no taboo override exists
-                            (c.taboo_set_id IS NULL
-                                AND NOT EXISTS (
-                                    SELECT 1 FROM card t WHERE t.taboo_set_id = taboo.id AND t.code = c.code
+                        c.cost,
+                        c.xp,
+                        c.permanent,
+                    
+                        c.taboo_xp,
+                        c.taboo_set_id,
+                    
+                        c.type_code,
+                        t.name AS typeName,
+                    
+                        c.subtype_code,
+                        st.name AS subTypeName,
+                    
+                        c.faction_code,
+                        f.name AS factionName,
+                        c.faction2_code,
+                        c.faction3_code,
+                    
+                        c.pack_code,
+                        p.name AS packName,
+                        c.pack_position,
+                    
+                        c.encounter_code,
+                        e.name AS encounterName,
+                    
+                        c.cycle_code,
+                        cy.name AS cycleName,
+                        
+                        c.reprint_pack_code,
+                    
+                        c.name,
+                        c.subname,
+                    
+                        c.skill_willpower,
+                        c.skill_intellect,
+                        c.skill_combat,
+                        c.skill_agility,
+                        c.skill_wild,
+                    
+                        c.parallel,
+                        c.is_unique,
+                        c.slot,
+                        c.stage
+                    FROM card c
+                    JOIN card_type t
+                        ON c.type_code = t.code
+                    LEFT JOIN card_subtype st
+                        ON c.subtype_code = st.code
+                    JOIN faction f
+                        ON c.faction_code = f.code
+                    JOIN pack p
+                        ON c.pack_code = p.code
+                    LEFT JOIN encounter_set e
+                        ON c.encounter_code = e.code
+                    JOIN cycle cy
+                        ON c.cycle_code = cy.code
+                    CROSS JOIN selected_taboo taboo
+                    WHERE c.encounter_code IS ${if (spoilerState) "NOT NULL" else "NULL"} AND c.hidden = 0
+                    ${if (searchPreferences.showFanMade) "" else " AND (c.official = 1 AND c.preview = 0)"}
+                    ${if (spoilerState) "" 
+                    else """ AND
+                     (
+                        -- No taboo selected -> originals only
+                        (taboo.id IS NULL AND c.taboo_set_id IS NULL)
+        
+                        OR
+                        
+                        (taboo.id IS NOT NULL AND 
+                            (
+                                -- Selected taboo version
+                                c.taboo_set_id = taboo.id
+                
+                                OR
+                
+                                -- Original version if no taboo override exists
+                                (c.taboo_set_id IS NULL
+                                    AND NOT EXISTS (
+                                        SELECT 1 FROM card t WHERE t.taboo_set_id = taboo.id AND t.code = c.code
+                                    )
                                 )
                             )
                         )
-                    )
-                 )
-                """.trimIndent() 
-                }
+                     )
+                    """.trimIndent() 
+                    }
+                ),
+                
+                ranked_cards AS (
+                    SELECT *, ROW_NUMBER() OVER (
+                        PARTITION BY
+                            COALESCE(duplicate_of_code, code)
+                        ORDER BY
+                            CASE
+                                WHEN duplicate_of_code IS NULL THEN 0
+                                ELSE 1
+                            END,
+                            code
+                    ) AS duplicate_rank FROM filtered_cards
+                )
+
+                SELECT * FROM ranked_cards WHERE duplicate_rank = 1
             """.trimIndent(),
             onBindStatement = { statement ->
                 var index = 1

@@ -81,7 +81,10 @@ fun SingleCard.toEntity(
         gameBeginAttribute = patchValues.gameBeginAttribute.resolve(),
         health = health,
         healthPerInvestigator = health_per_investigator ?: false,
-        hidden = patchValues.hidden.resolve(hidden) ?: false,
+        hidden = patchValues.hidden.resolve(
+            //Make alt art investigators not hidden (except for Hank)
+            if (type_code.rawValue == "investigator" && code != "10016a" && code != "10016b") false else hidden
+        ) ?: false,
         illustrator = illustrator,
         investigatorId = investigator_id,
         isUnique = is_unique ?: false,
