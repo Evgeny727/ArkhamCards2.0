@@ -1,4 +1,4 @@
-package com.arkhamcards.v2.domain.model.enums
+package com.arkhamcards.v2.domain.enums
 
 enum class Gender() {
     MALE, FEMALE, NON_BINARY;

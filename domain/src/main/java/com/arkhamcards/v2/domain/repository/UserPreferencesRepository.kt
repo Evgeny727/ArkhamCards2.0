@@ -3,6 +3,7 @@ package com.arkhamcards.v2.domain.repository
 import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
 import com.arkhamcards.v2.domain.model.settings.Collection
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.Flow
 
 interface UserPreferencesRepository {
@@ -29,3 +30,6 @@ interface UserPreferencesRepository {
     suspend fun saveSortOrderPlayerPreference(sortOrder: List<String>)
     suspend fun saveSortOrderMythosPreference(sortOrder: List<String>)
 }
+
+val DEFAULT_PLAYER_SORT_ORDER = persistentListOf("type", "slot")
+val DEFAULT_MYTHOS_SORT_ORDER = persistentListOf("pack", "position")

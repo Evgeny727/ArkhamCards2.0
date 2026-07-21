@@ -20,17 +20,29 @@ data class CardListItem(
     //Type
     val type: CardType,
     val typeName: String,
+    val typeNumber: Int,
     val subType: CardSubType?,
+    val subTypeName: String?,
 
     //Faction
     val faction: Faction,
     val faction2: Faction?,
     val faction3: Faction?,
+    val factionNumber: Int,
+
+    //Slot
+    val slot: String?,
+    val slotNumber: Int,
 
     //Pack
     val packCode: String,
     val packPosition: Int,
+    val packName: String,
+    val cycleCode: String,
+    val cycleName: String,
+    val cyclePosition: Int,
     val encounterCode: String?,
+    val encounterName: String?,
     val reprintPackCode: String?,
 
     //Name

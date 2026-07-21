@@ -1,7 +1,7 @@
 package com.arkhamcards.v2.domain.repository
 
 import androidx.paging.PagingData
-import com.arkhamcards.v2.domain.model.cards.CardListItem
+import com.arkhamcards.v2.domain.model.cards.CardListItemUiModel
 import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
 import kotlinx.coroutines.flow.Flow
 
@@ -19,6 +19,6 @@ interface CardsRepository {
         spoilerState: Boolean,
         searchQuery: String,
         searchPreferences: CardsSearchPreferences
-    ): Flow<PagingData<CardListItem>>
+    ): Flow<PagingData<CardListItemUiModel>>
 
 }

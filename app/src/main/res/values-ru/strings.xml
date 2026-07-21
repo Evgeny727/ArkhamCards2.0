@@ -7,14 +7,18 @@
     <string name="hand">Рука</string>
     <string name="hand_arcane">Рука. Магический</string>
     <string name="hand_x2">Рука ×2</string>
+    <string name="hand_x2_arcane">Рука ×2. Магический</string>
     <string name="arcane">Магический</string>
     <string name="arcane_x2">Магический ×2</string>
+    <string name="arcane_accessory">Магический. Аксессуар</string>
     <string name="accessory">Аксессуар</string>
     <string name="body">Одежда</string>
+    <string name="body_arcane">Одежда. Магический</string>
     <string name="body_hand_x2">Одежда. Рука ×2</string>
     <string name="ally_arcane">Союзник. Магический</string>
     <string name="ally">Союзник</string>
     <string name="tarot">Таро</string>
+    <string name="head">Шляпа</string>
     <string name="other">Другое</string>
     <string name="return_to_threads_of_fate">Нити судьбы. Возвращение</string>
     <string name="return_to_heart_of_the_elders">Сердце древних. Возвращение</string>
@@ -1926,4 +1930,6 @@
     <string name="xxlarge">XX-Большой</string>
     <string name="font_size">Размер шрифта</string>
     <string name="font_size_warning_text">Эта настройка может повлиять на расположение элементов на некоторых экранах.</string>
+    <string name="cost_value">Цена: %s</string>
+    <string name="multiclass">Мультикласс</string>
 </resources>

@@ -11,7 +11,7 @@ import com.arkhamcards.v2.ui.theme.AppIconsFont
 
 private val ICON_REGEX = Regex("""\[(.*?)]""")
 
-fun String.iconize(iconSize: TextUnit, color: Color): AnnotatedString {
+fun String.iconize(iconSize: TextUnit, color: Color? = null): AnnotatedString {
     return buildAnnotatedString {
         var lastIndex = 0
 
@@ -22,7 +22,7 @@ fun String.iconize(iconSize: TextUnit, color: Color): AnnotatedString {
 
             withStyle(
                 style = SpanStyle(
-                    color = color,
+                    color = color ?: Color.Unspecified,
                     fontFamily = AppIconsFont,
                     fontSize = iconSize
                 )

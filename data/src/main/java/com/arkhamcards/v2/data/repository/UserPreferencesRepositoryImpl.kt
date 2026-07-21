@@ -12,6 +12,8 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
 import com.arkhamcards.v2.domain.model.settings.Collection
+import com.arkhamcards.v2.domain.repository.DEFAULT_MYTHOS_SORT_ORDER
+import com.arkhamcards.v2.domain.repository.DEFAULT_PLAYER_SORT_ORDER
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -125,7 +127,7 @@ class UserPreferencesRepositoryImpl @Inject constructor(
             }
         }.map { preferences ->
             preferences[CARDS_SORT_ORDER_PLAYER]?.split(",")?.filter { it.isNotBlank() }
-                ?.toImmutableList() ?: persistentListOf()
+                ?.toImmutableList() ?: DEFAULT_PLAYER_SORT_ORDER
         }
     override val sortOrderMythos: Flow<ImmutableList<String>> = dataStore.data
         .catch {
@@ -137,7 +139,7 @@ class UserPreferencesRepositoryImpl @Inject constructor(
             }
         }.map { preferences ->
             preferences[CARDS_SORT_ORDER_MYTHOS]?.split(",")?.filter { it.isNotBlank() }
-                ?.toImmutableList() ?: persistentListOf()
+                ?.toImmutableList() ?: DEFAULT_MYTHOS_SORT_ORDER
         }
     override val cardsSearchPreferences: Flow<CardsSearchPreferences> = dataStore.data
         .catch {
@@ -153,9 +155,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
                 showFanMade = preferences[FANMADE_CARDS] ?: false,
                 tabooSetId = preferences[TABOO] ?: 0,
                 playerSortOrder = preferences[CARDS_SORT_ORDER_PLAYER]?.split(",")
-                    ?.filter { it.isNotBlank() } ?: emptyList(),
+                    ?.filter { it.isNotBlank() } ?: DEFAULT_PLAYER_SORT_ORDER,
                 mythosSortOrder = preferences[CARDS_SORT_ORDER_MYTHOS]?.split(",")
-                    ?.filter { it.isNotBlank() } ?: emptyList(),
+                    ?.filter { it.isNotBlank() } ?: DEFAULT_MYTHOS_SORT_ORDER,
                 ignoreCollection = preferences[IGNORE_COLLECTION] ?: true,
                 collection = preferences[COLLECTION]?.let { json.decodeFromString<Collection>(it) }
                     ?: Collection(persistentListOf(), persistentListOf())
@@ -231,13 +233,13 @@ class UserPreferencesRepositoryImpl @Inject constructor(
 
     override suspend fun saveSortOrderPlayerPreference(sortOrder: List<String>) {
         dataStore.edit { preferences ->
-            preferences[CARDS_SORT_ORDER_PLAYER] = sortOrder.joinToString(",")
+            preferences[CARDS_SORT_ORDER_PLAYER] = sortOrder.ifEmpty { DEFAULT_PLAYER_SORT_ORDER }.joinToString(",")
         }
     }
 
     override suspend fun saveSortOrderMythosPreference(sortOrder: List<String>) {
         dataStore.edit { preferences ->
-            preferences[CARDS_SORT_ORDER_MYTHOS] = sortOrder.joinToString(",")
+            preferences[CARDS_SORT_ORDER_MYTHOS] = sortOrder.ifEmpty { DEFAULT_MYTHOS_SORT_ORDER }.joinToString(",")
         }
     }
 }

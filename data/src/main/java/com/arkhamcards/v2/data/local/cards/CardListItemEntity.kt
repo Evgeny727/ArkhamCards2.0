@@ -22,6 +22,8 @@ data class CardListItemEntity(
     @ColumnInfo(name = "type_code")
     val typeCode: String,
     val typeName: String,
+    @ColumnInfo(name = "sort_by_type")
+    val typeNumber: Int,
     @ColumnInfo(name = "subtype_code")
     val subTypeCode: String?,
     val subTypeName: String?,
@@ -34,6 +36,8 @@ data class CardListItemEntity(
     val faction2Code: String?,
     @ColumnInfo(name = "faction3_code")
     val faction3Code: String?,
+    @ColumnInfo(name = "sort_by_faction")
+    val factionNumber: Int,
 
     //Pack + Encounter + Cycle
     @ColumnInfo(name = "pack_code")
@@ -47,6 +51,7 @@ data class CardListItemEntity(
     @ColumnInfo(name = "cycle_code")
     val cycleCode: String,
     val cycleName: String,
+    val cyclePosition: Int,
     @ColumnInfo(name = "reprint_pack_code")
     val reprintPackCode: String?,
 
@@ -62,5 +67,7 @@ data class CardListItemEntity(
     @ColumnInfo(name = "is_unique")
     val isUnique: Boolean,
     val slot: String?,
+    @ColumnInfo(name = "sort_by_slot")
+    val slotNumber: Int,
     val stage: Int?,
 )

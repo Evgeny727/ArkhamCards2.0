@@ -38,7 +38,7 @@ fun SingleCard.toEntity(
     val backType = patchValues.backType.resolve() ?: ""
 
     val reprintPackCode = if (cycle.code in REPRINT_PACKS) {
-        cycle.code + if (encounter_code != null) "p" else "c"
+        cycle.code + if (encounter_code == null) "p" else "c"
     } else null
 
     return CardEntity(
@@ -109,7 +109,7 @@ fun SingleCard.toEntity(
         realFlavor = real_flavor,
         realName = real_name,
         realPackName = real_pack_name,
-        realSlot = real_slot,
+        realSlot = real_slot?.ifBlank { null },
         realSubname = real_subname,
         realTabooOriginalBackText = real_taboo_original_back_text,
         realTabooOriginalText = real_taboo_original_text,
@@ -154,8 +154,8 @@ fun SingleCard.toEntity(
             else -> taboo_set_id
         },
         translation = translation,
-        sortByType = sortByTypeOrder(this),
-        sortByFaction = sortByFactionOrder(this),
+        sortByType = sortByTypeOrder(type_code.rawValue, subtype_code),
+        sortByFaction = sortByFactionOrder(faction_code, faction2_code),
         sortByPack = cycle.position * 200 + pack.position,
         sortByCycle = cycle.position,
         sortBySlot = sortBySlotOrder(real_slot, permanent, type_code.rawValue),
@@ -201,13 +201,14 @@ fun CoreCardText?.toTranslation(card: SingleCard): Translation = Translation(
     customizationText = this?.customization_text ?: card.real_customization_text,
     flavor = this?.flavor ?: card.real_flavor,
     name = this?.name ?: card.real_name,
-    slot = this?.slot ?: card.real_slot,
+    slot = (this?.slot ?: card.real_slot)?.ifBlank { null },
     subname = this?.subname ?: card.real_subname,
     tabooOriginalBackText = this?.taboo_original_back_text ?: card.real_taboo_original_back_text,
     tabooOriginalText = this?.taboo_original_text ?: card.real_taboo_original_text,
     tabooTextChange = this?.taboo_text_change ?: card.real_taboo_text_change,
     text = this?.text ?: card.real_text,
-    traits = this?.traits ?: card.real_traits
+    traits = this?.traits ?: card.real_traits,
+    encounterSetName = this?.encounter_name ?: card.real_encounter_set_name
 )
 
 /**

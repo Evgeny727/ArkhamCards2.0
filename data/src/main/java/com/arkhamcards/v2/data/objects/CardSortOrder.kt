@@ -1,49 +1,50 @@
 package com.arkhamcards.v2.data.objects
 
-import com.arkhamcards.v2.fragment.SingleCard
-import com.arkhamcards.v2.type.Card_type_code_enum
-
 object CardSortOrder {
 
-    //"investigator","asset","event","skill","basicweakness","signature_weakness","weakness","scenario","story"
-    fun sortByTypeOrder(card: SingleCard): Int {
-        if (card.spoiler == true) return 8
-        return when (card.subtype_code) {
-            "basicweakness" -> 4
-            "weakness" -> {
-                if (card.restrictions?.toString()?.contains("investigator") == true) 5
-                else 6
-            }
+    //first general types and in the end - weaknesses
+    fun sortByTypeOrder(type: String, subtype: String?): Int {
+        return when (subtype) {
+            "basicweakness" -> 14
+            "weakness" -> 15
 
             else -> {
-                when (card.type_code) {
-                    Card_type_code_enum.investigator -> 0
-                    Card_type_code_enum.asset -> 1
-                    Card_type_code_enum.event -> 2
-                    Card_type_code_enum.skill -> 3
-                    else -> 7
+                when (type) {
+                    "investigator" -> 0
+                    "asset" -> 1
+                    "event" -> 2
+                    "skill" -> 3
+                    "location" -> 4
+                    "enemy" -> 5
+                    "enemy_location" -> 6
+                    "key" -> 7
+                    "treachery" -> 8
+                    "scenario" -> 9
+                    "act" -> 10
+                    "agenda" -> 11
+                    "story" -> 12
+                    else -> 13
                 }
             }
         }
     }
 
-    //"guardian","seeker","rogue","mystic","survivor","neutral","specialist","multiclass","mythos"
-    fun sortByFactionOrder(card: SingleCard): Int {
+    //"guardian","seeker","rogue","mystic","survivor","neutral","multiclass","mythos"
+    fun sortByFactionOrder(faction: String, faction2: String?): Int {
         val basicFactions = listOf("guardian", "seeker", "rogue", "mystic", "survivor", "neutral")
-        if (card.faction2_code != null) return 7
-        if (card.restrictions?.toString()?.contains("trait") == true) return 6
-        return when (card.faction_code) {
+        if (faction2 != null) return 6
+        return when (faction) {
             in basicFactions -> {
-                basicFactions.indexOf(card.faction_code)
+                basicFactions.indexOf(faction)
             }
-            else -> 8
+            else -> 7
         }
     }
 
     fun sortBySlotOrder(slot: String?, isPermanent: Boolean?, type: String): Int {
         if (isPermanent == true) return  99
         return when(slot) {
-            null -> if (type == "asset") 0 else 100
+            null -> if (type == "asset") 100 else 0
             "Hand" -> 1
             "Hand. Arcane" -> 2
             "Hand x2" -> 3

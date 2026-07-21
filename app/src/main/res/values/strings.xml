@@ -3,7 +3,6 @@
     <string name="app_name" translatable="false">Arkham Cards</string>
     <string name="patreon_button" translatable="false">Patreon</string>
 
-    //Strings from ArkhamCards
     <string name="latest_taboo_set">Latest</string>
     <string name="guardian">Guardian</string>
     <string name="seeker">Seeker</string>
@@ -463,9 +462,11 @@
     <string name="hand">Hand</string>
     <string name="hand_arcane">Hand. Arcane</string>
     <string name="hand_x2">Hand x2</string>
+    <string name="hand_x2_arcane">Hand x2. Arcane</string>
     <string name="arcane">Arcane</string>
     <string name="accessory">Accessory</string>
     <string name="body">Body</string>
+    <string name="body_arcane">Body. Arcane</string>
     <string name="body_hand_x2">Body. Hand x2</string>
     <string name="ally">Ally</string>
     <string name="tarot">Tarot</string>
@@ -481,6 +482,7 @@
     <string name="latest_deck_available_xp">Latest Deck: %s XP</string>
     <string name="too_many_offclass_cards_for_versatile">Too many off-class cards for Versatile</string>
     <string name="arcane_x2">Arcane x2</string>
+    <string name="arcane_accessory">Arcane. Accessory</string>
     <string name="ally_arcane">Ally. Arcane</string>
     <string name="things0_and_things1">%s and %s</string>
     <string name="list_and_last">%s, and %s</string>
@@ -1929,4 +1931,5 @@
     <string name="font_size">Font Size</string>
     <string name="font_size_warning_text">This can be used to make the app font size larger, though it may impact layout on some screens.</string>
     <string name="this_draft_uses_the_decks_selected_card_pool">This draft uses the deck\'s selected card pool.</string>
+    <string name="multiclass">Multi-class</string>
 </resources>

@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.map
 import androidx.room.RoomRawQuery
 import androidx.room.withTransaction
 import com.arkhamcards.v2.data.local.ArkhamDatabase
@@ -13,20 +12,20 @@ import com.arkhamcards.v2.data.local.cards.CardCacheData
 import com.arkhamcards.v2.data.local.cards.patches.CardPatchRegistry
 import com.arkhamcards.v2.data.mapper.db.toData
 import com.arkhamcards.v2.data.mapper.db.toEntity
-import com.arkhamcards.v2.data.mapper.domain.cards.toDomain
+import com.arkhamcards.v2.data.mapper.domain.cards.withCategoryHeaders
 import com.arkhamcards.v2.data.objects.CardCache
 import com.arkhamcards.v2.data.objects.CardCache.createCache
+import com.arkhamcards.v2.data.objects.CardSearchQueryBuilder.buildSortClause
 import com.arkhamcards.v2.data.remote.CardsRemoteDataSource
 import com.arkhamcards.v2.domain.TimestampNormilizer.compareTimestamps
 import com.arkhamcards.v2.domain.TimestampNormilizer.getCurrentDateTime
 import com.arkhamcards.v2.domain.TimestampNormilizer.isAtLeastWeekApart
-import com.arkhamcards.v2.domain.model.cards.CardListItem
+import com.arkhamcards.v2.domain.model.cards.CardListItemUiModel
 import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -186,7 +185,7 @@ class CardsRepositoryImpl @Inject constructor(
         spoilerState: Boolean,
         searchQuery: String,
         searchPreferences: CardsSearchPreferences
-    ): Flow<PagingData<CardListItem>> {
+    ): Flow<PagingData<CardListItemUiModel>> {
         val rawQuery = buildSearchCardsQuery(spoilerState, searchQuery, searchPreferences)
 
         return Pager(
@@ -198,9 +197,10 @@ class CardsRepositoryImpl @Inject constructor(
                 maxSize = 600
             ),
             pagingSourceFactory = { cardsDao.searchCardsRaw(rawQuery) }
-        ).flow.map { pagingData ->
-            pagingData.map { it.toDomain() }
-        }
+        ).flow.withCategoryHeaders(
+            if (spoilerState) searchPreferences.mythosSortOrder else searchPreferences.playerSortOrder,
+            spoilerState
+        )
     }
 
     private fun buildSearchCardsQuery(
@@ -208,6 +208,11 @@ class CardsRepositoryImpl @Inject constructor(
         searchQuery: String,
         searchPreferences: CardsSearchPreferences
     ): RoomRawQuery {
+        val sortClause = buildSortClause(
+            if (spoilerState) searchPreferences.mythosSortOrder else searchPreferences.playerSortOrder,
+            spoilerState
+        )
+
         return RoomRawQuery(
             sql = """
                 WITH filtered_cards AS (
@@ -249,9 +254,11 @@ class CardsRepositoryImpl @Inject constructor(
                     
                         c.encounter_code,
                         e.name AS encounterName,
+                        c.encounter_position,
                     
                         c.cycle_code,
                         cy.name AS cycleName,
+                        cy.position as cyclePosition,
                         
                         c.reprint_pack_code,
                     
@@ -267,7 +274,13 @@ class CardsRepositoryImpl @Inject constructor(
                         c.parallel,
                         c.is_unique,
                         c.slot,
-                        c.stage
+                        c.stage,
+                        
+                        c.sort_by_type,
+                        c.sort_by_faction,
+                        c.sort_by_pack,
+                        c.sort_by_cycle,
+                        c.sort_by_slot
                     FROM card c
                     JOIN card_type t
                         ON c.type_code = t.code
@@ -325,7 +338,15 @@ class CardsRepositoryImpl @Inject constructor(
                     ) AS duplicate_rank FROM filtered_cards
                 )
 
-                SELECT * FROM ranked_cards WHERE duplicate_rank = 1
+                ${
+                    if (sortClause.isNotEmpty()) {
+                        (if (spoilerState) "SELECT *, MIN(pack_position) OVER (" +
+                                "PARTITION BY encounter_code" +
+                                ") AS encounter_group FROM ranked_cards WHERE duplicate_rank = 1"
+                        else "SELECT * FROM ranked_cards WHERE duplicate_rank = 1") +
+                        " ORDER BY $sortClause"
+                    } else ""
+                }
             """.trimIndent(),
             onBindStatement = { statement ->
                 var index = 1

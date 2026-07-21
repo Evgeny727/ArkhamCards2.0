@@ -52,7 +52,9 @@ data class Translation(
     @ColumnInfo("taboo_text_change")
     val tabooTextChange: String?,
     val text: String?,
-    val traits: String?
+    val traits: String?,
+    @ColumnInfo("encounter_set_name")
+    val encounterSetName: String?
 )
 
 @Entity(

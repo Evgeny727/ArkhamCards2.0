@@ -1,4 +1,4 @@
-package com.arkhamcards.v2.domain.model.enums
+package com.arkhamcards.v2.domain.enums
 
 enum class MulliganAttribute {
     STARTS_IN_HAND, STARTS_IN_PLAY, STICKY_MULLIGAN, NONE;
