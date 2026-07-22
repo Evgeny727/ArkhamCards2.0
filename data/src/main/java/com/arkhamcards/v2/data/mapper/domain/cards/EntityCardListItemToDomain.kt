@@ -85,7 +85,9 @@ internal fun Flow<PagingData<CardListItemEntity>>.withCategoryHeaders(
                 when(headerOptions.second) {
                     CardsHeaderType.TYPE -> subTypeName ?: typeName
                     CardsHeaderType.TYPE_SLOT -> (subTypeName ?: typeName) to
-                            (if (slotNumber in 1..100) slotNumber else null)
+                            (if (slotNumber in 1..100) {
+                                if (slotNumber in 16..98) slot else slotNumber
+                            } else null)
                     CardsHeaderType.SLOT -> if (slotNumber in 16..98) slot else slotNumber
                     CardsHeaderType.FACTION -> factionNumber
                     CardsHeaderType.FACTION_PACK -> factionNumber to resolvedPackName
@@ -101,7 +103,7 @@ internal fun Flow<PagingData<CardListItemEntity>>.withCategoryHeaders(
                 }
             }
             CardListItemUiModel.CategoryHeader(
-                key = "header_${headerOptions.second?.name ?: "all_cards"}_${value.toString()}",
+                key = "header_${headerOptions.second?.name ?: "all_cards"}_${value.toString()}_${afterItem.id}",
                 category = headerOptions.second,
                 value = value
             )

@@ -14,7 +14,7 @@ object CardSearchQueryBuilder {
                 "pack" -> "sort_by_pack"
                 "name" -> "name"
                 "position" -> (if (positionFirst) "sort_by_pack, " else "") +
-                        (if (spoiler) "encounter_group, " else "") + "pack_position"
+                        (if (spoiler) "encounter_group, encounter_code, " else "") + "pack_position"
                 "encounter" -> "encounter_code, encounter_position"
                 else -> option
             }
