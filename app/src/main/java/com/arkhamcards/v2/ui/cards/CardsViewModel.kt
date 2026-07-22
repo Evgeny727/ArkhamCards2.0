@@ -64,6 +64,18 @@ class CardsViewModel @Inject constructor(
         initialValue = CardsSearchPreferences()
     )
 
+    init {
+        scrollListOnChange()
+    }
+
+    fun scrollListOnChange() {
+        viewModelScope.launch {
+            _cardsSearchPreferences.collect {
+                _scrollToTop.emit(Unit)
+            }
+        }
+    }
+
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val searchResults = combine(

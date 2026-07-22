@@ -1932,4 +1932,14 @@
     <string name="font_size_warning_text">This can be used to make the app font size larger, though it may impact layout on some screens.</string>
     <string name="this_draft_uses_the_decks_selected_card_pool">This draft uses the deck\'s selected card pool.</string>
     <string name="multiclass">Multi-class</string>
+    <string name="sort_by_type">Type</string>
+    <string name="sort_by_slot">Slot</string>
+    <string name="sort_by_faction">Class</string>
+    <string name="sort_by_cost">Cost</string>
+    <string name="sort_by_level">Level</string>
+    <string name="sort_by_cycle">Cycle</string>
+    <string name="sort_by_pack">Pack</string>
+    <string name="sort_by_name">Title</string>
+    <string name="sort_by_position">Card number</string>
+    <string name="sort_by_encounter">Encounter Set</string>
 </resources>

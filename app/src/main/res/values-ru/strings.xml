@@ -1932,4 +1932,14 @@
     <string name="font_size_warning_text">Эта настройка может повлиять на расположение элементов на некоторых экранах.</string>
     <string name="cost_value">Цена: %s</string>
     <string name="multiclass">Мультикласс</string>
+    <string name="sort_by_type">По типу</string>
+    <string name="sort_by_slot">По слоту</string>
+    <string name="sort_by_faction">По классу</string>
+    <string name="sort_by_cost">По цене</string>
+    <string name="sort_by_level">По уровню</string>
+    <string name="sort_by_cycle">По циклу</string>
+    <string name="sort_by_pack">По дополнению</string>
+    <string name="sort_by_name">По названию</string>
+    <string name="sort_by_position">По номеру карты</string>
+    <string name="sort_by_encounter">По набору контактов</string>
 </resources>

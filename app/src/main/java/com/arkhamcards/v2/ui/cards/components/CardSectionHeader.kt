@@ -53,16 +53,26 @@ internal fun buildHeaderTitle(
             pair.first.toString() + slotText
         }
         CardsHeaderType.SLOT -> getSlotBySortNumber(value.toString())
-        CardsHeaderType.FACTION -> getFactionBySortNumber(value as? String)
-        CardsHeaderType.FACTION_PACK -> ""
-        CardsHeaderType.FACTION_LEVEL -> ""
+        CardsHeaderType.FACTION -> getFactionBySortNumber(value.toString())
+        CardsHeaderType.FACTION_PACK -> {
+            val pair = (value as? Pair<*, *>) ?: return stringResource(R.string.unknown)
+            val packText = if (pair.second == null) "" else (colon + pair.second.toString())
+
+            getFactionBySortNumber(pair.first.toString()) + packText
+        }
+        CardsHeaderType.FACTION_LEVEL -> {
+            val pair = (value as? Pair<*, *>) ?: return stringResource(R.string.unknown)
+            val levelText = if (pair.second == null) "" else " (${pair.second})"
+
+            getFactionBySortNumber(pair.first.toString()) + levelText
+        }
         CardsHeaderType.COST -> {
-            (value as? Int)?.let {
+            (value as? Int?)?.let {
                 stringResource(R.string.cost_value, if (it == -2) "X" else it)
             } ?: stringResource(R.string.cost_none)
         }
         CardsHeaderType.LEVEL -> {
-            (value as? Int)?.let {
+            (value as? Int?)?.let {
                 stringResource(R.string.level_level, it)
             } ?: stringResource(R.string.none)
         }

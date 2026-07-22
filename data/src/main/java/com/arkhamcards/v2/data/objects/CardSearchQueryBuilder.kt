@@ -8,7 +8,7 @@ object CardSearchQueryBuilder {
                 "type" -> "sort_by_type"
                 "slot" -> "sort_by_slot"
                 "faction" -> "sort_by_faction"
-                "cost" -> "(cost IS NULL) cost"
+                "cost" -> "(cost IS NULL), cost"
                 "level" -> "(xp IS NULL), xp"
                 "cycle" -> "sort_by_cycle"
                 "pack" -> "sort_by_pack"

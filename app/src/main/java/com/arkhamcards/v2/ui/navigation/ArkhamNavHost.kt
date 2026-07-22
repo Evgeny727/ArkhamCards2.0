@@ -61,6 +61,8 @@ import com.arkhamcards.v2.R
 import com.arkhamcards.v2.ui.campaigns.Campaigns
 import com.arkhamcards.v2.ui.cards.Cards
 import com.arkhamcards.v2.ui.cards.CardsScreen
+import com.arkhamcards.v2.ui.cards.CardsSortScreen
+import com.arkhamcards.v2.ui.cards.CardsSortViewModel
 import com.arkhamcards.v2.ui.cards.CardsViewModel
 import com.arkhamcards.v2.ui.components.ArkhamAlertButton
 import com.arkhamcards.v2.ui.components.ArkhamAlertButtonStyle
@@ -295,7 +297,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                             )
                             ArkhamAppBarAction(
                                 contentColor = CustomTheme.colors.m,
-                                onClick = {  },
+                                onClick = { navController.navigateSingleTop(CardsSortScreen) },
                                 iconGlyph = AppIcon.Sort,
                             )
                         }
@@ -303,6 +305,43 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                             ArkhamSwitch(
                                 value = spoilerState,
                                 onValueChange = cardsViewModel::toggleSpoiler
+                            )
+                        }
+                    }
+                    composable<CardsSortScreen> { backStackEntry ->
+                        val parentEntry = remember(backStackEntry) {
+                            navController.getBackStackEntry<Cards>()
+                        }
+                        val cardsViewModel: CardsViewModel = hiltViewModel(parentEntry)
+                        val spoilerState by cardsViewModel.spoilerState.collectAsState()
+                        val cardsSortViewModel = hiltViewModel<CardsSortViewModel>()
+
+                        CardsSortScreen(
+                            spoilerState = spoilerState,
+                            navigateUp = navController::navigateUp,
+                            cardsSortViewModel = cardsSortViewModel,
+                            onApply = { newSortOptions ->
+                                cardsSortViewModel.applyNewSortOptions(newSortOptions, spoilerState)
+                                navController.navigateUp() },
+                            innerPadding = innerPadding
+                        )
+
+                        title = stringResource(R.string.sort)
+                        subtitle = null
+                        color = baseColor
+                        contentColor = baseContentColor
+                        rightActions = {
+                            ArkhamAppBarAction(
+                                contentColor = CustomTheme.colors.m,
+                                onClick = cardsSortViewModel::clearSortOptions,
+                                iconGlyph = AppIcon.Trash,
+                            )
+                        }
+                        leftAction = { color ->
+                            ArkhamAppBarAction(
+                                contentColor = color,
+                                onClick = navController::navigateUp,
+                                iconGlyph = AppIcon.ArrowBack,
                             )
                         }
                     }

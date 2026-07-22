@@ -16,7 +16,8 @@ import kotlinx.coroutines.flow.map
 fun CardListItemEntity.toDomain() = CardListItem(
     id = id,
     thumbnailUrl = thumbnailurl,
-    cost = cost.realCardCost(typeCode, permanent),
+    realCost = cost.realCardCost(typeCode, permanent),
+    cost = cost,
     xp = xp,
     permanent = permanent,
     tabooXp = tabooXp,

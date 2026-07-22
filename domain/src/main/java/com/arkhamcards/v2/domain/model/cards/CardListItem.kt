@@ -9,7 +9,8 @@ data class CardListItem(
     val thumbnailUrl: String?,
 
     //Cost
-    val cost: String?,
+    val realCost: String?,
+    val cost:  Int?,
     val xp: Int?,
     val permanent: Boolean,
 
