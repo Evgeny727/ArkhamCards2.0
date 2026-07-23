@@ -26,6 +26,7 @@ import androidx.paging.compose.itemKey
 import com.arkhamcards.v2.domain.model.cards.CardListItemUiModel
 import com.arkhamcards.v2.ui.cards.components.CardListItem
 import com.arkhamcards.v2.ui.cards.components.CardSectionHeader
+import com.arkhamcards.v2.ui.cards.components.PlaceholderCardListItem
 import com.arkhamcards.v2.ui.cards.components.buildHeaderTitle
 import com.arkhamcards.v2.ui.theme.CustomTheme
 import com.arkhamcards.v2.ui.utils.appSp
@@ -78,9 +79,11 @@ fun CardsScreen(
                 is CardListItemUiModel.CardItem -> "card"
             } }
         ) { index ->
-            val item = searchResults[index] ?: return@items
+            when (val item = searchResults[index]) {
+                null -> {
+                    PlaceholderCardListItem(rowHeight = rowHeight)
+                }
 
-            when (item) {
                 is CardListItemUiModel.CategoryHeader -> {
                     val title = buildHeaderTitle(item.category, item.value)
                     CardSectionHeader(title)
