@@ -174,15 +174,27 @@ fun SingleCard.toEntity(
         searchFlavor = translation.flavor?.normalizeForSearch() ?: "",
         searchFlavorBack = translation.backFlavor?.normalizeForSearch() ?: "",
         searchRealName = if (locale == "en") null else
-            listOfNotNull(real_name, real_subname, real_back_name, real_back_subname)
+            listOfNotNull(real_name, real_subname)
+                .joinToString(" ")
+                .normalizeForSearch(),
+        searchRealNameBack = if (locale == "en") null else
+            listOfNotNull(real_back_name, real_back_subname)
                 .joinToString(" ")
                 .normalizeForSearch(),
         searchRealGame = if (locale == "en") null else
-            listOfNotNull(real_text, real_back_text, real_customization_text)
+            listOfNotNull(real_text, real_customization_text)
+                .joinToString(" ")
+                .normalizeForSearch(),
+        searchRealGameBack = if (locale == "en") null else
+            listOfNotNull(real_back_text)
                 .joinToString(" ")
                 .normalizeForSearch(),
         searchRealFlavor = if (locale == "en") null else
-            listOfNotNull(real_flavor, real_back_flavor)
+            listOfNotNull(real_flavor)
+                .joinToString(" ")
+                .normalizeForSearch(),
+        searchRealFlavorBack = if (locale == "en") null else
+            listOfNotNull(real_back_flavor)
                 .joinToString(" ")
                 .normalizeForSearch(),
     )

@@ -335,8 +335,14 @@ data class CardEntity(
     val searchFlavorBack: String,
     @ColumnInfo("search_real_name")
     val searchRealName: String?,
+    @ColumnInfo("search_real_name_back")
+    val searchRealNameBack: String?,
     @ColumnInfo("search_real_game")
     val searchRealGame: String?,
+    @ColumnInfo("search_real_game_back")
+    val searchRealGameBack: String?,
     @ColumnInfo("search_real_flavor")
     val searchRealFlavor: String?,
+    @ColumnInfo("search_real_flavor_back")
+    val searchRealFlavorBack: String?,
 )
