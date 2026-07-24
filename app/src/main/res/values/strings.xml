@@ -735,6 +735,7 @@
     <string name="search_encounter_cards">Search encounter cards</string>
     <string name="clear_search_filters">Clear search filters</string>
     <string name="search_game_text">Search game text</string>
+    <string name="search_flavor_text">Search flavor text</string>
     <string name="search_card_backs">Search card backs</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>

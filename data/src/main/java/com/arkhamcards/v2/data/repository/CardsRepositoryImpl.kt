@@ -16,11 +16,14 @@ import com.arkhamcards.v2.data.mapper.domain.cards.withCategoryHeaders
 import com.arkhamcards.v2.data.objects.CardCache
 import com.arkhamcards.v2.data.objects.CardCache.createCache
 import com.arkhamcards.v2.data.objects.CardSearchQueryBuilder.buildSortClause
+import com.arkhamcards.v2.data.objects.createSQLSearchQuery
+import com.arkhamcards.v2.data.objects.normalizeForSearch
 import com.arkhamcards.v2.data.remote.CardsRemoteDataSource
 import com.arkhamcards.v2.domain.TimestampNormilizer.compareTimestamps
 import com.arkhamcards.v2.domain.TimestampNormilizer.getCurrentDateTime
 import com.arkhamcards.v2.domain.TimestampNormilizer.isAtLeastWeekApart
 import com.arkhamcards.v2.domain.model.cards.CardListItemUiModel
+import com.arkhamcards.v2.domain.model.cards.CardsSearchOptions
 import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -32,6 +35,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
 import java.io.File
+import java.util.Locale
 import javax.inject.Inject
 
 private val json = Json {
@@ -183,10 +187,10 @@ class CardsRepositoryImpl @Inject constructor(
 
     override fun searchPaginatedCardsFlow(
         spoilerState: Boolean,
-        searchQuery: String,
+        searchOptions: CardsSearchOptions,
         searchPreferences: CardsSearchPreferences
     ): Flow<PagingData<CardListItemUiModel>> {
-        val rawQuery = buildSearchCardsQuery(spoilerState, searchQuery, searchPreferences)
+        val rawQuery = buildSearchCardsQuery(spoilerState, searchOptions, searchPreferences)
 
         return Pager(
             config = PagingConfig(
@@ -205,13 +209,20 @@ class CardsRepositoryImpl @Inject constructor(
 
     private fun buildSearchCardsQuery(
         spoilerState: Boolean,
-        searchQuery: String,
+        searchOptions: CardsSearchOptions,
         searchPreferences: CardsSearchPreferences
     ): RoomRawQuery {
         val sortClause = buildSortClause(
             if (spoilerState) searchPreferences.mythosSortOrder else searchPreferences.playerSortOrder,
             spoilerState
         )
+
+        val searchQuery = buildSearchQuery(
+            searchOptions,
+            searchPreferences.includeEnglish
+        )
+
+        val isQueryNotBlank = searchQuery.sqlQuery.isNotBlank()
 
         return RoomRawQuery(
             sql = """
@@ -323,6 +334,7 @@ class CardsRepositoryImpl @Inject constructor(
                      )
                     """.trimIndent() 
                     }
+                    ${if (isQueryNotBlank) " AND (${searchQuery.searchFieldsQuery})" else ""}
                 ),
                 
                 ranked_cards AS (
@@ -355,7 +367,68 @@ class CardsRepositoryImpl @Inject constructor(
                         statement.bindInt(index++, tabooSetId)
                     }
                 }
+                if (isQueryNotBlank) {
+                    repeat(searchQuery.searchFieldsAmount) {
+                        statement.bindText(index++, searchQuery.sqlQuery)
+                    }
+                }
             }
         )
     }
+
+    private fun buildSearchQuery(
+        searchOptions: CardsSearchOptions,
+        includeEnglish: Boolean
+    ): SqlSearchOptions {
+        val language = Locale.getDefault().toLanguageTag().substringBefore("-")
+        val shouldIncludeRealFields = language != "en" && includeEnglish
+
+        val sqlQuery = searchOptions.searchQuery
+            .normalizeForSearch()
+            .createSQLSearchQuery()
+
+        if (sqlQuery.isBlank()) return SqlSearchOptions()
+
+        val searchFields = searchOptions.buildSearchFields(shouldIncludeRealFields)
+
+        val searchFieldsQuery = searchFields.joinToString(" OR ") { "$it LIKE ?" }
+
+        return SqlSearchOptions(
+            sqlQuery,
+            searchFieldsQuery,
+            searchFields.size
+        )
+    }
+
+    private fun CardsSearchOptions.buildSearchFields(
+        shouldIncludeRealFields: Boolean
+    ): List<String> {
+        val fields = buildList {
+            add("name")
+            if (searchBack) add("name_back")
+
+            if (searchGame) {
+                add("game")
+                if (searchBack) add("game_back")
+            }
+
+            if (searchFlavor) {
+                add("flavor")
+                if (searchBack) add("flavor_back")
+            }
+        }
+
+        return buildList {
+            fields.forEach {
+                add("search_$it")
+                if (shouldIncludeRealFields) add("search_real_$it")
+            }
+        }
+    }
 }
+
+data class SqlSearchOptions(
+    val sqlQuery: String = "",
+    val searchFieldsQuery: String = "",
+    val searchFieldsAmount: Int = 0
+)

@@ -24,7 +24,7 @@ fun CardSectionHeader(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(color = CustomTheme.colors.l20),
+            .background(color = CustomTheme.colors.l10),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {

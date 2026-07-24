@@ -785,6 +785,7 @@
     <string name="search_encounter_cards">Поиск карт контактов</string>
     <string name="clear_search_filters">Очистить фильтр поиска</string>
     <string name="search_game_text">Искать по тексту карт</string>
+    <string name="search_flavor_text">Искать по худ. тексту</string>
     <string name="search_card_backs">Искать на обороте</string>
     <string name="show_all_available_cards">Показать кардпул</string>
     <string name="fight_value">Бой: %s</string>
