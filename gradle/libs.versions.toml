@@ -28,7 +28,7 @@ gms = "4.5.0"
 playServicesBase = "18.10.0"
 
 apollo = "5.0.1"
-charts = "0.2.5"
+charts = "1.0.0"
 reorderable = "3.1.0"
 
 hilt = "2.60.1"

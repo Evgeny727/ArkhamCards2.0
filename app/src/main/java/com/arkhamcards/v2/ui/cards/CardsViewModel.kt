@@ -10,6 +10,7 @@ import com.arkhamcards.v2.domain.repository.CardsRepository
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -17,11 +18,14 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.milliseconds
 
 @HiltViewModel
 class CardsViewModel @Inject constructor(
@@ -52,7 +56,7 @@ class CardsViewModel @Inject constructor(
 
     fun updateSearchQuery(query: String) {
         _searchOptions.update { it.copy(searchQuery = query) }
-        viewModelScope.launch { _scrollToTop.emit(Unit) }
+        if (query.isNotBlank()) viewModelScope.launch { _scrollToTop.emit(Unit) }
     }
 
     fun clearSearchQuery() {
@@ -62,21 +66,21 @@ class CardsViewModel @Inject constructor(
 
     fun onSearchGameTextChange(state: Boolean) {
         _searchOptions.update { it.copy(searchGame = state) }
-        if (_searchOptions.value.searchQuery.isNotEmpty()) viewModelScope.launch {
+        if (_searchOptions.value.searchQuery.isNotBlank()) viewModelScope.launch {
             _scrollToTop.emit(Unit)
         }
     }
 
     fun onSearchFlavorTextChange(state: Boolean) {
         _searchOptions.update { it.copy(searchFlavor = state) }
-        if (_searchOptions.value.searchQuery.isNotEmpty()) viewModelScope.launch {
+        if (_searchOptions.value.searchQuery.isNotBlank()) viewModelScope.launch {
             _scrollToTop.emit(Unit)
         }
     }
 
     fun onSearchBackTextChange(state: Boolean) {
         _searchOptions.update { it.copy(searchBack = state) }
-        if (_searchOptions.value.searchQuery.isNotEmpty()) viewModelScope.launch {
+        if (_searchOptions.value.searchQuery.isNotBlank()) viewModelScope.launch {
             _scrollToTop.emit(Unit)
         }
     }
@@ -100,14 +104,20 @@ class CardsViewModel @Inject constructor(
     }
 
 
-    @OptIn(ExperimentalCoroutinesApi::class)
+    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     val searchResults = combine(
         _spoilerState,
         _searchOptions,
         _cardsSearchPreferences
     ) { spoilerState, searchOptions, cardsSearchPreferences ->
-        Triple(spoilerState, searchOptions, cardsSearchPreferences)
-    }.flatMapLatest { (spoilerState, searchOptions, searchPreferences) ->
+        Triple(
+            spoilerState,
+            searchOptions.copy(searchQuery = searchOptions.searchQuery.trim()),
+            cardsSearchPreferences
+        )
+    }.debounce(200.milliseconds)
+        .distinctUntilChanged()
+        .flatMapLatest { (spoilerState, searchOptions, searchPreferences) ->
         cardsRepository.searchPaginatedCardsFlow(spoilerState, searchOptions, searchPreferences)
     }.cachedIn(viewModelScope)
 
