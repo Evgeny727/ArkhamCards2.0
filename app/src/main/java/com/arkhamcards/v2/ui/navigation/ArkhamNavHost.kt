@@ -74,9 +74,11 @@ import com.arkhamcards.v2.ui.components.ArkhamAlertDialog
 import com.arkhamcards.v2.ui.components.ArkhamSwitch
 import com.arkhamcards.v2.ui.decks.Decks
 import com.arkhamcards.v2.ui.icons.AppIcon
+import com.arkhamcards.v2.ui.settings.CollectionScreen
 import com.arkhamcards.v2.ui.settings.Settings
 import com.arkhamcards.v2.ui.settings.SettingsAbout
 import com.arkhamcards.v2.ui.settings.SettingsBackup
+import com.arkhamcards.v2.ui.settings.SettingsCollection
 import com.arkhamcards.v2.ui.settings.SettingsDiagnostics
 import com.arkhamcards.v2.ui.settings.SettingsScreen
 import com.arkhamcards.v2.ui.settings.SettingsViewModel
@@ -207,7 +209,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                             viewModel = settingsViewModel,
                             onLanguageChange = viewModel::updateLocale,
                             updateCards = viewModel::updateCardsIfAvailable,
-                            navigateToCollection = {},
+                            navigateToCollection = { navController.navigateSingleTop(SettingsCollection) },
                             navigateToAbout = { navController.navigateSingleTop(SettingsAbout) },
                             navigateToBackup = { navController.navigateSingleTop(SettingsBackup) },
                             navigateToDiagnostics = { navController.navigateSingleTop(SettingsDiagnostics) },
@@ -221,6 +223,43 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                         contentColor = baseContentColor
                         rightActions = null
                         leftAction = null
+                    }
+                    composable<SettingsCollection> { backStackEntry ->
+                        val parentEntry = remember(backStackEntry) {
+                            navController.getBackStackEntry<Settings>()
+                        }
+                        val settingsViewModel = hiltViewModel<SettingsViewModel>(parentEntry)
+                        val ignoreCollection by settingsViewModel.ignoreCollectionState.collectAsState()
+                        val collection by settingsViewModel.collectionState.collectAsState()
+                        val allPacks by settingsViewModel.allPacksState.collectAsState()
+
+                        LaunchedEffect(Unit) {
+                            settingsViewModel.errors.collect {
+                                viewModel.emitError(it.exception)
+                            }
+                        }
+
+                        CollectionScreen(
+                            ignoreCollection = ignoreCollection,
+                            collection = collection,
+                            allPacks = allPacks,
+                            onIgnoreChange = settingsViewModel::setIgnoreCollection,
+                            onCollectionChange = settingsViewModel::setCollection,
+                            innerPadding = innerPadding
+                        )
+
+                        title = stringResource(R.string.edit_collection)
+                        subtitle = null
+                        color = baseColor
+                        contentColor = baseContentColor
+                        rightActions = null
+                        leftAction = { color ->
+                            ArkhamAppBarAction(
+                                contentColor = color,
+                                onClick = navController::navigateUp,
+                                iconGlyph = AppIcon.ArrowBack,
+                            )
+                        }
                     }
                     composable<SettingsAbout> {
 

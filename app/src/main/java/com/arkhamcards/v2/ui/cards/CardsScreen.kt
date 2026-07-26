@@ -109,7 +109,7 @@ fun CardsScreen(
                             .animateItem()
                     ) {
                         Text(
-                            text = if (searchOptions.searchQuery.isEmpty()) {
+                            text = if (searchOptions.searchQuery.isBlank()) {
                                 stringResource(R.string.no_matching_cards)
                             }
                             else {
@@ -120,6 +120,13 @@ fun CardsScreen(
                             },
                             style = CustomTheme.typography.text,
                         )
+                        if (searchOptions.searchQuery.isBlank()) {
+                            Text(
+                                text = stringResource(R.string.edit_collection_in_settings),
+                                style = CustomTheme.typography.text,
+                                modifier = Modifier.padding(top = 8.dp)
+                            )
+                        }
                     }
                 }
             }
@@ -200,12 +207,14 @@ fun CardsScreen(
                 }
             }
 
-            if (searchOptions.searchQuery.isNotEmpty()) {
+            if (searchOptions.searchQuery.isNotBlank()) {
                 item("clear_search_button", contentType = "button") {
                     ArkhamButton(
                         title = stringResource(R.string.clear_query_search, searchOptions.searchQuery),
                         onClick = viewModel::clearSearchQuery,
-                        modifier = Modifier.padding(8.dp).animateItem(),
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .animateItem(),
                     ) { color ->
                         ArkhamButtonSearchIcon(color)
                     }
@@ -216,7 +225,9 @@ fun CardsScreen(
                         ArkhamButton(
                             title = stringResource(R.string.search_game_text),
                             onClick = { viewModel.onSearchGameTextChange(true) },
-                            modifier = Modifier.padding(8.dp).animateItem(),
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .animateItem(),
                         ) { color ->
                             ArkhamButtonSearchIcon(color)
                         }
@@ -228,7 +239,9 @@ fun CardsScreen(
                         ArkhamButton(
                             title = stringResource(R.string.search_flavor_text),
                             onClick = { viewModel.onSearchFlavorTextChange(true) },
-                            modifier = Modifier.padding(8.dp).animateItem(),
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .animateItem(),
                         ) { color ->
                             ArkhamButtonSearchIcon(color)
                         }
@@ -240,7 +253,9 @@ fun CardsScreen(
                         ArkhamButton(
                             title = stringResource(R.string.search_card_backs),
                             onClick = { viewModel.onSearchBackTextChange(true) },
-                            modifier = Modifier.padding(8.dp).animateItem(),
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .animateItem(),
                         ) { color ->
                             ArkhamButtonSearchIcon(color)
                         }
@@ -252,7 +267,9 @@ fun CardsScreen(
                         title = stringResource(if (spoilerState) R.string.search_player_cards
                             else R.string.search_encounter_cards),
                         onClick = { viewModel.toggleSpoiler(!spoilerState) },
-                        modifier = Modifier.padding(8.dp).animateItem(),
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .animateItem(),
                     ) { color ->
                         ArkhamButtonSearchIcon(color)
                     }

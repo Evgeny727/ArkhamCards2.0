@@ -1943,4 +1943,6 @@
     <string name="sort_by_name">По названию</string>
     <string name="sort_by_position">По номеру карты</string>
     <string name="sort_by_encounter">По набору контактов</string>
+    <string name="chapter_1">Сезон 1</string>
+    <string name="chapter_2">Сезон 2</string>
 </resources>

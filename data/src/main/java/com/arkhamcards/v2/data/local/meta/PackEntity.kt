@@ -29,6 +29,6 @@ data class PackEntity(
     val name: String,
     val position: Int,
     val official: Boolean,
-    val reprint: Boolean?,
+    val reprint: Boolean,
     val chapter: Int?
 )

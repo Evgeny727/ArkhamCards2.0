@@ -17,6 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.arkhamcards.v2.R
 import com.arkhamcards.v2.SUPPORTED_LANGUAGES
+import com.arkhamcards.v2.domain.enums.Faction
+import com.arkhamcards.v2.domain.model.meta.Pack
 import com.arkhamcards.v2.domain.model.meta.TabooSet
 import com.arkhamcards.v2.domain.model.settings.Collection
 import com.arkhamcards.v2.ui.components.ArkhamCheckboxButton
@@ -27,7 +29,6 @@ import com.arkhamcards.v2.ui.components.ArkhamSquareButton
 import com.arkhamcards.v2.ui.components.ArkhamSurfaceButton
 import com.arkhamcards.v2.ui.components.ArkhamSurfaceButtonGroup
 import com.arkhamcards.v2.ui.components.ArkhamTabooSetButton
-import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.ui.components.iconSize
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.theme.CustomTheme
@@ -38,6 +39,7 @@ import java.util.Locale
 @Composable
 fun CardsCard(
     onLanguageChange: (String) -> Unit,
+    allPacks: ImmutableList<Pack>,
     collection: Collection,
     ignoreCollection: Boolean,
     navigateToCollection: () -> Unit,
@@ -63,6 +65,7 @@ fun CardsCard(
             HorizontalDivider(color = CustomTheme.colors.divider)
 
             ArkhamCollectionSurfaceButton(
+                allPacks = allPacks,
                 collection = collection,
                 ignoreCollection = ignoreCollection,
                 navigateToCollection = navigateToCollection
@@ -170,18 +173,38 @@ private fun ArkhamLanguageSurfaceButton(
 
 @Composable
 private fun ArkhamCollectionSurfaceButton(
+    allPacks: ImmutableList<Pack>,
     collection: Collection,
     ignoreCollection: Boolean,
     navigateToCollection: () -> Unit
 ) {
-    val collectionValue = if (ignoreCollection) stringResource(R.string.all_cycles_and_packs)
-        else pluralStringResource(R.plurals.count_cycle, collection.cycles.size) + " + " +
-            pluralStringResource(R.plurals.count_pack, collection.packs.size)
+    val (cyclesSize, packsSize) = remember(allPacks, collection) {
+        val fullCollection = collection.packs + collection.reprintPacks
+        if (fullCollection.isEmpty()) return@remember 0 to 0
+
+        val uniqueCycles = mutableSetOf<Int>()
+        var packs = 0
+
+        allPacks.forEach { pack ->
+            if (pack.code !in fullCollection) return@forEach
+
+            if (pack.cyclePosition < 50) {
+                uniqueCycles += pack.cyclePosition
+            } else {
+                packs++
+            }
+        }
+
+        uniqueCycles.size to packs
+    }
+    val collectionSummarized = pluralStringResource(R.plurals.count_cycle, cyclesSize, cyclesSize) + " + " +
+            pluralStringResource(R.plurals.count_pack, packsSize, packsSize)
+    val allCollection = stringResource(R.string.all_cycles_and_packs)
 
     ArkhamSurfaceButton(
         title = stringResource(R.string.card_collection),
         icon = AppIcon.CardOutline,
-        valueLabel = collectionValue,
+        valueLabel = if (ignoreCollection) allCollection else collectionSummarized,
         onClick = navigateToCollection
     )
 }

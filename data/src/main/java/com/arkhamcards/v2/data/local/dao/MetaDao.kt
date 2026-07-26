@@ -7,6 +7,7 @@ import com.arkhamcards.v2.data.local.meta.CycleEntity
 import com.arkhamcards.v2.data.local.meta.EncounterSetEntity
 import com.arkhamcards.v2.data.local.meta.FactionEntity
 import com.arkhamcards.v2.data.local.meta.PackEntity
+import com.arkhamcards.v2.data.local.meta.FullPackEntity
 import com.arkhamcards.v2.data.local.meta.TabooSetEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -52,4 +53,11 @@ interface MetaDao {
 
     @Query("SELECT * FROM taboo_set ORDER BY date DESC")
     fun getTaboos(): Flow<List<TabooSetEntity>>
+
+    @Query("""
+        SELECT p.*, c.position as cyclePosition, c.name AS cycleName 
+        FROM pack p JOIN cycle c ON p.cycle_code = c.code 
+        ORDER BY p.chapter DESC, c.position, p.reprint DESC, p.position
+    """)
+    fun getAllPacks(): Flow<List<FullPackEntity>>
 }

@@ -1,4 +1,4 @@
-package com.arkhamcards.v2.domain
+package com.arkhamcards.v2.domain.objects
 
 import java.text.SimpleDateFormat
 import java.util.Date

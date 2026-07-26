@@ -6,6 +6,9 @@ import kotlinx.serialization.Serializable
 object Settings
 
 @Serializable
+object SettingsCollection
+
+@Serializable
 object SettingsAbout
 
 @Serializable

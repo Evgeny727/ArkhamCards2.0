@@ -19,12 +19,12 @@ import com.arkhamcards.v2.data.objects.CardSearchQueryBuilder.buildSortClause
 import com.arkhamcards.v2.data.objects.createSQLSearchQuery
 import com.arkhamcards.v2.data.objects.normalizeForSearch
 import com.arkhamcards.v2.data.remote.CardsRemoteDataSource
-import com.arkhamcards.v2.domain.TimestampNormilizer.compareTimestamps
-import com.arkhamcards.v2.domain.TimestampNormilizer.getCurrentDateTime
-import com.arkhamcards.v2.domain.TimestampNormilizer.isAtLeastWeekApart
 import com.arkhamcards.v2.domain.model.cards.CardListItemUiModel
 import com.arkhamcards.v2.domain.model.cards.CardsSearchOptions
 import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
+import com.arkhamcards.v2.domain.objects.TimestampNormilizer.compareTimestamps
+import com.arkhamcards.v2.domain.objects.TimestampNormilizer.getCurrentDateTime
+import com.arkhamcards.v2.domain.objects.TimestampNormilizer.isAtLeastWeekApart
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -224,6 +224,13 @@ class CardsRepositoryImpl @Inject constructor(
 
         val isQueryNotBlank = searchQuery.sqlQuery.isNotBlank()
 
+        val (packsQuery, reprintsQuery) = if (searchPreferences.ignoreCollection) "" to ""
+        else {
+            val packs = searchPreferences.collection.packs.joinToString(",") { "'$it'" }
+            val reprints = searchPreferences.collection.reprintPacks.joinToString(",") { "'$it'" }
+            packs to reprints
+        }
+
         return RoomRawQuery(
             sql = """
                 WITH filtered_cards AS (
@@ -306,9 +313,14 @@ class CardsRepositoryImpl @Inject constructor(
                     JOIN cycle cy
                         ON c.cycle_code = cy.code
                     CROSS JOIN selected_taboo taboo
-                    WHERE c.encounter_code IS ${if (spoilerState) "NOT NULL" else "NULL"} AND c.hidden = 0
-                    ${if (searchPreferences.showFanMade) "" else " AND (c.official = 1 AND c.preview = 0)"}
-                    ${if (spoilerState) "" 
+                    WHERE c.encounter_code IS ${if (spoilerState) "NOT NULL" else "NULL"} 
+                    ${ if (searchPreferences.ignoreCollection) "" 
+                    else """ AND (
+                        c.pack_code IN ($packsQuery) 
+                        OR c.reprint_pack_code IN ($reprintsQuery)
+                    )""".trimIndent()
+                    }
+                    ${ if (spoilerState) "" 
                     else """ AND
                      (
                         -- No taboo selected -> originals only
@@ -334,6 +346,8 @@ class CardsRepositoryImpl @Inject constructor(
                      )
                     """.trimIndent() 
                     }
+                     AND c.hidden = 0 ${ if (searchPreferences.showFanMade) "" 
+                         else " AND (c.official = 1 AND c.preview = 0)" }
                     ${if (isQueryNotBlank) " AND (${searchQuery.searchFieldsQuery})" else ""}
                 ),
                 

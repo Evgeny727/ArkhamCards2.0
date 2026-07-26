@@ -8,6 +8,7 @@ import com.arkhamcards.v2.domain.repository.MetaRepository
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -53,10 +54,16 @@ class SettingsViewModel @Inject constructor(
             initialValue = false
         )
 
+    val allPacksState = metaRepository.getAllPacks(secondCore = true).stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = persistentListOf()
+    )
+
     val collectionState: StateFlow<Collection> = userPreferencesRepository.collection.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = Collection(persistentListOf(), persistentListOf())
+        initialValue = Collection(persistentSetOf(), persistentSetOf())
     )
 
     val ignoreCollectionState: StateFlow<Boolean> = userPreferencesRepository.ignoreCollection.stateIn(

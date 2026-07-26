@@ -2,6 +2,7 @@ package com.arkhamcards.v2.data.repository
 
 import com.arkhamcards.v2.data.local.dao.MetaDao
 import com.arkhamcards.v2.data.mapper.domain.meta.toDomain
+import com.arkhamcards.v2.domain.model.meta.Pack
 import com.arkhamcards.v2.domain.model.meta.TabooSet
 import com.arkhamcards.v2.domain.repository.MetaRepository
 import kotlinx.collections.immutable.ImmutableList
@@ -16,6 +17,24 @@ class MetaRepositoryImpl @Inject constructor(
 
     override fun getTaboos(): Flow<ImmutableList<TabooSet>> = metaDao.getTaboos().map { sets ->
         sets.map { it.toDomain() }.toImmutableList()
+    }
+
+    override fun getAllPacks(secondCore: Boolean): Flow<ImmutableList<Pack>> = metaDao.getAllPacks().map { packs ->
+        buildList {
+            packs.forEach { entity ->
+                val pack = entity.toDomain()
+                add(pack)
+
+                if (secondCore && pack.code == "core") {
+                    add(
+                        pack.copy(
+                            code = "core2"
+                            // change any other fields if needed
+                        )
+                    )
+                }
+            }
+        }.toImmutableList()
     }
 
 }

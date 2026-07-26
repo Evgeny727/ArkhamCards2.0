@@ -16,9 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.arkhamcards.v2.ui.icons.IconGlyph
 import com.arkhamcards.v2.ui.theme.CustomTheme
+import com.arkhamcards.v2.ui.utils.appSp
 
 @Composable
 fun ArkhamCheckboxButton(
@@ -30,6 +32,7 @@ fun ArkhamCheckboxButton(
     isSelected: Boolean = false,
     enabled: Boolean = true,
     isRadio: Boolean = false,
+    isPackRow: Boolean = false,
     onValueChange: (Boolean) -> Unit,
 ) {
     Surface(
@@ -61,7 +64,7 @@ fun ArkhamCheckboxButton(
                     else Text(
                         text = iconGlyph.glyph,
                         fontFamily = iconGlyph.fontFamily,
-                        color = CustomTheme.colors.m,
+                        color = if (isPackRow) CustomTheme.colors.darkText else CustomTheme.colors.m,
                         fontSize = iconSize(iconGlyph)
                     )
                 }
@@ -69,7 +72,8 @@ fun ArkhamCheckboxButton(
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = title,
-                    style = CustomTheme.typography.large
+                    style = CustomTheme.typography.large,
+                    fontSize = if (isPackRow) 16.appSp(CustomTheme.typography.scaleFactor) else TextUnit.Unspecified,
                 )
 
                 description?.let {

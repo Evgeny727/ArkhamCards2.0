@@ -1,10 +1,13 @@
 package com.arkhamcards.v2.domain.model.settings
 
-import kotlinx.collections.immutable.ImmutableList
+import com.arkhamcards.v2.domain.objects.ImmutableStringSetSerializer
+import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Collection(
-    val cycles: ImmutableList<String>,
-    val packs: ImmutableList<String>,
+    @Serializable(with = ImmutableStringSetSerializer::class)
+    val packs: ImmutableSet<String>,
+    @Serializable(with = ImmutableStringSetSerializer::class)
+    val reprintPacks: ImmutableSet<String>,
 )

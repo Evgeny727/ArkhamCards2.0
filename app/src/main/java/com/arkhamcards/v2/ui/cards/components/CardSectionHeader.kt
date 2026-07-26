@@ -1,8 +1,11 @@
 package com.arkhamcards.v2.ui.cards.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -10,28 +13,63 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.arkhamcards.v2.R
 import com.arkhamcards.v2.domain.model.cards.CardsHeaderType
+import com.arkhamcards.v2.ui.icons.IconGlyph
 import com.arkhamcards.v2.ui.theme.CustomTheme
+import com.arkhamcards.v2.ui.utils.appSp
 
 @Composable
 fun CardSectionHeader(
     title: String,
     modifier: Modifier = Modifier,
+    isSubTitle: Boolean = true,
+    controls: @Composable (RowScope.() -> Unit)? = null
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(color = CustomTheme.colors.l10),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+            .background(color = if (isSubTitle) CustomTheme.colors.l10 else CustomTheme.colors.l20),
+    ) {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Text(
+                text = title,
+                style = CustomTheme.typography.subHeaderText,
+                modifier = Modifier.weight(1f)
+            )
+            controls?.invoke(this)
+        }
+    }
+}
+
+@Composable
+fun CardSectionHeaderIconButton(
+    iconGlyph: IconGlyph,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+) {
+    Box(
+        modifier = modifier
+            .clip(CustomTheme.shapes.circle)
+            .background(color = CustomTheme.colors.d10)
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center
     ) {
         Text(
-            text = title,
-            style = CustomTheme.typography.subHeaderText,
-            modifier = Modifier.padding(8.dp)
+            text = iconGlyph.glyph,
+            fontFamily = iconGlyph.fontFamily,
+            color = CustomTheme.colors.l30,
+            fontSize = 24.appSp(CustomTheme.typography.scaleFactor),
+            modifier = Modifier.padding(4.dp),
         )
     }
 }

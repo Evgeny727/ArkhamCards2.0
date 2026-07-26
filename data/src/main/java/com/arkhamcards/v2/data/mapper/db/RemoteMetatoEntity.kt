@@ -36,7 +36,7 @@ fun Pack.toEntity(name: String): PackEntity {
         name = name,
         position = position,
         official = official,
-        reprint = reprint,
+        reprint = reprint ?: false,
         chapter = chapter,
     )
 }

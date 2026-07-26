@@ -16,7 +16,7 @@ import com.arkhamcards.v2.domain.repository.DEFAULT_MYTHOS_SORT_ORDER
 import com.arkhamcards.v2.domain.repository.DEFAULT_PLAYER_SORT_ORDER
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -93,7 +93,7 @@ class UserPreferencesRepositoryImpl @Inject constructor(
         }.map { preferences ->
             preferences[COLLECTION]?.let {
                 json.decodeFromString<Collection>(it)
-            } ?: Collection(persistentListOf(), persistentListOf())
+            } ?: Collection(persistentSetOf(), persistentSetOf())
         }
     override val ignoreCollection: Flow<Boolean> = dataStore.data
         .catch {
@@ -160,7 +160,7 @@ class UserPreferencesRepositoryImpl @Inject constructor(
                     ?.filter { it.isNotBlank() } ?: DEFAULT_MYTHOS_SORT_ORDER,
                 ignoreCollection = preferences[IGNORE_COLLECTION] ?: true,
                 collection = preferences[COLLECTION]?.let { json.decodeFromString<Collection>(it) }
-                    ?: Collection(persistentListOf(), persistentListOf())
+                    ?: Collection( persistentSetOf(), persistentSetOf())
             )
         }
 

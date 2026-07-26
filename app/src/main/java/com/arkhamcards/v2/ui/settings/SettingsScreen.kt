@@ -36,6 +36,7 @@ fun SettingsScreen(
     val settingsUiState by viewModel.settingsUiState.collectAsState()
     val showFanmadeCards by viewModel.showFanmadeCardsState.collectAsState()
     val includeEnglish by viewModel.isIncludeEnglishSearchResultsState.collectAsState()
+    val allPacks by viewModel.allPacksState.collectAsState()
     val collection by viewModel.collectionState.collectAsState()
     val ignoreCollection by viewModel.ignoreCollectionState.collectAsState()
     val tabooSetId by viewModel.tabooSetIdState.collectAsState()
@@ -67,6 +68,7 @@ fun SettingsScreen(
         item("cards_card") {
             CardsCard(
                 onLanguageChange = onLanguageChange,
+                allPacks = allPacks,
                 collection = collection,
                 ignoreCollection = ignoreCollection,
                 navigateToCollection = navigateToCollection,
