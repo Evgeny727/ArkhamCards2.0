@@ -9,10 +9,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.arkhamcards.v2.R
+import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.ui.components.ArkhamRoundedCardHeader
 import com.arkhamcards.v2.ui.components.ArkhamRoundedFactionCard
 import com.arkhamcards.v2.ui.components.ArkhamSquareButton
-import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.ui.components.iconSize
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.theme.CustomTheme
@@ -31,25 +31,42 @@ fun SocialsCard(
             faction = Faction.Neutral,
         ) },
     ) {
-        if (languageTag == "ru") {
+        Text(
+            text = stringResource(R.string.socials_text),
+            style = CustomTheme.typography.text,
+            modifier = Modifier.padding(horizontal = 8.dp)
+        )
+        ArkhamSquareButton(
+            title = stringResource(R.string.discord),
+            onClick = remember { {
+                context.openLink(when (languageTag) {
+                    "ru" -> "https://discord.gg/cqUudV2"
+                    else -> "https://discord.gg/RpPgDQDfsN"
+                })
+            } },
+        ) { color ->
             Text(
-                text = "Общайтесь с другими поклонниками карточного «Ужаса Аркхэма» в русскоязычных сообществах:",
-                style = CustomTheme.typography.text,
-                modifier = Modifier.padding(horizontal = 8.dp)
+                text = AppIcon.Discord.glyph,
+                fontFamily = AppIcon.Discord.fontFamily,
+                color = color,
+                fontSize = iconSize(AppIcon.Discord)
             )
+        }
+        if (languageTag == "es") {
             ArkhamSquareButton(
-                title = stringResource(R.string.discord),
+                title = "Tutorial aplicación",
                 onClick = remember { {
-                    context.openLink("https://discord.gg/cqUudV2")
+                    context.openLink("https://www.youtube.com/watch?v=Vt9PCm02owU&list=PLFbghkzYxuOj4l3dF9ljqSqd_MKGibzei")
                 } },
             ) { color ->
                 Text(
-                    text = AppIcon.Discord.glyph,
-                    fontFamily = AppIcon.Discord.fontFamily,
+                    text = AppIcon.Wild.glyph,
+                    fontFamily = AppIcon.Wild.fontFamily,
                     color = color,
-                    fontSize = iconSize(AppIcon.Discord)
+                    fontSize = iconSize(AppIcon.Wild)
                 )
             }
+        } else if (languageTag == "ru") {
             ArkhamSquareButton(
                 title = stringResource(R.string.vk),
                 onClick = remember { {
@@ -74,20 +91,6 @@ fun SocialsCard(
                     fontFamily = AppIcon.Telegram.fontFamily,
                     color = color,
                     fontSize = iconSize(AppIcon.Telegram)
-                )
-            }
-        } else if (languageTag == "es") {
-            ArkhamSquareButton(
-                title = "Tutorial aplicación",
-                onClick = remember { {
-                    context.openLink("https://www.youtube.com/watch?v=Vt9PCm02owU&list=PLFbghkzYxuOj4l3dF9ljqSqd_MKGibzei")
-                } },
-            ) { color ->
-                Text(
-                    text = AppIcon.Wild.glyph,
-                    fontFamily = AppIcon.Wild.fontFamily,
-                    color = color,
-                    fontSize = iconSize(AppIcon.Wild)
                 )
             }
         }

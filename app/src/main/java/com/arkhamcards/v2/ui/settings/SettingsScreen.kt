@@ -99,7 +99,7 @@ fun SettingsScreen(
 //            Text(text = "Settings", style = CustomTheme.typography.header)
 //        }
 
-        if (languageTag == "ru" || languageTag == "es") item("socials_card") {
+        item("socials_card") {
             SocialsCard(languageTag)
         }
 

@@ -1943,4 +1943,5 @@
     <string name="sort_by_name">Title</string>
     <string name="sort_by_position">Card number</string>
     <string name="sort_by_encounter">Encounter Set</string>
+    <string name="socials_text">Chat with other Arkham Horror: The Card Game™ players:</string>
 </resources>

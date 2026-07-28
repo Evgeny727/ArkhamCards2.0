@@ -9,7 +9,7 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-private val REGEX_SKILL_BOOST = Regex("""\+\d+?\s\[(.+?)\]""")
+private val REGEX_SKILL_BOOST = Regex("""\+\d+?\s\[(.+?)]""")
 private val USES_REGEX = Regex("""Uses\s\(\d+?\s(\w+?)\)""")
 private val BONDED_REGEX = Regex("""Bonded\s\((.*?)\)(\.|\s)""")
 private val REGEX_SUCCEED_BY = Regex("""succe(ssful|ed(?:s?|ed?))(:? at a skill test)? by(?! 0)""")
@@ -31,6 +31,7 @@ object CardCache {
         private set
     var actions: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    //keys: fast and succeeds_by
     var properties: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
     var skillBoosts: MutableMap<String, MutableSet<String>> = mutableMapOf()
@@ -41,36 +42,52 @@ object CardCache {
         private set
     var tags: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // `Daisy Walker`'s requires `Daisy's Tote Bag`.
     var requiredCards: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // Jim Culver requires Vengeful Shade in the spirit deck.
     var sideDeckRequiredCards: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // `Daisy's Tote Bag` is restrictory to `Daisy Walker`.
     var restrictedTo: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // Advanced requiredCards for an investigator.
     var advanced: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // Replacement requiredCards for an investigator.
     var replacement: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // Roland banks has parallel card "Directive".
     var parallelCards: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // Parallel versions of an investigator.
     var parallel: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // Base version for a parallel investigator.
     var base: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // Revised core "First Aid (3)" is a duplicate of Pallid Mask "First Aid (3)".
     var duplicates: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // Laboratory Assistant is a chapter two reprint of Laboratory Assistant.
     var reprints: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // Any card can have `n` different level version. (e.g. Ancient Stone)
     var level: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // `Hallowed Mirror` has bound `Soothing Melody`.
     var bound: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // `Soothing Melody` is bonded to `Hallowed Mirror`.
     var bonded: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // `Predator or Prey?` is the front for `The Masked Hunter`.
     var fronts: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // Agatha Crane exists both as a mystic and a seeker card.
     var otherVersions: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    // TCU Laboratory Assistant is a baseprint of Laboratory Assistant.
     var basePrints: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
 
@@ -136,7 +153,7 @@ object CardCache {
                 card.typeCode == "investigator" &&
                 card.deckLimit != null &&
                 card.duplicateOfCode == null &&
-                !(card.altArtInvestigator ?: false) &&
+                !card.altArtInvestigator &&
                 card.alternateOfCode == null &&
                 (card.encounterCode.isNullOrEmpty() || card.xp != null)
             ) {
@@ -172,15 +189,11 @@ object CardCache {
             }
 
             val investigatorRestrictions = card.restrictions?.jsonObject["investigator"]?.jsonObject
-            if (investigatorRestrictions != null && !(card.hidden ?: false)) {
+            if (investigatorRestrictions != null && !card.hidden) {
                 // Can have multiple entries (alternate arts).
                 for (key in investigatorRestrictions.keys) {
-                    val investigator = cardsMap[key]
-
-                    if (investigator == null) {
-                        //TODO:log missing investigator to crashlytics
-                        continue
-                    }
+                    val investigator =
+                        cardsMap[key] ?: continue //TODO:log missing investigator to crashlytics
 
                     if (investigator.duplicateOfCode != null) {
                         continue
@@ -249,7 +262,7 @@ object CardCache {
 
             // TODO: there is an edge case with Dream-Gate where the front should show when accessing `06015b` via
             //  a bond, but currently does not.
-            if (!(card.hidden ?: false)) {
+            if (!card.hidden) {
                 val bondedCards = localBonded[card.realName]
                 if (bondedCards != null) {
                     for (bondedCode in bondedCards) {
