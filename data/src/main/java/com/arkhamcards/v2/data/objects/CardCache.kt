@@ -82,7 +82,9 @@ object CardCache {
     var bonded: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
     // `Predator or Prey?` is the front for `The Masked Hunter`.
-    var fronts: MutableMap<String, MutableSet<String>> = mutableMapOf()
+    var fronts: MutableMap<String, String> = mutableMapOf()
+        private set
+    var backs: MutableMap<String, String> = mutableMapOf()
         private set
     // Agatha Crane exists both as a mystic and a seeker card.
     var otherVersions: MutableMap<String, MutableSet<String>> = mutableMapOf()
@@ -113,6 +115,7 @@ object CardCache {
         bound = mutableMapOf()
         bonded = mutableMapOf()
         fronts = mutableMapOf()
+        backs = mutableMapOf()
         otherVersions = mutableMapOf()
         basePrints = mutableMapOf()
     }
@@ -124,7 +127,7 @@ object CardCache {
 
         val localBonded: MutableMap<String, MutableSet<String>> = mutableMapOf()
         val upgrades: MutableMap<String, MutableSet<String>> = mutableMapOf()
-        val backs: MutableMap<String, String> = mutableMapOf()
+        val localBacks: MutableMap<String, String> = mutableMapOf()
         val investigatorsByName: MutableMap<String, MutableSet<String>> = mutableMapOf()
         val canonicalInvestigatorCodes: MutableSet<String> = mutableSetOf()
         val requiredCardCodes: MutableSet<String> = mutableSetOf()
@@ -146,7 +149,7 @@ object CardCache {
             }
 
             card.backLinkId?.let { backLinkId ->
-                backs[backLinkId] = card.code
+                localBacks[backLinkId] = card.code
             }
 
             if (
@@ -289,8 +292,9 @@ object CardCache {
             }
         }
 
-        for ((back, front) in backs) {
-            fronts.addToSet(back, front)
+        for ((back, front) in localBacks) {
+            fronts[back] = front
+            backs[front] = back
         }
 
         for ((investigator, entry) in parallel) {
@@ -465,7 +469,8 @@ object CardCache {
         level = data.level.mapValues { it.value.toMutableSet() }.toMutableMap()
         bound = data.bound.mapValues { it.value.toMutableSet() }.toMutableMap()
         bonded = data.bonded.mapValues { it.value.toMutableSet() }.toMutableMap()
-        fronts = data.fronts.mapValues { it.value.toMutableSet() }.toMutableMap()
+        fronts = data.fronts.toMutableMap()
+        backs = data.backs.toMutableMap()
         otherVersions = data.otherVersions.mapValues { it.value.toMutableSet() }.toMutableMap()
         basePrints = data.basePrints.mapValues { it.value.toMutableSet() }.toMutableMap()
     }

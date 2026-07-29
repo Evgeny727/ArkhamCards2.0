@@ -25,6 +25,7 @@ fun CardCache.toData() = CardCacheData(
     bound = bound,
     bonded = bonded,
     fronts = fronts,
+    backs = backs,
     otherVersions = otherVersions,
     basePrints = basePrints,
 )

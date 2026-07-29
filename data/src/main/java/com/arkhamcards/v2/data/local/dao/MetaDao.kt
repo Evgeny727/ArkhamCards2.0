@@ -2,6 +2,7 @@ package com.arkhamcards.v2.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.RewriteQueriesToDropUnusedColumns
 import androidx.room.Upsert
 import com.arkhamcards.v2.data.local.meta.CycleEntity
 import com.arkhamcards.v2.data.local.meta.EncounterSetEntity
@@ -54,6 +55,7 @@ interface MetaDao {
     @Query("SELECT * FROM taboo_set ORDER BY date DESC")
     fun getTaboos(): Flow<List<TabooSetEntity>>
 
+    @RewriteQueriesToDropUnusedColumns
     @Query("""
         SELECT p.*, c.position as cyclePosition, c.name AS cycleName 
         FROM pack p JOIN cycle c ON p.cycle_code = c.code 

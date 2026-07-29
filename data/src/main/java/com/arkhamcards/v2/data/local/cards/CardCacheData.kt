@@ -24,7 +24,8 @@ data class CardCacheData(
     val level: Map<String, Set<String>> = emptyMap(),
     val bound: Map<String, Set<String>> = emptyMap(),
     val bonded: Map<String, Set<String>> = emptyMap(),
-    val fronts: Map<String, Set<String>> = emptyMap(),
+    val fronts: Map<String, String> = emptyMap(),
+    val backs: Map<String, String> = emptyMap(),
     val otherVersions: Map<String, Set<String>> = emptyMap(),
     val basePrints: Map<String, Set<String>> = emptyMap(),
 )

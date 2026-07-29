@@ -178,7 +178,9 @@ class CardsRepositoryImpl @Inject constructor(
         if (!file.exists()) { return@withContext false }
 
         val data: CardCacheData =
-            file.inputStream().buffered().use(json::decodeFromStream)
+            file.inputStream().buffered().use{
+                json.decodeFromStream<CardCacheData>(it)
+            }
 
         CardCache.load(data)
 
@@ -271,7 +273,7 @@ class CardsRepositoryImpl @Inject constructor(
                         c.pack_position,
                     
                         c.encounter_code,
-                        e.name AS encounterName,
+                        c.encounter_set_name AS encounterName,
                         c.encounter_position,
                     
                         c.cycle_code,
@@ -308,8 +310,6 @@ class CardsRepositoryImpl @Inject constructor(
                         ON c.faction_code = f.code
                     JOIN pack p
                         ON c.pack_code = p.code
-                    LEFT JOIN encounter_set e
-                        ON c.encounter_code = e.code
                     JOIN cycle cy
                         ON c.cycle_code = cy.code
                     CROSS JOIN selected_taboo taboo
