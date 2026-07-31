@@ -153,6 +153,7 @@ fun SingleCard.toEntity(
             0 -> null //Fix taboo set id for original cards which are/were in any taboo set
             else -> taboo_set_id
         },
+        tabooPlaceholder = if (taboo_set_id == 0) true else taboo_placeholder ?: false,
         translation = translation,
         sortByType = sortByTypeOrder(type_code.rawValue, subtype_code),
         sortByFaction = sortByFactionOrder(faction_code, faction2_code),

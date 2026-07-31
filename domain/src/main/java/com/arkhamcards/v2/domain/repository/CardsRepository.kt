@@ -1,9 +1,12 @@
 package com.arkhamcards.v2.domain.repository
 
 import androidx.paging.PagingData
+import com.arkhamcards.v2.domain.model.cards.CardDetailsWithRelations
 import com.arkhamcards.v2.domain.model.cards.CardListItemUiModel
 import com.arkhamcards.v2.domain.model.cards.CardsSearchOptions
 import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
+import com.arkhamcards.v2.domain.model.cards.CodeWithTaboo
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
 interface CardsRepository {
@@ -21,5 +24,16 @@ interface CardsRepository {
         searchOptions: CardsSearchOptions,
         searchPreferences: CardsSearchPreferences
     ): Flow<PagingData<CardListItemUiModel>>
+
+    fun searchPaginatedCardCodesFlow(
+        spoilerState: Boolean,
+        searchOptions: CardsSearchOptions,
+        searchPreferences: CardsSearchPreferences
+    ): Flow<ImmutableList<CodeWithTaboo>>
+
+    fun getCardWithRelationsByCodeFlow(
+        code: String,
+        tabooSetId: Int?,
+    ): Flow<CardDetailsWithRelations>
 
 }

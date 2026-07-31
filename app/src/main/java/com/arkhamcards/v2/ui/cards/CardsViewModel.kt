@@ -9,6 +9,7 @@ import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -103,9 +104,8 @@ class CardsViewModel @Inject constructor(
         }
     }
 
-
-    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
-    val searchResults = combine(
+    @OptIn(FlowPreview::class)
+    private val _searchConfig = combine(
         _spoilerState,
         _searchOptions,
         _cardsSearchPreferences
@@ -117,8 +117,23 @@ class CardsViewModel @Inject constructor(
         )
     }.debounce(200.milliseconds)
         .distinctUntilChanged()
-        .flatMapLatest { (spoilerState, searchOptions, searchPreferences) ->
+
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val searchResults = _searchConfig.flatMapLatest { (spoilerState, searchOptions, searchPreferences) ->
         cardsRepository.searchPaginatedCardsFlow(spoilerState, searchOptions, searchPreferences)
     }.cachedIn(viewModelScope)
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val searchResultCodes = _searchConfig.flatMapLatest { (spoilerState, searchOptions, searchPreferences) ->
+        cardsRepository.searchPaginatedCardCodesFlow(spoilerState, searchOptions, searchPreferences)
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000L),
+        initialValue = persistentListOf()
+    )
+
+    fun getCardDetailsWithRelations(code: String, tabooSetId: Int?) =
+        cardsRepository.getCardWithRelationsByCodeFlow(code, tabooSetId)
 
 }

@@ -47,13 +47,15 @@ import kotlinx.coroutines.flow.collectLatest
 fun CardsScreen(
     viewModel: CardsViewModel,
     emitError: (Throwable) -> Unit,
+    onCardClick: (String) -> Unit,
     innerPadding: PaddingValues,
     modifier: Modifier = Modifier,
 ) {
-    val  spoilerState by viewModel.spoilerState.collectAsState()
+    val spoilerState by viewModel.spoilerState.collectAsState()
     val searchOptions by viewModel.searchOptions.collectAsState()
-    val listState = rememberSaveable(saver = LazyListState.Saver) { LazyListState() }
     val searchResults = viewModel.searchResults.collectAsLazyPagingItems()
+
+    val listState = rememberSaveable(saver = LazyListState.Saver) { LazyListState() }
 
     val density = LocalDensity.current
     val rowHeight = with(density) {
@@ -156,7 +158,9 @@ fun CardsScreen(
                         CardListItem(
                             cardListItem = item.card,
                             rowHeight = rowHeight,
-                            onClick = { /*TODO*/ }
+                            onClick = {
+                                onCardClick(item.card.code)
+                            }
                         )
                     }
                 }

@@ -251,7 +251,7 @@ fun CardListItemSubname(cardListItem: CardListItem) {
             }
         }
 
-        cardListItem.tabooSetId?.let {
+        if (!cardListItem.tabooPlaceholder) cardListItem.tabooSetId?.let {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(2.dp)

@@ -12,23 +12,31 @@ import com.arkhamcards.v2.data.local.cards.CardCacheData
 import com.arkhamcards.v2.data.local.cards.patches.CardPatchRegistry
 import com.arkhamcards.v2.data.mapper.db.toData
 import com.arkhamcards.v2.data.mapper.db.toEntity
+import com.arkhamcards.v2.data.mapper.domain.cards.toDetailsWithPackInfo
+import com.arkhamcards.v2.data.mapper.domain.cards.toDomain
 import com.arkhamcards.v2.data.mapper.domain.cards.withCategoryHeaders
 import com.arkhamcards.v2.data.objects.CardCache
 import com.arkhamcards.v2.data.objects.CardCache.createCache
+import com.arkhamcards.v2.data.objects.CardRelationResolver.buildCardWithRelations
+import com.arkhamcards.v2.data.objects.CardRelationResolver.resolveCardCodesWithRelations
 import com.arkhamcards.v2.data.objects.CardSearchQueryBuilder.buildSortClause
 import com.arkhamcards.v2.data.objects.createSQLSearchQuery
 import com.arkhamcards.v2.data.objects.normalizeForSearch
 import com.arkhamcards.v2.data.remote.CardsRemoteDataSource
+import com.arkhamcards.v2.domain.model.cards.CardDetailsWithRelations
 import com.arkhamcards.v2.domain.model.cards.CardListItemUiModel
 import com.arkhamcards.v2.domain.model.cards.CardsSearchOptions
 import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
+import com.arkhamcards.v2.domain.model.cards.CodeWithTaboo
 import com.arkhamcards.v2.domain.objects.TimestampNormilizer.compareTimestamps
 import com.arkhamcards.v2.domain.objects.TimestampNormilizer.getCurrentDateTime
 import com.arkhamcards.v2.domain.objects.TimestampNormilizer.isAtLeastWeekApart
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -209,10 +217,40 @@ class CardsRepositoryImpl @Inject constructor(
         )
     }
 
-    private fun buildSearchCardsQuery(
+    override fun searchPaginatedCardCodesFlow(
         spoilerState: Boolean,
         searchOptions: CardsSearchOptions,
         searchPreferences: CardsSearchPreferences
+    ): Flow<ImmutableList<CodeWithTaboo>> {
+        val rawQuery = buildSearchCardsQuery(
+            spoilerState,
+            searchOptions,
+            searchPreferences,
+            projection = "code, taboo_set_id"
+        )
+
+        return cardsDao.getSearchedCardCodesRaw(rawQuery).map { it.toDomain() }
+    }
+
+    override fun getCardWithRelationsByCodeFlow(
+        code: String,
+        tabooSetId: Int?
+    ): Flow<CardDetailsWithRelations> {
+        val codes = resolveCardCodesWithRelations(code)
+
+        return cardsDao.getCardsByCodeFlow(codes, tabooSetId)
+            .map { cards ->
+                val detailsWithPackInfoMap = cards.toDetailsWithPackInfo()
+
+                buildCardWithRelations(code, detailsWithPackInfoMap)
+            }
+    }
+
+    private fun buildSearchCardsQuery(
+        spoilerState: Boolean,
+        searchOptions: CardsSearchOptions,
+        searchPreferences: CardsSearchPreferences,
+        projection: String? = null
     ): RoomRawQuery {
         val sortClause = buildSortClause(
             if (spoilerState) searchPreferences.mythosSortOrder else searchPreferences.playerSortOrder,
@@ -256,6 +294,7 @@ class CardsRepositoryImpl @Inject constructor(
                     
                         c.taboo_xp,
                         c.taboo_set_id,
+                        c.taboo_placeholder,
                     
                         c.type_code,
                         t.name AS typeName,
@@ -366,10 +405,10 @@ class CardsRepositoryImpl @Inject constructor(
 
                 ${
                     if (sortClause.isNotEmpty()) {
-                        (if (spoilerState) "SELECT *, MIN(pack_position) OVER (" +
+                        (if (spoilerState) "SELECT ${projection ?: "*"}, MIN(pack_position) OVER (" +
                                 "PARTITION BY encounter_code" +
                                 ") AS encounter_group FROM ranked_cards WHERE duplicate_rank = 1"
-                        else "SELECT * FROM ranked_cards WHERE duplicate_rank = 1") +
+                        else "SELECT ${projection ?: "*"} FROM ranked_cards WHERE duplicate_rank = 1") +
                         " ORDER BY $sortClause"
                     } else ""
                 }
@@ -377,7 +416,7 @@ class CardsRepositoryImpl @Inject constructor(
             onBindStatement = { statement ->
                 var index = 1
                 with(searchPreferences) {
-                    repeat(3) {
+                    repeat(2) {
                         statement.bindInt(index++, tabooSetId)
                     }
                 }

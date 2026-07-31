@@ -7,3 +7,8 @@ object Cards
 
 @Serializable
 object CardsSortScreen
+
+@Serializable
+data class CardDetailsScreen(
+    val cardCode: String
+)

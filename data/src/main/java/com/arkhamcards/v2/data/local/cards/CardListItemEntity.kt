@@ -5,6 +5,7 @@ import androidx.room.Embedded
 
 data class CardListItemEntity(
     val id: String,
+    val code: String,
     val thumbnailurl: String?,
 
     //Cost
@@ -17,6 +18,8 @@ data class CardListItemEntity(
     val tabooXp: Int?,
     @ColumnInfo(name = "taboo_set_id")
     val tabooSetId: Int?,
+    @ColumnInfo(name = "taboo_placeholder")
+    val tabooPlaceholder: Boolean,
 
     //Type
     @ColumnInfo(name = "type_code")

@@ -58,11 +58,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.arkhamcards.v2.AppViewModel
 import com.arkhamcards.v2.CardsCacheState
 import com.arkhamcards.v2.CardsSyncState
 import com.arkhamcards.v2.R
 import com.arkhamcards.v2.ui.campaigns.Campaigns
+import com.arkhamcards.v2.ui.cards.CardDetailsScreen
 import com.arkhamcards.v2.ui.cards.Cards
 import com.arkhamcards.v2.ui.cards.CardsScreen
 import com.arkhamcards.v2.ui.cards.CardsSortScreen
@@ -324,6 +326,9 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                         CardsScreen(
                             viewModel = cardsViewModel,
                             emitError = viewModel::emitError,
+                            onCardClick = { code ->
+                                navController.navigateSingleTop(CardDetailsScreen(code))
+                            },
                             innerPadding = innerPadding
                         )
 
@@ -380,6 +385,33 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                                 iconGlyph = AppIcon.Trash,
                             )
                         }
+                        leftAction = { color ->
+                            ArkhamAppBarAction(
+                                contentColor = color,
+                                onClick = navController::navigateUp,
+                                iconGlyph = AppIcon.ArrowBack,
+                            )
+                        }
+                    }
+                    composable<CardDetailsScreen> { backStackEntry ->
+                        val parentEntry = remember(backStackEntry) {
+                            navController.getBackStackEntry<Cards>()
+                        }
+                        val destination = backStackEntry.toRoute<CardDetailsScreen>()
+
+                        val cardsViewModel: CardsViewModel = hiltViewModel(parentEntry)
+
+                        CardDetailsScreen(
+                            cardCode = destination.cardCode,
+                            cardsViewModel = cardsViewModel,
+                            innerPadding = innerPadding
+                        )
+
+                        title = ""
+                        subtitle = null
+                        color = baseColor
+                        contentColor = baseContentColor
+                        rightActions = null
                         leftAction = { color ->
                             ArkhamAppBarAction(
                                 contentColor = color,

@@ -42,7 +42,7 @@ data class Translation(
     @ColumnInfo("customization_text")
     val customizationText: String?,
     val flavor: String?,
-    val name: String?,
+    val name: String,
     val slot: String?,
     val subname: String?,
     @ColumnInfo("taboo_original_back_text")
@@ -302,6 +302,8 @@ data class CardEntity(
     val tabooXp: Int?,
     @ColumnInfo("taboo_set_id")
     val tabooSetId: Int?,
+    @ColumnInfo("taboo_placeholder")
+    val tabooPlaceholder: Boolean,
 
 
     //Translation

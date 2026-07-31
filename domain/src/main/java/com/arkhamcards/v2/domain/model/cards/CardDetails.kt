@@ -1,0 +1,95 @@
+package com.arkhamcards.v2.domain.model.cards
+
+import com.arkhamcards.v2.domain.enums.CardBackType
+import com.arkhamcards.v2.domain.enums.CardSubType
+import com.arkhamcards.v2.domain.enums.CardType
+import com.arkhamcards.v2.domain.enums.Faction
+
+data class CardDetails(
+    val id: String,
+    val code: String,
+
+    //translated fields
+    val backFlavor: String?,
+    val backName: String?,
+    val backSubname: String?,
+    val backText: String?,
+    val backTraits: String?,
+    val customizationText: String?,
+    val flavor: String?,
+    val name: String,
+    val slot: String?,
+    val subname: String?,
+    val tabooOriginalBackText: String?,
+    val tabooOriginalText: String?,
+    val text: String?,
+    val traits: String?,
+    val encounterSetName: String?,
+
+    val backIllustrator: String?,
+    val backType: CardBackType,
+    val clues: Int?,
+    val cluesFixed: Boolean,
+    val cost: String?,
+    val doom: Int?,
+    val doomPerInvestigator: Boolean,
+    val doubleSided: Boolean,
+    val duplicateOfCode: String?,
+    val encounterPosition: Int?,
+    val enemyDamage: Int?,
+    val enemyHorror: Int?,
+    val enemyFight: Int?,
+    val enemyFightPerInvestigator: Boolean,
+    val enemyEvade: Int?,
+    val enemyEvadePerInvestigator: Boolean,
+    val faction: Faction,
+    val faction2: Faction?,
+    val faction3: Faction?,
+    val health: Int?,
+    val healthPerInvestigator: Boolean,
+    val illustrator: String?,
+    val isUnique: Boolean,
+    val official: Boolean,
+    val packCode: String,
+    val packName: String,
+    val packPosition: Int,
+    val parallel: Boolean,
+    val permanent: Boolean,
+    val reprintPackCode: String?,
+    val reprintPackName: String?,
+    val realSlot: String?,
+    val sanity: Int?,
+    val shroud: Int?,
+    val shroudPerInvestigator: Boolean,
+    val skillWillpower: Int?,
+    val skillIntellect: Int?,
+    val skillCombat: Int?,
+    val skillAgility: Int?,
+    val skillWild: Int?,
+    val stage: Int?,
+    val subType: CardSubType?,
+    val subTypeName: String?,
+    val xp: Int?,
+    val vengeance: Int?,
+    val victory: Int?,
+    val quantity: Int,
+    val type: CardType,
+    val typeName: String,
+
+    //image fields
+    val thumbnailUrl: String?,
+    val imageUrl: String?,
+    val backImageUrl: String?,
+
+    val tabooXp: Int?,
+    val tabooPlaceholder: Boolean,
+)
+
+data class CardPackInfo(
+    val code: String,
+    val reprintCode: String?,
+    val name: String,
+    val reprintName: String?,
+    val quantity: Int,
+    val position: Int,
+)

@@ -42,6 +42,7 @@ object CardCache {
         private set
     var tags: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+
     // `Daisy Walker`'s requires `Daisy's Tote Bag`.
     var requiredCards: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
@@ -93,6 +94,9 @@ object CardCache {
     var basePrints: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
 
+    //All card's relations by code
+    var relationsCache: MutableMap<String, List<String>> = mutableMapOf()
+
     private fun clearCache() {
         traits = mutableMapOf()
         actions = mutableMapOf()
@@ -118,7 +122,14 @@ object CardCache {
         backs = mutableMapOf()
         otherVersions = mutableMapOf()
         basePrints = mutableMapOf()
+        relationsCache = mutableMapOf()
     }
+
+    private data class Upgrade(
+        val code: String,
+        val subname: String?,
+        val xp: Int,
+    )
 
     suspend fun createCache(cardsList: List<CardEntity>) = withContext(Dispatchers.Default) {
         clearCache()
@@ -126,7 +137,7 @@ object CardCache {
         val cardsMap = cardsList.associateBy { it.id }
 
         val localBonded: MutableMap<String, MutableSet<String>> = mutableMapOf()
-        val upgrades: MutableMap<String, MutableSet<String>> = mutableMapOf()
+        val upgrades: MutableMap<String, MutableSet<Upgrade>> = mutableMapOf()
         val localBacks: MutableMap<String, String> = mutableMapOf()
         val investigatorsByName: MutableMap<String, MutableSet<String>> = mutableMapOf()
         val canonicalInvestigatorCodes: MutableSet<String> = mutableSetOf()
@@ -137,7 +148,14 @@ object CardCache {
             addIndices(card)
 
             if ((card.xp ?: -1) >= 0) {
-                upgrades.addToSet(card.realName, card.code)
+                var xp = card.xp ?: 0
+                if (card.exceptional) xp *= 2
+
+                upgrades.addToSet(card.realName, Upgrade(
+                    card.code,
+                    card.realSubname,
+                    xp
+                ))
             }
 
             val bondedMatch = BONDED_REGEX.find(card.realText.orEmpty())
@@ -252,13 +270,12 @@ object CardCache {
             }
 
             if (card.xp != null) {
-                val cardUpgrades = upgrades[card.realName]
-                if (cardUpgrades != null) {
-                    for (upgrade in cardUpgrades) {
-                        if (card.code != upgrade) {
-                            level.addToSet(card.code, upgrade)
-                            level.addToSet(upgrade, card.code)
-                        }
+                upgrades[card.realName]?.forEach { upgrade ->
+                    if (card.code != upgrade.code &&
+                        (card.xp != upgrade.xp || card.realSubname != upgrade.subname)
+                        ) {
+                            level.addToSet(card.code, upgrade.code)
+                            level.addToSet(upgrade.code, card.code)
                     }
                 }
             }
@@ -370,6 +387,13 @@ object CardCache {
         getOrPut(key) { mutableSetOf() }.add(value)
     }
 
+    private fun MutableMap<String, MutableSet<Upgrade>>.addToSet(
+        key: String,
+        value: Upgrade
+    ) {
+        getOrPut(key) { mutableSetOf() }.add(value)
+    }
+
     private fun indexByTraits(card: CardEntity) {
         val cardTraits = (card.realTraits ?: "") + (card.realBackTraits ?: "")
         if (cardTraits.isBlank()) return
@@ -448,6 +472,10 @@ object CardCache {
         }
     }
 
+    fun setRelationsByCode(code: String, relations: Set<String>) {
+        relationsCache[code] = relations.toList()
+    }
+
     fun load(data: CardCacheData) {
         traits = data.traits.mapValues { it.value.toMutableSet() }.toMutableMap()
         actions = data.actions.mapValues { it.value.toMutableSet() }.toMutableMap()
@@ -473,5 +501,6 @@ object CardCache {
         backs = data.backs.toMutableMap()
         otherVersions = data.otherVersions.mapValues { it.value.toMutableSet() }.toMutableMap()
         basePrints = data.basePrints.mapValues { it.value.toMutableSet() }.toMutableMap()
+        relationsCache = data.relationsCache.toMutableMap()
     }
 }

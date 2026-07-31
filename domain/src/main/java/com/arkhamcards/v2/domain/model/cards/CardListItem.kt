@@ -6,6 +6,7 @@ import com.arkhamcards.v2.domain.enums.Faction
 
 data class CardListItem(
     val id: String,
+    val code: String,
     val thumbnailUrl: String?,
 
     //Cost
@@ -17,6 +18,7 @@ data class CardListItem(
     //Taboo
     val tabooXp: Int?,
     val tabooSetId: Int?,
+    val tabooPlaceholder: Boolean,
 
     //Type
     val type: CardType,
