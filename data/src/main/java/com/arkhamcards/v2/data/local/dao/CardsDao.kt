@@ -48,11 +48,12 @@ interface CardsDao {
         )
         
         SELECT c.*, p.name AS packName, rp.name AS reprintPackName, 
-            st.name AS subTypeName, t.name AS typeName FROM card c 
+            st.name AS subTypeName, t.name AS typeName, e.name AS encounterName FROM card c 
         JOIN card_type t ON c.type_code = t.code
         LEFT JOIN card_subtype st ON c.subtype_code = st.code
         JOIN pack p ON c.pack_code = p.code
         LEFT JOIN pack rp ON c.reprint_pack_code = rp.code
+        LEFT JOIN encounter_set e ON c.encounter_code = e.code
         CROSS JOIN selected_taboo taboo
         WHERE c.code IN (:codes) AND (
             -- No taboo selected -> originals only

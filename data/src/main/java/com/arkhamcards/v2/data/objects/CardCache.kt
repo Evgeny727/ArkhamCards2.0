@@ -398,7 +398,7 @@ object CardCache {
         val cardTraits = (card.realTraits ?: "") + (card.realBackTraits ?: "")
         if (cardTraits.isBlank()) return
         for (trait in cardTraits.split(".")) {
-            traits.addToSet(trait, card.id)
+            traits.addToSet(trait.trim(), card.id)
         }
     }
 

@@ -138,5 +138,4 @@ fragment CoreCardText on all_card_text {
   taboo_text_change
   text
   traits
-  encounter_name
 }

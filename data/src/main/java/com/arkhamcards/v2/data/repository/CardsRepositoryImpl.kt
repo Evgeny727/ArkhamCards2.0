@@ -312,7 +312,7 @@ class CardsRepositoryImpl @Inject constructor(
                         c.pack_position,
                     
                         c.encounter_code,
-                        c.encounter_set_name AS encounterName,
+                        e.name AS encounterName,
                         c.encounter_position,
                     
                         c.cycle_code,
@@ -351,6 +351,8 @@ class CardsRepositoryImpl @Inject constructor(
                         ON c.pack_code = p.code
                     JOIN cycle cy
                         ON c.cycle_code = cy.code
+                    LEFT JOIN encounter_set e
+                        ON c.encounter_code = e.code
                     CROSS JOIN selected_taboo taboo
                     WHERE c.encounter_code IS ${if (spoilerState) "NOT NULL" else "NULL"} 
                     ${ if (searchPreferences.ignoreCollection) "" 

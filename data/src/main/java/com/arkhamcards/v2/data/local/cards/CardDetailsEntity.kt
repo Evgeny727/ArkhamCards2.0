@@ -29,8 +29,6 @@ data class CardDetailsEntity(
     val tabooOriginalText: String?,
     val text: String?,
     val traits: String?,
-    @ColumnInfo("encounter_set_name")
-    val encounterSetName: String?,
 
     @ColumnInfo("back_illustrator")
     val backIllustrator: String?,
@@ -47,8 +45,11 @@ data class CardDetailsEntity(
     val doubleSided: Boolean,
     @ColumnInfo("duplicate_of_code")
     val duplicateOfCode: String?,
+    @ColumnInfo("encounter_code")
+    val encounterCode: String?,
     @ColumnInfo("encounter_position")
     val encounterPosition: Int?,
+    val encounterName: String?,
     @ColumnInfo("enemy_damage")
     val enemyDamage: Int?,
     @ColumnInfo("enemy_horror")

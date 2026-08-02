@@ -24,7 +24,6 @@ data class CardDetails(
     val tabooOriginalText: String?,
     val text: String?,
     val traits: String?,
-    val encounterSetName: String?,
 
     val backIllustrator: String?,
     val backType: CardBackType,
@@ -35,7 +34,9 @@ data class CardDetails(
     val doomPerInvestigator: Boolean,
     val doubleSided: Boolean,
     val duplicateOfCode: String?,
+    val encounterCode: String?,
     val encounterPosition: Int?,
+    val encounterName: String?,
     val enemyDamage: Int?,
     val enemyHorror: Int?,
     val enemyFight: Int?,

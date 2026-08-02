@@ -221,7 +221,6 @@ fun CoreCardText?.toTranslation(card: SingleCard): Translation = Translation(
     tabooTextChange = this?.taboo_text_change ?: card.real_taboo_text_change,
     text = this?.text ?: card.real_text,
     traits = this?.traits ?: card.real_traits,
-    encounterSetName = this?.encounter_name ?: card.real_encounter_set_name
 )
 
 /**
