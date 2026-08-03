@@ -605,7 +605,7 @@
     <string name="upgrade_version_available_xp">Aggiornamento %s: %s PE</string>
     <string name="delete_broken_deck">Elimina il mazzo danneggiato</string>
     <string name="error_loading_deck">Sembra che per qualche ragione abbiamo dei problemi a caricare questo mazzo</string>
-    <string name="parallel">Parallelo</string>
+    <string name="parallel_investigator">Parallelo</string>
     <string name="random_location">Luogo casuale</string>
     <string name="draw_location">Pesca un luogo</string>
     <string name="switch_campaign">Cambia la campagna</string>

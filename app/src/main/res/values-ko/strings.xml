@@ -249,7 +249,7 @@
     <string name="deck_size_selected_at_creation_time">참고: 덱 크기는 덱을 생성하는 시점에서 선택하여야 하며, 시나리오 도중 변경할 수 없습니다.</string>
     <string name="select_faction">역할군 선택</string>
     <string name="secondary_faction_selected_at_creation_time">참고: 부 역할군은 덱을 생성하는 시점에서 선택하여야 하며, 시나리오 도중 변경할 수 없습니다.</string>
-    <string name="parallel">평행</string>
+    <string name="parallel_investigator">평행</string>
     <string name="card_costs">카드 비용</string>
     <string name="card_factions">카드 역할군</string>
     <string name="base_version_deck_xp">기본 버전\n경험치 %s점</string>

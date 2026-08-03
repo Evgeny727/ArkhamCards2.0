@@ -252,7 +252,7 @@ val DarkColorScheme = CustomColors(
             invertedText = MythosLightText,
             text = MythosDarkText,
             border = MythosDarkText,
-            background = Light30,
+            background = Color(0xFF444444),
             darkBackground = Color(0xFF000000),
             lightBackground = Color(0xFF000000)
         )

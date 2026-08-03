@@ -610,7 +610,7 @@
     <string name="upgrade_version_available_xp">Amélioration %s : %s XP</string>
     <string name="delete_broken_deck">Supprimer les decks corrompus</string>
     <string name="error_loading_deck">Il semble que nous ayons des problème pour charger ce deck</string>
-    <string name="parallel">Parallèle</string>
+    <string name="parallel_investigator">Parallèle</string>
     <string name="random_location">Lieu aléatoire</string>
     <string name="draw_location">Piocher un lieu</string>
     <string name="switch_campaign">Changer de campagne</string>

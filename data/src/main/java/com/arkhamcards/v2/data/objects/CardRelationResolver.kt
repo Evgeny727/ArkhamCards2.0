@@ -149,7 +149,8 @@ object CardRelationResolver {
                     RelationType.Replacement
                 )
 
-                val duplicateCodes = getRelations(rootCode, RelationType.Duplicates)
+                val duplicateCodes = getRelations(rootCode, RelationType.Duplicates) +
+                        getRelations(rootCode, RelationType.Bound) + getRelations(rootCode, RelationType.Bonded)
 
                 val seenCodes = mutableSetOf<String>()
 

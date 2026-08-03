@@ -197,13 +197,13 @@ object CardCache {
 
         // second pass: construct lookup tables.
         for (card in cardsList) {
-            card.deckRequirements?.jsonObject["card"]?.jsonArray?.forEach {
+            card.deckRequirements?.jsonObject["card"]?.jsonArray?.firstOrNull()?.let {
                 it.jsonArray.forEach { code ->
                     requiredCards.addToSet(card.code, code.jsonPrimitive.content)
                 }
             }
 
-            card.sideDeckRequirements?.jsonObject["card"]?.jsonArray?.forEach {
+            card.sideDeckRequirements?.jsonObject["card"]?.jsonArray?.firstOrNull()?.let {
                 it.jsonArray.forEach { code ->
                     sideDeckRequiredCards.addToSet(card.code, code.jsonPrimitive.content)
                 }

@@ -313,7 +313,9 @@
     <string name="the_circle_undone">Нарушенный Круг</string>
     <string name="the_dreameaters">Пожиратели снов</string>
     <string name="the_innsmouth_conspiracy">Заговор в Инсмуте</string>
-    <string name="parallel">Альтернативные</string>
+    <string name="parallel_investigator">Альтернативный сыщик</string>
+    <string name="base_investigator">Оригинальный сыщик</string>
+    <string name="other_versions">Другие версии</string>
     <string name="sort_by">Сортировка</string>
     <string name="pack">Доп</string>
     <string name="title">Название</string>
@@ -361,6 +363,11 @@
     <string name="warning_card_contains_possible_spoilers_for_pack">Внимание: эта карта может содержать спойлеры к ‘%s’.</string>
     <string name="alternate_cards">Альтернативные карты</string>
     <string name="advanced_cards">Продвинутые карты</string>
+    <string name="parallel_cards">Альтернативные карты</string>
+    <string name="replacement_cards">Продвинутые карты</string>
+    <string name="side_required_cards">Дополнительные карты</string>
+    <string name="other_level_cards">Другие уровни</string>
+    <string name="other_signature_cards">Другие персональные карты</string>
     <string name="test_icons">Символы навыков: </string>
     <string name="doom_doom">Безысходность: %s</string>
     <string name="per_investigator_clues">Улики: %s%s</string>
@@ -1422,6 +1429,7 @@
     <string name="player">Игрок</string>
     <string name="barkham_horror">Ужас Гавкхэма</string>
     <string name="show_all_available_cards_for_parallel">Альтернативный кардпул</string>
+    <string name="show_all_available_cards_for_base">Оригинальный кардпул</string>
     <string name="show_fanmade_cards">Неканоничные карты</string>
     <string name="reset_onboarding">Сбросить обучение</string>
     <string name="signing_arkham_cards_description">Подключение аккаунта Arkham Cards позволит вам синхронизировать данные кампаний между устройствами, а также делиться текущим прогрессом кампаний с другими игроками, участвующими в ней.</string>

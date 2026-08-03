@@ -601,7 +601,9 @@
     <string name="upgrade_version_available_xp">Upgrade %s: %s XP</string>
     <string name="delete_broken_deck">Delete broken deck</string>
     <string name="error_loading_deck">Looks like we are having trouble loading this deck for some reason</string>
-    <string name="parallel">Parallel</string>
+    <string name="parallel_investigator">Parallel</string>
+    <string name="base_investigator">Base</string>
+    <string name="other_versions">Other versions</string>
     <string name="random_location">Random location</string>
     <string name="draw_location">Draw location</string>
     <string name="switch_campaign">Switch campaign</string>
@@ -1378,6 +1380,7 @@
     <string name="player">Player</string>
     <string name="barkham_horror">Barkham Horror</string>
     <string name="show_all_available_cards_for_parallel">Show all available cards for parallel</string>
+    <string name="show_all_available_cards_for_base">Show all available cards for base</string>
     <string name="show_fanmade_cards">Show fan-made cards</string>
     <string name="reset_onboarding">Reset onboarding</string>
     <string name="signing_arkham_cards_description">Signing into Arkham Cards will let you backup your campaigns between your devices and share in-progress campaigns with other friends.</string>
@@ -1698,6 +1701,10 @@
     <string name="error_more_offclass_card_than_the_number_of_weaknesses_in_your_deck_and_bonded_cards">More off-class card than the number of weaknesses in your deck and bonded cards.</string>
     <string name="concealed">Concealed</string>
     <string name="parallel_cards">Parallel Cards</string>
+    <string name="replacement_cards">Replacement Cards</string>
+    <string name="side_required_cards">Additional Required Cards</string>
+    <string name="other_level_cards">Other Levels</string>
+    <string name="other_signature_cards">Other Signature Cards</string>
     <string name="heart_of_darkness">Heart of Darkness</string>
     <string name="information_on_kurtz">Information on Kurtz</string>
     <string name="return_but_donotremove_bless_curse_tokens">Return, but %s %s / %s tokens</string>

@@ -418,7 +418,7 @@ class CardsRepositoryImpl @Inject constructor(
             onBindStatement = { statement ->
                 var index = 1
                 with(searchPreferences) {
-                    repeat(2) {
+                    repeat(3) {
                         statement.bindInt(index++, tabooSetId)
                     }
                 }
@@ -482,7 +482,7 @@ class CardsRepositoryImpl @Inject constructor(
     }
 }
 
-data class SqlSearchOptions(
+private data class SqlSearchOptions(
     val sqlQuery: String = "",
     val searchFieldsQuery: String = "",
     val searchFieldsAmount: Int = 0

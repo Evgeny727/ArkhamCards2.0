@@ -624,7 +624,7 @@
     <string name="upgrade_version_available_xp">Ulepsz %s: %s XP</string>
     <string name="delete_broken_deck">Usuń uszkodzoną talię</string>
     <string name="error_loading_deck">Wygląda na to, że z jakiegoś powodu mamy problem z załadowaniem tej talii</string>
-    <string name="parallel">Z równoległego świata</string>
+    <string name="parallel_investigator">Z równoległego świata</string>
     <string name="random_location">Losowa lokalizacja</string>
     <string name="draw_location">Dobierz lokalizację</string>
     <string name="switch_campaign">Przełącz kampanię</string>

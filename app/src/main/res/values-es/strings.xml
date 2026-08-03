@@ -607,7 +607,7 @@
     <string name="upgrade_version_available_xp">Mejora %s: %s XP</string>
     <string name="delete_broken_deck">Eliminar mazo roto</string>
     <string name="error_loading_deck">Parece que existen dificultades para cargar este mazo</string>
-    <string name="parallel">Paralelo</string>
+    <string name="parallel_investigator">Paralelo</string>
     <string name="random_location">Lugar aleatorio</string>
     <string name="draw_location">Roba un lugar</string>
     <string name="switch_campaign">Cambiar campaña</string>

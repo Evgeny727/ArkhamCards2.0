@@ -80,7 +80,7 @@ fun CardListItem(
                 }
 
                 with(cardListItem) {
-                    CardIcon(xp, type, subType, faction, faction2, factionColor, realCost, packCode, encounterCode)
+                    CardIcon(xp, type, subType, faction, faction2, factionColor, realCost, encounterCode)
                 }
 
                 CardListItemName(cardListItem, factionColor, invalid)

@@ -595,7 +595,7 @@
     <string name="delete_broken_deck">Beschädigtes Deck löschen</string>
     <string name="error_loading_deck">Scheinbar gibt es Probleme beim Laden dieses Decks</string>
     <string name="delete_deck">Deck löschen</string>
-    <string name="parallel">Parallel</string>
+    <string name="parallel_investigator">Parallel</string>
     <string name="random_location">Zufälliger Ort</string>
     <string name="draw_location">Ort ziehen</string>
     <string name="switch_campaign">Kampagne wechseln</string>

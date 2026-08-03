@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,6 +22,7 @@ import com.arkhamcards.v2.ui.theme.CustomTheme
 import com.arkhamcards.v2.ui.theme.FactionColors
 import com.arkhamcards.v2.ui.utils.appSp
 
+@Stable
 internal fun iconScaleFactor(scaleFactor: Float) = (scaleFactor - 1) / 2 + 1
 
 @Composable
@@ -32,7 +34,6 @@ fun CardIcon(
     faction2: Faction?,
     factionColor: FactionColors,
     cost: String?,
-    packCode: String,
     encounterCode: String?,
     inverted: Boolean = false
 ) {
@@ -41,7 +42,7 @@ fun CardIcon(
 
     Box(contentAlignment = Alignment.Center) {
         if (showCost) CardCostIcon(xp, type, subType, faction, faction2, factionColor, cost, inverted, iconScaleFactor)
-        else CardFactionIcon(type, subType,faction, faction2, factionColor, packCode, encounterCode, iconScaleFactor)
+        else CardFactionIcon( subType, faction, faction2, factionColor, encounterCode, iconScaleFactor)
     }
 }
 
@@ -110,36 +111,28 @@ fun CardCostIcon(
 
 @Composable
 fun CardFactionIcon(
-    type: CardType,
     subType: CardSubType?,
     faction: Faction,
     faction2: Faction?,
     factionColor: FactionColors,
-    packCode: String,
     encounterCode: String?,
     iconScaleFactor: Float
 ) {
-    if (encounterCode != null) {
-        EncounterIcon(
-            iconCode = encounterCode,
-            iconSize = 32.appSp(iconScaleFactor),
-            iconColor = CustomTheme.colors.darkText,
-        )
-    } else if (subType == CardSubType.BasicWeakness || subType == CardSubType.Weakness) {
+    if (subType == CardSubType.BasicWeakness || subType == CardSubType.Weakness) {
         Text(
             text = AppIcon.Weakness.glyph,
             fontFamily = AppIconsFont,
             fontSize = 32.appSp(iconScaleFactor),
             color = CustomTheme.colors.faction.neutral.text,
         )
-    } else if (type == CardType.Scenario || type == CardType.Story) {
+    } else if (encounterCode != null) {
         EncounterIcon(
-            iconCode = packCode,
+            iconCode = encounterCode,
             iconSize = 32.appSp(iconScaleFactor),
-            iconColor = CustomTheme.colors.darkText
+            iconColor = CustomTheme.colors.darkText,
         )
     } else {
-        val factionIcon = factionIcon(faction, faction2, null)
+        val factionIcon = factionIcon(faction, faction2)
         Text(
             text = factionIcon.glyph,
             fontFamily = factionIcon.fontFamily,

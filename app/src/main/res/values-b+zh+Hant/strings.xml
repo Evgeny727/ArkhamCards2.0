@@ -581,7 +581,7 @@
     <string name="delete_broken_deck">刪除毀損的牌組</string>
     <string name="error_loading_deck">讀取此牌組時遭遇不明原因的失敗</string>
     <string name="delete_deck">刪除牌組</string>
-    <string name="parallel">平行調查員</string>
+    <string name="parallel_investigator">平行調查員</string>
     <string name="random_location">隨機地點</string>
     <string name="draw_location">抽取地點卡</string>
     <string name="switch_campaign">切換劇本</string>
