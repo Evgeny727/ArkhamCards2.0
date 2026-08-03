@@ -670,7 +670,7 @@ enum class PackIcon(
     PeopleOfArkham("people_of_arkham", 0xEB7F),
     QueenOfAsh("queen_of_ash", 0xEB80),
     ReekingDecay("reeking_decay", 0xEB81),
-    Sewers("sewers", 0xEB82),
+    ArkhamSewers("arkham_sewers", 0xEB82),
     SmokeAndMirrors("smoke_and_mirrors", 0xEB83),
     SpreadingFlames("spreading_flames", 0xEB84),
     Torment("torment", 0xEB85),
