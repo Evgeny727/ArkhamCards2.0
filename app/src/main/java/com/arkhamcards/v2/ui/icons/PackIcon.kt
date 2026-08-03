@@ -524,7 +524,7 @@ enum class PackIcon(
     FortunesChosen("fortunes_chosen", 0xEAEC),
     FortuneAndFolly("fortune_and_folly", 0xEAED),
     Roulette("roulette", 0xEAEE),
-    Meddling("meddling", 0xEAEF),
+    MeddlingOfMeowlathotep("meddling_of_meowlathotep", 0xEAEF),
     BarkhamHorror("barkham_horror", 0xEAF0),
     DeathOfTheStars("death_of_the_stars", 0xEAF1),
     AssimilatingSwarm("assimilating_swarm", 0xEAF2),
@@ -556,7 +556,6 @@ enum class PackIcon(
     Carnevale("carnevale", 0xEB0C),
     CurseOfTheRougarou("curse_of_the_rougarou", 0xEB0D),
     TheBayou("the_bayou", 0xEB0E),
-    Blob("blob", 0xEB0F),
     Novella("novella", 0xEB10),
     Blbe("blbe", 0xEB11),
     BlobThatAteEverythingElse("blob_that_ate_everything_else", 0xEB12),
@@ -693,7 +692,6 @@ enum class PackIcon(
             "win" -> Winifred
             "jac" -> Jacqueline
             "ste" -> Stella
-            "meddling_of_meowlathotep" -> Meddling
             "zbh" -> BarkhamHorror
             "boa" -> Core2026
             "tom" -> Tommy
