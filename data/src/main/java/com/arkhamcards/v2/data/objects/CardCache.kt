@@ -134,7 +134,7 @@ object CardCache {
     suspend fun createCache(cardsList: List<CardEntity>) = withContext(Dispatchers.Default) {
         clearCache()
 
-        val cardsMap = cardsList.associateBy { it.id }
+        val cardsMap = cardsList.associateBy { it.code }
 
         val localBonded: MutableMap<String, MutableSet<String>> = mutableMapOf()
         val upgrades: MutableMap<String, MutableSet<Upgrade>> = mutableMapOf()
@@ -213,8 +213,12 @@ object CardCache {
             if (investigatorRestrictions != null && !card.hidden) {
                 // Can have multiple entries (alternate arts).
                 for (key in investigatorRestrictions.keys) {
-                    val investigator =
-                        cardsMap[key] ?: continue //TODO:log missing investigator to crashlytics
+                    val investigator = cardsMap[key]
+
+                    if (investigator == null) {
+                        //TODO:log missing investigator to crashlytics
+                        continue
+                    }
 
                     if (investigator.duplicateOfCode != null) {
                         continue

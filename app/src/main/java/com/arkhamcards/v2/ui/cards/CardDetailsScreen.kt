@@ -61,6 +61,7 @@ fun CardDetailsScreen(
             item.code,
             item.tabooSetId
         ).collectAsState(null)
+
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -193,6 +194,33 @@ fun CardDetailsScreen(
                             isBase = !isBase
                         ) {
                             /*TODO:Create new deck*/
+                        }
+                    }
+                }
+
+                if (!cardDetailsWithRelations?.cardRelations?.restrictedTo.isNullOrEmpty()) {
+                    item("restricte_to_header", contentType = "header") {
+                        CardDetailsSectionHeader(
+                            title = stringResource(R.string.restricted_to),
+                            normalCase = false
+                        )
+                    }
+
+                    cardDetailsWithRelations?.cardRelations?.restrictedTo?.forEach { restrictedTo ->
+                        restrictedTo.run {
+                            item(
+                                key = "restricted_to_${cardDetails.id}",
+                                contentType = "card_details"
+                            ) {
+                                ArkhamRoundedFactionCard(
+                                    faction = if (cardDetails.faction2 != null) Faction.Dual
+                                    else cardDetails.faction,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    header = {
+                                        CardDetailsHeader(cardDetails)
+                                    }
+                                ) { }
+                            }
                         }
                     }
                 }

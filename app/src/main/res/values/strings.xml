@@ -1705,6 +1705,7 @@
     <string name="side_required_cards">Additional Required Cards</string>
     <string name="other_level_cards">Other Levels</string>
     <string name="other_signature_cards">Other Signature Cards</string>
+    <string name="restricted_to">Restricted To</string>
     <string name="heart_of_darkness">Heart of Darkness</string>
     <string name="information_on_kurtz">Information on Kurtz</string>
     <string name="return_but_donotremove_bless_curse_tokens">Return, but %s %s / %s tokens</string>

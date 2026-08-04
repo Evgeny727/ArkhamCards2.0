@@ -368,6 +368,7 @@
     <string name="side_required_cards">Дополнительные карты</string>
     <string name="other_level_cards">Другие уровни</string>
     <string name="other_signature_cards">Другие персональные карты</string>
+    <string name="restricted_to">Привязано к</string>
     <string name="test_icons">Символы навыков: </string>
     <string name="doom_doom">Безысходность: %s</string>
     <string name="per_investigator_clues">Улики: %s%s</string>
