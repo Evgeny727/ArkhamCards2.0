@@ -504,6 +504,6 @@ object CardCache {
         backs = data.backs.toMutableMap()
         otherVersions = data.otherVersions.mapValues { it.value.toMutableSet() }.toMutableMap()
         basePrints = data.basePrints.mapValues { it.value.toMutableSet() }.toMutableMap()
-        relationsCache = data.relationsCache.toMutableMap()
+        relationsCache = mutableMapOf()
     }
 }

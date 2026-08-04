@@ -28,5 +28,4 @@ fun CardCache.toData() = CardCacheData(
     backs = backs,
     otherVersions = otherVersions,
     basePrints = basePrints,
-    relationsCache = relationsCache,
 )

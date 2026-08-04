@@ -28,5 +28,4 @@ data class CardCacheData(
     val backs: Map<String, String> = emptyMap(),
     val otherVersions: Map<String, Set<String>> = emptyMap(),
     val basePrints: Map<String, Set<String>> = emptyMap(),
-    val relationsCache: Map<String, List<String>> = emptyMap(),
 )
