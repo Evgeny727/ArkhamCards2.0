@@ -10,22 +10,27 @@ data class CardDetailsWithRelations(
 
 data class CardRelations(
 
-    val bound: ImmutableList<CardDetailsWithPackInfo>,
-    val bonded: ImmutableList<CardDetailsWithPackInfo>,
+    val bound: ImmutableList<RelatedCard>,
+    val bonded: ImmutableList<RelatedCard>,
 
-    val restrictedTo: ImmutableList<CardDetailsWithPackInfo>,
+    val restrictedTo: ImmutableList<RelatedCard>,
 
-    val parallel: CardDetailsWithPackInfo?,
-    val base: CardDetailsWithPackInfo?,
+    val parallel: RelatedCard?,
+    val base: RelatedCard?,
 
-    val advanced: ImmutableList<CardDetailsWithPackInfo>,
-    val replacement: ImmutableList<CardDetailsWithPackInfo>,
-    val requiredCards: ImmutableList<CardDetailsWithPackInfo>,
-    val sideDeckRequiredCards: ImmutableList<CardDetailsWithPackInfo>,
-    val parallelCards: ImmutableList<CardDetailsWithPackInfo>,
-    val otherVersions: ImmutableList<CardDetailsWithPackInfo>,
-    val level: ImmutableList<CardDetailsWithPackInfo>,
-    val otherSignatures: ImmutableList<CardDetailsWithPackInfo>,
+    val advanced: ImmutableList<RelatedCard>,
+    val replacement: ImmutableList<RelatedCard>,
+    val requiredCards: ImmutableList<RelatedCard>,
+    val sideDeckRequiredCards: ImmutableList<RelatedCard>,
+    val parallelCards: ImmutableList<RelatedCard>,
+    val otherVersions: ImmutableList<RelatedCard>,
+    val level: ImmutableList<RelatedCard>,
+    val otherSignatures: ImmutableList<RelatedCard>,
+)
+
+data class RelatedCard(
+    val details: CardDetailsWithPackInfo,
+    val backDetails: CardDetailsWithPackInfo? = null,
 )
 
 data class CardDetailsWithPackInfo(

@@ -4,6 +4,7 @@ import com.arkhamcards.v2.domain.enums.CardType
 import com.arkhamcards.v2.domain.model.cards.CardDetailsWithPackInfo
 import com.arkhamcards.v2.domain.model.cards.CardDetailsWithRelations
 import com.arkhamcards.v2.domain.model.cards.CardRelations
+import com.arkhamcards.v2.domain.model.cards.RelatedCard
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
@@ -35,6 +36,10 @@ object CardRelationResolver {
             result += currentCode
 
             CardCache.backs[currentCode]?.let {
+                stack.addLast(Node(it, true))
+            }
+
+            CardCache.fronts[currentCode]?.let {
                 stack.addLast(Node(it, true))
             }
 
@@ -110,17 +115,17 @@ object CardRelationResolver {
         }
 
 
-        var restrictedTo: ImmutableList<CardDetailsWithPackInfo> = persistentListOf()
-        var parallel: CardDetailsWithPackInfo? = null
-        var base: CardDetailsWithPackInfo? = null
-        var advanced: ImmutableList<CardDetailsWithPackInfo> = persistentListOf()
-        var replacement: ImmutableList<CardDetailsWithPackInfo> = persistentListOf()
-        var requiredCards: ImmutableList<CardDetailsWithPackInfo> = persistentListOf()
-        var sideDeckRequiredCards: ImmutableList<CardDetailsWithPackInfo> = persistentListOf()
-        var parallelCards: ImmutableList<CardDetailsWithPackInfo> = persistentListOf()
-        var otherVersions: ImmutableList<CardDetailsWithPackInfo> = persistentListOf()
-        var level: ImmutableList<CardDetailsWithPackInfo> = persistentListOf()
-        var otherSignatures: ImmutableList<CardDetailsWithPackInfo> = persistentListOf()
+        var restrictedTo: ImmutableList<RelatedCard> = persistentListOf()
+        var parallel: RelatedCard? = null
+        var base: RelatedCard? = null
+        var advanced: ImmutableList<RelatedCard> = persistentListOf()
+        var replacement: ImmutableList<RelatedCard> = persistentListOf()
+        var requiredCards: ImmutableList<RelatedCard> = persistentListOf()
+        var sideDeckRequiredCards: ImmutableList<RelatedCard> = persistentListOf()
+        var parallelCards: ImmutableList<RelatedCard> = persistentListOf()
+        var otherVersions: ImmutableList<RelatedCard> = persistentListOf()
+        var level: ImmutableList<RelatedCard> = persistentListOf()
+        var otherSignatures: ImmutableList<RelatedCard> = persistentListOf()
 
         if (root.cardDetails.type == CardType.Investigator) {
             advanced = cardsMap.buildRelationList(rootCode, RelationType.Advanced)
@@ -137,15 +142,15 @@ object CardRelationResolver {
 
             restrictedTo.firstOrNull()?.let { investigator ->
                 val otherAdvanced = cardsMap.buildRelationList(
-                    investigator.cardDetails.code,
+                    investigator.details.cardDetails.code,
                     RelationType.Advanced
                 )
                 val otherRequired = cardsMap.buildRelationList(
-                    investigator.cardDetails.code,
+                    investigator.details.cardDetails.code,
                     RelationType.RequiredCards
                 )
                 val otherReplacement = cardsMap.buildRelationList(
-                    investigator.cardDetails.code,
+                    investigator.details.cardDetails.code,
                     RelationType.Replacement
                 )
 
@@ -160,26 +165,26 @@ object CardRelationResolver {
                         .plus(otherRequired)
                         .plus(otherReplacement)
                         .forEach { card ->
-                            val code = card.cardDetails.code
+                            val code = card.details.cardDetails.code
 
                             if (
                                 code != rootCode &&
                                 code !in duplicateCodes &&
-                                card.cardDetails.subType == root.cardDetails.subType &&
+                                card.details.cardDetails.subType == root.cardDetails.subType &&
                                 seenCodes.add(code)
                             ) {
                                 add(card)
                             }
                         }
-                }.sortedBy { it.cardDetails.name }
+                }.sortedBy { it.details.cardDetails.name }
 
                 otherSignatures = matched.toImmutableList()
             }
         }
 
-        val bound: ImmutableList<CardDetailsWithPackInfo> =
+        val bound: ImmutableList<RelatedCard> =
             cardsMap.buildRelationList(rootCode, RelationType.Bound)
-        val bonded: ImmutableList<CardDetailsWithPackInfo> =
+        val bonded: ImmutableList<RelatedCard> =
             cardsMap.buildRelationList(rootCode, RelationType.Bonded)
 
         return CardDetailsWithRelations(
@@ -204,27 +209,36 @@ object CardRelationResolver {
     }
 
     private val relationComparator =
-        compareBy<CardDetailsWithPackInfo>(
+        compareBy<RelatedCard>(
             {
                 CardSortOrder.sortByTypeOrder(
-                    it.cardDetails.type.name.lowercase(),
-                    it.cardDetails.subType?.name?.lowercase()
+                    it.details.cardDetails.type.name.lowercase(),
+                    it.details.cardDetails.subType?.name?.lowercase()
                 )
             },
-            { it.cardDetails.name },
-            { it.cardDetails.xp ?: -1 },
-            { it.cardDetails.packPosition },
+            { it.details.cardDetails.name },
+            { it.details.cardDetails.xp ?: -1 },
+            { it.details.cardDetails.packPosition },
         )
 
     private fun Map<String, CardDetailsWithPackInfo>.buildRelationList(
         rootCode: String,
         relation: RelationType,
-    ): ImmutableList<CardDetailsWithPackInfo> {
+    ): ImmutableList<RelatedCard> {
         return buildList {
             getRelations(rootCode, relation).forEach { code ->
-                this@buildRelationList[code]
+
+                val front = this@buildRelationList[code]
                     ?.takeIf { it.cardDetails.duplicateOfCode == null }
-                    ?.let(::add)
+                    ?: return@forEach
+
+                add(
+                    RelatedCard(
+                        details = front,
+                        backDetails = (CardCache.backs[code] ?: CardCache.fronts[code])
+                            ?.let(this@buildRelationList::get)
+                    )
+                )
             }
         }.sortedWith(relationComparator).toImmutableList()
     }
@@ -232,8 +246,27 @@ object CardRelationResolver {
     private fun Map<String, CardDetailsWithPackInfo>.buildSingleRelation(
         rootCode: String,
         relation: RelationType,
-    ): CardDetailsWithPackInfo? =
+    ): RelatedCard? =
         buildRelationList(rootCode, relation).firstOrNull()
+
+//    private fun Map<String, CardDetailsWithPackInfo>.buildRelationList(
+//        rootCode: String,
+//        relation: RelationType,
+//    ): ImmutableList<CardDetailsWithPackInfo> {
+//        return buildList {
+//            getRelations(rootCode, relation).forEach { code ->
+//                this@buildRelationList[code]
+//                    ?.takeIf { it.cardDetails.duplicateOfCode == null }
+//                    ?.let(::add)
+//            }
+//        }.sortedWith(relationComparator).toImmutableList()
+//    }
+//
+//    private fun Map<String, CardDetailsWithPackInfo>.buildSingleRelation(
+//        rootCode: String,
+//        relation: RelationType,
+//    ): CardDetailsWithPackInfo? =
+//        buildRelationList(rootCode, relation).firstOrNull()
 }
 
 enum class RelationType {

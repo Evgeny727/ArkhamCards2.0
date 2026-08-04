@@ -115,7 +115,7 @@ fun CardDetailsScreen(
                         }
 
                         //TODO:Show parallel investigator
-                        cardDetailsWithRelations?.cardRelations?.parallel?.run {
+                        cardDetailsWithRelations?.cardRelations?.parallel?.details?.run {
                             item(
                                 key = "parallel_${cardDetails.id}",
                                 contentType = "card_details"
@@ -141,7 +141,7 @@ fun CardDetailsScreen(
                         }
 
                         //TODO:Show base investigator
-                        cardDetailsWithRelations?.cardRelations?.base?.run {
+                        cardDetailsWithRelations?.cardRelations?.base?.details?.run {
                             item(
                                 key = "base_${cardDetails.id}",
                                 contentType = "card_details"
@@ -167,7 +167,7 @@ fun CardDetailsScreen(
                         }
 
                         cardDetailsWithRelations?.cardRelations?.otherVersions?.forEach { otherVersion ->
-                            otherVersion.run {
+                            otherVersion.details.run {
                                 item(
                                     key = "other_version_${cardDetails.id}",
                                     contentType = "card_details"
@@ -207,7 +207,7 @@ fun CardDetailsScreen(
                     }
 
                     cardDetailsWithRelations?.cardRelations?.restrictedTo?.forEach { restrictedTo ->
-                        restrictedTo.run {
+                        restrictedTo.details.run {
                             item(
                                 key = "restricted_to_${cardDetails.id}",
                                 contentType = "card_details"
@@ -234,9 +234,25 @@ fun CardDetailsScreen(
                     }
 
                     cardDetailsWithRelations?.cardRelations?.requiredCards?.forEach { required ->
-                        required.run {
+                        required.details.run {
                             item(
                                 key = "required_${cardDetails.id}",
+                                contentType = "card_details"
+                            ) {
+                                ArkhamRoundedFactionCard(
+                                    faction = if (cardDetails.faction2 != null) Faction.Dual
+                                    else cardDetails.faction,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    header = {
+                                        CardDetailsHeader(cardDetails)
+                                    }
+                                ) { }
+                            }
+                        }
+
+                        required.backDetails?.run {
+                            item(
+                                key = "required_${cardDetails.id}_back",
                                 contentType = "card_details"
                             ) {
                                 ArkhamRoundedFactionCard(
@@ -261,9 +277,25 @@ fun CardDetailsScreen(
                     }
 
                     cardDetailsWithRelations?.cardRelations?.sideDeckRequiredCards?.forEach { sideRequired ->
-                        sideRequired.run {
+                        sideRequired.details.run {
                             item(
                                 key = "side_required_${cardDetails.id}",
+                                contentType = "card_details"
+                            ) {
+                                ArkhamRoundedFactionCard(
+                                    faction = if (cardDetails.faction2 != null) Faction.Dual
+                                    else cardDetails.faction,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    header = {
+                                        CardDetailsHeader(cardDetails)
+                                    }
+                                ) { }
+                            }
+                        }
+
+                        sideRequired.backDetails?.run {
+                            item(
+                                key = "side_required_${cardDetails.id}_back",
                                 contentType = "card_details"
                             ) {
                                 ArkhamRoundedFactionCard(
@@ -288,9 +320,25 @@ fun CardDetailsScreen(
                     }
 
                     cardDetailsWithRelations?.cardRelations?.advanced?.forEach { advanced ->
-                        advanced.run {
+                        advanced.details.run {
                             item(
                                 key = "advanced_${cardDetails.id}",
+                                contentType = "card_details"
+                            ) {
+                                ArkhamRoundedFactionCard(
+                                    faction = if (cardDetails.faction2 != null) Faction.Dual
+                                    else cardDetails.faction,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    header = {
+                                        CardDetailsHeader(cardDetails)
+                                    }
+                                ) { }
+                            }
+                        }
+
+                        advanced.backDetails?.run {
+                            item(
+                                key = "advanced_${cardDetails.id}_back",
                                 contentType = "card_details"
                             ) {
                                 ArkhamRoundedFactionCard(
@@ -315,9 +363,25 @@ fun CardDetailsScreen(
                     }
 
                     cardDetailsWithRelations?.cardRelations?.replacement?.forEach { replacement ->
-                        replacement.run {
+                        replacement.details.run {
                             item(
                                 key = "replacement_${cardDetails.id}",
+                                contentType = "card_details"
+                            ) {
+                                ArkhamRoundedFactionCard(
+                                    faction = if (cardDetails.faction2 != null) Faction.Dual
+                                    else cardDetails.faction,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    header = {
+                                        CardDetailsHeader(cardDetails)
+                                    }
+                                ) { }
+                            }
+                        }
+
+                        replacement.backDetails?.run {
+                            item(
+                                key = "replacement_${cardDetails.id}_back",
                                 contentType = "card_details"
                             ) {
                                 ArkhamRoundedFactionCard(
@@ -342,7 +406,23 @@ fun CardDetailsScreen(
                     }
 
                     cardDetailsWithRelations?.cardRelations?.parallelCards?.forEach { parallel ->
-                        parallel.run {
+                        parallel.details.run {
+                            item(
+                                key = "parallel_card_${cardDetails.id}",
+                                contentType = "card_details"
+                            ) {
+                                ArkhamRoundedFactionCard(
+                                    faction = if (cardDetails.faction2 != null) Faction.Dual
+                                    else cardDetails.faction,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    header = {
+                                        CardDetailsHeader(cardDetails)
+                                    }
+                                ) { }
+                            }
+                        }
+
+                        parallel.backDetails?.run {
                             item(
                                 key = "parallel_card_${cardDetails.id}",
                                 contentType = "card_details"
@@ -369,9 +449,25 @@ fun CardDetailsScreen(
                     }
 
                     cardDetailsWithRelations?.cardRelations?.otherSignatures?.forEach { otherSignature ->
-                        otherSignature.run {
+                        otherSignature.details.run {
                             item(
                                 key = "other_signature_${cardDetails.id}",
+                                contentType = "card_details"
+                            ) {
+                                ArkhamRoundedFactionCard(
+                                    faction = if (cardDetails.faction2 != null) Faction.Dual
+                                    else cardDetails.faction,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    header = {
+                                        CardDetailsHeader(cardDetails)
+                                    }
+                                ) { }
+                            }
+                        }
+
+                        otherSignature.backDetails?.run {
+                            item(
+                                key = "other_signature_${cardDetails.id}_back",
                                 contentType = "card_details"
                             ) {
                                 ArkhamRoundedFactionCard(
@@ -396,9 +492,25 @@ fun CardDetailsScreen(
                     }
 
                     cardDetailsWithRelations?.cardRelations?.bound?.forEach { bound ->
-                        bound.run {
+                        bound.details.run {
                             item(
                                 key = "bound_${cardDetails.id}",
+                                contentType = "card_details"
+                            ) {
+                                ArkhamRoundedFactionCard(
+                                    faction = if (cardDetails.faction2 != null) Faction.Dual
+                                    else cardDetails.faction,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    header = {
+                                        CardDetailsHeader(cardDetails)
+                                    }
+                                ) { }
+                            }
+                        }
+
+                        bound.backDetails?.run {
+                            item(
+                                key = "bound_${cardDetails.id}_back",
                                 contentType = "card_details"
                             ) {
                                 ArkhamRoundedFactionCard(
@@ -423,9 +535,25 @@ fun CardDetailsScreen(
                     }
 
                     cardDetailsWithRelations?.cardRelations?.bonded?.forEach { bonded ->
-                        bonded.run {
+                        bonded.details.run {
                             item(
                                 key = "bonded_${cardDetails.id}",
+                                contentType = "card_details"
+                            ) {
+                                ArkhamRoundedFactionCard(
+                                    faction = if (cardDetails.faction2 != null) Faction.Dual
+                                    else cardDetails.faction,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    header = {
+                                        CardDetailsHeader(cardDetails)
+                                    }
+                                ) { }
+                            }
+                        }
+
+                        bonded.backDetails?.run {
+                            item(
+                                key = "bonded_${cardDetails.id}_back",
                                 contentType = "card_details"
                             ) {
                                 ArkhamRoundedFactionCard(
@@ -450,9 +578,24 @@ fun CardDetailsScreen(
                     }
 
                     cardDetailsWithRelations?.cardRelations?.level?.forEach { level ->
-                        level.run {
+                        level.details.run {
                             item(
                                 key = "level_${cardDetails.id}",
+                                contentType = "card_details"
+                            ) {
+                                ArkhamRoundedFactionCard(
+                                    faction = if (cardDetails.faction2 != null) Faction.Dual
+                                    else cardDetails.faction,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    header = {
+                                        CardDetailsHeader(cardDetails)
+                                    }
+                                ) { }
+                            }
+                        }
+                        level.backDetails?.run {
+                            item(
+                                key = "level_${cardDetails.id}_back",
                                 contentType = "card_details"
                             ) {
                                 ArkhamRoundedFactionCard(
