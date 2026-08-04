@@ -133,7 +133,4 @@ class CardsViewModel @Inject constructor(
         initialValue = persistentListOf()
     )
 
-    fun getCardDetailsWithRelations(code: String, tabooSetId: Int?) =
-        cardsRepository.getCardWithRelationsByCodeFlow(code, tabooSetId)
-
 }

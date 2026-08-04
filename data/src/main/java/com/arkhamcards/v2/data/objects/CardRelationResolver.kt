@@ -188,8 +188,10 @@ object CardRelationResolver {
             cardsMap.buildRelationList(rootCode, RelationType.Bonded)
 
         return CardDetailsWithRelations(
-            cardDetails = root,
-            backCardDetails = back,
+            card = RelatedCard(
+                details = root,
+                backDetails = back,
+            ),
             cardRelations = CardRelations(
                 bound = bound,
                 bonded = bonded,

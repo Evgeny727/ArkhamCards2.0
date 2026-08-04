@@ -1,4 +1,4 @@
-package com.arkhamcards.v2.ui.cards.components
+package com.arkhamcards.v2.ui.cards.components.details
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

@@ -65,6 +65,7 @@ import com.arkhamcards.v2.CardsSyncState
 import com.arkhamcards.v2.R
 import com.arkhamcards.v2.ui.campaigns.Campaigns
 import com.arkhamcards.v2.ui.cards.CardDetailsScreen
+import com.arkhamcards.v2.ui.cards.CardDetailsViewModel
 import com.arkhamcards.v2.ui.cards.Cards
 import com.arkhamcards.v2.ui.cards.CardsScreen
 import com.arkhamcards.v2.ui.cards.CardsSortScreen
@@ -400,10 +401,14 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                         val destination = backStackEntry.toRoute<CardDetailsScreen>()
 
                         val cardsViewModel: CardsViewModel = hiltViewModel(parentEntry)
+                        val cardDetailsViewModel: CardDetailsViewModel = hiltViewModel()
+
+                        val cardsLazyCodes by cardsViewModel.searchResultCodes.collectAsState()
 
                         CardDetailsScreen(
                             cardCode = destination.cardCode,
-                            cardsViewModel = cardsViewModel,
+                            cardCodes = cardsLazyCodes,
+                            cardDetailsViewModel = cardDetailsViewModel,
                             innerPadding = innerPadding
                         )
 

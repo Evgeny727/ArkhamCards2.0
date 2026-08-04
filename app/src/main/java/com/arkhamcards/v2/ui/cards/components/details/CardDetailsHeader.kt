@@ -1,4 +1,4 @@
-package com.arkhamcards.v2.ui.cards.components
+package com.arkhamcards.v2.ui.cards.components.details
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,6 +30,12 @@ import com.arkhamcards.v2.domain.enums.CardSubType
 import com.arkhamcards.v2.domain.enums.CardType
 import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.domain.model.cards.CardDetails
+import com.arkhamcards.v2.domain.model.cards.CardPack
+import com.arkhamcards.v2.ui.cards.components.CardCostIcon
+import com.arkhamcards.v2.ui.cards.components.EncounterIcon
+import com.arkhamcards.v2.ui.cards.components.UNIQUE_SYMBOL
+import com.arkhamcards.v2.ui.cards.components.factionIcon
+import com.arkhamcards.v2.ui.cards.components.iconScaleFactor
 import com.arkhamcards.v2.ui.components.factionColor
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.icons.PackIcon
@@ -41,6 +47,7 @@ import com.arkhamcards.v2.ui.utils.iconize
 @Composable
 fun CardDetailsHeader(
     cardDetails: CardDetails,
+    firstPackInCollection: CardPack?,
     modifier: Modifier = Modifier,
 ) {
     val cardFaction = if (cardDetails.faction2 != null) Faction.Dual else cardDetails.faction
@@ -106,8 +113,8 @@ fun CardDetailsHeader(
                     parallel = cardDetails.parallel,
                     isUnique = cardDetails.isUnique,
                     name = cardDetails.name,
-                    packCode = cardDetails.reprintPackCode ?: cardDetails.packCode,
-                    packPosition = cardDetails.packPosition,
+                    packCode = firstPackInCollection?.code ?: cardDetails.reprintPackCode ?: cardDetails.packCode,
+                    packPosition = firstPackInCollection?.position ?: cardDetails.packPosition,
                     subname = cardDetails.subname
                 )
 
@@ -212,7 +219,7 @@ private fun RowScope.CardDetailsNameRow(
                 if (isUnique) withStyle(
                     style = SpanStyle(fontSize = iconSize)
                 ) {
-                    append("$UNIQUE_SYMBOL ")
+                    append("${UNIQUE_SYMBOL} ")
                 }
 
                 append(name.iconize(iconSize = 16.sp, color = Color.White))

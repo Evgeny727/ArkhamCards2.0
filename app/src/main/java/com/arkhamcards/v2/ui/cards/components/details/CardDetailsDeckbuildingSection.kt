@@ -1,4 +1,4 @@
-package com.arkhamcards.v2.ui.cards.components
+package com.arkhamcards.v2.ui.cards.components.details
 
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.Text

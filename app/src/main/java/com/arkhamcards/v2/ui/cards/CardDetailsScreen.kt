@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,46 +17,49 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.arkhamcards.v2.R
 import com.arkhamcards.v2.domain.enums.CardType
-import com.arkhamcards.v2.domain.enums.Faction
-import com.arkhamcards.v2.ui.cards.components.CardDetailsHeader
-import com.arkhamcards.v2.ui.cards.components.CardDetailsSectionHeader
-import com.arkhamcards.v2.ui.cards.components.cardDetailsDeckbuildingSection
-import com.arkhamcards.v2.ui.components.ArkhamRoundedFactionCard
+import com.arkhamcards.v2.domain.model.cards.CodeWithTaboo
+import com.arkhamcards.v2.ui.cards.components.details.cardDetailsDeckbuildingSection
+import com.arkhamcards.v2.ui.cards.components.details.cardDetailsRelationSection
+import com.arkhamcards.v2.ui.cards.components.details.cardDetailsRelationSectionSingle
+import com.arkhamcards.v2.ui.cards.components.details.doubleSidedCardDetails
 import com.arkhamcards.v2.ui.theme.CustomTheme
 import com.arkhamcards.v2.ui.utils.applyScaffoldPaddings
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun CardDetailsScreen(
     cardCode: String,
-    cardsViewModel: CardsViewModel,
+    cardCodes: ImmutableList<CodeWithTaboo>,
+    cardDetailsViewModel: CardDetailsViewModel,
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues
 ) {
-    val cardsLazyCodes by cardsViewModel.searchResultCodes.collectAsState()
-    val index = remember(cardsLazyCodes) {
-        cardsLazyCodes.indexOfFirst { it.code == cardCode }.coerceAtLeast(0)
+    val collection by cardDetailsViewModel.collectionFlow.collectAsState()
+    val ignoreCollection by cardDetailsViewModel.ignoreCollectionFlow.collectAsState()
+    val showFanmade by cardDetailsViewModel.showFanmadeFlow.collectAsState()
+    val index = remember(cardCodes) {
+        cardCodes.indexOfFirst { it.code == cardCode }.coerceAtLeast(0)
     }
-    val pagerState = rememberPagerState(initialPage = index) { cardsLazyCodes.size }
+    val pagerState = rememberPagerState(initialPage = index) { cardCodes.size }
 
-    LaunchedEffect(cardsLazyCodes) {
-        if (cardsLazyCodes.isNotEmpty()) {
+    LaunchedEffect(cardCodes) {
+        if (cardCodes.isNotEmpty()) {
             pagerState.scrollToPage(index)
         }
     }
 
     HorizontalPager(
         state = pagerState,
-        key = { page -> cardsLazyCodes[page].code },
+        key = { page -> cardCodes[page].code },
         modifier = modifier
             .fillMaxSize()
             .applyScaffoldPaddings(innerPadding),
     ) { page ->
-        val item = cardsLazyCodes[page]
-        val cardDetailsWithRelations by cardsViewModel.getCardDetailsWithRelations(
+        val item = cardCodes[page]
+        val cardDetailsWithRelations by cardDetailsViewModel.getCardDetailsWithRelations(
             item.code,
             item.tabooSetId
         ).collectAsState(null)
@@ -85,107 +87,57 @@ fun CardDetailsScreen(
                         color = CustomTheme.colors.m)
                 }
             } else {
-                val isInvestigator = cardDetailsWithRelations?.cardDetails?.cardDetails?.type == CardType.Investigator
+                val isInvestigator = cardDetailsWithRelations?.card?.details?.cardDetails?.type ==
+                        CardType.Investigator
+
                 val isParallel = cardDetailsWithRelations?.cardRelations?.parallel != null
                 val isBase = cardDetailsWithRelations?.cardRelations?.base != null
 
-                cardDetailsWithRelations?.cardDetails?.run {
-                    item(
-                        key = cardDetails.id,
-                        contentType = "card_details"
-                    ) {
-                        ArkhamRoundedFactionCard(
-                            faction = if (cardDetails.faction2 != null) Faction.Dual
-                                else cardDetails.faction,
-                            modifier = Modifier.fillMaxWidth(),
-                            header = {
-                                CardDetailsHeader(cardDetails)
-                            }
-                        ) { }
-                    }
+                cardDetailsWithRelations?.card?.let { relatedCard ->
+                    doubleSidedCardDetails(relatedCard, "main", collection)
                 }
 
                 if (isInvestigator) {
                     if (isParallel) {
-                        item("parallel_investigator_header", contentType = "header") {
-                            CardDetailsSectionHeader(
-                                title = stringResource(R.string.parallel_investigator),
-                                normalCase = false
+                        cardDetailsWithRelations?.cardRelations?.parallel?.let { relatedCard ->
+                            cardDetailsRelationSectionSingle(
+                                relatedCard = relatedCard,
+                                prefix = "parallel",
+                                sectionTitleResId = R.string.parallel_investigator,
+                                collection = collection,
+                                showFanmade = showFanmade,
+                                ignoreCollection = ignoreCollection
                             )
-                        }
-
-                        //TODO:Show parallel investigator
-                        cardDetailsWithRelations?.cardRelations?.parallel?.details?.run {
-                            item(
-                                key = "parallel_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                        else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
                         }
                     }
 
                     if (isBase) {
-                        item("base_investigator_header", contentType = "header") {
-                            CardDetailsSectionHeader(
-                                title = stringResource(R.string.base_investigator),
-                                normalCase = false
+                        cardDetailsWithRelations?.cardRelations?.base?.let { relatedCard ->
+                            cardDetailsRelationSectionSingle(
+                                relatedCard = relatedCard,
+                                prefix = "base",
+                                sectionTitleResId = R.string.base_investigator,
+                                collection = collection,
+                                showFanmade = showFanmade,
+                                ignoreCollection = ignoreCollection
                             )
-                        }
-
-                        //TODO:Show base investigator
-                        cardDetailsWithRelations?.cardRelations?.base?.details?.run {
-                            item(
-                                key = "base_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                        else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
                         }
                     }
 
-                    if (!cardDetailsWithRelations?.cardRelations?.otherVersions.isNullOrEmpty()) {
-                        item("other_versions_header", contentType = "header") {
-                            CardDetailsSectionHeader(
-                                title = stringResource(R.string.other_versions),
-                                normalCase = false
-                            )
-                        }
+                    cardDetailsWithRelations?.cardRelations?.otherVersions.run {
+                        if (isNullOrEmpty()) return@run
 
-                        cardDetailsWithRelations?.cardRelations?.otherVersions?.forEach { otherVersion ->
-                            otherVersion.details.run {
-                                item(
-                                    key = "other_version_${cardDetails.id}",
-                                    contentType = "card_details"
-                                ) {
-                                    ArkhamRoundedFactionCard(
-                                        faction = if (cardDetails.faction2 != null) Faction.Dual
-                                            else cardDetails.faction,
-                                        modifier = Modifier.fillMaxWidth(),
-                                        header = {
-                                            CardDetailsHeader(cardDetails)
-                                        }
-                                    ) { }
-                                }
-                            }
-                        }
+                        cardDetailsRelationSection(
+                            relatedCards = this,
+                            prefix = "other_versions",
+                            sectionTitleResId = R.string.other_versions,
+                            collection = collection,
+                            showFanmade = showFanmade,
+                            ignoreCollection = ignoreCollection
+                        )
                     }
 
-                    if (cardDetailsWithRelations?.cardDetails?.cardDetails?.encounterCode == null) {
+                    if (cardDetailsWithRelations?.card?.details?.cardDetails?.encounterCode == null) {
                         cardDetailsDeckbuildingSection(
                             onShowBaseInvestigatorCards = { /*TODO:Show base cardpool*/ },
                             onShowParallelInvestigatorCards = if (isParallel || isBase) { {
@@ -198,417 +150,134 @@ fun CardDetailsScreen(
                     }
                 }
 
-                if (!cardDetailsWithRelations?.cardRelations?.restrictedTo.isNullOrEmpty()) {
-                    item("restricte_to_header", contentType = "header") {
-                        CardDetailsSectionHeader(
-                            title = stringResource(R.string.restricted_to),
-                            normalCase = false
-                        )
-                    }
+                cardDetailsWithRelations?.cardRelations?.restrictedTo.run {
+                    if (isNullOrEmpty()) return@run
 
-                    cardDetailsWithRelations?.cardRelations?.restrictedTo?.forEach { restrictedTo ->
-                        restrictedTo.details.run {
-                            item(
-                                key = "restricted_to_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-                    }
+                    cardDetailsRelationSection(
+                        relatedCards = this,
+                        prefix = "restricted_to",
+                        sectionTitleResId = R.string.restricted_to,
+                        collection = collection,
+                        showFanmade = showFanmade,
+                        ignoreCollection = ignoreCollection
+                    )
                 }
 
-                if (!cardDetailsWithRelations?.cardRelations?.requiredCards.isNullOrEmpty()) {
-                    item("required_cards_header", contentType = "header") {
-                        CardDetailsSectionHeader(
-                            title = stringResource(R.string.required_cards),
-                            normalCase = false
-                        )
-                    }
+                cardDetailsWithRelations?.cardRelations?.requiredCards.run {
+                    if (isNullOrEmpty()) return@run
 
-                    cardDetailsWithRelations?.cardRelations?.requiredCards?.forEach { required ->
-                        required.details.run {
-                            item(
-                                key = "required_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-
-                        required.backDetails?.run {
-                            item(
-                                key = "required_${cardDetails.id}_back",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-                    }
+                    cardDetailsRelationSection(
+                        relatedCards = this,
+                        prefix = "required",
+                        sectionTitleResId = R.string.required_cards,
+                        collection = collection,
+                        showFanmade = showFanmade,
+                        ignoreCollection = ignoreCollection
+                    )
                 }
 
-                if (!cardDetailsWithRelations?.cardRelations?.sideDeckRequiredCards.isNullOrEmpty()) {
-                    item("side_required_cards_header", contentType = "header") {
-                        CardDetailsSectionHeader(
-                            title = stringResource(R.string.side_required_cards),
-                            normalCase = false
-                        )
-                    }
+                cardDetailsWithRelations?.cardRelations?.sideDeckRequiredCards.run {
+                    if (isNullOrEmpty()) return@run
 
-                    cardDetailsWithRelations?.cardRelations?.sideDeckRequiredCards?.forEach { sideRequired ->
-                        sideRequired.details.run {
-                            item(
-                                key = "side_required_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-
-                        sideRequired.backDetails?.run {
-                            item(
-                                key = "side_required_${cardDetails.id}_back",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-                    }
+                    cardDetailsRelationSection(
+                        relatedCards = this,
+                        prefix = "side_required_to",
+                        sectionTitleResId = R.string.side_required_cards,
+                        collection = collection,
+                        showFanmade = showFanmade,
+                        ignoreCollection = ignoreCollection
+                    )
                 }
 
-                if (!cardDetailsWithRelations?.cardRelations?.advanced.isNullOrEmpty()) {
-                    item("advanced_cards_header", contentType = "header") {
-                        CardDetailsSectionHeader(
-                            title = stringResource(R.string.advanced_cards),
-                            normalCase = false
-                        )
-                    }
+                cardDetailsWithRelations?.cardRelations?.advanced.run {
+                    if (isNullOrEmpty()) return@run
 
-                    cardDetailsWithRelations?.cardRelations?.advanced?.forEach { advanced ->
-                        advanced.details.run {
-                            item(
-                                key = "advanced_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-
-                        advanced.backDetails?.run {
-                            item(
-                                key = "advanced_${cardDetails.id}_back",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-                    }
+                    cardDetailsRelationSection(
+                        relatedCards = this,
+                        prefix = "advanced",
+                        sectionTitleResId = R.string.advanced_cards,
+                        collection = collection,
+                        showFanmade = showFanmade,
+                        ignoreCollection = ignoreCollection
+                    )
                 }
 
-                if (!cardDetailsWithRelations?.cardRelations?.replacement.isNullOrEmpty()) {
-                    item("replacement_cards_header", contentType = "header") {
-                        CardDetailsSectionHeader(
-                            title = stringResource(R.string.replacement_cards),
-                            normalCase = false
-                        )
-                    }
+                cardDetailsWithRelations?.cardRelations?.replacement.run {
+                    if (isNullOrEmpty()) return@run
 
-                    cardDetailsWithRelations?.cardRelations?.replacement?.forEach { replacement ->
-                        replacement.details.run {
-                            item(
-                                key = "replacement_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-
-                        replacement.backDetails?.run {
-                            item(
-                                key = "replacement_${cardDetails.id}_back",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-                    }
+                    cardDetailsRelationSection(
+                        relatedCards = this,
+                        prefix = "replacement",
+                        sectionTitleResId = R.string.replacement_cards,
+                        collection = collection,
+                        showFanmade = showFanmade,
+                        ignoreCollection = ignoreCollection
+                    )
                 }
 
-                if (!cardDetailsWithRelations?.cardRelations?.parallelCards.isNullOrEmpty()) {
-                    item("parallel_cards_header", contentType = "header") {
-                        CardDetailsSectionHeader(
-                            title = stringResource(R.string.parallel_cards),
-                            normalCase = false
-                        )
-                    }
+                cardDetailsWithRelations?.cardRelations?.parallelCards.run {
+                    if (isNullOrEmpty()) return@run
 
-                    cardDetailsWithRelations?.cardRelations?.parallelCards?.forEach { parallel ->
-                        parallel.details.run {
-                            item(
-                                key = "parallel_card_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-
-                        parallel.backDetails?.run {
-                            item(
-                                key = "parallel_card_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-                    }
+                    cardDetailsRelationSection(
+                        relatedCards = this,
+                        prefix = "parallel_card",
+                        sectionTitleResId = R.string.parallel_cards,
+                        collection = collection,
+                        showFanmade = showFanmade,
+                        ignoreCollection = ignoreCollection
+                    )
                 }
 
-                if (!cardDetailsWithRelations?.cardRelations?.otherSignatures.isNullOrEmpty()) {
-                    item("other_signature_cards_header", contentType = "header") {
-                        CardDetailsSectionHeader(
-                            title = stringResource(R.string.other_signature_cards),
-                            normalCase = false
-                        )
-                    }
+                cardDetailsWithRelations?.cardRelations?.otherSignatures.run {
+                    if (isNullOrEmpty()) return@run
 
-                    cardDetailsWithRelations?.cardRelations?.otherSignatures?.forEach { otherSignature ->
-                        otherSignature.details.run {
-                            item(
-                                key = "other_signature_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-
-                        otherSignature.backDetails?.run {
-                            item(
-                                key = "other_signature_${cardDetails.id}_back",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-                    }
+                    cardDetailsRelationSection(
+                        relatedCards = this,
+                        prefix = "other_signature",
+                        sectionTitleResId = R.string.other_signature_cards,
+                        collection = collection,
+                        showFanmade = showFanmade,
+                        ignoreCollection = ignoreCollection
+                    )
                 }
 
-                if (!cardDetailsWithRelations?.cardRelations?.bound.isNullOrEmpty()) {
-                    item("bound_cards_header", contentType = "header") {
-                        CardDetailsSectionHeader(
-                            title = stringResource(R.string.bound_cards),
-                            normalCase = false
-                        )
-                    }
+                cardDetailsWithRelations?.cardRelations?.bound.run {
+                    if (isNullOrEmpty()) return@run
 
-                    cardDetailsWithRelations?.cardRelations?.bound?.forEach { bound ->
-                        bound.details.run {
-                            item(
-                                key = "bound_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-
-                        bound.backDetails?.run {
-                            item(
-                                key = "bound_${cardDetails.id}_back",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-                    }
+                    cardDetailsRelationSection(
+                        relatedCards = this,
+                        prefix = "bound",
+                        sectionTitleResId = R.string.bound_cards,
+                        collection = collection,
+                        showFanmade = showFanmade,
+                        ignoreCollection = ignoreCollection
+                    )
                 }
 
-                if (!cardDetailsWithRelations?.cardRelations?.bonded.isNullOrEmpty()) {
-                    item("bonded_cards_header", contentType = "header") {
-                        CardDetailsSectionHeader(
-                            title = stringResource(R.string.bonded),
-                            normalCase = false
-                        )
-                    }
+                cardDetailsWithRelations?.cardRelations?.bonded.run {
+                    if (isNullOrEmpty()) return@run
 
-                    cardDetailsWithRelations?.cardRelations?.bonded?.forEach { bonded ->
-                        bonded.details.run {
-                            item(
-                                key = "bonded_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-
-                        bonded.backDetails?.run {
-                            item(
-                                key = "bonded_${cardDetails.id}_back",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-                    }
+                    cardDetailsRelationSection(
+                        relatedCards = this,
+                        prefix = "bonded",
+                        sectionTitleResId = R.string.bonded,
+                        collection = collection,
+                        showFanmade = showFanmade,
+                        ignoreCollection = ignoreCollection
+                    )
                 }
 
-                if (!cardDetailsWithRelations?.cardRelations?.level.isNullOrEmpty()) {
-                    item("level_cards_header", contentType = "header") {
-                        CardDetailsSectionHeader(
-                            title = stringResource(R.string.other_level_cards),
-                            normalCase = false
-                        )
-                    }
+                cardDetailsWithRelations?.cardRelations?.level.run {
+                    if (isNullOrEmpty()) return@run
 
-                    cardDetailsWithRelations?.cardRelations?.level?.forEach { level ->
-                        level.details.run {
-                            item(
-                                key = "level_${cardDetails.id}",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-                        level.backDetails?.run {
-                            item(
-                                key = "level_${cardDetails.id}_back",
-                                contentType = "card_details"
-                            ) {
-                                ArkhamRoundedFactionCard(
-                                    faction = if (cardDetails.faction2 != null) Faction.Dual
-                                    else cardDetails.faction,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    header = {
-                                        CardDetailsHeader(cardDetails)
-                                    }
-                                ) { }
-                            }
-                        }
-                    }
+                    cardDetailsRelationSection(
+                        relatedCards = this,
+                        prefix = "level",
+                        sectionTitleResId = R.string.other_level_cards,
+                        collection = collection,
+                        showFanmade = showFanmade,
+                        ignoreCollection = ignoreCollection
+                    )
                 }
             }
         }
