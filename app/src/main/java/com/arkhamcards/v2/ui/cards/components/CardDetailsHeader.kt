@@ -103,6 +103,7 @@ fun CardDetailsHeader(
 
                 //name block
                 CardDetailsNameRow(
+                    parallel = cardDetails.parallel,
                     isUnique = cardDetails.isUnique,
                     name = cardDetails.name,
                     packCode = cardDetails.reprintPackCode ?: cardDetails.packCode,
@@ -184,6 +185,7 @@ fun CardDetailsFactionIcons(
 
 @Composable
 private fun RowScope.CardDetailsNameRow(
+    parallel: Boolean,
     isUnique: Boolean,
     name: String,
     packCode: String,
@@ -195,11 +197,20 @@ private fun RowScope.CardDetailsNameRow(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
+            val iconSize = 16.appSp(CustomTheme.typography.scaleFactor)
             val nameString = buildAnnotatedString {
+                if (parallel) {
+                    withStyle(
+                        style = SpanStyle(
+                            fontFamily = AppIconsFont,
+                            fontSize = iconSize
+                        )
+                    ) {
+                        append(AppIcon.Parallel.glyph)
+                    }
+                }
                 if (isUnique) withStyle(
-                    style = SpanStyle(
-                        fontSize = 16.appSp(CustomTheme.typography.scaleFactor),
-                    )
+                    style = SpanStyle(fontSize = iconSize)
                 ) {
                     append("$UNIQUE_SYMBOL ")
                 }
@@ -214,7 +225,7 @@ private fun RowScope.CardDetailsNameRow(
                     withStyle(
                         style = SpanStyle(
                             fontFamily = packIcon.fontFamily,
-                            fontSize = 16.appSp(CustomTheme.typography.scaleFactor),
+                            fontSize = iconSize,
                         )
                     ) {
                         append(packIcon.glyph)
@@ -222,7 +233,11 @@ private fun RowScope.CardDetailsNameRow(
 
                     append('\u00A0')
 
-                    append(packPosition.toString())
+                    withStyle(
+                        style = SpanStyle(fontSize = iconSize)
+                    ) {
+                        append(packPosition.toString())
+                    }
                 }
             }
 
