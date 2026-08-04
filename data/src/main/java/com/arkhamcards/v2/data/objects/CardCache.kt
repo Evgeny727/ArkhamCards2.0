@@ -235,8 +235,7 @@ object CardCache {
                             } else if (
                                 !requiredCardCodes.contains(card.code) &&
                                 card.duplicateOfCode == null &&
-                                // Kate has bonded cards restricted to her, these should not be part of the deck.
-                                card.deckLimit != null
+                                (card.deckLimit ?: 0) > 0
                             ) {
                                 requiredCards.addToSet(key, card.code)
                             }
