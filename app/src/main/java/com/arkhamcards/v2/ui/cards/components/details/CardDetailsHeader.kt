@@ -21,6 +21,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -54,7 +55,7 @@ fun CardDetailsHeader(
 
     val density = LocalDensity.current
     val minRowHeight = with(density) {
-        (26 + 21).appSp(CustomTheme.typography.scaleFactor).toDp() + 16.dp
+        (26 + 21).appSp(CustomTheme.typography.scaleFactor).toDp()
     }
 
     Surface(
@@ -83,7 +84,7 @@ fun CardDetailsHeader(
             contentAlignment = Alignment.Center
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(8.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
@@ -93,7 +94,10 @@ fun CardDetailsHeader(
 
                 //cost
                 if (showCost) {
-                    Box(contentAlignment = Alignment.Center) {
+                    Box(
+                        modifier = Modifier.padding(vertical = 8.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
                         CardCostIcon(
                             xp = cardDetails.xp,
                             type = cardDetails.type,
@@ -147,13 +151,13 @@ fun CardDetailsFactionIcons(
         Text(
             text = AppIcon.Weakness.glyph,
             fontFamily = AppIconsFont,
-            fontSize = 32.appSp(iconScaleFactor),
+            fontSize = 28.appSp(iconScaleFactor),
             color = Color.White,
         )
     } else if (encounterCode != null && !isWithCost) {
         EncounterIcon(
             iconCode = encounterCode,
-            iconSize = 32.appSp(iconScaleFactor),
+            iconSize = 28.appSp(iconScaleFactor),
             iconColor = Color.White,
         )
     } else {
@@ -163,7 +167,7 @@ fun CardDetailsFactionIcons(
             fontFamily = factionIcon.fontFamily,
             fontSize = 32.appSp(iconScaleFactor),
             color = Color.White,
-            modifier = Modifier.padding(bottom = 4.dp)
+            modifier = Modifier.padding(bottom = if (faction != Faction.Neutral) 4.dp else 0.dp)
         )
 
         faction2?.let {
@@ -210,16 +214,20 @@ private fun RowScope.CardDetailsNameRow(
                     withStyle(
                         style = SpanStyle(
                             fontFamily = AppIconsFont,
-                            fontSize = iconSize
+                            fontSize = 18.appSp(CustomTheme.typography.scaleFactor),
+                            baselineShift = BaselineShift(-0.1f)
                         )
                     ) {
-                        append(AppIcon.Parallel.glyph)
+                        append(AppIcon.Parallel1.glyph)
                     }
                 }
                 if (isUnique) withStyle(
-                    style = SpanStyle(fontSize = iconSize)
+                    style = SpanStyle(
+                        fontSize = iconSize,
+                        baselineShift = BaselineShift(0.05f)
+                    )
                 ) {
-                    append("${UNIQUE_SYMBOL} ")
+                    append("$UNIQUE_SYMBOL ")
                 }
 
                 append(name.iconize(iconSize = 16.sp, color = Color.White))
@@ -233,6 +241,7 @@ private fun RowScope.CardDetailsNameRow(
                         style = SpanStyle(
                             fontFamily = packIcon.fontFamily,
                             fontSize = iconSize,
+                            baselineShift = BaselineShift(-0.1f)
                         )
                     ) {
                         append(packIcon.glyph)
@@ -241,7 +250,10 @@ private fun RowScope.CardDetailsNameRow(
                     append('\u00A0')
 
                     withStyle(
-                        style = SpanStyle(fontSize = iconSize)
+                        style = SpanStyle(
+                            fontSize = iconSize,
+                            baselineShift = BaselineShift(0.05f)
+                        )
                     ) {
                         append(packPosition.toString())
                     }
