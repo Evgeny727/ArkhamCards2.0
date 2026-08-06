@@ -119,6 +119,8 @@ data class CardDetailsEntity(
     val backimageurl: String?,
 
     //Taboo fields
+    @ColumnInfo("taboo_set_id")
+    val tabooSetId: String?,
     @ColumnInfo("taboo_xp")
     val tabooXp: Int?,
     @ColumnInfo("taboo_placeholder")

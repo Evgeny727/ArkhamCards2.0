@@ -20,5 +20,13 @@ enum class CardType {
             "treachery" -> Treachery
             else -> Unknown
         }
+
+        fun isLocationLike(type: CardType): Boolean {
+            return type == Location || type == EnemyLocation
+        }
+
+        fun isEnemyLike(type: CardType): Boolean {
+            return type == Enemy || type == EnemyLocation
+        }
     }
 }

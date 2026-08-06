@@ -83,6 +83,7 @@ internal fun CardDetailsEntity.toDomain() = CardDetails(
     thumbnailUrl = thumbnailurl,
     imageUrl = imageurl,
     backImageUrl = backimageurl,
+    tabooSetId = tabooSetId,
     tabooXp = tabooXp,
     tabooPlaceholder = tabooPlaceholder,
 )

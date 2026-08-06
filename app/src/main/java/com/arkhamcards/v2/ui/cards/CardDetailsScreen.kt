@@ -24,7 +24,7 @@ import com.arkhamcards.v2.domain.model.cards.CodeWithTaboo
 import com.arkhamcards.v2.ui.cards.components.details.cardDetailsDeckbuildingSection
 import com.arkhamcards.v2.ui.cards.components.details.cardDetailsRelationSection
 import com.arkhamcards.v2.ui.cards.components.details.cardDetailsRelationSectionSingle
-import com.arkhamcards.v2.ui.cards.components.details.doubleSidedCardDetails
+import com.arkhamcards.v2.ui.cards.components.details.cardDetailsWithLinkedBack
 import com.arkhamcards.v2.ui.theme.CustomTheme
 import com.arkhamcards.v2.ui.utils.applyScaffoldPaddings
 import kotlinx.collections.immutable.ImmutableList
@@ -94,7 +94,7 @@ fun CardDetailsScreen(
                 val isBase = cardDetailsWithRelations?.cardRelations?.base != null
 
                 cardDetailsWithRelations?.card?.let { relatedCard ->
-                    doubleSidedCardDetails(relatedCard, "main", collection)
+                    cardDetailsWithLinkedBack(relatedCard, "main", collection)
                 }
 
                 if (isInvestigator) {

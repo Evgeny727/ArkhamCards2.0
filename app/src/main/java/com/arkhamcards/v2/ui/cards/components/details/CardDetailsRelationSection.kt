@@ -29,7 +29,7 @@ fun LazyListScope.cardDetailsRelationSection(
             cardDetailsRelationSectionHeader(prefix, sectionTitleResId)
         }
 
-        doubleSidedCardDetails(relatedCard, prefix, collection)
+        cardDetailsWithLinkedBack(relatedCard, prefix, collection)
     }
 }
 
@@ -45,7 +45,7 @@ fun LazyListScope.cardDetailsRelationSectionSingle(
 
     cardDetailsRelationSectionHeader(prefix, sectionTitleResId)
 
-    doubleSidedCardDetails(relatedCard, prefix, collection)
+    cardDetailsWithLinkedBack(relatedCard, prefix, collection)
 }
 
 private fun LazyListScope.cardDetailsRelationSectionHeader(
@@ -60,47 +60,26 @@ private fun LazyListScope.cardDetailsRelationSectionHeader(
     }
 }
 
-fun LazyListScope.doubleSidedCardDetails(
+fun LazyListScope.cardDetailsWithLinkedBack(
     relatedCard: RelatedCard,
     prefix: String,
     collection: Collection
 ) {
     relatedCard.details.run {
-        item(
-            key = "${prefix}_${cardDetails.id}",
-            contentType = "card_details"
-        ) {
-            ArkhamRoundedFactionCard(
-                faction = if (cardDetails.faction2 != null) Faction.Dual
-                else cardDetails.faction,
-                modifier = Modifier.fillMaxWidth(),
-                header = {
-                    CardDetailsHeader(
-                        cardDetails,
-                        firstPackInCollection = firstPackIn(collection)
-                    )
-                }
-            ) { }
-        }
+        doubleSidedCardDetails(
+            cardDetailsWithPackInfo = this,
+            prefix = prefix,
+            collection = collection
+        )
     }
 
     relatedCard.backDetails?.run {
-        item(
-            key = "${prefix}_${cardDetails.id}_back",
-            contentType = "card_details"
-        ) {
-            ArkhamRoundedFactionCard(
-                faction = if (cardDetails.faction2 != null) Faction.Dual
-                else cardDetails.faction,
-                modifier = Modifier.fillMaxWidth(),
-                header = {
-                    CardDetailsHeader(
-                        cardDetails,
-                        firstPackInCollection = firstPackIn(collection)
-                    )
-                }
-            ) { }
-        }
+        doubleSidedCardDetails(
+            cardDetailsWithPackInfo = this,
+            prefix = prefix,
+            collection = collection,
+            suffix = "_back"
+        )
     }
 }
 

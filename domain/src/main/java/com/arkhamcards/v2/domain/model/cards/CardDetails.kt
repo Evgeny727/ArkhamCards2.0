@@ -82,6 +82,7 @@ data class CardDetails(
     val imageUrl: String?,
     val backImageUrl: String?,
 
+    val tabooSetId: String?,
     val tabooXp: Int?,
     val tabooPlaceholder: Boolean,
 )
