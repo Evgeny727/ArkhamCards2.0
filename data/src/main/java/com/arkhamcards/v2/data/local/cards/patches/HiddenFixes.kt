@@ -308,6 +308,12 @@ internal fun loadHiddenFixesPatches(): List<CardPatch> = listOf(
         )
     ),
     CardPatch(
+        code = "11068b",
+        values = EntityPatch(
+            hidden = PatchValue.Set(true),
+        )
+    ),
+    CardPatch(
         code = "11559b",
         values = EntityPatch(
             hidden = PatchValue.Set(true),
