@@ -13,12 +13,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import com.arkhamcards.v2.R
 import com.arkhamcards.v2.domain.enums.CardType
 import com.arkhamcards.v2.domain.enums.CardType.Companion.isEnemyLike
+import com.arkhamcards.v2.domain.enums.CardType.Companion.isLocationLike
 import com.arkhamcards.v2.domain.model.cards.CardDetails
+import com.arkhamcards.v2.ui.icons.AppIcon
+import com.arkhamcards.v2.ui.theme.AppIconsFont
 import com.arkhamcards.v2.ui.theme.CustomTheme
 import com.arkhamcards.v2.ui.utils.appSp
 
@@ -97,6 +106,26 @@ fun RowScope.CardDetailsMetaBlock(
                 )
             }
 
+            if (isLocationLike(type) || type == CardType.Agenda || type == CardType.Act) {
+                DoomCluesShroudRow(
+                    type = type,
+                    doom = doom,
+                    doomPerInvestigator = doomPerInvestigator,
+                    shroud = shroud,
+                    shroudPerInvestigator = shroudPerInvestigator,
+                    clues = clues,
+                    cluesFixed = cluesFixed
+                )
+            }
+
+            if (type == CardType.Agenda || type == CardType.Act || type == CardType.Story) flavor?.let {
+                Spacer(modifier = Modifier.height(8.dp))
+
+                ParsedCardText(
+                    text = it,
+                    isFlavor = true
+                )
+            }
         }
     }
 }
@@ -242,4 +271,73 @@ private fun CardDetailsHealthSanityLine(
             )
         }
     }
+}
+
+@Composable
+private fun DoomCluesShroudRow(
+    type: CardType,
+    doom: Int?,
+    doomPerInvestigator: Boolean,
+    shroud: Int?,
+    shroudPerInvestigator: Boolean,
+    clues: Int?,
+    cluesFixed: Boolean
+) {
+    val perInvestigatorIconText = buildAnnotatedString {
+        withStyle(
+            SpanStyle(
+                fontFamily = AppIconsFont,
+                fontSize = 14.appSp(CustomTheme.typography.scaleFactor)
+            )
+        ) {
+            append(AppIcon.PerInvestigator.glyph)
+        }
+    }
+    val text = buildAnnotatedString {
+        if (type == CardType.Agenda) {
+            append(stringResource(
+                R.string.doom_doom,
+                numberValueToString(doom)
+            ))
+
+            if (doomPerInvestigator) {
+                append(perInvestigatorIconText)
+            }
+        }
+        if (type == CardType.Act) {
+            append(stringResource(
+                R.string.per_investigator_clues,
+                numberValueToString(clues), "")
+            )
+
+            if ((clues ?: 0) > 0) {
+                append(perInvestigatorIconText)
+            }
+        }
+        if (isLocationLike(type)) {
+            append(stringResource(R.string.shroud) + ": ")
+            append(numberValueToString(shroud))
+            if (shroudPerInvestigator) append(perInvestigatorIconText)
+            append(". ")
+
+            append(stringResource(
+                R.string.per_investigator_clues,
+                numberValueToString(clues), "")
+            )
+            if (!cluesFixed && (clues ?: 0) > 0) append(perInvestigatorIconText)
+            append(". ")
+        }
+    }
+
+    Text(
+        text = text,
+        style = CustomTheme.typography.small,
+    )
+}
+
+@Stable
+private fun numberValueToString(value: Int?): String = when (value) {
+    null -> "—"
+    -2 -> "X"
+    else -> value.toString()
 }

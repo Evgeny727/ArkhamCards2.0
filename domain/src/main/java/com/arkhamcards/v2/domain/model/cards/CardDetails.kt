@@ -34,6 +34,7 @@ data class CardDetails(
     val doomPerInvestigator: Boolean,
     val doubleSided: Boolean,
     val duplicateOfCode: String?,
+    val deckLimit: Int?,
     val encounterCode: String?,
     val encounterPosition: Int?,
     val encounterName: String?,

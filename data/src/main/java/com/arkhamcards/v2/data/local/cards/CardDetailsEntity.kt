@@ -45,6 +45,8 @@ data class CardDetailsEntity(
     val doubleSided: Boolean,
     @ColumnInfo("duplicate_of_code")
     val duplicateOfCode: String?,
+    @ColumnInfo("deck_limit")
+    val deckLimit: Int?,
     @ColumnInfo("encounter_code")
     val encounterCode: String?,
     @ColumnInfo("encounter_position")

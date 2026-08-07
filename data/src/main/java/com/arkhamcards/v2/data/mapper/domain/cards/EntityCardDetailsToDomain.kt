@@ -38,6 +38,7 @@ internal fun CardDetailsEntity.toDomain() = CardDetails(
     doomPerInvestigator = doomPerInvestigator,
     doubleSided = doubleSided,
     duplicateOfCode = duplicateOfCode,
+    deckLimit = deckLimit,
     encounterCode = encounterCode,
     encounterPosition = encounterPosition,
     encounterName = encounterName,
