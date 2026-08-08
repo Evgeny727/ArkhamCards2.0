@@ -10,19 +10,12 @@ data class CardDetails(
     val code: String,
 
     //translated fields
-    val backFlavor: String?,
     val backName: String?,
     val backSubname: String?,
-    val backText: String?,
     val backTraits: String?,
-    val customizationText: String?,
-    val flavor: String?,
     val name: String,
     val slot: String?,
     val subname: String?,
-    val tabooOriginalBackText: String?,
-    val tabooOriginalText: String?,
-    val text: String?,
     val traits: String?,
 
     val backIllustrator: String?,
@@ -83,9 +76,19 @@ data class CardDetails(
     val imageUrl: String?,
     val backImageUrl: String?,
 
+    //Taboo fields
     val tabooSetId: String?,
     val tabooXp: Int?,
     val tabooPlaceholder: Boolean,
+
+    //Parsed fields
+    val parsedBackFlavor: CardText?,
+    val parsedBackText: CardText?,
+    val parsedFlavor: CardText?,
+    val parsedText: CardText?,
+    val parsedCustomizationText: CardText?,
+    val parsedTabooOriginalBackText: CardText?,
+    val parsedTabooOriginalText: CardText?,
 )
 
 data class CardPackInfo(

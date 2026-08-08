@@ -1,4 +1,4 @@
-package com.arkhamcards.v2.ui.utils.text.model
+package com.arkhamcards.v2.ui.cards.components.details
 
 import androidx.compose.ui.text.SpanStyle
 

@@ -205,21 +205,23 @@ fun SingleCard.toEntity(
  * Extension function to convert [CoreCardText] to [Translation]
  */
 fun CoreCardText?.toTranslation(card: SingleCard): Translation = Translation(
-    backFlavor = this?.back_flavor ?: card.real_back_flavor,
+    backFlavor = (this?.back_flavor ?: card.real_back_flavor)?.preprocessCardText(processBullets = false),
     backName = this?.back_name ?: card.real_back_name,
     backSubname = this?.back_subname ?: card.real_back_subname,
-    backText = this?.back_text ?: card.real_back_text,
+    backText = (this?.back_text ?: card.real_back_text)?.preprocessCardText(processBullets = true),
     backTraits = this?.back_traits ?: card.real_back_traits,
     customizationChange = this?.customization_change ?: card.real_customization_change,
     customizationText = this?.customization_text ?: card.real_customization_text,
-    flavor = this?.flavor ?: card.real_flavor,
+    flavor = (this?.flavor ?: card.real_flavor)?.preprocessCardText(processBullets = false),
     name = this?.name ?: card.real_name,
     slot = (this?.slot ?: card.real_slot)?.ifBlank { null },
     subname = this?.subname ?: card.real_subname,
-    tabooOriginalBackText = this?.taboo_original_back_text ?: card.real_taboo_original_back_text,
-    tabooOriginalText = this?.taboo_original_text ?: card.real_taboo_original_text,
+    tabooOriginalBackText = (this?.taboo_original_back_text ?: card.real_taboo_original_back_text)
+        ?.preprocessCardText(processBullets = true),
+    tabooOriginalText = (this?.taboo_original_text ?: card.real_taboo_original_text)
+        ?.preprocessCardText(processBullets = true),
     tabooTextChange = this?.taboo_text_change ?: card.real_taboo_text_change,
-    text = this?.text ?: card.real_text,
+    text = (this?.text ?: card.real_text)?.preprocessCardText(processBullets = true),
     traits = this?.traits ?: card.real_traits,
 )
 
@@ -241,4 +243,37 @@ fun GetTranslationDataQuery.Card_subtype_name.toEntity(): CardSubtypeEntity {
         code = code,
         name = name
     )
+}
+
+private val WEIRD_BULLET_REGEX = Regex("""\\u2022""")
+private val LINEBREAK_REGEX = Regex("""(\/n|<br\/?>)""")
+private val INDENTED_BULLET_REGEX = Regex("""(^\s?--|^-—\s+)([^0-9].+)$""", RegexOption.MULTILINE)
+private val BULLET_REGEX = Regex("""(^\s?-|^—\s+)([^0-9].+)$""", RegexOption.MULTILINE)
+private val GUIDE_BULLET_REGEX = Regex("""(^\s?=|^=\s+)([^0-9].+)$""", RegexOption.MULTILINE)
+private val PARAGRAPH_BULLET_REGEX = Regex("""(<p>- )|(<p>–)""", RegexOption.MULTILINE)
+private val DOUBLE_BRACKET_REGEX = Regex("""\[\[([^\]]+)\]\]""")
+
+internal fun String.preprocessCardText(processBullets: Boolean): String {
+    val result = this
+        .replace(WEIRD_BULLET_REGEX, "•")
+        .replace(LINEBREAK_REGEX, "\n")
+        .replace(DOUBLE_BRACKET_REGEX) { match ->
+            "<trait>${match.groupValues[1]}</trait>"
+        }
+
+    if (processBullets) {
+        return result
+            .replace(INDENTED_BULLET_REGEX) { match ->
+                "\t[bullet] ${match.groupValues[2]}"
+            }
+            .replace(BULLET_REGEX) { match ->
+                "[bullet] ${match.groupValues[2]}"
+            }
+            .replace(GUIDE_BULLET_REGEX) { match ->
+                "[guide_bullet] ${match.groupValues[2]}"
+            }
+            .replace(PARAGRAPH_BULLET_REGEX, "<p>[bullet]")
+    }
+
+    return result
 }

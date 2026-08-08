@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.BaselineShift
@@ -50,6 +51,8 @@ fun CardDetailsHeader(
     cardDetails: CardDetails,
     firstPackInCollection: CardPack?,
     modifier: Modifier = Modifier,
+    isBack: Boolean = false,
+    isCustomizableSheet: Boolean = false
 ) {
     val cardFaction = if (cardDetails.faction2 != null) Faction.Dual else cardDetails.faction
 
@@ -88,50 +91,73 @@ fun CardDetailsHeader(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                val showCost = cardDetails.type == CardType.Asset ||
-                        cardDetails.type == CardType.Event || cardDetails.type == CardType.Skill
-                val iconScaleFactor = iconScaleFactor(CustomTheme.typography.scaleFactor)
-
-                //cost
-                if (showCost) {
-                    Box(
-                        modifier = Modifier.padding(vertical = 8.dp),
-                        contentAlignment = Alignment.Center
+                if (isCustomizableSheet) {
+                    Row(
+                        modifier = Modifier.weight(1f),
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        CardCostIcon(
-                            xp = cardDetails.xp,
-                            type = cardDetails.type,
-                            subType = cardDetails.subType,
-                            faction = cardDetails.faction,
-                            faction2 = cardDetails.faction2,
-                            factionColor = CustomTheme.colors.faction.neutral,
-                            cost = cardDetails.cost,
-                            inverted = true,
-                            iconScaleFactor = iconScaleFactor
+                        Text(
+                            text = stringResource(R.string.customizations),
+                            style = CustomTheme.typography.cardName,
+                            color = Color.White,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
                         )
                     }
+                } else {
+                    val showCost = cardDetails.type == CardType.Asset ||
+                            cardDetails.type == CardType.Event || cardDetails.type == CardType.Skill
+                    val iconScaleFactor = iconScaleFactor(CustomTheme.typography.scaleFactor)
+
+                    //cost
+                    if (showCost) {
+                        Box(
+                            modifier = Modifier.padding(vertical = 8.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CardCostIcon(
+                                xp = cardDetails.xp,
+                                type = cardDetails.type,
+                                subType = cardDetails.subType,
+                                faction = cardDetails.faction,
+                                faction2 = cardDetails.faction2,
+                                factionColor = CustomTheme.colors.faction.neutral,
+                                cost = cardDetails.cost,
+                                inverted = true,
+                                iconScaleFactor = iconScaleFactor
+                            )
+                        }
+                    }
+
+                    //name block
+                    val name = if (isBack) {
+                        cardDetails.backName ?: stringResource(
+                            R.string.card_back_name_fallback,
+                            cardDetails.name
+                        )
+                    } else {
+                        cardDetails.name
+                    }
+                    CardDetailsNameRow(
+                        parallel = cardDetails.parallel,
+                        isUnique = cardDetails.isUnique,
+                        name = name,
+                        packCode = firstPackInCollection?.code ?: cardDetails.reprintPackCode ?: cardDetails.packCode,
+                        packPosition = firstPackInCollection?.position ?: cardDetails.packPosition,
+                        subname = if (isBack) cardDetails.subname else cardDetails.subname
+                    )
+
+                    //faction icons
+                    CardDetailsFactionIcons(
+                        isWithCost = showCost,
+                        subType = cardDetails.subType,
+                        faction = cardDetails.faction,
+                        faction2 = cardDetails.faction2,
+                        faction3 = cardDetails.faction3,
+                        encounterCode = cardDetails.encounterCode,
+                        iconScaleFactor = iconScaleFactor
+                    )
                 }
-
-                //name block
-                CardDetailsNameRow(
-                    parallel = cardDetails.parallel,
-                    isUnique = cardDetails.isUnique,
-                    name = cardDetails.name,
-                    packCode = firstPackInCollection?.code ?: cardDetails.reprintPackCode ?: cardDetails.packCode,
-                    packPosition = firstPackInCollection?.position ?: cardDetails.packPosition,
-                    subname = cardDetails.subname
-                )
-
-                //faction icons
-                CardDetailsFactionIcons(
-                    isWithCost = showCost,
-                    subType = cardDetails.subType,
-                    faction = cardDetails.faction,
-                    faction2 = cardDetails.faction2,
-                    faction3 = cardDetails.faction3,
-                    encounterCode = cardDetails.encounterCode,
-                    iconScaleFactor = iconScaleFactor
-                )
             }
         }
     }

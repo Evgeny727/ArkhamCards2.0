@@ -14,7 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,7 +28,9 @@ import com.arkhamcards.v2.ui.cards.components.details.cardDetailsDeckbuildingSec
 import com.arkhamcards.v2.ui.cards.components.details.cardDetailsRelationSection
 import com.arkhamcards.v2.ui.cards.components.details.cardDetailsRelationSectionSingle
 import com.arkhamcards.v2.ui.cards.components.details.cardDetailsWithLinkedBack
+import com.arkhamcards.v2.ui.cards.components.details.rememberCardTextStyles
 import com.arkhamcards.v2.ui.theme.CustomTheme
+import com.arkhamcards.v2.ui.utils.CardTextStyleResolver
 import com.arkhamcards.v2.ui.utils.applyScaffoldPaddings
 import kotlinx.collections.immutable.ImmutableList
 
@@ -40,15 +45,26 @@ fun CardDetailsScreen(
     val collection by cardDetailsViewModel.collectionFlow.collectAsState()
     val ignoreCollection by cardDetailsViewModel.ignoreCollectionFlow.collectAsState()
     val showFanmade by cardDetailsViewModel.showFanmadeFlow.collectAsState()
-    val index = remember(cardCodes) {
+    val index = rememberSaveable(cardCodes) {
         cardCodes.indexOfFirst { it.code == cardCode }.coerceAtLeast(0)
     }
     val pagerState = rememberPagerState(initialPage = index) { cardCodes.size }
+    var initialPageApplied by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(cardCodes) {
-        if (cardCodes.isNotEmpty()) {
+        if (!initialPageApplied && cardCodes.isNotEmpty()) {
             pagerState.scrollToPage(index)
+            initialPageApplied = true
         }
+    }
+
+    val styles = rememberCardTextStyles(flavorText = false)
+    val flavorStyles = rememberCardTextStyles(flavorText = true)
+    val styleResolver = remember(styles) {
+        CardTextStyleResolver(styles)
+    }
+    val flavorStyleResolver = remember(flavorStyles) {
+        CardTextStyleResolver(flavorStyles)
     }
 
     HorizontalPager(
@@ -57,6 +73,7 @@ fun CardDetailsScreen(
         modifier = modifier
             .fillMaxSize()
             .applyScaffoldPaddings(innerPadding),
+        beyondViewportPageCount = 1
     ) { page ->
         val item = cardCodes[page]
         val cardDetailsWithRelations by cardDetailsViewModel.getCardDetailsWithRelations(
@@ -94,7 +111,7 @@ fun CardDetailsScreen(
                 val isBase = cardDetailsWithRelations?.cardRelations?.base != null
 
                 cardDetailsWithRelations?.card?.let { relatedCard ->
-                    cardDetailsWithLinkedBack(relatedCard, "main", collection)
+                    cardDetailsWithLinkedBack(relatedCard, "main", collection, styleResolver, flavorStyleResolver)
                 }
 
                 if (isInvestigator) {
@@ -106,7 +123,9 @@ fun CardDetailsScreen(
                                 sectionTitleResId = R.string.parallel_investigator,
                                 collection = collection,
                                 showFanmade = showFanmade,
-                                ignoreCollection = ignoreCollection
+                                ignoreCollection = ignoreCollection,
+                                styleResolver = styleResolver,
+                                flavorStyleResolver = flavorStyleResolver
                             )
                         }
                     }
@@ -119,7 +138,9 @@ fun CardDetailsScreen(
                                 sectionTitleResId = R.string.base_investigator,
                                 collection = collection,
                                 showFanmade = showFanmade,
-                                ignoreCollection = ignoreCollection
+                                ignoreCollection = ignoreCollection,
+                                styleResolver = styleResolver,
+                                flavorStyleResolver = flavorStyleResolver
                             )
                         }
                     }
@@ -133,7 +154,9 @@ fun CardDetailsScreen(
                             sectionTitleResId = R.string.other_versions,
                             collection = collection,
                             showFanmade = showFanmade,
-                            ignoreCollection = ignoreCollection
+                            ignoreCollection = ignoreCollection,
+                            styleResolver = styleResolver,
+                            flavorStyleResolver = flavorStyleResolver
                         )
                     }
 
@@ -159,7 +182,9 @@ fun CardDetailsScreen(
                         sectionTitleResId = R.string.restricted_to,
                         collection = collection,
                         showFanmade = showFanmade,
-                        ignoreCollection = ignoreCollection
+                        ignoreCollection = ignoreCollection,
+                        styleResolver = styleResolver,
+                        flavorStyleResolver = flavorStyleResolver
                     )
                 }
 
@@ -172,7 +197,9 @@ fun CardDetailsScreen(
                         sectionTitleResId = R.string.required_cards,
                         collection = collection,
                         showFanmade = showFanmade,
-                        ignoreCollection = ignoreCollection
+                        ignoreCollection = ignoreCollection,
+                        styleResolver = styleResolver,
+                        flavorStyleResolver = flavorStyleResolver
                     )
                 }
 
@@ -185,7 +212,9 @@ fun CardDetailsScreen(
                         sectionTitleResId = R.string.side_required_cards,
                         collection = collection,
                         showFanmade = showFanmade,
-                        ignoreCollection = ignoreCollection
+                        ignoreCollection = ignoreCollection,
+                        styleResolver = styleResolver,
+                        flavorStyleResolver = flavorStyleResolver
                     )
                 }
 
@@ -198,7 +227,9 @@ fun CardDetailsScreen(
                         sectionTitleResId = R.string.advanced_cards,
                         collection = collection,
                         showFanmade = showFanmade,
-                        ignoreCollection = ignoreCollection
+                        ignoreCollection = ignoreCollection,
+                        styleResolver = styleResolver,
+                        flavorStyleResolver = flavorStyleResolver
                     )
                 }
 
@@ -211,7 +242,9 @@ fun CardDetailsScreen(
                         sectionTitleResId = R.string.replacement_cards,
                         collection = collection,
                         showFanmade = showFanmade,
-                        ignoreCollection = ignoreCollection
+                        ignoreCollection = ignoreCollection,
+                        styleResolver = styleResolver,
+                        flavorStyleResolver = flavorStyleResolver
                     )
                 }
 
@@ -224,7 +257,9 @@ fun CardDetailsScreen(
                         sectionTitleResId = R.string.parallel_cards,
                         collection = collection,
                         showFanmade = showFanmade,
-                        ignoreCollection = ignoreCollection
+                        ignoreCollection = ignoreCollection,
+                        styleResolver = styleResolver,
+                        flavorStyleResolver = flavorStyleResolver
                     )
                 }
 
@@ -237,7 +272,9 @@ fun CardDetailsScreen(
                         sectionTitleResId = R.string.other_signature_cards,
                         collection = collection,
                         showFanmade = showFanmade,
-                        ignoreCollection = ignoreCollection
+                        ignoreCollection = ignoreCollection,
+                        styleResolver = styleResolver,
+                        flavorStyleResolver = flavorStyleResolver
                     )
                 }
 
@@ -250,7 +287,9 @@ fun CardDetailsScreen(
                         sectionTitleResId = R.string.bound_cards,
                         collection = collection,
                         showFanmade = showFanmade,
-                        ignoreCollection = ignoreCollection
+                        ignoreCollection = ignoreCollection,
+                        styleResolver = styleResolver,
+                        flavorStyleResolver = flavorStyleResolver
                     )
                 }
 
@@ -263,7 +302,9 @@ fun CardDetailsScreen(
                         sectionTitleResId = R.string.bonded,
                         collection = collection,
                         showFanmade = showFanmade,
-                        ignoreCollection = ignoreCollection
+                        ignoreCollection = ignoreCollection,
+                        styleResolver = styleResolver,
+                        flavorStyleResolver = flavorStyleResolver
                     )
                 }
 
@@ -276,7 +317,9 @@ fun CardDetailsScreen(
                         sectionTitleResId = R.string.other_level_cards,
                         collection = collection,
                         showFanmade = showFanmade,
-                        ignoreCollection = ignoreCollection
+                        ignoreCollection = ignoreCollection,
+                        styleResolver = styleResolver,
+                        flavorStyleResolver = flavorStyleResolver
                     )
                 }
             }

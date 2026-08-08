@@ -2,6 +2,7 @@ package com.arkhamcards.v2.data.mapper.domain.cards
 
 import com.arkhamcards.v2.data.local.cards.CardDetailsEntity
 import com.arkhamcards.v2.data.objects.CardCache
+import com.arkhamcards.v2.data.objects.CardTextParser
 import com.arkhamcards.v2.domain.enums.CardBackType
 import com.arkhamcards.v2.domain.enums.CardSubType
 import com.arkhamcards.v2.domain.enums.CardType
@@ -15,19 +16,12 @@ import kotlinx.collections.immutable.toImmutableList
 internal fun CardDetailsEntity.toDomain() = CardDetails(
     id = id,
     code = code,
-    backFlavor = backFlavor,
     backName = backName,
     backSubname = backSubname,
-    backText = backText,
     backTraits = backTraits,
-    customizationText = customizationText,
-    flavor = flavor,
     name = name,
     slot = slot,
     subname = subname,
-    tabooOriginalBackText = tabooOriginalText,
-    tabooOriginalText = tabooOriginalBackText,
-    text = text,
     traits = traits,
     backIllustrator = backIllustrator,
     backType = CardBackType.byType(backType),
@@ -87,48 +81,46 @@ internal fun CardDetailsEntity.toDomain() = CardDetails(
     tabooSetId = tabooSetId,
     tabooXp = tabooXp,
     tabooPlaceholder = tabooPlaceholder,
-)
-
-internal fun CardDetails.toPackInfoDomain() = CardPackInfo(
-    code = packCode,
-    reprintCode = reprintPackCode,
-    name = packName,
-    reprintName = reprintPackName,
-    quantity = quantity,
-    position = packPosition
+    parsedBackFlavor = backFlavor?.let { CardTextParser.parse(it) },
+    parsedBackText = backText?.let { CardTextParser.parse(it) },
+    parsedFlavor = flavor?.let { CardTextParser.parse(it) },
+    parsedText = text?.let { CardTextParser.parse(it) },
+    parsedCustomizationText = customizationText?.let { CardTextParser.parse(it) },
+    parsedTabooOriginalBackText = tabooOriginalBackText?.let { CardTextParser.parse(it) },
+    parsedTabooOriginalText = tabooOriginalText?.let { CardTextParser.parse(it) },
 )
 
 internal fun List<CardDetailsEntity>.toDetailsWithPackInfo(): Map<String, CardDetailsWithPackInfo> {
-    val detailsMap = HashMap<String, CardDetails>(size)
-    forEach { card ->
-        detailsMap[card.code] = card.toDomain()
+    val map = HashMap<String, CardDetailsEntity>(size)
+    forEach {
+        map[it.code] = it
     }
 
     val detailsWithPackInfoMap = HashMap<String, CardDetailsWithPackInfo>(size)
-    for ((code, details) in detailsMap) {
+    for ((code, entity) in map) {
 
         val reprints =
             buildPackInfoList(
                 CardCache.reprints[code],
-                detailsMap,
+                map,
             )
 
         val duplicates = buildSet {
             addAll(buildPackInfoList(
                 CardCache.duplicates[code],
-                detailsMap,
+                map,
             ))
             CardCache.reprints[code]?.forEach { code ->
                 addAll(buildPackInfoList(
                     CardCache.duplicates[code],
-                    detailsMap,
+                    map,
                 ))
             }
         }.toImmutableList()
 
         detailsWithPackInfoMap[code] =
             CardDetailsWithPackInfo(
-                cardDetails = details,
+                cardDetails = entity.toDomain(),
                 duplicates = duplicates,
                 reprints = reprints,
             )
@@ -139,7 +131,7 @@ internal fun List<CardDetailsEntity>.toDetailsWithPackInfo(): Map<String, CardDe
 
 private fun buildPackInfoList(
     codes: Set<String>?,
-    details: Map<String, CardDetails>,
+    details: Map<String, CardDetailsEntity>,
 ): ImmutableList<CardPackInfo> {
     return buildList {
         codes?.forEach { code ->
@@ -147,3 +139,12 @@ private fun buildPackInfoList(
         }
     }.toImmutableList()
 }
+
+internal fun CardDetailsEntity.toPackInfoDomain() = CardPackInfo(
+    code = packCode,
+    reprintCode = reprintPackCode,
+    name = packName,
+    reprintName = reprintPackName,
+    quantity = quantity,
+    position = packPosition
+)

@@ -1,14 +1,11 @@
 package com.arkhamcards.v2.ui.cards.components.details
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.domain.model.cards.RelatedCard
 import com.arkhamcards.v2.domain.model.settings.Collection
-import com.arkhamcards.v2.ui.components.ArkhamRoundedFactionCard
+import com.arkhamcards.v2.ui.utils.CardTextStyleResolver
 import kotlinx.collections.immutable.ImmutableList
 
 fun LazyListScope.cardDetailsRelationSection(
@@ -17,7 +14,9 @@ fun LazyListScope.cardDetailsRelationSection(
     @StringRes sectionTitleResId: Int,
     collection: Collection,
     showFanmade: Boolean,
-    ignoreCollection: Boolean
+    ignoreCollection: Boolean,
+    styleResolver: CardTextStyleResolver,
+    flavorStyleResolver: CardTextStyleResolver,
 ) {
     var headerAdded = false
 
@@ -29,7 +28,7 @@ fun LazyListScope.cardDetailsRelationSection(
             cardDetailsRelationSectionHeader(prefix, sectionTitleResId)
         }
 
-        cardDetailsWithLinkedBack(relatedCard, prefix, collection)
+        cardDetailsWithLinkedBack(relatedCard, prefix, collection, styleResolver, flavorStyleResolver)
     }
 }
 
@@ -39,13 +38,15 @@ fun LazyListScope.cardDetailsRelationSectionSingle(
     @StringRes sectionTitleResId: Int,
     collection: Collection,
     showFanmade: Boolean,
-    ignoreCollection: Boolean
+    ignoreCollection: Boolean,
+    styleResolver: CardTextStyleResolver,
+    flavorStyleResolver: CardTextStyleResolver,
 ) {
     if (!relatedCard.shouldShow(collection, ignoreCollection, showFanmade)) return
 
     cardDetailsRelationSectionHeader(prefix, sectionTitleResId)
 
-    cardDetailsWithLinkedBack(relatedCard, prefix, collection)
+    cardDetailsWithLinkedBack(relatedCard, prefix, collection, styleResolver, flavorStyleResolver)
 }
 
 private fun LazyListScope.cardDetailsRelationSectionHeader(
@@ -63,13 +64,17 @@ private fun LazyListScope.cardDetailsRelationSectionHeader(
 fun LazyListScope.cardDetailsWithLinkedBack(
     relatedCard: RelatedCard,
     prefix: String,
-    collection: Collection
+    collection: Collection,
+    styleResolver: CardTextStyleResolver,
+    flavorStyleResolver: CardTextStyleResolver,
 ) {
     relatedCard.details.run {
         doubleSidedCardDetails(
             cardDetailsWithPackInfo = this,
             prefix = prefix,
-            collection = collection
+            collection = collection,
+            styleResolver = styleResolver,
+            flavorStyleResolver = flavorStyleResolver
         )
     }
 
@@ -78,7 +83,9 @@ fun LazyListScope.cardDetailsWithLinkedBack(
             cardDetailsWithPackInfo = this,
             prefix = prefix,
             collection = collection,
-            suffix = "_back"
+            suffix = "_back",
+            styleResolver = styleResolver,
+            flavorStyleResolver = flavorStyleResolver
         )
     }
 }

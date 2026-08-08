@@ -22,8 +22,9 @@ import com.arkhamcards.v2.ui.utils.appSp
 @Composable
 fun CardDetailsPackInfoBlock(
     cardDetailsWithPackInfo: CardDetailsWithPackInfo,
-    firstPackInCollection: String?,
     modifier: Modifier = Modifier,
+    firstPackInCollection: String? = null,
+    onlyIllustrator: Boolean = false
 ) {
     HorizontalDivider(color = CustomTheme.colors.l10)
 
@@ -50,7 +51,9 @@ fun CardDetailsPackInfoBlock(
                         style = CustomTheme.typography.tiny
                     )
                 }
+            }
 
+            if (!onlyIllustrator) {
                 Column(
                     modifier = Modifier.weight(1f),
                     horizontalAlignment = Alignment.End
@@ -58,7 +61,7 @@ fun CardDetailsPackInfoBlock(
                     encounterCode?.let {
                         val icon = PackIcon.fromPackCode(it)
                         val quantityText = if (quantity > 1) "$encounterPosition - ${encounterPosition!! + quantity - 1}"
-                            else encounterPosition!!.toString()
+                        else encounterPosition!!.toString()
 
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(4.dp),

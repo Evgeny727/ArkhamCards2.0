@@ -23,18 +23,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arkhamcards.v2.R
+import com.arkhamcards.v2.domain.model.cards.CardText
 import com.arkhamcards.v2.ui.components.ArkhamToggleButton
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.theme.AppIconsFont
 import com.arkhamcards.v2.ui.theme.CustomTheme
+import com.arkhamcards.v2.ui.utils.CardTextStyleResolver
 import com.arkhamcards.v2.ui.utils.appSp
 import kotlin.math.absoluteValue
 
 @Composable
 fun CardDetailsTabooBlock(
     tabooXp: Int?,
-    tabooOriginalText: String?,
-    tabooOriginalBackText: String?,
+    tabooOriginalText: CardText?,
+    tabooOriginalBackText: CardText?,
+    styleResolver: CardTextStyleResolver,
     deckLimit: Int,
     modifier: Modifier = Modifier,
 ) {
@@ -110,11 +113,11 @@ fun CardDetailsTabooBlock(
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         tabooOriginalText?.let {
-                            ParsedCardText(it)
+                            ParsedCardText(it, styleResolver)
                         }
 
                         tabooOriginalBackText?.let {
-                            ParsedCardText(it)
+                            ParsedCardText(it, styleResolver)
                         }
                     }
                 }

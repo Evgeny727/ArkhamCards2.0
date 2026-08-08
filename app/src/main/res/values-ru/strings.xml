@@ -1955,4 +1955,5 @@
     <string name="chapter_1">Сезон 1</string>
     <string name="chapter_2">Сезон 2</string>
     <string name="socials_text">Общайтесь с другими поклонниками карточного «Ужаса Аркхэма» в русскоязычных сообществах:</string>
+    <string name="card_back_name_fallback">%s — Оборот</string>
 </resources>

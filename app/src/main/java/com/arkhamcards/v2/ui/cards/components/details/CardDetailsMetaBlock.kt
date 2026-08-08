@@ -29,11 +29,14 @@ import com.arkhamcards.v2.domain.model.cards.CardDetails
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.theme.AppIconsFont
 import com.arkhamcards.v2.ui.theme.CustomTheme
+import com.arkhamcards.v2.ui.utils.CardTextStyleResolver
 import com.arkhamcards.v2.ui.utils.appSp
 
 @Composable
 fun RowScope.CardDetailsMetaBlock(
-    cardDetails: CardDetails
+    cardDetails: CardDetails,
+    styleResolver: CardTextStyleResolver,
+    simpleBack: Boolean = false,
 ) {
     Column(
         modifier = Modifier.weight(1f),
@@ -44,87 +47,111 @@ fun RowScope.CardDetailsMetaBlock(
                     typeName = typeName,
                     stage = stage,
                     subTypeName = subTypeName,
-                    slot = slot
+                    slot = slot,
                 )
             }
 
-            traits?.let { traits ->
-                Text(
-                    text = traits,
-                    style = CustomTheme.typography.run { small + boldItalic }
-                )
-            }
+            if (simpleBack) {
+                backTraits?.let { traits ->
+                    Text(
+                        text = traits,
+                        style = CustomTheme.typography.run { small + boldItalic }
+                    )
+                }
 
-            if (type != CardType.Investigator && (skillWillpower != null
-                        || skillIntellect != null || skillCombat != null
-                        || skillAgility != null || skillWild != null)
-            ) {
-                Spacer(modifier = Modifier.height(4.dp))
+                if (type == CardType.Agenda || type == CardType.Act || type == CardType.Story) {
+                    parsedBackFlavor?.let {
+                        Spacer(modifier = Modifier.height(8.dp))
 
-                CardDetailsSkillFlowRow(
-                    isWeakness = subType != null,
-                    skillWillpower = skillWillpower,
-                    skillIntellect = skillIntellect,
-                    skillCombat = skillCombat,
-                    skillAgility = skillAgility,
-                    skillWild = skillWild
-                )
-            }
+                        ParsedCardText(
+                            text = it,
+                            styleResolver = styleResolver,
+                            isFlavor = true
+                        )
+                    }
+                }
+            } else {
+                traits?.let { traits ->
+                    Text(
+                        text = traits,
+                        style = CustomTheme.typography.run { small + boldItalic }
+                    )
+                }
 
-            if (type == CardType.Investigator) {
-                Spacer(modifier = Modifier.height(4.dp))
+                if (type != CardType.Investigator && (skillWillpower != null
+                            || skillIntellect != null || skillCombat != null
+                            || skillAgility != null || skillWild != null)
+                ) {
+                    Spacer(modifier = Modifier.height(4.dp))
 
-                CardDetailsInvestigatorStatLine(
-                    skillWillpower = skillWillpower,
-                    skillIntellect = skillIntellect,
-                    skillCombat = skillCombat,
-                    skillAgility = skillAgility
-                )
-            }
+                    CardDetailsSkillFlowRow(
+                        isWeakness = subType != null,
+                        skillWillpower = skillWillpower,
+                        skillIntellect = skillIntellect,
+                        skillCombat = skillCombat,
+                        skillAgility = skillAgility,
+                        skillWild = skillWild
+                    )
+                }
 
-            if (isEnemyLike(type)) {
-                Spacer(modifier = Modifier.height(4.dp))
+                if (type == CardType.Investigator) {
+                    Spacer(modifier = Modifier.height(4.dp))
 
-                CardDetailsEnemyStatBlock(
-                    enemyFight = enemyFight,
-                    enemyFightPerInvestigator = enemyFightPerInvestigator,
-                    health = health,
-                    healthPerInvestigator = healthPerInvestigator,
-                    enemyEvade = enemyEvade,
-                    enemyEvadePerInvestigator = enemyEvadePerInvestigator,
-                    enemyDamage = enemyDamage,
-                    enemyHorror = enemyHorror,
-                )
-            }
+                    CardDetailsInvestigatorStatLine(
+                        skillWillpower = skillWillpower,
+                        skillIntellect = skillIntellect,
+                        skillCombat = skillCombat,
+                        skillAgility = skillAgility
+                    )
+                }
 
-            if (!isEnemyLike(type) && (health != null || sanity != null)) {
-                Spacer(modifier = Modifier.height(8.dp))
+                if (isEnemyLike(type)) {
+                    Spacer(modifier = Modifier.height(4.dp))
 
-                CardDetailsHealthSanityLine(
-                    health = health,
-                    sanity = sanity
-                )
-            }
+                    CardDetailsEnemyStatBlock(
+                        enemyFight = enemyFight,
+                        enemyFightPerInvestigator = enemyFightPerInvestigator,
+                        health = health,
+                        healthPerInvestigator = healthPerInvestigator,
+                        enemyEvade = enemyEvade,
+                        enemyEvadePerInvestigator = enemyEvadePerInvestigator,
+                        enemyDamage = enemyDamage,
+                        enemyHorror = enemyHorror,
+                    )
+                }
 
-            if (isLocationLike(type) || type == CardType.Agenda || type == CardType.Act) {
-                DoomCluesShroudRow(
-                    type = type,
-                    doom = doom,
-                    doomPerInvestigator = doomPerInvestigator,
-                    shroud = shroud,
-                    shroudPerInvestigator = shroudPerInvestigator,
-                    clues = clues,
-                    cluesFixed = cluesFixed
-                )
-            }
+                if (!isEnemyLike(type) && (health != null || sanity != null)) {
+                    Spacer(modifier = Modifier.height(8.dp))
 
-            if (type == CardType.Agenda || type == CardType.Act || type == CardType.Story) flavor?.let {
-                Spacer(modifier = Modifier.height(8.dp))
+                    CardDetailsHealthSanityLine(
+                        health = health,
+                        sanity = sanity
+                    )
+                }
 
-                ParsedCardText(
-                    text = it,
-                    isFlavor = true
-                )
+                if (isLocationLike(type) || type == CardType.Agenda || type == CardType.Act) {
+                    DoomCluesShroudRow(
+                        type = type,
+                        doom = doom,
+                        doomPerInvestigator = doomPerInvestigator,
+                        shroud = shroud,
+                        shroudPerInvestigator = shroudPerInvestigator,
+                        clues = clues,
+                        cluesFixed = cluesFixed
+                    )
+                }
+
+                if (type == CardType.Agenda || type == CardType.Act || type == CardType.Story) {
+                    parsedFlavor?.let {
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        ParsedCardText(
+                            text = it,
+                            styleResolver = styleResolver,
+                            isFlavor = true
+                        )
+                    }
+                }
             }
         }
     }
