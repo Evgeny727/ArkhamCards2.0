@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.arkhamcards.v2.domain.model.cards.CardDetailsWithPackInfo
 import com.arkhamcards.v2.ui.icons.AppIcon
@@ -70,6 +71,7 @@ fun CardDetailsPackInfoBlock(
                             Text(
                                 text = encounterName!!,
                                 style = CustomTheme.typography.tiny,
+                                textAlign = TextAlign.End,
                                 modifier = Modifier.weight(1f, fill = false)
                             )
 
@@ -100,6 +102,7 @@ fun CardDetailsPackInfoBlock(
                                 style = CustomTheme.typography.tiny.copy(
                                     fontWeight = if (firstPack) FontWeight.SemiBold else FontWeight.Normal
                                 ),
+                                textAlign = TextAlign.End,
                                 modifier = Modifier.weight(1f, fill = false)
                             )
 
