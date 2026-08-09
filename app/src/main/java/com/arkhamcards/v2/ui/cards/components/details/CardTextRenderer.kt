@@ -37,17 +37,18 @@ fun ParsedCardText(
     styleResolver: CardTextStyleResolver,
     modifier: Modifier = Modifier,
     isFlavor: Boolean = false,
+    isCustomizationText: Boolean = false
 ) {
     Row(
         modifier = modifier.fillMaxWidth().height(IntrinsicSize.Min),
     ) {
-        if (!isFlavor) {
+        if (!isFlavor && !isCustomizationText) {
             VerticalDivider(thickness = 2.dp, color = CustomTheme.colors.m)
         }
 
         Column(
             modifier = Modifier.weight(1f).padding(
-                start = if (isFlavor) 0.dp else 8.dp,
+                start = if (isFlavor || isCustomizationText) 0.dp else 8.dp,
                 end = 8.dp,
                 top = 4.dp,
                 bottom = 4.dp

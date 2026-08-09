@@ -98,7 +98,7 @@ fun LazyListScope.doubleSidedCardDetails(
                         )
                     }
                 ) {
-                    ParsedCardText(customizationText, styleResolver)
+                    ParsedCardText(customizationText, styleResolver, isCustomizationText = true)
                 }
             }
         }
@@ -140,11 +140,15 @@ fun CardDetailsFrontContent(
     flavorStyleResolver: CardTextStyleResolver
 ) {
     cardDetailsWithPackInfo.run {
+        val flavorFirst = with(cardDetails) {
+            type == CardType.Agenda || type == CardType.Act || type == CardType.Story
+        }
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            CardDetailsMetaBlock(cardDetails, flavorStyleResolver)
+            CardDetailsMetaBlock(cardDetails)
 
             cardDetails.realSlot?.let { slots ->
                 CardDetailsSlotsBlock(slots)
@@ -166,6 +170,12 @@ fun CardDetailsFrontContent(
             }
         }
 
+        if (flavorFirst) {
+            cardDetails.parsedFlavor?.let {
+                ParsedCardText(it, flavorStyleResolver, isFlavor = true)
+            }
+        }
+
         cardDetails.parsedText?.let {
             ParsedCardText(it, styleResolver)
         }
@@ -184,11 +194,9 @@ fun CardDetailsFrontContent(
             )
         }
 
-        cardDetails.run {
-            if (type != CardType.Agenda && type != CardType.Act && type != CardType.Story) {
-                parsedFlavor?.let {
-                    ParsedCardText(it, flavorStyleResolver, isFlavor = true)
-                }
+        if (!flavorFirst) {
+            cardDetails.parsedFlavor?.let {
+                ParsedCardText(it, flavorStyleResolver, isFlavor = true)
             }
         }
 
@@ -216,11 +224,15 @@ fun CardDetailsBackContent(
     flavorStyleResolver: CardTextStyleResolver
 ) {
     cardDetailsWithPackInfo.run {
+        val flavorFirst = with(cardDetails) {
+            type == CardType.Agenda || type == CardType.Act || type == CardType.Story
+        }
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            CardDetailsMetaBlock(cardDetails, flavorStyleResolver, simpleBack = true)
+            CardDetailsMetaBlock(cardDetails, simpleBack = true)
 
             cardDetails.realSlot?.let { slots ->
                 CardDetailsSlotsBlock(slots)
@@ -244,15 +256,19 @@ fun CardDetailsBackContent(
             }
         }
 
+        if (flavorFirst) {
+            cardDetails.parsedBackFlavor?.let {
+                ParsedCardText(it, flavorStyleResolver, isFlavor = true)
+            }
+        }
+
         cardDetails.parsedBackText?.let {
             ParsedCardText(it, styleResolver)
         }
 
-        cardDetails.run {
-            if (type != CardType.Agenda && type != CardType.Act && type != CardType.Story) {
-                parsedBackFlavor?.let {
-                    ParsedCardText(it, flavorStyleResolver, isFlavor = true)
-                }
+        if (!flavorFirst) {
+            cardDetails.parsedBackFlavor?.let {
+                ParsedCardText(it, flavorStyleResolver, isFlavor = true)
             }
         }
 

@@ -29,13 +29,11 @@ import com.arkhamcards.v2.domain.model.cards.CardDetails
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.theme.AppIconsFont
 import com.arkhamcards.v2.ui.theme.CustomTheme
-import com.arkhamcards.v2.ui.utils.CardTextStyleResolver
 import com.arkhamcards.v2.ui.utils.appSp
 
 @Composable
 fun RowScope.CardDetailsMetaBlock(
     cardDetails: CardDetails,
-    styleResolver: CardTextStyleResolver,
     simpleBack: Boolean = false,
 ) {
     Column(
@@ -57,18 +55,6 @@ fun RowScope.CardDetailsMetaBlock(
                         text = traits,
                         style = CustomTheme.typography.run { small + boldItalic }
                     )
-                }
-
-                if (type == CardType.Agenda || type == CardType.Act || type == CardType.Story) {
-                    parsedBackFlavor?.let {
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        ParsedCardText(
-                            text = it,
-                            styleResolver = styleResolver,
-                            isFlavor = true
-                        )
-                    }
                 }
             } else {
                 traits?.let { traits ->
@@ -139,18 +125,6 @@ fun RowScope.CardDetailsMetaBlock(
                         clues = clues,
                         cluesFixed = cluesFixed
                     )
-                }
-
-                if (type == CardType.Agenda || type == CardType.Act || type == CardType.Story) {
-                    parsedFlavor?.let {
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        ParsedCardText(
-                            text = it,
-                            styleResolver = styleResolver,
-                            isFlavor = true
-                        )
-                    }
                 }
             }
         }
