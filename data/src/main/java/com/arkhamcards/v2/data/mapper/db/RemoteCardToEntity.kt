@@ -35,7 +35,13 @@ fun SingleCard.toEntity(
     val patchValues = cardPatch.values
 
     //TODO: impl back types for all cards
-    val backType = patchValues.backType.resolve() ?: ""
+    val patchedBackType = patchValues.backType.resolve()
+    val backType = when {
+        double_sided == true || back_link_id != null -> "card"
+        patchedBackType != null -> patchedBackType
+        faction_code == "mythos" || (encounter_code != null && deck_limit == null) -> "encounter"
+        else -> "player"
+    }
 
     val reprintPackCode = if (cycle.code in REPRINT_PACKS) {
         cycle.code + if (encounter_code == null) "p" else "c"
@@ -146,9 +152,29 @@ fun SingleCard.toEntity(
         typeCode = type_code.rawValue,
         //Exclude thumbnail for random basic weakness
         thumbnailurl = if (official && id != "01000") ARKHAM_BUILD_BASE_IMAGE_URL + "thumbnails/${code}.webp" else null,
-        backthumbnailurl = if (official && double_sided == true && back_link_id == null) ARKHAM_BUILD_BASE_IMAGE_URL + "thumbnails/${code}b.webp" else null,
-        imageurl = imageurl,
-        backimageurl = backimageurl,
+        backthumbnailurl = if (official && double_sided == true && back_link_id == null) {
+            ARKHAM_BUILD_BASE_IMAGE_URL + "thumbnails/${code}b.webp"
+        } else null,
+        imageurl = when {
+            official -> {
+                ARKHAM_BUILD_BASE_IMAGE_URL + "optimized/${
+                    if (taboo_set_id != 0 && taboo_placeholder != true) id else code
+                }.webp"
+            }
+            else -> imageurl
+        },
+        backimageurl = when {
+            backType != "card" -> ARKHAM_BUILD_BASE_IMAGE_URL + "back_${backType}.jpg"
+            official && double_sided == true && back_link_id == null -> {
+                ARKHAM_BUILD_BASE_IMAGE_URL + "optimized/${
+                    if (taboo_set_id != 0 && taboo_placeholder != true) id else code
+                }b.webp"
+            }
+            official && back_link_id != null -> {
+                ARKHAM_BUILD_BASE_IMAGE_URL + "optimized/${back_link_id}.webp"
+            }
+            else -> backimageurl
+        },
         tabooXp = taboo_xp,
         tabooSetId = when(taboo_set_id) {
             0 -> null //Fix taboo set id for original cards which are/were in any taboo set

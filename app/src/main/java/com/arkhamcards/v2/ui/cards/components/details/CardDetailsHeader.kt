@@ -138,6 +138,7 @@ fun CardDetailsHeader(
                     } else {
                         cardDetails.name
                     }
+
                     CardDetailsNameRow(
                         parallel = cardDetails.parallel,
                         isUnique = cardDetails.isUnique,
