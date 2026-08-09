@@ -117,6 +117,7 @@ data class CardDetailsEntity(
 
     //image fields
     val thumbnailurl: String?,
+    val backthumbnailurl: String?,
     val imageurl: String?,
     val backimageurl: String?,
 

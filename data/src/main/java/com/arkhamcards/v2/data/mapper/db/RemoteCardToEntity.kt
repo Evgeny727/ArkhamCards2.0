@@ -146,6 +146,7 @@ fun SingleCard.toEntity(
         typeCode = type_code.rawValue,
         //Exclude thumbnail for random basic weakness
         thumbnailurl = if (official && id != "01000") ARKHAM_BUILD_BASE_IMAGE_URL + "thumbnails/${code}.webp" else null,
+        backthumbnailurl = if (official && double_sided == true && back_link_id == null) ARKHAM_BUILD_BASE_IMAGE_URL + "thumbnails/${code}b.webp" else null,
         imageurl = imageurl,
         backimageurl = backimageurl,
         tabooXp = taboo_xp,

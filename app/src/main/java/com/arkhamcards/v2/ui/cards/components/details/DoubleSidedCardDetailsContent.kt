@@ -229,8 +229,7 @@ fun CardDetailsBackContent(
             if (cardDetails.type != CardType.Investigator && cardDetails.type != CardType.Story) {
                 cardDetails.run {
                     CardDetailsClickableThumbnail(
-                        thumbnailUrl = thumbnailUrl,
-                        //TODO: add backThumbNail
+                        thumbnailUrl = backThumbnailUrl,
                         imageUrl = imageUrl,
                         backImageUrl = backImageUrl,
                         taboSetId = tabooSetId,

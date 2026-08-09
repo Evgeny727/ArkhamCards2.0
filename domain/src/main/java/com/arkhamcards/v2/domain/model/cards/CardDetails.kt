@@ -73,6 +73,7 @@ data class CardDetails(
 
     //image fields
     val thumbnailUrl: String?,
+    val backThumbnailUrl: String?,
     val imageUrl: String?,
     val backImageUrl: String?,
 
