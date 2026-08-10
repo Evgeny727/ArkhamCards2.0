@@ -90,6 +90,9 @@ data class CardDetails(
     val parsedCustomizationText: CardText?,
     val parsedTabooOriginalBackText: CardText?,
     val parsedTabooOriginalText: CardText?,
+
+    //Linked Back info
+    val backInfo: CardBackInfo?
 )
 
 data class CardPackInfo(
@@ -100,3 +103,13 @@ data class CardPackInfo(
     val quantity: Int,
     val position: Int,
 )
+
+data class CardBackInfo(
+    val code: String,
+    val type: CardType,
+    val tabooSetId: String?,
+    val tabooPlaceholder: Boolean,
+    val imageUrl: String?
+)
+
+const val ARKHAM_BUILD_BASE_IMAGE_URL = "https://cdn.arkham.build/"

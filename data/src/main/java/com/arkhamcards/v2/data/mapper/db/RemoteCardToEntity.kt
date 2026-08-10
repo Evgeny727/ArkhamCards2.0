@@ -14,10 +14,9 @@ import com.arkhamcards.v2.data.objects.CardSortOrder.sortByFactionOrder
 import com.arkhamcards.v2.data.objects.CardSortOrder.sortBySlotOrder
 import com.arkhamcards.v2.data.objects.CardSortOrder.sortByTypeOrder
 import com.arkhamcards.v2.data.objects.normalizeForSearch
+import com.arkhamcards.v2.domain.model.cards.ARKHAM_BUILD_BASE_IMAGE_URL
 import com.arkhamcards.v2.fragment.CoreCardText
 import com.arkhamcards.v2.fragment.SingleCard
-
-const val ARKHAM_BUILD_BASE_IMAGE_URL = "https://cdn.arkham.build/"
 
 val REPRINT_PACKS = setOf("dwl", "ptc", "tfa", "tcu", "tde", "tic")
 
@@ -166,9 +165,9 @@ fun SingleCard.toEntity(
         backimageurl = when {
             backType != "card" -> ARKHAM_BUILD_BASE_IMAGE_URL + "back_${backType}.jpg"
             official && double_sided == true && back_link_id == null -> {
-                ARKHAM_BUILD_BASE_IMAGE_URL + "optimized/${
-                    if (taboo_set_id != 0 && taboo_placeholder != true) id else code
-                }b.webp"
+                ARKHAM_BUILD_BASE_IMAGE_URL + "optimized/${code}b${
+                    if ((taboo_set_id ?: 0) != 0 && taboo_placeholder != true) "-$taboo_set_id" else ""
+                }.webp"
             }
             official && back_link_id != null -> {
                 ARKHAM_BUILD_BASE_IMAGE_URL + "optimized/${back_link_id}.webp"

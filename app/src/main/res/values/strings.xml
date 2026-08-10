@@ -1953,4 +1953,7 @@
     <string name="sort_by_encounter">Encounter Set</string>
     <string name="socials_text">Chat with other Arkham Horror: The Card Game™ players:</string>
     <string name="card_back_name_fallback">%s - Back</string>
+    <string name="card_scan">Card Scan</string>
+    <string name="card_scan_with_taboo">Show with taboo</string>
+    <string name="card_scan_without_taboo">Show without taboo</string>
 </resources>

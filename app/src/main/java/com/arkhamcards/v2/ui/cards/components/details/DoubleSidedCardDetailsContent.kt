@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.arkhamcards.v2.R
+import com.arkhamcards.v2.domain.enums.CardBackType
 import com.arkhamcards.v2.domain.enums.CardType
 import com.arkhamcards.v2.domain.enums.CardType.Companion.isLocationLike
 import com.arkhamcards.v2.domain.enums.Faction
@@ -158,9 +159,13 @@ fun CardDetailsFrontContent(
                 CardDetailsClickableThumbnail(
                     thumbnailUrl = thumbnailUrl,
                     imageUrl = imageUrl,
-                    backImageUrl = backImageUrl,
-                    taboSetId = tabooSetId,
+                    backImageUrl = backInfo?.imageUrl ?: backImageUrl,
+                    taboSetId = if (tabooPlaceholder) null else tabooSetId,
+                    backTaboSetId = backInfo?.tabooPlaceholder?.let { if (it) null else backInfo?.tabooSetId },
+                    code = code,
+                    backCode = backInfo?.code,
                     type = type,
+                    backCardType = backInfo?.type,
                     backType = backType,
                     encounterCode = encounterCode,
                     subType = subType,
@@ -244,13 +249,18 @@ fun CardDetailsBackContent(
                         thumbnailUrl = backThumbnailUrl,
                         imageUrl = imageUrl,
                         backImageUrl = backImageUrl,
-                        taboSetId = tabooSetId,
+                        taboSetId = if (tabooPlaceholder) null else tabooSetId,
+                        backTaboSetId = if (tabooPlaceholder) null else tabooSetId,
+                        code = code,
+                        backCode = null,
                         type = type,
-                        backType = backType,
+                        backCardType = null,
+                        backType = CardBackType.Card,
                         encounterCode = encounterCode,
                         subType = subType,
                         faction = faction,
                         faction2 = faction2,
+                        isBackFirst = true
                     )
                 }
             }

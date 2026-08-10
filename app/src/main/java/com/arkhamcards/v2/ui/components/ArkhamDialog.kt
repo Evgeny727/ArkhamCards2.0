@@ -1,5 +1,6 @@
 package com.arkhamcards.v2.ui.components
 
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,7 +15,7 @@ fun ArkhamDialog(
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier,
     allowDismiss: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable (ColumnScope.() -> Unit)
 ) {
     Dialog(
         onDismissRequest = onDismiss,

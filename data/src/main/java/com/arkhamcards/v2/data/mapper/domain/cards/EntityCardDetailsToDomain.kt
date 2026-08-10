@@ -7,13 +7,20 @@ import com.arkhamcards.v2.domain.enums.CardBackType
 import com.arkhamcards.v2.domain.enums.CardSubType
 import com.arkhamcards.v2.domain.enums.CardType
 import com.arkhamcards.v2.domain.enums.Faction
+import com.arkhamcards.v2.domain.model.cards.CardBackInfo
 import com.arkhamcards.v2.domain.model.cards.CardDetails
 import com.arkhamcards.v2.domain.model.cards.CardDetailsWithPackInfo
 import com.arkhamcards.v2.domain.model.cards.CardPackInfo
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
-internal fun CardDetailsEntity.toDomain() = CardDetails(
+internal fun CardDetailsEntity.toDomain(
+    backCode: String?,
+    backCardType: CardType?,
+    backTabooSetId: String?,
+    backTabooPlaceholder: Boolean,
+    backImageUrl: String?,
+) = CardDetails(
     id = id,
     code = code,
     backName = backName,
@@ -89,6 +96,15 @@ internal fun CardDetailsEntity.toDomain() = CardDetails(
     parsedCustomizationText = customizationText?.let { CardTextParser.parse(it) },
     parsedTabooOriginalBackText = tabooOriginalBackText?.let { CardTextParser.parse(it) },
     parsedTabooOriginalText = tabooOriginalText?.let { CardTextParser.parse(it) },
+    backInfo = backCode?.let {
+        CardBackInfo(
+            code = it,
+            tabooSetId = backTabooSetId,
+            type = backCardType ?: CardType.byType(typeCode),
+            tabooPlaceholder = backTabooPlaceholder,
+            imageUrl = backImageUrl
+        )
+    }
 )
 
 internal fun List<CardDetailsEntity>.toDetailsWithPackInfo(): Map<String, CardDetailsWithPackInfo> {
@@ -119,9 +135,19 @@ internal fun List<CardDetailsEntity>.toDetailsWithPackInfo(): Map<String, CardDe
             }
         }.toImmutableList()
 
+        val backCard = (CardCache.backs[code] ?: CardCache.fronts[code])?.let { backCode ->
+            map[backCode]
+        }
+
         detailsWithPackInfoMap[code] =
             CardDetailsWithPackInfo(
-                cardDetails = entity.toDomain(),
+                cardDetails = entity.toDomain(
+                    backCode = backCard?.code,
+                    backCardType = backCard?.typeCode?.let { CardType.byType(it) },
+                    backTabooSetId = backCard?.tabooSetId,
+                    backTabooPlaceholder = backCard?.tabooPlaceholder ?: false,
+                    backImageUrl = backCard?.imageurl
+                ),
                 duplicates = duplicates,
                 reprints = reprints,
             )

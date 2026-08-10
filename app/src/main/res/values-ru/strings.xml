@@ -364,7 +364,7 @@
     <string name="alternate_cards">Альтернативные карты</string>
     <string name="advanced_cards">Продвинутые карты</string>
     <string name="parallel_cards">Альтернативные карты</string>
-    <string name="replacement_cards">Продвинутые карты</string>
+    <string name="replacement_cards">Замены</string>
     <string name="side_required_cards">Дополнительные карты</string>
     <string name="other_level_cards">Другие уровни</string>
     <string name="other_signature_cards">Другие персональные карты</string>
@@ -1956,4 +1956,7 @@
     <string name="chapter_2">Сезон 2</string>
     <string name="socials_text">Общайтесь с другими поклонниками карточного «Ужаса Аркхэма» в русскоязычных сообществах:</string>
     <string name="card_back_name_fallback">%s — Оборот</string>
+    <string name="card_scan">Скан карты</string>
+    <string name="card_scan_with_taboo">Показать с табу</string>
+    <string name="card_scan_without_taboo">Показать без табу</string>
 </resources>
