@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.hilt)
@@ -25,6 +23,10 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.perf)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)

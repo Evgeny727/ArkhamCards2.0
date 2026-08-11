@@ -33,7 +33,6 @@ fun SingleCard.toEntity(
     val translation = coreCardText.toTranslation(this)
     val patchValues = cardPatch.values
 
-    //TODO: impl back types for all cards
     val patchedBackType = patchValues.backType.resolve()
     val backType = when {
         double_sided == true || back_link_id != null -> "card"

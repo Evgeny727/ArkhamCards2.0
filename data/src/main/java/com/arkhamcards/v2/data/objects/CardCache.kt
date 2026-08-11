@@ -2,6 +2,7 @@ package com.arkhamcards.v2.data.objects
 
 import com.arkhamcards.v2.data.local.cards.CardCacheData
 import com.arkhamcards.v2.data.local.cards.CardEntity
+import com.arkhamcards.v2.domain.repository.AnalyticsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.JsonArray
@@ -131,7 +132,10 @@ object CardCache {
         val xp: Int,
     )
 
-    suspend fun createCache(cardsList: List<CardEntity>) = withContext(Dispatchers.Default) {
+    suspend fun createCache(
+        cardsList: List<CardEntity>,
+        analyticsRepository: AnalyticsRepository
+    ) = withContext(Dispatchers.Default) {
         clearCache()
 
         val cardsMap = cardsList.associateBy { it.code }
@@ -142,6 +146,8 @@ object CardCache {
         val investigatorsByName: MutableMap<String, MutableSet<String>> = mutableMapOf()
         val canonicalInvestigatorCodes: MutableSet<String> = mutableSetOf()
         val requiredCardCodes: MutableSet<String> = mutableSetOf()
+
+        var missingInvestigators = 0
 
         // first pass: identify target cards.
         for (card in cardsList) {
@@ -216,7 +222,8 @@ object CardCache {
                     val investigator = cardsMap[key]
 
                     if (investigator == null) {
-                        //TODO:log missing investigator to crashlytics
+                        analyticsRepository.logMessage("Missing investigator: $key")
+                        missingInvestigators++
                         continue
                     }
 
@@ -310,6 +317,10 @@ object CardCache {
                     }
                 }
             }
+        }
+
+        if (missingInvestigators > 0) {
+            analyticsRepository.logError(NoSuchElementException("Missing $missingInvestigators investigators."))
         }
 
         for ((back, front) in localBacks) {

@@ -25,8 +25,6 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.firebase.Firebase
-import com.google.firebase.crashlytics.crashlytics
 import dagger.hilt.android.AndroidEntryPoint
 
 val LocalThemeIsDark = compositionLocalOf { false }
@@ -47,18 +45,6 @@ class MainActivity : AppCompatActivity() {
         val isPlayServicesAvailable = GoogleApiAvailability.getInstance()
             .isGooglePlayServicesAvailable(this)
         if (isPlayServicesAvailable == ConnectionResult.SUCCESS) maybeCheckForUpdate()
-
-        val crashlytics = Firebase.crashlytics
-//        crashlytics.setCustomKeys {
-//            key("current_level", 3)
-//            key("last_UI_action", "logged_in")
-//        }
-        //crashlytics.log("message")
-        //crashlytics.setUserId("user_id")
-//        crashlytics.recordException(RuntimeException("Test Crash")) {
-//            key("string key", "string value")
-//            key("boolean key", true)
-//        }
 
         setContent {
             viewModel = hiltViewModel<AppViewModel>(this)

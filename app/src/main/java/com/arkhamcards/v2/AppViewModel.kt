@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.arkhamcards.v2.domain.repository.AnalyticsRepository
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -21,13 +22,17 @@ val AUDIO_LANGUAGES = setOf("es", "ru", "en", "de", "pl")
 @HiltViewModel
 class AppViewModel @Inject constructor(
     private val cardsSyncManager: CardsSyncManager,
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val analyticsRepository: AnalyticsRepository
 ) : ViewModel() {
 
     private val _events = MutableSharedFlow<UiErrorState>(extraBufferCapacity = 1)
     val events = _events.asSharedFlow()
 
-    fun emitError(throwable: Throwable) = _events.tryEmit(UiErrorState(throwable))
+    fun emitError(throwable: Throwable) {
+        analyticsRepository.logError(throwable)
+        _events.tryEmit(UiErrorState(throwable))
+    }
 
     val cardsSyncState = cardsSyncManager.state
     val cardsCacheState = cardsSyncManager.cacheState

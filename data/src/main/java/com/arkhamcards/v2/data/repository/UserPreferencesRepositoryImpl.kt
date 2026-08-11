@@ -1,6 +1,5 @@
 package com.arkhamcards.v2.data.repository
 
-import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.IOException
 import androidx.datastore.preferences.core.Preferences
@@ -12,6 +11,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
 import com.arkhamcards.v2.domain.model.settings.Collection
+import com.arkhamcards.v2.domain.repository.AnalyticsRepository
 import com.arkhamcards.v2.domain.repository.DEFAULT_MYTHOS_SORT_ORDER
 import com.arkhamcards.v2.domain.repository.DEFAULT_PLAYER_SORT_ORDER
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
@@ -26,11 +26,14 @@ import javax.inject.Inject
 
 class UserPreferencesRepositoryImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>,
+    private val analyticsRepository: AnalyticsRepository
 ) : UserPreferencesRepository {
     override val isDarkTheme: Flow<Int> = dataStore.data
         .catch {
             if (it is IOException) {
-                Log.e(TAG, "Error reading theme preferences.", it)
+                analyticsRepository.logMessage("Error reading theme preferences.")
+                analyticsRepository.logError(it)
+
                 emit(emptyPreferences())
             } else {
                 throw it
@@ -41,7 +44,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override val scaleFactor: Flow<Float> = dataStore.data
         .catch {
             if (it is IOException) {
-                Log.e(TAG, "Error reading scale factor preferences.", it)
+                analyticsRepository.logMessage("Error reading scale factor preferences.")
+                analyticsRepository.logError(it)
+
                 emit(emptyPreferences())
             } else {
                 throw it
@@ -52,7 +57,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override val showFanmadeCards: Flow<Boolean> = dataStore.data
         .catch {
             if (it is IOException) {
-                Log.e(TAG, "Error reading fanmade cards preferences.", it)
+                analyticsRepository.logMessage("Error reading fanmade cards preferences.")
+                analyticsRepository.logError(it)
+
                 emit(emptyPreferences())
             } else {
                 throw it
@@ -63,7 +70,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override val isIncludeEnglishSearchResults: Flow<Boolean> = dataStore.data
         .catch {
             if (it is IOException) {
-                Log.e(TAG, "Error reading english search preferences.", it)
+                analyticsRepository.logMessage("Error reading english search preferences.")
+                analyticsRepository.logError(it)
+
                 emit(emptyPreferences())
             } else {
                 throw it
@@ -74,7 +83,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override val tabooSetId: Flow<Int> = dataStore.data
         .catch {
             if (it is IOException) {
-                Log.e(TAG, "Error reading taboo preferences.", it)
+                analyticsRepository.logMessage("Error reading taboo preferences.")
+                analyticsRepository.logError(it)
+
                 emit(emptyPreferences())
             } else {
                 throw it
@@ -85,7 +96,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override val collection: Flow<Collection> = dataStore.data
         .catch {
             if (it is IOException) {
-                Log.e(TAG, "Error reading collection preferences.", it)
+                analyticsRepository.logMessage("Error reading collection preferences.")
+                analyticsRepository.logError(it)
+
                 emit(emptyPreferences())
             } else {
                 throw it
@@ -98,7 +111,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override val ignoreCollection: Flow<Boolean> = dataStore.data
         .catch {
             if (it is IOException) {
-                Log.e(TAG, "Error reading ignore collection preferences.", it)
+                analyticsRepository.logMessage("Error reading ignore collection preferences.")
+                analyticsRepository.logError(it)
+
                 emit(emptyPreferences())
             } else {
                 throw it
@@ -109,7 +124,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override val cardsUpdatedAt: Flow<String> = dataStore.data
         .catch {
             if (it is IOException) {
-                Log.e(TAG, "Error reading cards updated timestamp preferences.", it)
+                analyticsRepository.logMessage("Error reading cards updated timestamp preferences.")
+                analyticsRepository.logError(it)
+
                 emit(emptyPreferences())
             } else {
                 throw it
@@ -120,7 +137,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override val sortOrderPlayer: Flow<ImmutableList<String>> = dataStore.data
         .catch {
             if (it is IOException) {
-                Log.e(TAG, "Error reading theme preferences.", it)
+                analyticsRepository.logMessage("Error reading player sort order preferences.")
+                analyticsRepository.logError(it)
+
                 emit(emptyPreferences())
             } else {
                 throw it
@@ -132,7 +151,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override val sortOrderMythos: Flow<ImmutableList<String>> = dataStore.data
         .catch {
             if (it is IOException) {
-                Log.e(TAG, "Error reading theme preferences.", it)
+                analyticsRepository.logMessage("Error reading mythos sort order preferences.")
+                analyticsRepository.logError(it)
+
                 emit(emptyPreferences())
             } else {
                 throw it
@@ -144,7 +165,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override val cardsSearchPreferences: Flow<CardsSearchPreferences> = dataStore.data
         .catch {
             if (it is IOException) {
-                Log.e(TAG, "Error reading cards search preferences.", it)
+                analyticsRepository.logMessage("Error reading cards search preferences.")
+                analyticsRepository.logError(it)
+
                 emit(emptyPreferences())
             } else {
                 throw it

@@ -1,7 +1,6 @@
 package com.arkhamcards.v2.data.repository
 
 import android.content.Context
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -31,7 +30,9 @@ import com.arkhamcards.v2.domain.model.cards.CodeWithTaboo
 import com.arkhamcards.v2.domain.objects.TimestampNormilizer.compareTimestamps
 import com.arkhamcards.v2.domain.objects.TimestampNormilizer.getCurrentDateTime
 import com.arkhamcards.v2.domain.objects.TimestampNormilizer.isAtLeastTwoWeeksApart
+import com.arkhamcards.v2.domain.repository.AnalyticsRepository
 import com.arkhamcards.v2.domain.repository.CardsRepository
+import com.arkhamcards.v2.domain.repository.PerformanceRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
@@ -54,7 +55,9 @@ private val json = Json {
 class CardsRepositoryImpl @Inject constructor(
     private val cardsRemoteDataSource: CardsRemoteDataSource,
     private val db: ArkhamDatabase,
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val performanceRepository: PerformanceRepository,
+    private val analyticsRepository: AnalyticsRepository
 ) : CardsRepository {
 
     private val cardsDao = db.cardsDao()
@@ -126,7 +129,6 @@ class CardsRepositoryImpl @Inject constructor(
             metaDao.upsertCycles(cycleEntities)
             metaDao.upsertPacks(packEntities)
             metaDao.upsertEncounterSets(encounterSetEntities)
-            Log.e("transaction", "upsertEncounterSets: ${encounterSetEntities.size}")
             metaDao.upsertTabooSets(tabooSetEntities)
             cardsDao.upsertCardTypes(cardTypeEntities)
             cardsDao.upsertCardSubtypes(cardSubtypeEntities)
@@ -134,7 +136,9 @@ class CardsRepositoryImpl @Inject constructor(
         }
         onProgress(0.85f)
 
-        createCache(allCards)
+        performanceRepository.trace("createCache") {
+            createCache(allCards, analyticsRepository)
+        }
         onProgress(0.93f)
         saveCache()
         onProgress(0.97f)
@@ -171,28 +175,31 @@ class CardsRepositoryImpl @Inject constructor(
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    private suspend fun saveCache() = withContext(Dispatchers.IO) {
-        File(context.filesDir, "card_cache.json")
-            .outputStream()
-            .buffered()
-            .use { json.encodeToStream(CardCache.toData(), it) }
+    private suspend fun saveCache() = performanceRepository.trace("saveCache") {
+        withContext(Dispatchers.IO) {
+            File(context.filesDir, "card_cache.json")
+                .outputStream()
+                .buffered()
+                .use { json.encodeToStream(CardCache.toData(), it) }
+        }
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    override suspend fun loadCache(): Boolean = withContext(Dispatchers.IO) {
+    override suspend fun loadCache(): Boolean = performanceRepository.trace("loadCache") {
+        withContext(Dispatchers.IO) {
+            val file = File(context.filesDir, "card_cache.json")
 
-        val file = File(context.filesDir, "card_cache.json")
+            if (!file.exists()) { return@withContext false }
 
-        if (!file.exists()) { return@withContext false }
+            val data: CardCacheData =
+                file.inputStream().buffered().use{
+                    json.decodeFromStream<CardCacheData>(it)
+                }
 
-        val data: CardCacheData =
-            file.inputStream().buffered().use{
-                json.decodeFromStream<CardCacheData>(it)
-            }
+            CardCache.load(data)
 
-        CardCache.load(data)
-
-        return@withContext true
+            return@withContext true
+        }
     }
 
     override fun searchPaginatedCardsFlow(
