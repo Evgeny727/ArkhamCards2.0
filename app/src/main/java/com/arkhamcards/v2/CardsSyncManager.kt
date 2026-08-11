@@ -2,6 +2,7 @@ package com.arkhamcards.v2
 
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.time.Duration.Companion.seconds
 
 sealed interface CardsSyncState {
     object Idle : CardsSyncState
@@ -49,7 +51,7 @@ class CardsSyncManager @Inject constructor(
     }
 
     suspend fun checkForUpdate(language: String) {
-        fetchCardsUpdate(language) { updateAvailable ->
+        fetchCardsUpdate(language, loadCacheOnError = true) { updateAvailable ->
             if (updateAvailable) _state.value = CardsSyncState.UpdateAvailable
             else loadCache()
         }
@@ -80,6 +82,7 @@ class CardsSyncManager @Inject constructor(
     private suspend inline fun fetchCardsUpdate(
         language: String,
         forced: Boolean = false,
+        loadCacheOnError: Boolean = false,
         block: suspend (Boolean) -> Unit
     ) {
         cardsRepository.isCardsUpdateAvailable(
@@ -91,6 +94,7 @@ class CardsSyncManager @Inject constructor(
             .onFailure {
                 _errors.tryEmit(it)
                 _state.value = CardsSyncState.Ready
+                if (loadCacheOnError) loadCache()
             }
     }
 
@@ -112,7 +116,10 @@ class CardsSyncManager @Inject constructor(
 
     suspend fun loadCache() {
         _cacheState.value = CardsCacheState.Loading
+
         val cacheReady = cardsRepository.loadCache()
+
+        delay(1.seconds) //slight delay for better visual representation of loading
 
         if (cacheReady) _cacheState.value = CardsCacheState.Ready
         else _cacheState.value = CardsCacheState.Error

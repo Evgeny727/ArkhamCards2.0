@@ -30,7 +30,7 @@ import com.arkhamcards.v2.domain.model.cards.CardsSearchPreferences
 import com.arkhamcards.v2.domain.model.cards.CodeWithTaboo
 import com.arkhamcards.v2.domain.objects.TimestampNormilizer.compareTimestamps
 import com.arkhamcards.v2.domain.objects.TimestampNormilizer.getCurrentDateTime
-import com.arkhamcards.v2.domain.objects.TimestampNormilizer.isAtLeastWeekApart
+import com.arkhamcards.v2.domain.objects.TimestampNormilizer.isAtLeastTwoWeeksApart
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.collections.immutable.ImmutableList
@@ -155,7 +155,7 @@ class CardsRepositoryImpl @Inject constructor(
 
     override suspend fun isCardsUpdateAvailable(locale: String, savedTimestamp: String?, forced: Boolean) = runCatching {
         val currentTimestamp = getCurrentDateTime()
-        if (!forced && !isAtLeastWeekApart(savedTimestamp, currentTimestamp))
+        if (!forced && !isAtLeastTwoWeeksApart(savedTimestamp, currentTimestamp))
             return@runCatching false
 
         val cardsUpdatedAt = cardsRemoteDataSource.fetchCardsUpdatedAt(locale).dataAssertNoErrors

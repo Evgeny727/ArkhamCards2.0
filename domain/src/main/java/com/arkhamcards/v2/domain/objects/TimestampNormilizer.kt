@@ -62,7 +62,7 @@ object TimestampNormilizer {
         return date1.before(date2)
     }
 
-    fun isAtLeastWeekApart(timestamp1: String?, timestamp2: String?): Boolean {
+    fun isAtLeastTwoWeeksApart(timestamp1: String?, timestamp2: String?): Boolean {
         if (timestamp1.isNullOrBlank() || timestamp2.isNullOrBlank()) return false
 
         val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US).apply {
@@ -72,6 +72,6 @@ object TimestampNormilizer {
         val date1 = format.parse(fixFraction(timestamp1) ?: return false) ?: return false
         val date2 = format.parse(fixFraction(timestamp2) ?: return false) ?: return false
 
-        return abs(date2.time - date1.time) >= WEEK_MILLIS
+        return abs(date2.time - date1.time) >= WEEK_MILLIS * 2
     }
 }

@@ -3,6 +3,7 @@ package com.arkhamcards.v2.ui.navigation
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.EaseIn
@@ -16,7 +17,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -26,9 +30,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
@@ -87,6 +93,7 @@ import com.arkhamcards.v2.ui.settings.SettingsScreen
 import com.arkhamcards.v2.ui.settings.SettingsViewModel
 import com.arkhamcards.v2.ui.theme.CustomTheme
 import com.arkhamcards.v2.ui.theme.LocalLanguage
+import com.arkhamcards.v2.ui.utils.applyScaffoldPaddings
 
 @Composable
 fun ArkhamNavHost(viewModel: AppViewModel) {
@@ -153,21 +160,23 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                 snackbarHostState.showSnackbar(message)
             }
         }
-        if (cardsState is CardsSyncState.UpdateAvailable) ArkhamAlertDialog(
-            title = stringResource(R.string.new_cards_available),
-            description = stringResource(R.string.these_cards_might_have_been_updated),
-            onDismiss = viewModel::cancelCardsUpdate,
-        ) {
-            ArkhamAlertButton(
-                text = stringResource(R.string.not_now),
-                style = ArkhamAlertButtonStyle.CANCEL,
-                loading = cardsCacheState is CardsCacheState.Loading,
-                onClick = viewModel::cancelCardsUpdate
-            )
-            ArkhamAlertButton(
-                text = stringResource(R.string.download_cards),
-                loading = cardsCacheState is CardsCacheState.Loading,
-            ) { viewModel.confirmCardsUpdate(languageTag) }
+        if (cardsState is CardsSyncState.UpdateAvailable) {
+            ArkhamAlertDialog(
+                title = stringResource(R.string.new_cards_available),
+                description = stringResource(R.string.these_cards_might_have_been_updated),
+                onDismiss = viewModel::cancelCardsUpdate,
+            ) {
+                ArkhamAlertButton(
+                    text = stringResource(R.string.not_now),
+                    style = ArkhamAlertButtonStyle.CANCEL,
+                    loading = cardsCacheState is CardsCacheState.Loading,
+                    onClick = viewModel::cancelCardsUpdate
+                )
+                ArkhamAlertButton(
+                    text = stringResource(R.string.download_cards),
+                    loading = cardsCacheState is CardsCacheState.Loading,
+                ) { viewModel.confirmCardsUpdate(languageTag) }
+            }
         }
         Box(
             modifier = Modifier.fillMaxSize()
@@ -453,15 +462,53 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                     }
                 }
             }
+
             if (cardsState is CardsSyncState.Loading) {
                 CardsDownloadingProgressIndicator((cardsState as CardsSyncState.Loading).progress)
+            }
+
+            AnimatedVisibility(
+                modifier = Modifier.align(Alignment.BottomEnd),
+                visible = cardsCacheState is CardsCacheState.Loading
+                        && cardsState !is CardsSyncState.UpdateAvailable
+            ) {
+                CardsCacheLoading(innerPadding)
             }
         }
     }
 }
 
+internal fun <T: Any> NavHostController.navigateSingleTop(route: T) = navigate(route) {
+    launchSingleTop = true
+}
+
 @Composable
-fun CardsDownloadingProgressIndicator(progress: Float) {
+private fun CardsCacheLoading(paddingValues: PaddingValues) {
+    Surface(
+        modifier = Modifier.applyScaffoldPaddings(paddingValues).padding(8.dp),
+        color = CustomTheme.colors.d30,
+        shape = CustomTheme.shapes.medium
+    ) {
+        Row(
+            modifier = Modifier.padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(32.dp),
+                color = CustomTheme.colors.l30
+            )
+            Text(
+                text = stringResource(R.string.loading_cards_cache),
+                color = CustomTheme.colors.l30,
+                style = CustomTheme.typography.text
+            )
+        }
+    }
+}
+
+@Composable
+private fun CardsDownloadingProgressIndicator(progress: Float) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = CustomTheme.colors.background
@@ -512,8 +559,4 @@ private fun CustomLinearProgressBar(
                 .background(CustomTheme.colors.d10)
         )
     }
-}
-
-internal fun <T: Any> NavHostController.navigateSingleTop(route: T) = navigate(route) {
-    launchSingleTop = true
 }

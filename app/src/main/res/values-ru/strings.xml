@@ -1959,4 +1959,5 @@
     <string name="card_scan">Скан карты</string>
     <string name="card_scan_with_taboo">Показать с табу</string>
     <string name="card_scan_without_taboo">Показать без табу</string>
+    <string name="loading_cards_cache">Загрузка кэша…</string>
 </resources>
