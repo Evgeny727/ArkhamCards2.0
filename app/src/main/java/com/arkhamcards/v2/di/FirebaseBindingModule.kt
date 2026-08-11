@@ -1,4 +1,4 @@
-package com.arkhamcards.v2.firebase.di
+package com.arkhamcards.v2.di
 
 import com.arkhamcards.v2.domain.repository.AnalyticsRepository
 import com.arkhamcards.v2.domain.repository.PerformanceRepository

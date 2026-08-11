@@ -1198,6 +1198,7 @@
     <string name="frost">Frost</string>
     <string name="database_reset">Database reset</string>
     <string name="please_close_and_restart_the_app">Please close and restart the app</string>
+    <string name="restart_app">Restart</string>
     <string name="reset_card_database">Reset card database</string>
     <string name="mythos_busters">Mythos Busters</string>
     <string name="database_cleared">The card database has been reset.\n\nPlease close the app and restart it to trigger a full sync of card data.</string>
@@ -1957,4 +1958,7 @@
     <string name="card_scan_with_taboo">Show with taboo</string>
     <string name="card_scan_without_taboo">Show without taboo</string>
     <string name="loading_cards_cache">Loading cache…</string>
+    <string name="load_cards_cache_error">Unable to load cards cache</string>
+    <string name="create_cards_cache_error">Unable to create cards cache</string>
+    <string name="clear_cards_database_error">Unable to clear cards database</string>
 </resources>

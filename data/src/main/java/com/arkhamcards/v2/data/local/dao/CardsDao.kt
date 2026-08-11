@@ -79,4 +79,7 @@ interface CardsDao {
         )
     """)
     fun getCardsByCodeFlow(codes: Collection<String>, tabooSetId: Int?): Flow<List<CardDetailsEntity>>
+
+    @Query("SELECT * FROM card")
+    suspend fun getAllCards(): List<CardEntity>
 }

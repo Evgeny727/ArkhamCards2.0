@@ -202,6 +202,27 @@ class CardsRepositoryImpl @Inject constructor(
         }
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
+    override suspend fun recreateCache(): Boolean = try {
+        performanceRepository.trace("recreateCache") {
+            withContext(Dispatchers.IO) {
+                val allCards = cardsDao.getAllCards()
+                createCache(allCards, analyticsRepository)
+                saveCache()
+            }
+        }
+        true
+    } catch (e: Throwable) {
+        analyticsRepository.logError(e)
+        false
+    }
+
+    @OptIn(ExperimentalSerializationApi::class)
+    override suspend fun clearCardsDatabase() = runCatching {
+        cardsDao.deleteAllCards()
+        metaDao.deleteAll()
+    }
+
     override fun searchPaginatedCardsFlow(
         spoilerState: Boolean,
         searchOptions: CardsSearchOptions,

@@ -16,8 +16,8 @@ import com.arkhamcards.v2.ui.theme.CustomTheme
 fun ArkhamAlertDialog(
     title: String,
     description: String,
-    onDismiss: () -> Unit,
     modifier: Modifier = Modifier,
+    onDismiss: () -> Unit = {},
     buttons: (@Composable () -> Unit)? = null
 ) {
     Dialog(

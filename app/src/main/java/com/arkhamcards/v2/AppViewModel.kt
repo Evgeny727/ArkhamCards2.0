@@ -26,12 +26,12 @@ class AppViewModel @Inject constructor(
     private val analyticsRepository: AnalyticsRepository
 ) : ViewModel() {
 
-    private val _events = MutableSharedFlow<UiErrorState>(extraBufferCapacity = 1)
-    val events = _events.asSharedFlow()
+    private val _errors = MutableSharedFlow<UiErrorState>(extraBufferCapacity = 1)
+    val errors = _errors.asSharedFlow()
 
     fun emitError(throwable: Throwable) {
         analyticsRepository.logError(throwable)
-        _events.tryEmit(UiErrorState(throwable))
+        _errors.tryEmit(UiErrorState(throwable))
     }
 
     val cardsSyncState = cardsSyncManager.state
@@ -103,6 +103,14 @@ class AppViewModel @Inject constructor(
             language.startsWith("zh-HK") ||
             language.startsWith("zh-MO")) "zh-cn"
         else language.substringBefore("-")
+    }
+
+    fun recreateCardsCache() {
+        if (cardsCacheState.value is CardsCacheState.Loading) return
+
+        viewModelScope.launch {
+            cardsSyncManager.recreateCache()
+        }
     }
 
 }

@@ -2,13 +2,17 @@ package com.arkhamcards.v2.ui.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import coil3.ImageLoader
 import com.arkhamcards.v2.UiErrorState
+import com.arkhamcards.v2.domain.exceptions.ClearCardsDatabaseException
 import com.arkhamcards.v2.domain.model.settings.Collection
+import com.arkhamcards.v2.domain.repository.CardsRepository
 import com.arkhamcards.v2.domain.repository.MetaRepository
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -17,6 +21,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 sealed interface SettingsUiState {
@@ -24,10 +29,17 @@ sealed interface SettingsUiState {
     object Loading : SettingsUiState
 }
 
+sealed interface SettingsUiEvent {
+    object ImageCacheCleared : SettingsUiEvent
+    object CardsDatabaseCleared : SettingsUiEvent
+}
+
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository,
-    private val metaRepository: MetaRepository
+    private val metaRepository: MetaRepository,
+    private val cardsRepository: CardsRepository,
+    private val imageLoader: ImageLoader
 ) : ViewModel() {
 
     private val _settingsUiState = MutableStateFlow<SettingsUiState>(SettingsUiState.Idle)
@@ -38,6 +50,13 @@ class SettingsViewModel @Inject constructor(
 
     fun emitError(throwable: Throwable) {
         _errors.tryEmit(UiErrorState(throwable))
+    }
+
+    private val _events = MutableSharedFlow<SettingsUiEvent>(extraBufferCapacity = 1)
+    val events: SharedFlow<SettingsUiEvent> = _events
+
+    fun emitEvent(event: SettingsUiEvent) {
+        _events.tryEmit(event)
     }
 
     val showFanmadeCardsState: StateFlow<Boolean> =
@@ -123,6 +142,32 @@ class SettingsViewModel @Inject constructor(
     fun setEnglishSearchResults(isInclude: Boolean) {
         viewModelScope.launch {
             userPreferencesRepository.saveIncludeEnglishSearchResults(isInclude)
+        }
+    }
+
+    fun clearImageCache() {
+        viewModelScope.launch {
+            _settingsUiState.value = SettingsUiState.Loading
+
+            withContext(Dispatchers.IO) {
+                imageLoader.memoryCache?.clear()
+                imageLoader.diskCache?.clear()
+            }
+
+            emitEvent(SettingsUiEvent.ImageCacheCleared)
+            _settingsUiState.value = SettingsUiState.Idle
+        }
+    }
+
+    fun clearCardsDatabase() {
+        viewModelScope.launch {
+            _settingsUiState.value = SettingsUiState.Loading
+
+            cardsRepository.clearCardsDatabase()
+                .onFailure { emitError(ClearCardsDatabaseException()) }
+                .onSuccess { emitEvent(SettingsUiEvent.CardsDatabaseCleared) }
+
+            _settingsUiState.value = SettingsUiState.Idle
         }
     }
 }

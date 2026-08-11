@@ -17,7 +17,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -84,6 +83,7 @@ import com.arkhamcards.v2.ui.components.ArkhamSwitch
 import com.arkhamcards.v2.ui.decks.Decks
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.settings.CollectionScreen
+import com.arkhamcards.v2.ui.settings.DiagnosticsScreen
 import com.arkhamcards.v2.ui.settings.Settings
 import com.arkhamcards.v2.ui.settings.SettingsAbout
 import com.arkhamcards.v2.ui.settings.SettingsBackup
@@ -94,6 +94,7 @@ import com.arkhamcards.v2.ui.settings.SettingsViewModel
 import com.arkhamcards.v2.ui.theme.CustomTheme
 import com.arkhamcards.v2.ui.theme.LocalLanguage
 import com.arkhamcards.v2.ui.utils.applyScaffoldPaddings
+import com.arkhamcards.v2.ui.utils.resolveExceptionToStringResId
 
 @Composable
 fun ArkhamNavHost(viewModel: AppViewModel) {
@@ -152,10 +153,10 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
         val resources = LocalResources.current
         LaunchedEffect(Unit) {
             viewModel.checkIfCardsReady(languageTag)
-            viewModel.events.collect { error ->
-                val message = when (error.exception) {
-                    else -> error.exception.localizedMessage ?:
-                        resources.getString(R.string.unknown_error)
+            viewModel.errors.collect { error ->
+                val message = when (val id = error.exception.resolveExceptionToStringResId()) {
+                    null -> error.exception.localizedMessage
+                    else -> resources.getString(id)
                 }
                 snackbarHostState.showSnackbar(message)
             }
@@ -307,9 +308,17 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                             )
                         }
                     }
-                    composable<SettingsDiagnostics> {
+                    composable<SettingsDiagnostics> { backStackEntry ->
+                        val parentEntry = remember(backStackEntry) {
+                            navController.getBackStackEntry<Settings>()
+                        }
+                        val settingsViewModel = hiltViewModel<SettingsViewModel>(parentEntry)
 
-                        //TODO: add diagnostics screen
+                        DiagnosticsScreen(
+                            settingsViewModel = settingsViewModel,
+                            recreateCache = viewModel::recreateCardsCache,
+                            innerPadding = innerPadding
+                        )
 
                         title = stringResource(R.string.diagnostics)
                         subtitle = null

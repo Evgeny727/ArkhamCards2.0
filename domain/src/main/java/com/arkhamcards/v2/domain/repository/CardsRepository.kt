@@ -19,6 +19,10 @@ interface CardsRepository {
 
     suspend fun loadCache(): Boolean
 
+    suspend fun recreateCache(): Boolean
+
+    suspend fun clearCardsDatabase(): Result<Unit>
+
     fun searchPaginatedCardsFlow(
         spoilerState: Boolean,
         searchOptions: CardsSearchOptions,

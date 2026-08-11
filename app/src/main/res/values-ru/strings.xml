@@ -1245,6 +1245,7 @@
     <string name="frost">Мороз</string>
     <string name="database_reset">Очистить БД</string>
     <string name="please_close_and_restart_the_app">Перезапустите приложение</string>
+    <string name="restart_app">Перезапустить</string>
     <string name="reset_card_database">Сбросить базу карт</string>
     <string name="mythos_busters">Mythos Busters</string>
     <string name="database_cleared">База карт очищена.\n\nПерезапустите приложение, чтобы загрузить актуальную базу карт.</string>
@@ -1960,4 +1961,7 @@
     <string name="card_scan_with_taboo">Показать с табу</string>
     <string name="card_scan_without_taboo">Показать без табу</string>
     <string name="loading_cards_cache">Загрузка кэша…</string>
+    <string name="load_cards_cache_error">Не удалось загрузить кэш карт</string>
+    <string name="create_cards_cache_error">Не удалось создать кэш карт</string>
+    <string name="clear_cards_database_error">Не удалось очистить базу карт</string>
 </resources>

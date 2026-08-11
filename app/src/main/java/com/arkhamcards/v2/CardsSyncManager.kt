@@ -1,5 +1,7 @@
 package com.arkhamcards.v2
 
+import com.arkhamcards.v2.domain.exceptions.UnableCreateCardsCacheException
+import com.arkhamcards.v2.domain.exceptions.UnableToLoadCardsCacheException
 import com.arkhamcards.v2.domain.repository.CardsRepository
 import com.arkhamcards.v2.domain.repository.UserPreferencesRepository
 import kotlinx.coroutines.delay
@@ -24,7 +26,6 @@ sealed interface CardsCacheState {
     object Idle : CardsCacheState
     object Loading : CardsCacheState
     object Ready : CardsCacheState
-    object Error : CardsCacheState
 }
 
 @Singleton
@@ -121,9 +122,19 @@ class CardsSyncManager @Inject constructor(
 
         delay(1.seconds) //slight delay for better visual representation of loading
 
-        if (cacheReady) _cacheState.value = CardsCacheState.Ready
-        else _cacheState.value = CardsCacheState.Error
+        if (!cacheReady) _errors.tryEmit(UnableToLoadCardsCacheException())
+        _cacheState.value = CardsCacheState.Ready
 
         _state.value = CardsSyncState.Ready
+    }
+
+    suspend fun recreateCache() {
+        _cacheState.value = CardsCacheState.Loading
+
+        val cacheRecreated = cardsRepository.recreateCache()
+
+        if (!cacheRecreated) _errors.tryEmit(UnableCreateCardsCacheException())
+
+        _cacheState.value = CardsCacheState.Ready
     }
 }
