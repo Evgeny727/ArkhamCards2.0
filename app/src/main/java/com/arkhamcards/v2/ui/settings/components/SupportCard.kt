@@ -13,11 +13,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.arkhamcards.v2.R
+import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.ui.components.ArkhamButtonColor
 import com.arkhamcards.v2.ui.components.ArkhamRoundedCardHeader
 import com.arkhamcards.v2.ui.components.ArkhamRoundedFactionCard
 import com.arkhamcards.v2.ui.components.ArkhamSquareButton
-import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.ui.components.iconSize
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.utils.openEmail
@@ -40,19 +40,20 @@ fun SupportCard(
             faction = Faction.Neutral,
         ) },
     ) {
-        ArkhamSquareButton(
-            title = stringResource(R.string.patreon_button),
-            onClick = remember { {
-                context.openLink(patreonLink)
-            } },
-        ) { color ->
-            Icon(
-                painter = painterResource(R.drawable.patreon_logo),
-                contentDescription = null,
-                tint = color,
-                modifier = Modifier.size(24.dp)
-            )
-        }
+        //TODO:add button after creating separate patreon account
+//        ArkhamSquareButton(
+//            title = stringResource(R.string.patreon_button),
+//            onClick = remember { {
+//                context.openLink(patreonLink)
+//            } },
+//        ) { color ->
+//            Icon(
+//                painter = painterResource(R.drawable.patreon_logo),
+//                contentDescription = null,
+//                tint = color,
+//                modifier = Modifier.size(24.dp)
+//            )
+//        }
         ArkhamSquareButton(
             title = stringResource(R.string.about_arkham_cards),
             onClick = navigateToAbout,
