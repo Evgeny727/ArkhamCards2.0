@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAbsoluteAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -111,18 +112,13 @@ fun CardDetailsClickableThumbnail(
                     .clickable { showFullImageDialog = true },
                 onSuccess = { hidePlaceholder = true },
                 contentDescription = null,
+                alignment = type.imageOffset.toAlignment(),
                 contentScale = ContentScale.Crop,
             )
         }
     }
 
     if (showFullImageDialog) {
-//        val backImageUrl = if (backCode != null && official) {
-//            ARKHAM_BUILD_BASE_IMAGE_URL + "optimized/${backCode}${
-//                if (backTaboSetId != null) "-$backTaboSetId" else ""
-//            }.webp"
-//        } else backImageUrl
-
         CardDetailsFullImageDialog(
             code = code,
             backCode = backCode,
@@ -138,6 +134,9 @@ fun CardDetailsClickableThumbnail(
         )
     }
 }
+
+private fun Pair<Float, Float>.toAlignment(): Alignment =
+    BiasAbsoluteAlignment(first, second)
 
 @Composable
 private fun CardDetailsFullImageDialog(

@@ -23,8 +23,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.arkhamcards.v2.R
 import com.arkhamcards.v2.domain.enums.CardType
-import com.arkhamcards.v2.domain.enums.CardType.Companion.isEnemyLike
-import com.arkhamcards.v2.domain.enums.CardType.Companion.isLocationLike
 import com.arkhamcards.v2.domain.model.cards.CardDetails
 import com.arkhamcards.v2.ui.icons.AppIcon
 import com.arkhamcards.v2.ui.theme.AppIconsFont
@@ -91,7 +89,7 @@ fun RowScope.CardDetailsMetaBlock(
                     )
                 }
 
-                if (isEnemyLike(type)) {
+                if (type.isEnemyLike()) {
                     Spacer(modifier = Modifier.height(4.dp))
 
                     CardDetailsEnemyStatBlock(
@@ -106,7 +104,7 @@ fun RowScope.CardDetailsMetaBlock(
                     )
                 }
 
-                if (!isEnemyLike(type) && (health != null || sanity != null)) {
+                if (!type.isEnemyLike() && (health != null || sanity != null)) {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     CardDetailsHealthSanityLine(
@@ -115,7 +113,7 @@ fun RowScope.CardDetailsMetaBlock(
                     )
                 }
 
-                if (isLocationLike(type) || type == CardType.Agenda || type == CardType.Act) {
+                if (type.isLocationLike() || type == CardType.Agenda || type == CardType.Act) {
                     DoomCluesShroudRow(
                         type = type,
                         doom = doom,
@@ -315,7 +313,7 @@ private fun DoomCluesShroudRow(
                 append(perInvestigatorIconText)
             }
         }
-        if (isLocationLike(type)) {
+        if (type.isLocationLike()) {
             append(stringResource(R.string.shroud) + ": ")
             append(numberValueToString(shroud))
             if (shroudPerInvestigator) append(perInvestigatorIconText)
@@ -338,7 +336,7 @@ private fun DoomCluesShroudRow(
 
 @Stable
 private fun numberValueToString(value: Int?): String = when (value) {
-    null -> "—"
+    null -> "-"
     -2 -> "X"
     else -> value.toString()
 }

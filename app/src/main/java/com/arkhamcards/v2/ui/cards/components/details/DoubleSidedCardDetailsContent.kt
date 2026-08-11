@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.dp
 import com.arkhamcards.v2.R
 import com.arkhamcards.v2.domain.enums.CardBackType
 import com.arkhamcards.v2.domain.enums.CardType
-import com.arkhamcards.v2.domain.enums.CardType.Companion.isLocationLike
 import com.arkhamcards.v2.domain.enums.Faction
 import com.arkhamcards.v2.domain.model.cards.CardDetails
 import com.arkhamcards.v2.domain.model.cards.CardDetailsWithPackInfo
@@ -130,7 +129,7 @@ fun LazyListScope.doubleSidedCardDetails(
 }
 
 private fun CardDetails.isBackFirst(): Boolean {
-    return doubleSided && isLocationLike(type) && encounterCode != null
+    return doubleSided && type.isLocationLike() && encounterCode != null
 }
 
 @Composable

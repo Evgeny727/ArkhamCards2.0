@@ -20,13 +20,24 @@ enum class CardType {
             "treachery" -> Treachery
             else -> Unknown
         }
-
-        fun isLocationLike(type: CardType): Boolean {
-            return type == Location || type == EnemyLocation
-        }
-
-        fun isEnemyLike(type: CardType): Boolean {
-            return type == Enemy || type == EnemyLocation
-        }
     }
+
+    fun isLocationLike(): Boolean {
+        return this == Location || this == EnemyLocation
+    }
+
+    fun isEnemyLike(): Boolean {
+        return this == Enemy || this == EnemyLocation
+    }
+
+    val imageOffset: Pair<Float, Float>
+        get() = when (this) {
+            Investigator, Agenda -> -1f to 0f
+
+            Act -> 1f to 0f
+
+            Enemy -> 0f to 1f
+
+            else -> 0f to -1f
+        }
 }
