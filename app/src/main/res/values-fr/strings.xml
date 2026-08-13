@@ -66,7 +66,7 @@
     <string name="sign_out">Déconnexion</string>
     <string name="reconnect_account">Reconnecter le compte</string>
     <string name="diagnostics">Diagnostics</string>
-    <string name="about_arkham_cards">À propos d\'Arkham Cards</string>
+    <string name="about_arkham_companion">À propos d\'Arkham Companion</string>
     <string name="done">Effectué</string>
     <string name="updating_cards">Mise à jour des cartes en cours…</string>
     <string name="error_check_for_cards_again">Erreur : réessayez cette mise à jour</string>

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.hilt)
@@ -12,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.arkhamcards.v2"
+    namespace = "com.arkhamcompanion"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.arkhamcards.v2"
+        applicationId = "com.arkhamcompanion"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.ArkhamCards" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="Theme.ArkhamCompanion" parent="Theme.AppCompat.Light.NoActionBar" />
 
-    <style name="Theme.ArkhamCards.Splash" parent="Theme.SplashScreen">
+    <style name="Theme.ArkhamCompanion.Splash" parent="Theme.SplashScreen">
         <!-- Set the splash screen background color -->
         <item name="windowSplashScreenBackground">@color/ic_launcher_background</item>
         <!-- Set the splash screen icon drawable -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.ArkhamCards</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic__splash_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.ArkhamCompanion</item>
     </style>
 </resources>

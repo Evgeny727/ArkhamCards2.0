@@ -11,7 +11,7 @@ plugins {
 }
 
 android {
-    namespace = "com.arkhamcards.v2.data"
+    namespace = "com.arkhamcompanion.data"
     compileSdk = 37
 
     defaultConfig {
@@ -61,11 +61,11 @@ dependencies {
 apollo {
     service("service") {
         // The package name for the generated models
-        packageName.set("com.arkhamcards.v2")
+        packageName.set("com.arkhamcompanion")
         schemaFiles.from("src/main/graphql/schema.graphqls")
         addTypename.set("always")
         generateApolloEnums.set(true)
         mapScalarToKotlinString("timestamptz")
-        mapScalar("jsonb", "kotlinx.serialization.json.JsonElement", "com.arkhamcards.v2.data.objects.JsonElementAdapter")
+        mapScalar("jsonb", "kotlinx.serialization.json.JsonElement", "com.arkhamcompanion.data.objects.JsonElementAdapter")
     }
 }

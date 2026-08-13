@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Arkham Cards"
+rootProject.name = "Arkham Companion"
 include(":app")
 include(":domain")
 include(":data")

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name" translatable="false">Arkham Cards</string>
+    <string name="app_name" translatable="false">ArkhamCompanion</string>
     <string name="patreon_button" translatable="false">Patreon</string>
 
     <string name="latest_taboo_set">Latest</string>
@@ -69,7 +69,7 @@
     <string name="you_sure_to_sign_out">Are you sure you want to sign out?</string>
     <string name="reconnect_account">Reconnect Account</string>
     <string name="diagnostics">Diagnostics</string>
-    <string name="about_arkham_cards">About Arkham Cards</string>
+    <string name="about_arkham_companion">About Arkham Companion</string>
     <string name="done">Done</string>
     <string name="updating_cards">Updating cards</string>
     <string name="error_check_for_cards_again">Error: Check for Cards Again</string>

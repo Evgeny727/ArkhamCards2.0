@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.arkhamcards.v2.di"
+    namespace = "com.arkhamcompanion.di"
     compileSdk = 37
 
     defaultConfig {
