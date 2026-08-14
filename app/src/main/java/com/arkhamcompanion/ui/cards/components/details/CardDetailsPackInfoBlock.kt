@@ -61,8 +61,10 @@ fun CardDetailsPackInfoBlock(
                 ) {
                     encounterCode?.let {
                         val icon = PackIcon.fromPackCode(it)
-                        val quantityText = if (quantity > 1) "$encounterPosition - ${encounterPosition!! + quantity - 1}"
-                        else encounterPosition!!.toString()
+                        val quantityText = encounterPosition?.let { position ->
+                            if (quantity > 1) "$encounterPosition - ${position + quantity - 1}"
+                            else position.toString()
+                        }
 
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(4.dp),
@@ -82,10 +84,12 @@ fun CardDetailsPackInfoBlock(
                                 color = CustomTheme.colors.darkText
                             )
 
-                            Text(
-                                text = quantityText,
-                                style = CustomTheme.typography.tiny
-                            )
+                            quantityText?.let {
+                                Text(
+                                    text = quantityText,
+                                    style = CustomTheme.typography.tiny
+                                )
+                            }
                         }
                     }
 
