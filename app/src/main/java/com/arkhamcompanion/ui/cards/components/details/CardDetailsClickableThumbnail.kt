@@ -4,9 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -178,110 +180,118 @@ private fun CardDetailsFullImageDialog(
         modifier = modifier,
         onDismiss = onDismiss,
     ) {
-        Box(
-            modifier = modifier.size(310.dp).align(Alignment.CenterHorizontally),
-            contentAlignment = Alignment.Center
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            if (!hidePlaceholder) {
+            item(key = "image", contentType = "image") {
                 Box(
-                    modifier = Modifier
-                        .size(310.dp)
-                        .clip(CustomTheme.shapes.medium)
-                        .background(CustomTheme.colors.divider)
-                        .border(1.dp, CustomTheme.colors.darkText, CustomTheme.shapes.medium),
+                    modifier = modifier.size(310.dp).align(Alignment.CenterHorizontally),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = AppIcon.Logo.glyph,
-                        fontFamily = AppIconsFont,
-                        fontSize = 72.sp,
-                        color = CustomTheme.colors.lightText
-                    )
-                }
-            }
-
-            if (isLoading) CircularProgressIndicator(
-                color = CustomTheme.colors.darkText,
-                modifier = Modifier.size(56.dp).align(Alignment.Center)
-            )
-
-            if (showBack) {
-                AsyncImage(
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .data(backImageUrl)
-                        .build(),
-                    modifier = Modifier
-                        .width(if (isBackSideways) sideWayWidth else sideWayHeight)
-                        .height(if (isBackSideways) sideWayHeight else sideWayWidth)
-                        .clip(CustomTheme.shapes.large),
-                    onSuccess = { hidePlaceholder = true; isLoading = false },
-                    onError = { hidePlaceholder = false; isLoading = false },
-                    onLoading = { isLoading = true },
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                )
-            } else {
-                AsyncImage(
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .data(imageUrl)
-                        .build(),
-                    modifier = Modifier
-                        .width(if (isFrontSideways) sideWayWidth else sideWayHeight)
-                        .height(if (isFrontSideways) sideWayHeight else sideWayWidth)
-                        .clip(CustomTheme.shapes.large),
-                    onSuccess = { hidePlaceholder = true; isLoading = false },
-                    onError = { hidePlaceholder = false; isLoading = false },
-                    onLoading = { isLoading = true },
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                )
-            }
-        }
-
-        ArkhamSquareButton(
-            title = stringResource(R.string.flip_card),
-            onClick = { showBack = !showBack },
-            colors = ArkhamButtonColor.Default,
-            icon = { color ->
-                Text(
-                    text = AppIcon.FlipCard.glyph,
-                    fontFamily = AppIcon.FlipCard.fontFamily,
-                    fontSize = iconSize(AppIcon.FlipCard),
-                    color = color
-                )
-            }
-        )
-
-        if (taboSetId != null) {
-            ArkhamSquareButton(
-                title = stringResource(
-                    if (showWithoutTaboo) R.string.card_scan_with_taboo
-                    else R.string.card_scan_without_taboo
-                ),
-                onClick = {
-                    val newShowWithoutTaboo = !showWithoutTaboo
-                    showWithoutTaboo = newShowWithoutTaboo
-
-                    if (newShowWithoutTaboo) {
-                        imageUrl = imageUrl.removeTaboo(taboSetId)
-                        backImageUrl = backImageUrl.removeTaboo(backTabooId)
-                    } else {
-                        imageUrl = imageUrl.applyTaboo(taboSetId)
-                        backImageUrl = backImageUrl.applyTaboo(backTabooId)
+                    if (!hidePlaceholder) {
+                        Box(
+                            modifier = Modifier
+                                .size(310.dp)
+                                .clip(CustomTheme.shapes.medium)
+                                .background(CustomTheme.colors.divider)
+                                .border(1.dp, CustomTheme.colors.darkText, CustomTheme.shapes.medium),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = AppIcon.Logo.glyph,
+                                fontFamily = AppIconsFont,
+                                fontSize = 72.sp,
+                                color = CustomTheme.colors.lightText
+                            )
+                        }
                     }
-                },
-                colors = ArkhamButtonColor.Default,
-                icon = { color ->
-                    Text(
-                        text = AppIcon.Taboo.glyph,
-                        fontFamily = AppIcon.Taboo.fontFamily,
-                        fontSize = iconSize(AppIcon.Taboo),
-                        color = color
-                    )
-                }
-            )
-        }
 
+                    if (isLoading) CircularProgressIndicator(
+                        color = CustomTheme.colors.darkText,
+                        modifier = Modifier.size(56.dp).align(Alignment.Center)
+                    )
+
+                    if (showBack) {
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(backImageUrl)
+                                .build(),
+                            modifier = Modifier
+                                .width(if (isBackSideways) sideWayWidth else sideWayHeight)
+                                .height(if (isBackSideways) sideWayHeight else sideWayWidth)
+                                .clip(CustomTheme.shapes.large),
+                            onSuccess = { hidePlaceholder = true; isLoading = false },
+                            onError = { hidePlaceholder = false; isLoading = false },
+                            onLoading = { isLoading = true },
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                        )
+                    } else {
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(imageUrl)
+                                .build(),
+                            modifier = Modifier
+                                .width(if (isFrontSideways) sideWayWidth else sideWayHeight)
+                                .height(if (isFrontSideways) sideWayHeight else sideWayWidth)
+                                .clip(CustomTheme.shapes.large),
+                            onSuccess = { hidePlaceholder = true; isLoading = false },
+                            onError = { hidePlaceholder = false; isLoading = false },
+                            onLoading = { isLoading = true },
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                        )
+                    }
+                }
+            }
+
+            item(key = "flip_button", contentType = "button") {
+                ArkhamSquareButton(
+                    title = stringResource(R.string.flip_card),
+                    onClick = { showBack = !showBack },
+                    colors = ArkhamButtonColor.Default,
+                    icon = { color ->
+                        Text(
+                            text = AppIcon.FlipCard.glyph,
+                            fontFamily = AppIcon.FlipCard.fontFamily,
+                            fontSize = iconSize(AppIcon.FlipCard),
+                            color = color
+                        )
+                    }
+                )
+            }
+
+            if (taboSetId != null) item(key = "taboo_button", contentType = "button") {
+                ArkhamSquareButton(
+                    title = stringResource(
+                        if (showWithoutTaboo) R.string.card_scan_with_taboo
+                        else R.string.card_scan_without_taboo
+                    ),
+                    onClick = {
+                        val newShowWithoutTaboo = !showWithoutTaboo
+                        showWithoutTaboo = newShowWithoutTaboo
+
+                        if (newShowWithoutTaboo) {
+                            imageUrl = imageUrl.removeTaboo(taboSetId)
+                            backImageUrl = backImageUrl.removeTaboo(backTabooId)
+                        } else {
+                            imageUrl = imageUrl.applyTaboo(taboSetId)
+                            backImageUrl = backImageUrl.applyTaboo(backTabooId)
+                        }
+                    },
+                    colors = ArkhamButtonColor.Default,
+                    icon = { color ->
+                        Text(
+                            text = AppIcon.Taboo.glyph,
+                            fontFamily = AppIcon.Taboo.fontFamily,
+                            fontSize = iconSize(AppIcon.Taboo),
+                            color = color
+                        )
+                    }
+                )
+            }
+        }
     }
 }
 

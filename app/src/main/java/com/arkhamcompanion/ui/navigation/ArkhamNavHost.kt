@@ -506,7 +506,7 @@ private fun CardsCacheLoading(paddingValues: PaddingValues) {
         ) {
             CircularProgressIndicator(
                 modifier = Modifier.size(32.dp),
-                color = CustomTheme.colors.l30
+                color = CustomTheme.colors.m
             )
             Text(
                 text = stringResource(R.string.loading_cards_cache),
