@@ -143,7 +143,7 @@ private fun DiagnosticsAlertDialog(
 
             is SettingsUiEvent.CardsDatabaseCleared -> {
                 ArkhamAlertButton(
-                    text = stringResource(R.string.restart_app),
+                    text = stringResource(R.string.close_app),
                     style = ArkhamAlertButtonStyle.DEFAULT,
                     onClick = {
                         activity?.finish()

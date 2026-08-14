@@ -208,11 +208,11 @@ fun SingleCard.toEntity(
                 .joinToString(" ")
                 .normalizeForSearch(),
         searchRealGame = if (locale == "en") null else
-            listOfNotNull(real_text, real_customization_text)
+            listOfNotNull(real_text, real_traits, real_customization_text)
                 .joinToString(" ")
                 .normalizeForSearch(),
         searchRealGameBack = if (locale == "en") null else
-            listOfNotNull(real_back_text)
+            listOfNotNull(real_back_text, real_back_traits)
                 .joinToString(" ")
                 .normalizeForSearch(),
         searchRealFlavor = if (locale == "en") null else

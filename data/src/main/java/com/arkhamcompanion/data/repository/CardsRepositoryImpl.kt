@@ -417,7 +417,16 @@ class CardsRepositoryImpl @Inject constructor(
                     }
                      AND c.hidden = 0 ${ if (searchPreferences.showFanMade) "" 
                          else " AND (c.official = 1 AND c.preview = 0)" }
-                    ${if (isQueryNotBlank) " AND (${searchQuery.searchFieldsQuery})" else ""}
+                    ${if (isQueryNotBlank)
+                        """AND ((${searchQuery.searchFieldsQuery}) 
+                            ${if (searchOptions.searchBack)
+                                """OR EXISTS (
+                                    SELECT 1
+                                    FROM card back
+                                    WHERE back.code = c.back_link_id
+                                    AND (${searchQuery.backLinkCardFieldsQuery})
+                                )""".trimIndent() else ""}
+                        )""".trimIndent() else ""}
                 ),
                 
                 ranked_cards AS (
@@ -453,6 +462,9 @@ class CardsRepositoryImpl @Inject constructor(
                 if (isQueryNotBlank) {
                     repeat(searchQuery.searchFieldsAmount) {
                         statement.bindText(index++, searchQuery.sqlQuery)
+                        if (searchOptions.searchBack) {
+                            statement.bindText(index++, searchQuery.sqlQuery)
+                        }
                     }
                 }
             }
@@ -474,11 +486,13 @@ class CardsRepositoryImpl @Inject constructor(
 
         val searchFields = searchOptions.buildSearchFields(shouldIncludeRealFields)
 
-        val searchFieldsQuery = searchFields.joinToString(" OR ") { "$it LIKE ?" }
+        val searchFieldsQuery = searchFields.joinToString(" OR ") { "c.$it LIKE ?" }
+        val backLinkCardFieldsQuery = searchFields.joinToString(" OR ") { "back.$it LIKE ?" }
 
         return SqlSearchOptions(
             sqlQuery,
             searchFieldsQuery,
+            backLinkCardFieldsQuery,
             searchFields.size
         )
     }
@@ -513,5 +527,6 @@ class CardsRepositoryImpl @Inject constructor(
 private data class SqlSearchOptions(
     val sqlQuery: String = "",
     val searchFieldsQuery: String = "",
+    val backLinkCardFieldsQuery: String = "",
     val searchFieldsAmount: Int = 0
 )

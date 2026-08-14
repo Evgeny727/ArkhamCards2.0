@@ -39,7 +39,6 @@ import com.arkhamcompanion.ui.components.ArkhamButtonSearchIcon
 import com.arkhamcompanion.ui.components.ArkhamSearchBox
 import com.arkhamcompanion.ui.components.CardsSearchOptions
 import com.arkhamcompanion.ui.theme.CustomTheme
-import com.arkhamcompanion.ui.utils.appSp
 import com.arkhamcompanion.ui.utils.applyScaffoldPaddings
 import kotlinx.coroutines.flow.collectLatest
 
@@ -136,39 +135,6 @@ fun CardsScreen(
                 }
             }
 
-            items(
-                count = searchResults.itemCount,
-                key = searchResults.itemKey { when (it) {
-                    is CardListItemUiModel.CategoryHeader -> it.key
-                    is CardListItemUiModel.CardItem -> it.card.id
-                } },
-                contentType = searchResults.itemContentType { when (it) {
-                    is CardListItemUiModel.CategoryHeader -> "header"
-                    is CardListItemUiModel.CardItem -> "card"
-                } }
-            ) { index ->
-                when (val item = searchResults[index]) {
-                    null -> {
-                        PlaceholderCardListItem(rowHeight = rowHeight)
-                    }
-
-                    is CardListItemUiModel.CategoryHeader -> {
-                        val title = buildHeaderTitle(item.category, item.value)
-                        CardSectionHeader(title)
-                    }
-
-                    is CardListItemUiModel.CardItem -> {
-                        CardListItem(
-                            cardListItem = item.card,
-                            rowHeight = rowHeight,
-                            onClick = {
-                                onCardClick(item.card.code)
-                            }
-                        )
-                    }
-                }
-            }
-
             // Handle load states: initial load and pagination load errors/loading.
             searchResults.apply {
                 when {
@@ -180,7 +146,6 @@ fun CardsScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(16.dp)
-                                    .animateItem()
                             ) {
                                 CircularProgressIndicator(
                                     modifier = Modifier.size(32.dp),
@@ -210,6 +175,39 @@ fun CardsScreen(
                                 )
                             }
                         }
+                    }
+                }
+            }
+
+            items(
+                count = searchResults.itemCount,
+                key = searchResults.itemKey { when (it) {
+                    is CardListItemUiModel.CategoryHeader -> it.key
+                    is CardListItemUiModel.CardItem -> it.card.id
+                } },
+                contentType = searchResults.itemContentType { when (it) {
+                    is CardListItemUiModel.CategoryHeader -> "header"
+                    is CardListItemUiModel.CardItem -> "card"
+                } }
+            ) { index ->
+                when (val item = searchResults[index]) {
+                    null -> {
+                        PlaceholderCardListItem(rowHeight = rowHeight)
+                    }
+
+                    is CardListItemUiModel.CategoryHeader -> {
+                        val title = buildHeaderTitle(item.category, item.value)
+                        CardSectionHeader(title)
+                    }
+
+                    is CardListItemUiModel.CardItem -> {
+                        CardListItem(
+                            cardListItem = item.card,
+                            rowHeight = rowHeight,
+                            onClick = {
+                                onCardClick(item.card.code)
+                            }
+                        )
                     }
                 }
             }

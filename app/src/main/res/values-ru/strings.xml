@@ -1245,7 +1245,7 @@
     <string name="frost">Мороз</string>
     <string name="database_reset">Очистить БД</string>
     <string name="please_close_and_restart_the_app">Перезапустите приложение</string>
-    <string name="restart_app">Перезапустить</string>
+    <string name="close_app">Закрыть приложение</string>
     <string name="reset_card_database">Сбросить базу карт</string>
     <string name="mythos_busters">Mythos Busters</string>
     <string name="database_cleared">База карт очищена.\n\nПерезапустите приложение, чтобы загрузить актуальную базу карт.</string>

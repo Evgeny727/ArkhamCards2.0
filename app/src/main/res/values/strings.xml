@@ -1198,7 +1198,7 @@
     <string name="frost">Frost</string>
     <string name="database_reset">Database reset</string>
     <string name="please_close_and_restart_the_app">Please close and restart the app</string>
-    <string name="restart_app">Restart</string>
+    <string name="close_app">Close app</string>
     <string name="reset_card_database">Reset card database</string>
     <string name="mythos_busters">Mythos Busters</string>
     <string name="database_cleared">The card database has been reset.\n\nPlease close the app and restart it to trigger a full sync of card data.</string>
