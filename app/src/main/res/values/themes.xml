@@ -7,7 +7,7 @@
         <!-- Set the splash screen background color -->
         <item name="windowSplashScreenBackground">@color/ic_launcher_background</item>
         <!-- Set the splash screen icon drawable -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic__splash_logo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.ArkhamCompanion</item>
     </style>
 </resources>
