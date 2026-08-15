@@ -1,5 +1,7 @@
 package com.arkhamcompanion.ui.settings
 
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -46,6 +48,11 @@ fun SettingsScreen(
         viewModel.errors.collect {
             emitError(it.exception)
         }
+    }
+
+    val activity = LocalActivity.current
+    BackHandler {
+        activity?.finish()
     }
 
     val languageTag = LocalLanguage.current.languageTag
