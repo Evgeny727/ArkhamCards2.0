@@ -14,7 +14,7 @@ splashscreen = "1.2.0"
 
 datastore = "1.2.1"
 paging = "3.5.0"
-room = "2.8.4"
+room = "3.0.0"
 
 coil = "3.5.0"
 serializationJson = "1.11.0"
@@ -65,10 +65,9 @@ androidx-datastore-preferences = { group = "androidx.datastore", name = "datasto
 androidx-paging-runtime-ktx = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
 androidx-paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "paging" }
-androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
-androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
-androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
-androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-room-runtime = { group = "androidx.room3", name = "room3-runtime", version.ref = "room" }
+androidx-room-paging = { group = "androidx.room3", name = "room3-paging", version.ref = "room" }
+androidx-room-compiler = { group = "androidx.room3", name = "room3-compiler", version.ref = "room" }
 
 # Network / image / misc
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }

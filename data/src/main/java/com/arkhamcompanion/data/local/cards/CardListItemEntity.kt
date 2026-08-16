@@ -1,7 +1,7 @@
 package com.arkhamcompanion.data.local.cards
 
-import androidx.room.ColumnInfo
-import androidx.room.Embedded
+import androidx.room3.ColumnInfo
+import androidx.room3.Embedded
 
 data class CardListItemEntity(
     val id: String,

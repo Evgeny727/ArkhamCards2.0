@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.room.RoomRawQuery
-import androidx.room.withTransaction
+import androidx.room3.RoomRawQuery
+import androidx.room3.withWriteTransaction
 import com.arkhamcompanion.data.local.ArkhamDatabase
 import com.arkhamcompanion.data.local.LoggingPagingSource
 import com.arkhamcompanion.data.local.cards.CardCacheData
@@ -123,7 +123,7 @@ class CardsRepositoryImpl @Inject constructor(
 
         val allCards = playerEntities + encounterEntities
 
-        db.withTransaction {
+        db.withWriteTransaction {
             cardsDao.deleteAllCards()
             metaDao.deleteAll()
             metaDao.upsertFactions(factionEntities)

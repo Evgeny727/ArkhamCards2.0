@@ -1,8 +1,10 @@
 package com.arkhamcompanion.data.local
 
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import androidx.room3.ColumnTypeConverters
+import androidx.room3.DaoReturnTypeConverters
+import androidx.room3.Database
+import androidx.room3.RoomDatabase
+import androidx.room3.paging.PagingSourceDaoReturnTypeConverter
 import com.arkhamcompanion.data.local.cards.CardEntity
 import com.arkhamcompanion.data.local.cards.CardSubtypeEntity
 import com.arkhamcompanion.data.local.cards.CardTypeEntity
@@ -19,7 +21,8 @@ import com.arkhamcompanion.data.objects.JsonElementConverter
     FactionEntity::class, CardTypeEntity::class, CardSubtypeEntity::class],
     version = 1,
     exportSchema = false)
-@TypeConverters(JsonElementConverter::class)
+@ColumnTypeConverters(JsonElementConverter::class)
+@DaoReturnTypeConverters(PagingSourceDaoReturnTypeConverter::class)
 abstract class ArkhamDatabase : RoomDatabase() {
     abstract fun cardsDao(): CardsDao
     abstract fun metaDao(): MetaDao

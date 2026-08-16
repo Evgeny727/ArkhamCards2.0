@@ -5,7 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import androidx.room.Room
+import androidx.room3.Room
 import com.arkhamcompanion.data.local.ArkhamDatabase
 import dagger.Module
 import dagger.Provides
@@ -29,11 +29,7 @@ object DataModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): ArkhamDatabase {
-        return Room.databaseBuilder(
-            context,
-            ArkhamDatabase::class.java,
-            "arkham_database"
-        )
+        return Room.databaseBuilder<ArkhamDatabase>(context, name = "arkham_database")
             .build()
     }
 

@@ -1,14 +1,14 @@
 package com.arkhamcompanion.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.RewriteQueriesToDropUnusedColumns
-import androidx.room.Upsert
+import androidx.room3.Dao
+import androidx.room3.Query
+import androidx.room3.RewriteQueriesToDropUnusedColumns
+import androidx.room3.Upsert
 import com.arkhamcompanion.data.local.meta.CycleEntity
 import com.arkhamcompanion.data.local.meta.EncounterSetEntity
 import com.arkhamcompanion.data.local.meta.FactionEntity
-import com.arkhamcompanion.data.local.meta.PackEntity
 import com.arkhamcompanion.data.local.meta.FullPackEntity
+import com.arkhamcompanion.data.local.meta.PackEntity
 import com.arkhamcompanion.data.local.meta.TabooSetEntity
 import kotlinx.coroutines.flow.Flow
 

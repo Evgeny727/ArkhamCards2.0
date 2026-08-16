@@ -1,12 +1,12 @@
 package com.arkhamcompanion.data.local.dao
 
 import androidx.paging.PagingSource
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.RawQuery
-import androidx.room.RewriteQueriesToDropUnusedColumns
-import androidx.room.RoomRawQuery
-import androidx.room.Upsert
+import androidx.room3.Dao
+import androidx.room3.Query
+import androidx.room3.RawQuery
+import androidx.room3.RewriteQueriesToDropUnusedColumns
+import androidx.room3.RoomRawQuery
+import androidx.room3.Upsert
 import com.arkhamcompanion.data.local.cards.CardDetailsEntity
 import com.arkhamcompanion.data.local.cards.CardEntity
 import com.arkhamcompanion.data.local.cards.CardListItemEntity
