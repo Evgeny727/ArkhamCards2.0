@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.room.RoomRawQuery
 import androidx.room.withTransaction
 import com.arkhamcompanion.data.local.ArkhamDatabase
+import com.arkhamcompanion.data.local.LoggingPagingSource
 import com.arkhamcompanion.data.local.cards.CardCacheData
 import com.arkhamcompanion.data.local.cards.patches.CardPatchRegistry
 import com.arkhamcompanion.data.mapper.db.toData
@@ -57,7 +58,7 @@ class CardsRepositoryImpl @Inject constructor(
     private val db: ArkhamDatabase,
     @ApplicationContext private val context: Context,
     private val performanceRepository: PerformanceRepository,
-    private val analyticsRepository: AnalyticsRepository
+    private val analyticsRepository: AnalyticsRepository,
 ) : CardsRepository {
 
     private val cardsDao = db.cardsDao()
@@ -238,14 +239,19 @@ class CardsRepositoryImpl @Inject constructor(
                 initialLoadSize = 300,
                 maxSize = 700
             ),
-            pagingSourceFactory = { cardsDao.searchCardsRaw(rawQuery) }
+            pagingSourceFactory = {
+                LoggingPagingSource(
+                    delegate = cardsDao.searchCardsRaw(rawQuery),
+                    analyticsRepository = analyticsRepository
+                )
+            }
         ).flow.withCategoryHeaders(
             if (spoilerState) searchPreferences.mythosSortOrder else searchPreferences.playerSortOrder,
             spoilerState
         )
     }
 
-    override fun searchPaginatedCardCodesFlow(
+    override fun searchCardCodesFlow(
         spoilerState: Boolean,
         searchOptions: CardsSearchOptions,
         searchPreferences: CardsSearchPreferences

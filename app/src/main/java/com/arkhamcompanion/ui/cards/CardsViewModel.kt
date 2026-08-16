@@ -126,7 +126,7 @@ class CardsViewModel @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val searchResultCodes = _searchConfig.flatMapLatest { (spoilerState, searchOptions, searchPreferences) ->
-        cardsRepository.searchPaginatedCardCodesFlow(spoilerState, searchOptions, searchPreferences)
+        cardsRepository.searchCardCodesFlow(spoilerState, searchOptions, searchPreferences)
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000L),

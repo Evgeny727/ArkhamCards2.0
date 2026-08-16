@@ -69,22 +69,6 @@ fun CardsScreen(
             emitError(it.exception)
         }
     }
-    LaunchedEffect(searchResults.loadState.hasError) {
-        if (!searchResults.loadState.hasError) return@LaunchedEffect
-
-        val error = listOf(
-            searchResults.loadState.refresh,
-            searchResults.loadState.append,
-            searchResults.loadState.prepend,
-        )
-            .filterIsInstance<LoadState.Error>()
-            .firstOrNull()
-            ?.error
-
-        if (error != null) {
-            emitError(error)
-        }
-    }
     // Whenever the search query changes, scroll the list back to the top.
     LaunchedEffect(Unit) {
         viewModel.scrollToTop.collectLatest {

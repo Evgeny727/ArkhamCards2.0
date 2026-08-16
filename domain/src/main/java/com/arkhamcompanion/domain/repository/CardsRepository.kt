@@ -29,7 +29,7 @@ interface CardsRepository {
         searchPreferences: CardsSearchPreferences
     ): Flow<PagingData<CardListItemUiModel>>
 
-    fun searchPaginatedCardCodesFlow(
+    fun searchCardCodesFlow(
         spoilerState: Boolean,
         searchOptions: CardsSearchOptions,
         searchPreferences: CardsSearchPreferences
