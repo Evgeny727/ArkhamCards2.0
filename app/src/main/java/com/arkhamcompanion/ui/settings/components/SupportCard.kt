@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -14,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.arkhamcompanion.R
 import com.arkhamcompanion.domain.enums.Faction
 import com.arkhamcompanion.ui.components.ArkhamButtonColor
+import com.arkhamcompanion.ui.components.ArkhamIconText
 import com.arkhamcompanion.ui.components.ArkhamRoundedCardHeader
 import com.arkhamcompanion.ui.components.ArkhamRoundedFactionCard
 import com.arkhamcompanion.ui.components.ArkhamSquareButton
@@ -59,33 +59,30 @@ fun SupportCard(
             title = stringResource(R.string.about_arkham_companion),
             onClick = navigateToAbout,
         ) { color ->
-            Text(
-                text = AppIcon.Logo.glyph,
-                fontFamily = AppIcon.Logo.fontFamily,
+            ArkhamIconText(
+                iconGlyph = AppIcon.Logo,
                 color = color,
-                fontSize = iconSize(AppIcon.Logo)
+                size = iconSize(AppIcon.Logo)
             )
         }
         ArkhamSquareButton(
             title = stringResource(R.string.backup_data),
             onClick = navigateToBackUp,
         ) { color ->
-            Text(
-                text = AppIcon.Book.glyph,
-                fontFamily = AppIcon.Book.fontFamily,
+            ArkhamIconText(
+                iconGlyph = AppIcon.Book,
                 color = color,
-                fontSize = iconSize(AppIcon.Book)
+                size = iconSize(AppIcon.Book)
             )
         }
         ArkhamSquareButton(
             title = stringResource(R.string.diagnostics),
             onClick = navigateToDiagnostics,
         ) { color ->
-            Text(
-                text = AppIcon.Wrench.glyph,
-                fontFamily = AppIcon.Wrench.fontFamily,
+            ArkhamIconText(
+                iconGlyph = AppIcon.Wrench,
                 color = color,
-                fontSize = iconSize(AppIcon.Wrench)
+                size = iconSize(AppIcon.Wrench)
             )
         }
 

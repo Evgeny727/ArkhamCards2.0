@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name" translatable="false">ArkhamCompanion</string>
     <string name="patreon_button" translatable="false">Patreon</string>
+    <string name="not_implemented_text" translatable="false">Not implemented yet</string>
 
     <string name="latest_taboo_set">Latest</string>
     <string name="guardian">Guardian</string>
@@ -1957,7 +1958,7 @@
     <string name="card_scan">Card Scan</string>
     <string name="card_scan_with_taboo">Show with taboo</string>
     <string name="card_scan_without_taboo">Show without taboo</string>
-    <string name="loading_cards_cache">Loading cache…</string>
+    <string name="creating_cards_cache">Creating cache…</string>
     <string name="load_cards_cache_error">Unable to load cards cache</string>
     <string name="create_cards_cache_error">Unable to create cards cache</string>
     <string name="clear_cards_database_error">Unable to clear cards database</string>

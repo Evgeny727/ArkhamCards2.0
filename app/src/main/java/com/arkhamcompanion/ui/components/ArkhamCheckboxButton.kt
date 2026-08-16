@@ -61,11 +61,10 @@ fun ArkhamCheckboxButton(
                         modifier = Modifier.size(28.dp),
                         color = CustomTheme.colors.lightText
                     )
-                    else Text(
-                        text = iconGlyph.glyph,
-                        fontFamily = iconGlyph.fontFamily,
+                    else ArkhamIconText(
+                        iconGlyph = iconGlyph,
                         color = if (isPackRow) CustomTheme.colors.darkText else CustomTheme.colors.m,
-                        fontSize = iconSize(iconGlyph)
+                        size = iconSize(iconGlyph)
                     )
                 }
             }

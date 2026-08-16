@@ -14,9 +14,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.arkhamcompanion.domain.model.cards.CardDetailsWithPackInfo
+import com.arkhamcompanion.ui.components.ArkhamScalableIconText
 import com.arkhamcompanion.ui.icons.AppIcon
 import com.arkhamcompanion.ui.icons.PackIcon
-import com.arkhamcompanion.ui.theme.AppIconsFont
 import com.arkhamcompanion.ui.theme.CustomTheme
 import com.arkhamcompanion.ui.utils.appSp
 
@@ -40,10 +40,9 @@ fun CardDetailsPackInfoBlock(
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = AppIcon.Paintbrush.glyph,
-                        fontFamily = AppIconsFont,
-                        fontSize = 14.appSp(CustomTheme.typography.scaleFactor),
+                    ArkhamScalableIconText(
+                        iconGlyph = AppIcon.Paintbrush,
+                        size = 14.appSp(CustomTheme.typography.scaleFactor),
                         color = CustomTheme.colors.d20
                     )
 
@@ -77,10 +76,9 @@ fun CardDetailsPackInfoBlock(
                                 modifier = Modifier.weight(1f, fill = false)
                             )
 
-                            Text(
-                                text = icon.glyph,
-                                fontFamily = icon.fontFamily,
-                                fontSize = 14.appSp(CustomTheme.typography.scaleFactor),
+                            ArkhamScalableIconText(
+                                iconGlyph = icon,
+                                size = 14.appSp(CustomTheme.typography.scaleFactor),
                                 color = CustomTheme.colors.darkText
                             )
 
@@ -112,10 +110,9 @@ fun CardDetailsPackInfoBlock(
 
                             Spacer(modifier = Modifier.width(0.dp))
 
-                            Text(
-                                text = icon.glyph,
-                                fontFamily = icon.fontFamily,
-                                fontSize = 14.appSp(CustomTheme.typography.scaleFactor),
+                            ArkhamScalableIconText(
+                                iconGlyph = icon,
+                                size = 14.appSp(CustomTheme.typography.scaleFactor),
                                 color = CustomTheme.colors.darkText
                             )
 
@@ -130,10 +127,9 @@ fun CardDetailsPackInfoBlock(
 
                             Spacer(modifier = Modifier.width(4.dp))
 
-                            Text(
-                                text = AppIcon.CardOutline.glyph,
-                                fontFamily = AppIconsFont,
-                                fontSize = 14.appSp(CustomTheme.typography.scaleFactor),
+                            ArkhamScalableIconText(
+                                iconGlyph = AppIcon.CardOutline,
+                                size = 14.appSp(CustomTheme.typography.scaleFactor),
                                 color = CustomTheme.colors.darkText
                             )
 

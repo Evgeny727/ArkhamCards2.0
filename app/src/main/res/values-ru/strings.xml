@@ -1960,7 +1960,7 @@
     <string name="card_scan">Скан карты</string>
     <string name="card_scan_with_taboo">Показать с табу</string>
     <string name="card_scan_without_taboo">Показать без табу</string>
-    <string name="loading_cards_cache">Загрузка кэша…</string>
+    <string name="creating_cards_cache">Создание кэша…</string>
     <string name="load_cards_cache_error">Не удалось загрузить кэш карт</string>
     <string name="create_cards_cache_error">Не удалось создать кэш карт</string>
     <string name="clear_cards_database_error">Не удалось очистить базу карт</string>

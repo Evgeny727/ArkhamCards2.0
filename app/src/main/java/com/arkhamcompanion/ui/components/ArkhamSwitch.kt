@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -22,7 +21,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.arkhamcompanion.ui.icons.AppIcon
 import com.arkhamcompanion.ui.theme.CustomTheme
 
@@ -84,16 +82,14 @@ fun ArkhamSwitch(value: Boolean, onValueChange: (Boolean) -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(
-                text = investigatorIcon.glyph,
-                fontFamily = investigatorIcon.fontFamily,
-                fontSize = 24.sp,
+            ArkhamIconText(
+                iconGlyph = investigatorIcon,
+                size = 24.dp,
                 color = animatedColorInvestigatorIcon
             )
-            Text(
-                text = mythosIcon.glyph,
-                fontFamily = mythosIcon.fontFamily,
-                fontSize = 24.sp,
+            ArkhamIconText(
+                iconGlyph = mythosIcon,
+                size = 24.dp,
                 color = animatedColorMythosIcon
             )
         }

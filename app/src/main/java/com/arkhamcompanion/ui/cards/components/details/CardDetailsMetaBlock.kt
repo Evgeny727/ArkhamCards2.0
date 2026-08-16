@@ -241,32 +241,34 @@ private fun CardDetailsHealthSanityLine(
     health: Int?,
     sanity: Int?,
 ) {
+    val scaleFactor = CustomTheme.typography.scaleFactor
+
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Box(contentAlignment = Alignment.TopCenter) {
             HealthSanityIcon(
                 isHealth = true,
-                iconSize = 28.appSp(CustomTheme.typography.scaleFactor),
+                iconSize = 28.appSp(scaleFactor),
                 withBackground = false
             )
             HealthSanityNumericIcon(
                 value = health,
                 isHealth = true,
-                iconSize = 24.appSp(CustomTheme.typography.scaleFactor)
+                iconSize = 24.appSp(scaleFactor)
             )
         }
 
         Box(contentAlignment = Alignment.TopCenter) {
             HealthSanityIcon(
                 isHealth = false,
-                iconSize = 28.appSp(CustomTheme.typography.scaleFactor),
+                iconSize = 28.appSp(scaleFactor),
                 withBackground = false
             )
             HealthSanityNumericIcon(
                 value = sanity,
                 isHealth = false,
-                iconSize = 24.appSp(CustomTheme.typography.scaleFactor)
+                iconSize = 24.appSp(scaleFactor)
             )
         }
     }

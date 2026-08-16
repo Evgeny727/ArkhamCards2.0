@@ -18,9 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.arkhamcompanion.ui.icons.AppIcon
-import com.arkhamcompanion.ui.theme.AppIconsFont
 import com.arkhamcompanion.ui.theme.CustomTheme
 
 @Composable
@@ -72,10 +70,9 @@ fun ArkhamButton(
 
 @Composable
 fun ArkhamButtonSearchIcon(color: Color) {
-    Text(
-        text = AppIcon.Search.glyph,
-        fontFamily = AppIconsFont,
+    ArkhamIconText(
+        iconGlyph = AppIcon.Search,
         color = color,
-        fontSize = 24.sp
+        size = 24.dp
     )
 }

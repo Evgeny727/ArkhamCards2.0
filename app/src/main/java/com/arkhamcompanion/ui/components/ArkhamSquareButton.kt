@@ -22,9 +22,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.arkhamcompanion.ui.icons.AppIcon
 import com.arkhamcompanion.ui.icons.PackIcon
 import com.arkhamcompanion.ui.theme.CustomTheme
@@ -199,7 +198,7 @@ private fun buttonColors(type: ArkhamButtonColor): ArkhamButtonColors =
         )
     }
 
-internal fun iconSize(icon: Any): TextUnit = when (icon) {
+internal fun iconSize(icon: Any): Dp = when (icon) {
     AppIcon.Wild -> 24
     AppIcon.Trauma -> 32
     AppIcon.PlusButton -> 28
@@ -221,4 +220,4 @@ internal fun iconSize(icon: Any): TextUnit = when (icon) {
     AppIcon.MythosBusters -> 34
     AppIcon.Copy -> 26
     else -> 28
-}.sp
+}.dp

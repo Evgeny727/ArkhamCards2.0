@@ -8,9 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.arkhamcompanion.ui.utils.openLink
 import com.arkhamcompanion.R
 import com.arkhamcompanion.domain.enums.Faction
+import com.arkhamcompanion.ui.components.ArkhamIconText
 import com.arkhamcompanion.ui.components.ArkhamRoundedCardHeader
 import com.arkhamcompanion.ui.components.ArkhamRoundedFactionCard
 import com.arkhamcompanion.ui.components.ArkhamSquareButton
@@ -52,13 +52,10 @@ fun SocialsCard(
                 }
             },
         ) { color ->
-            Text(
-                text = AppIcon.Discord.glyph,
-                fontFamily = AppIcon.Discord.fontFamily,
+            ArkhamIconText(
+                iconGlyph = AppIcon.Discord,
                 color = color,
-                fontSize = iconSize(
-                    AppIcon.Discord
-                )
+                size = iconSize(AppIcon.Discord),
             )
         }
         if (languageTag == "es") {
@@ -70,13 +67,10 @@ fun SocialsCard(
                     }
                 },
             ) { color ->
-                Text(
-                    text = AppIcon.Wild.glyph,
-                    fontFamily = AppIcon.Wild.fontFamily,
+                ArkhamIconText(
+                    iconGlyph = AppIcon.Wild,
                     color = color,
-                    fontSize = iconSize(
-                        AppIcon.Wild
-                    )
+                    size = iconSize(AppIcon.Wild)
                 )
             }
         } else if (languageTag == "ru") {
@@ -88,13 +82,10 @@ fun SocialsCard(
                     }
                 },
             ) { color ->
-                Text(
-                    text = AppIcon.Vk.glyph,
-                    fontFamily = AppIcon.Vk.fontFamily,
+                ArkhamIconText(
+                    iconGlyph = AppIcon.Vk,
                     color = color,
-                    fontSize = iconSize(
-                        AppIcon.Vk
-                    )
+                    size = iconSize(AppIcon.Vk)
                 )
             }
             ArkhamSquareButton(
@@ -105,13 +96,10 @@ fun SocialsCard(
                     }
                 },
             ) { color ->
-                Text(
-                    text = AppIcon.Telegram.glyph,
-                    fontFamily = AppIcon.Telegram.fontFamily,
+                ArkhamIconText(
+                    iconGlyph = AppIcon.Telegram,
                     color = color,
-                    fontSize = iconSize(
-                        AppIcon.Telegram
-                    )
+                    size = iconSize(AppIcon.Telegram)
                 )
             }
         }

@@ -129,25 +129,27 @@ fun CollectionScreen(
                 }
                 cycles.forEach { (cycleName, reprintPacks, reprintCodes, packs, packCodes) ->
                     val isReprint = reprintPacks.isNotEmpty()
-                    if (isReprint) item(key = "cycle_${cycleName}_new", contentType = "cycle_header") {
-                        CardSectionHeader(
-                            title = "$cycleName (1 + 1)",
-                        ) {
-                            CardSectionHeaderIconButton(
-                                iconGlyph = AppIcon.PlusButton,
+                    if (isReprint) {
+                        item(key = "cycle_${cycleName}_new", contentType = "cycle_header") {
+                            CardSectionHeader(
+                                title = "$cycleName (1 + 1)",
                             ) {
-                                val newCollection = collection.copy(
-                                    reprintPacks = (collection.reprintPacks + reprintCodes).toImmutableSet()
-                                )
-                                onCollectionChange(newCollection)
-                            }
-                            CardSectionHeaderIconButton(
-                                iconGlyph = AppIcon.MinusButton,
-                            ) {
-                                val newCollection = collection.copy(
-                                    reprintPacks = (collection.reprintPacks - reprintCodes).toImmutableSet()
-                                )
-                                onCollectionChange(newCollection)
+                                CardSectionHeaderIconButton(
+                                    iconGlyph = AppIcon.PlusButton,
+                                ) {
+                                    val newCollection = collection.copy(
+                                        reprintPacks = (collection.reprintPacks + reprintCodes).toImmutableSet()
+                                    )
+                                    onCollectionChange(newCollection)
+                                }
+                                CardSectionHeaderIconButton(
+                                    iconGlyph = AppIcon.MinusButton,
+                                ) {
+                                    val newCollection = collection.copy(
+                                        reprintPacks = (collection.reprintPacks - reprintCodes).toImmutableSet()
+                                    )
+                                    onCollectionChange(newCollection)
+                                }
                             }
                         }
                     }

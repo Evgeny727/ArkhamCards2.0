@@ -1,10 +1,14 @@
 package com.arkhamcompanion.ui.cards.components.details
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -21,9 +25,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAbsoluteAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
@@ -36,11 +42,11 @@ import com.arkhamcompanion.domain.enums.Faction
 import com.arkhamcompanion.ui.cards.components.factionIcon
 import com.arkhamcompanion.ui.components.ArkhamButtonColor
 import com.arkhamcompanion.ui.components.ArkhamDialog
+import com.arkhamcompanion.ui.components.ArkhamIconText
 import com.arkhamcompanion.ui.components.ArkhamSquareButton
 import com.arkhamcompanion.ui.components.iconSize
 import com.arkhamcompanion.ui.icons.AppIcon
 import com.arkhamcompanion.ui.icons.PackIcon
-import com.arkhamcompanion.ui.theme.AppIconsFont
 import com.arkhamcompanion.ui.theme.CustomTheme
 
 @Composable
@@ -188,7 +194,9 @@ private fun CardDetailsFullImageDialog(
         ) {
             item(key = "image", contentType = "image") {
                 Box(
-                    modifier = modifier.size(310.dp).align(Alignment.CenterHorizontally),
+                    modifier = modifier
+                        .size(310.dp)
+                        .align(Alignment.CenterHorizontally),
                     contentAlignment = Alignment.Center
                 ) {
                     if (!hidePlaceholder) {
@@ -197,13 +205,16 @@ private fun CardDetailsFullImageDialog(
                                 .size(310.dp)
                                 .clip(CustomTheme.shapes.medium)
                                 .background(CustomTheme.colors.divider)
-                                .border(1.dp, CustomTheme.colors.darkText, CustomTheme.shapes.medium),
+                                .border(
+                                    1.dp,
+                                    CustomTheme.colors.darkText,
+                                    CustomTheme.shapes.medium
+                                ),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text(
-                                text = AppIcon.Logo.glyph,
-                                fontFamily = AppIconsFont,
-                                fontSize = 72.sp,
+                            ArkhamIconText(
+                                iconGlyph = AppIcon.Logo,
+                                size = 72.dp,
                                 color = CustomTheme.colors.lightText
                             )
                         }
@@ -211,40 +222,23 @@ private fun CardDetailsFullImageDialog(
 
                     if (isLoading) CircularProgressIndicator(
                         color = CustomTheme.colors.darkText,
-                        modifier = Modifier.size(56.dp).align(Alignment.Center)
+                        modifier = Modifier
+                            .size(56.dp)
+                            .align(Alignment.Center)
                     )
 
-                    if (showBack) {
-                        AsyncImage(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .data(backImageUrl)
-                                .build(),
-                            modifier = Modifier
-                                .width(if (isBackSideways) sideWayWidth else sideWayHeight)
-                                .height(if (isBackSideways) sideWayHeight else sideWayWidth)
-                                .clip(CustomTheme.shapes.large),
-                            onSuccess = { hidePlaceholder = true; isLoading = false },
-                            onError = { hidePlaceholder = false; isLoading = false },
-                            onLoading = { isLoading = true },
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                        )
-                    } else {
-                        AsyncImage(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .data(imageUrl)
-                                .build(),
-                            modifier = Modifier
-                                .width(if (isFrontSideways) sideWayWidth else sideWayHeight)
-                                .height(if (isFrontSideways) sideWayHeight else sideWayWidth)
-                                .clip(CustomTheme.shapes.large),
-                            onSuccess = { hidePlaceholder = true; isLoading = false },
-                            onError = { hidePlaceholder = false; isLoading = false },
-                            onLoading = { isLoading = true },
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                        )
-                    }
+                    FlippableCard(
+                        frontUrl = imageUrl,
+                        backUrl = backImageUrl,
+                        frontWidth = if (isFrontSideways) sideWayWidth else sideWayHeight,
+                        backWidth = if (isBackSideways) sideWayWidth else sideWayHeight,
+                        frontHeight = if (isFrontSideways) sideWayHeight else sideWayWidth,
+                        backHeight = if (isBackSideways) sideWayHeight else sideWayWidth,
+                        isFlipped = showBack,
+                        onSuccess = { hidePlaceholder = true; isLoading = false },
+                        onError = { hidePlaceholder = false; isLoading = false },
+                        onLoading = { isLoading = true },
+                    )
                 }
             }
 
@@ -254,10 +248,9 @@ private fun CardDetailsFullImageDialog(
                     onClick = { showBack = !showBack },
                     colors = ArkhamButtonColor.Default,
                     icon = { color ->
-                        Text(
-                            text = AppIcon.FlipCard.glyph,
-                            fontFamily = AppIcon.FlipCard.fontFamily,
-                            fontSize = iconSize(AppIcon.FlipCard),
+                        ArkhamIconText(
+                            iconGlyph = AppIcon.FlipCard,
+                            size = iconSize(AppIcon.FlipCard),
                             color = color
                         )
                     }
@@ -284,16 +277,85 @@ private fun CardDetailsFullImageDialog(
                     },
                     colors = ArkhamButtonColor.Default,
                     icon = { color ->
-                        Text(
-                            text = AppIcon.Taboo.glyph,
-                            fontFamily = AppIcon.Taboo.fontFamily,
-                            fontSize = iconSize(AppIcon.Taboo),
+                        ArkhamIconText(
+                            iconGlyph = AppIcon.Taboo,
+                            size = iconSize(AppIcon.Taboo),
                             color = color
                         )
                     }
                 )
             }
         }
+    }
+}
+
+@Composable
+fun FlippableCard(
+    frontUrl: String?,
+    backUrl: String?,
+    frontWidth: Dp,
+    backWidth: Dp,
+    frontHeight: Dp,
+    backHeight: Dp,
+    isFlipped: Boolean,
+    onSuccess: () -> Unit,
+    onLoading: () -> Unit,
+    onError: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val rotation by animateFloatAsState(
+        targetValue = if (isFlipped) 180f else 0f,
+        animationSpec = tween(
+            durationMillis = 500,
+            easing = FastOutSlowInEasing
+        ),
+        label = "cardRotation"
+    )
+
+    val showBack = rotation >= 90f
+
+    val width = if (showBack) backWidth else frontWidth
+    val height = if (showBack) backHeight else frontHeight
+
+    Box(
+        modifier = modifier
+            .width(width)
+            .height(height)
+            .graphicsLayer {
+                rotationY = rotation
+                cameraDistance = 12 * density
+            }
+    ) {
+        AsyncImage(
+            model = frontUrl,
+            contentDescription = null,
+            onSuccess = { onSuccess() },
+            onLoading = { onLoading() },
+            onError = { onError() },
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(CustomTheme.shapes.large)
+                .graphicsLayer {
+                    alpha = if (showBack) 0f else 1f
+                },
+            contentScale = ContentScale.Crop,
+        )
+
+        AsyncImage(
+            model = backUrl,
+            contentDescription = null,
+            onSuccess = { onSuccess() },
+            onLoading = { onLoading() },
+            onError = { onError() },
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(CustomTheme.shapes.large)
+                .graphicsLayer {
+                    alpha = if (showBack) 1f else 0f
+                    rotationY = 180f
+                },
+            contentScale = ContentScale.Crop,
+        )
     }
 }
 

@@ -23,6 +23,7 @@ import com.arkhamcompanion.domain.model.meta.TabooSet
 import com.arkhamcompanion.domain.model.settings.Collection
 import com.arkhamcompanion.ui.components.ArkhamCheckboxButton
 import com.arkhamcompanion.ui.components.ArkhamDialog
+import com.arkhamcompanion.ui.components.ArkhamIconText
 import com.arkhamcompanion.ui.components.ArkhamRoundedCardHeader
 import com.arkhamcompanion.ui.components.ArkhamRoundedFactionCard
 import com.arkhamcompanion.ui.components.ArkhamSquareButton
@@ -98,11 +99,10 @@ fun CardsCard(
             title = stringResource(R.string.check_for_card_updates),
             onClick = { updateCards(languageTag) },
             icon = { color ->
-                Text(
-                    text = AppIcon.Arkhamdb.glyph,
-                    fontFamily = AppIcon.Arkhamdb.fontFamily,
+                ArkhamIconText(
+                    iconGlyph = AppIcon.Arkhamdb,
                     color = color,
-                    fontSize = iconSize(AppIcon.Arkhamdb)
+                    size = iconSize(AppIcon.Arkhamdb)
                 )
             }
         )

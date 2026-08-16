@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.arkhamcompanion.ui.icons.AppIcon
 import com.arkhamcompanion.ui.icons.IconGlyph
 import com.arkhamcompanion.ui.theme.CustomTheme
@@ -34,7 +33,7 @@ fun ArkhamSurfaceButton(
     valueLabelDescription: String? = null,
     noLabelDivider: Boolean = false,
 ) {
-    val iconSize = if (icon == AppIcon.PerInvestigator) 26.sp else 32.sp
+    val iconSize = if (icon == AppIcon.PerInvestigator) 26.dp else 32.dp
 
     Surface(
         modifier = modifier.fillMaxWidth(),
@@ -57,10 +56,9 @@ fun ArkhamSurfaceButton(
                         if (it) {
                             CircularProgressIndicator(modifier = Modifier.size(28.dp), color = CustomTheme.colors.m)
                         } else {
-                            Text(
-                                text = icon.glyph,
-                                fontFamily = icon.fontFamily,
-                                fontSize = iconSize,
+                            ArkhamIconText(
+                                iconGlyph = icon,
+                                size = iconSize,
                                 color = CustomTheme.colors.m
                             )
                         }
@@ -98,10 +96,9 @@ fun ArkhamSurfaceButton(
                     modifier = Modifier.size(32.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = editIcon.glyph,
-                        fontFamily = editIcon.fontFamily,
-                        fontSize = 32.sp,
+                    ArkhamIconText(
+                        iconGlyph = editIcon,
+                        size = 32.dp,
                         color = CustomTheme.colors.m
                     )
                 }

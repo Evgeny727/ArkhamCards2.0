@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -28,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.arkhamcompanion.R
 import com.arkhamcompanion.ui.components.ArkhamButtonColor
 import com.arkhamcompanion.ui.components.ArkhamCheckboxButton
+import com.arkhamcompanion.ui.components.ArkhamIconText
 import com.arkhamcompanion.ui.components.ArkhamSquareButton
 import com.arkhamcompanion.ui.components.iconSize
 import com.arkhamcompanion.ui.icons.AppIcon
@@ -128,11 +128,10 @@ fun CardsSortScreen(
                 modifier = Modifier.weight(1f),
                 colors = ArkhamButtonColor.RedOutline,
             ) { color ->
-                Text(
-                    text = AppIcon.Dismiss.glyph,
-                    fontFamily = AppIcon.Dismiss.fontFamily,
+                ArkhamIconText(
+                    iconGlyph = AppIcon.Dismiss,
                     color = color,
-                    fontSize = iconSize(AppIcon.Dismiss)
+                    size = iconSize(AppIcon.Dismiss)
                 )
             }
             ArkhamSquareButton(
@@ -141,11 +140,10 @@ fun CardsSortScreen(
                 modifier = Modifier.weight(1f),
                 enabled = activeSortOptions != sortOptions
             ) { color ->
-                Text(
-                    text = AppIcon.CheckThin.glyph,
-                    fontFamily = AppIcon.CheckThin.fontFamily,
+                ArkhamIconText(
+                    iconGlyph = AppIcon.CheckThin,
                     color = color,
-                    fontSize = iconSize(AppIcon.CheckThin)
+                    size = iconSize(AppIcon.CheckThin)
                 )
             }
         }

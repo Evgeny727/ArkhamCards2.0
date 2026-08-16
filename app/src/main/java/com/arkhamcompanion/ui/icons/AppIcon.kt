@@ -399,6 +399,7 @@ enum class AppIcon(
     Accessory("accessory", 0xEA55),
     Ally("ally", 0xEA56),
     Logo("logo", 0xEA58),
+    Unique("unique", 0xEA59),
     Filter("filter", 0xEA5B);
 
     override val glyph: String

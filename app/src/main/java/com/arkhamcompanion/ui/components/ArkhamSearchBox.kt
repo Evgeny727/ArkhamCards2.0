@@ -33,13 +33,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.PopupProperties
 import com.arkhamcompanion.R
 import com.arkhamcompanion.ui.icons.AppIcon
-import com.arkhamcompanion.ui.theme.AppIconsFont
 import com.arkhamcompanion.ui.theme.CustomTheme
-import com.arkhamcompanion.ui.utils.appSp
 
 @Composable
 fun ArkhamSearchBox(
@@ -72,10 +69,9 @@ fun ArkhamSearchBox(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(
-                    text = AppIcon.Search.glyph,
-                    fontFamily = AppIconsFont,
-                    fontSize = 28.appSp(CustomTheme.typography.scaleFactor),
+                ArkhamIconText(
+                    iconGlyph = AppIcon.Search,
+                    size = 28.dp,
                     color = CustomTheme.colors.m
                 )
 
@@ -106,10 +102,9 @@ fun ArkhamSearchBox(
                             .clickable(onClick = onClearQuery),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(
-                            text = AppIcon.Dismiss.glyph,
-                            fontFamily = AppIconsFont,
-                            fontSize = 28.appSp(CustomTheme.typography.scaleFactor),
+                        ArkhamIconText(
+                            iconGlyph = AppIcon.Dismiss,
+                            size = 28.dp,
                             color = CustomTheme.colors.d20
                         )
                     }
@@ -120,7 +115,7 @@ fun ArkhamSearchBox(
                 ArkhamToggleButton(
                     checked = showOptions,
                     iconGlyph = AppIcon.Dots,
-                    size = 28.sp,
+                    size = 28.dp,
                     modifier = Modifier.padding(2.dp)
                 ) { newValue -> showOptions = newValue }
             }

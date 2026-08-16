@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,7 +15,6 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.arkhamcompanion.ui.icons.AppIcon
 import com.arkhamcompanion.ui.theme.CustomTheme
 
@@ -51,18 +49,17 @@ fun ArkhamCheckCircle(
         contentAlignment = Alignment.Center
     ) {
         val icon = if (large) AppIcon.CircleThin else AppIcon.CheckCircle
-        val iconSize = if (large) 34.sp else 28.sp
-        val checkSize = if (large) 28.sp else 22.sp
+        val iconSize = if (large) 34.dp else 28.dp
+        val checkSize = if (large) 28.dp else 22.dp
         val checkOffset = if (large) {
             DpOffset(3.dp, (-4).dp)
         } else {
             DpOffset(2.dp, (-3).dp)
         }
 
-        Text(
-            text = icon.glyph,
-            fontFamily = icon.fontFamily,
-            fontSize = iconSize,
+        ArkhamIconText(
+            iconGlyph = icon,
+            size = iconSize,
             color = with(CustomTheme.colors) {
                 when {
                     enabled -> when (style) {
@@ -78,10 +75,9 @@ fun ArkhamCheckCircle(
         if (isRadio && value) Box(modifier = Modifier.size(18.dp).background(
             color = if (enabled) CustomTheme.colors.m else disabledColor ?: CustomTheme.colors.l15,
             shape = CustomTheme.shapes.circle
-        )) else Text(
-            text = AppIcon.Check.glyph,
-            fontFamily = AppIcon.Check.fontFamily,
-            fontSize = checkSize,
+        )) else ArkhamIconText(
+            iconGlyph = AppIcon.Check,
+            size = checkSize,
             color = with(CustomTheme.colors) {
                 when {
                     enabled -> when (style) {

@@ -4,7 +4,6 @@ import com.arkhamcompanion.domain.exceptions.UnableCreateCardsCacheException
 import com.arkhamcompanion.domain.exceptions.UnableToLoadCardsCacheException
 import com.arkhamcompanion.domain.repository.CardsRepository
 import com.arkhamcompanion.domain.repository.UserPreferencesRepository
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -13,7 +12,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.time.Duration.Companion.seconds
 
 sealed interface CardsSyncState {
     object Idle : CardsSyncState
@@ -25,6 +23,7 @@ sealed interface CardsSyncState {
 sealed interface CardsCacheState {
     object Idle : CardsCacheState
     object Loading : CardsCacheState
+    object Creating : CardsCacheState
     object Ready : CardsCacheState
 }
 
@@ -60,22 +59,26 @@ class CardsSyncManager @Inject constructor(
 
     suspend fun updateCardsIfUpdateAvailable(language: String) {
         _state.value = CardsSyncState.Loading(0.0f)
-        fetchCardsUpdate(language, forced = true) { updateAvailable ->
-            if (updateAvailable) {
-                _state.value = CardsSyncState.Loading(0.05f)
-                cardsRepository.downloadAllCards(language) { newValue ->
-                    _state.value = CardsSyncState.Loading(newValue)
+
+        if (!cardsRepository.isCardsTableExists()) download(language)
+        else {
+            fetchCardsUpdate(language, forced = true) { updateAvailable ->
+                if (updateAvailable) {
+                    _state.value = CardsSyncState.Loading(0.05f)
+                    cardsRepository.downloadAllCards(language) { newValue ->
+                        _state.value = CardsSyncState.Loading(newValue)
+                    }
+                        .onSuccess {
+                            userPreferencesRepository.saveCardsUpdatedTimestamp(it)
+                            _state.value = CardsSyncState.Ready
+                        }
+                        .onFailure {
+                            _errors.tryEmit(it)
+                            _state.value = CardsSyncState.Ready
+                        }
+                } else {
+                    _state.value = CardsSyncState.Ready
                 }
-                    .onSuccess {
-                        userPreferencesRepository.saveCardsUpdatedTimestamp(it)
-                        _state.value = CardsSyncState.Ready
-                    }
-                    .onFailure {
-                        _errors.tryEmit(it)
-                        _state.value = CardsSyncState.Ready
-                    }
-            } else {
-                _state.value = CardsSyncState.Ready
             }
         }
     }
@@ -120,8 +123,6 @@ class CardsSyncManager @Inject constructor(
 
         val cacheReady = cardsRepository.loadCache()
 
-        delay(1.seconds) //slight delay for better visual representation of loading
-
         if (!cacheReady) _errors.tryEmit(UnableToLoadCardsCacheException())
         _cacheState.value = CardsCacheState.Ready
 
@@ -129,7 +130,7 @@ class CardsSyncManager @Inject constructor(
     }
 
     suspend fun recreateCache() {
-        _cacheState.value = CardsCacheState.Loading
+        _cacheState.value = CardsCacheState.Creating
 
         val cacheRecreated = cardsRepository.recreateCache()
 

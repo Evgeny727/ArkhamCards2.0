@@ -9,6 +9,9 @@ object Cards
 object CardsSortScreen
 
 @Serializable
+object CardsFiltersScreen
+
+@Serializable
 data class CardDetailsScreen(
     val cardCode: String
 )

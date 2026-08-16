@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.arkhamcompanion.R
 import com.arkhamcompanion.domain.model.cards.CardText
 import com.arkhamcompanion.ui.components.ArkhamToggleButton
@@ -102,7 +101,7 @@ fun CardDetailsTabooBlock(
                         ArkhamToggleButton(
                             checked = showTabooTextChange,
                             iconGlyph = AppIcon.ExpandMore,
-                            size = 22.sp,
+                            size = 22.dp,
                             modifier = Modifier.padding(2.dp)
                         ) { newValue -> showTabooTextChange = newValue }
                     }

@@ -18,9 +18,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.arkhamcompanion.R
 import com.arkhamcompanion.domain.model.cards.CardsHeaderType
+import com.arkhamcompanion.ui.components.ArkhamIconText
 import com.arkhamcompanion.ui.icons.IconGlyph
 import com.arkhamcompanion.ui.theme.CustomTheme
-import com.arkhamcompanion.ui.utils.appSp
 
 @Composable
 fun CardSectionHeader(
@@ -64,11 +64,10 @@ fun CardSectionHeaderIconButton(
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = iconGlyph.glyph,
-            fontFamily = iconGlyph.fontFamily,
+        ArkhamIconText(
+            iconGlyph = iconGlyph,
             color = CustomTheme.colors.l30,
-            fontSize = 24.appSp(CustomTheme.typography.scaleFactor),
+            size = 24.dp,
             modifier = Modifier.padding(4.dp),
         )
     }

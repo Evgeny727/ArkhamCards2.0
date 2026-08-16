@@ -35,9 +35,9 @@ import com.arkhamcompanion.domain.model.cards.CardDetails
 import com.arkhamcompanion.domain.model.cards.CardPack
 import com.arkhamcompanion.ui.cards.components.CardCostIcon
 import com.arkhamcompanion.ui.cards.components.EncounterIcon
-import com.arkhamcompanion.ui.cards.components.UNIQUE_SYMBOL
 import com.arkhamcompanion.ui.cards.components.factionIcon
 import com.arkhamcompanion.ui.cards.components.iconScaleFactor
+import com.arkhamcompanion.ui.components.ArkhamScalableIconText
 import com.arkhamcompanion.ui.components.factionColor
 import com.arkhamcompanion.ui.icons.AppIcon
 import com.arkhamcompanion.ui.icons.PackIcon
@@ -45,6 +45,7 @@ import com.arkhamcompanion.ui.theme.AppIconsFont
 import com.arkhamcompanion.ui.theme.CustomTheme
 import com.arkhamcompanion.ui.utils.appSp
 import com.arkhamcompanion.ui.utils.iconize
+import com.arkhamcompanion.ui.utils.scaledByFont
 
 @Composable
 fun CardDetailsHeader(
@@ -178,10 +179,9 @@ fun CardDetailsFactionIcons(
     iconScaleFactor: Float
 ) {
     if (subType == CardSubType.BasicWeakness || subType == CardSubType.Weakness) {
-        Text(
-            text = AppIcon.Weakness.glyph,
-            fontFamily = AppIconsFont,
-            fontSize = 28.appSp(iconScaleFactor),
+        ArkhamScalableIconText(
+            iconGlyph = AppIcon.Weakness,
+            size = 28.appSp(iconScaleFactor),
             color = Color.White,
         )
     } else if (encounterCode != null && !isWithCost) {
@@ -192,33 +192,33 @@ fun CardDetailsFactionIcons(
         )
     } else {
         val factionIcon = factionIcon(faction)
-        Text(
-            text = factionIcon.glyph,
-            fontFamily = factionIcon.fontFamily,
-            fontSize = 32.appSp(iconScaleFactor),
+        ArkhamScalableIconText(
+            iconGlyph = factionIcon,
+            size = 32.appSp(iconScaleFactor),
             color = Color.White,
-            modifier = Modifier.padding(bottom = if (faction != Faction.Neutral) 4.dp else 0.dp)
+            modifier = Modifier.padding(
+                bottom = if (faction != Faction.Neutral) 4.dp.scaledByFont(iconScaleFactor)
+                    else 0.dp
+            )
         )
 
         faction2?.let {
             val faction2Icon = factionIcon(faction2)
-            Text(
-                text = faction2Icon.glyph,
-                fontFamily = faction2Icon.fontFamily,
-                fontSize = 32.appSp(iconScaleFactor),
+            ArkhamScalableIconText(
+                iconGlyph = faction2Icon,
+                size = 32.appSp(iconScaleFactor),
                 color = Color.White,
-                modifier = Modifier.padding(bottom = 4.dp)
+                modifier = Modifier.padding(bottom = 4.dp.scaledByFont(iconScaleFactor))
             )
         }
 
         faction3?.let {
             val faction3Icon = factionIcon(faction3)
-            Text(
-                text = faction3Icon.glyph,
-                fontFamily = faction3Icon.fontFamily,
-                fontSize = 32.appSp(iconScaleFactor),
+            ArkhamScalableIconText(
+                iconGlyph = faction3Icon,
+                size = 32.appSp(iconScaleFactor),
                 color = Color.White,
-                modifier = Modifier.padding(bottom = 4.dp)
+                modifier = Modifier.padding(bottom = 4.dp.scaledByFont(iconScaleFactor))
             )
         }
     }
@@ -251,15 +251,18 @@ private fun RowScope.CardDetailsNameRow(
                         append(AppIcon.Parallel1.glyph)
                     }
                 }
-                if (isUnique) withStyle(
-                    style = SpanStyle(
-                        fontSize = iconSize,
-                        baselineShift = BaselineShift(0.05f)
-                    )
-                ) {
-                    append("$UNIQUE_SYMBOL ")
+                if (isUnique) {
+                    withStyle(
+                        style = SpanStyle(
+                            fontFamily = AppIconsFont,
+                            fontSize = 12.appSp(CustomTheme.typography.scaleFactor),
+                        )
+                    ) {
+                        append(AppIcon.Unique.glyph)
+                    }
                 }
 
+                append(" ")
                 append(name.iconize(iconSize = 16.sp, color = Color.White))
 
                 if (packPosition != 1000) {

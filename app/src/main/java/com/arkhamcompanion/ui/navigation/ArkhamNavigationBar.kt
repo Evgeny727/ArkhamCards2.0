@@ -24,6 +24,7 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import com.arkhamcompanion.ui.components.ArkhamIconText
 import com.arkhamcompanion.ui.theme.Alegreya
 import com.arkhamcompanion.ui.theme.CustomTheme
 
@@ -61,10 +62,9 @@ fun ArkhamNavigationBar(
                             restoreState = true
                         }
                     } },
-                    icon = { Text(
-                        text = bottomNavItem.icon.glyph,
-                        fontFamily = bottomNavItem.icon.fontFamily,
-                        fontSize = 26.sp,
+                    icon = { ArkhamIconText(
+                        iconGlyph = bottomNavItem.icon,
+                        size = 26.dp,
                         color = if (selected) CustomTheme.colors.d30 else CustomTheme.colors.m
                     ) },
                     label = { Text(

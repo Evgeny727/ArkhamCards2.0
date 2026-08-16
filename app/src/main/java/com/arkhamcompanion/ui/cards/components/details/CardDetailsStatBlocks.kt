@@ -20,10 +20,12 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
+import com.arkhamcompanion.ui.components.ArkhamScalableIconText
 import com.arkhamcompanion.ui.icons.AppIcon
 import com.arkhamcompanion.ui.theme.AppIconsFont
 import com.arkhamcompanion.ui.theme.CustomTheme
 import com.arkhamcompanion.ui.utils.appSp
+import com.arkhamcompanion.ui.utils.scaledByFont
 
 @Composable
 fun CardDetailsInvestigatorStatLine(
@@ -109,10 +111,9 @@ fun CardDetailsEnemyStatBlock(
                 )
 
                 if (healthPerInvestigator) {
-                    Text(
-                        text = AppIcon.PerInvestigator.glyph,
-                        fontFamily = AppIconsFont,
-                        fontSize = 18.appSp(CustomTheme.typography.scaleFactor),
+                    ArkhamScalableIconText(
+                        iconGlyph = AppIcon.PerInvestigator,
+                        size = 18.appSp(CustomTheme.typography.scaleFactor),
                         color = CustomTheme.colors.darkText,
                         modifier = Modifier.align(Alignment.Top).padding(top = 2.dp)
                     )
@@ -159,9 +160,10 @@ fun CardDetailsStatValue(
     perInvestigator: Boolean = false,
     reversed: Boolean = false
 ) {
-    val text = specialNumericValue(skillValue, 18.appSp(CustomTheme.typography.scaleFactor))
+    val scaleFactor = CustomTheme.typography.scaleFactor
+    val text = specialNumericValue(skillValue, 18.appSp(scaleFactor))
     val isNumericValue = text.isDigitsOnly() || text.text == "?"
-    val topPadding = if (isNumericValue) 2.dp else 0.dp
+    val topPadding = if (isNumericValue) 2.dp.scaledByFont(scaleFactor) else 0.dp
 
     Box(
         modifier = Modifier.background(
@@ -184,19 +186,18 @@ fun CardDetailsStatValue(
                     modifier = Modifier.padding(top = topPadding)
                 )
                 if (perInvestigator) {
-                    Text(
-                        text = AppIcon.PerInvestigator.glyph,
-                        fontFamily = AppIconsFont,
-                        fontSize = 18.appSp(CustomTheme.typography.scaleFactor),
+                    ArkhamScalableIconText(
+                        iconGlyph = AppIcon.PerInvestigator,
+                        size = 18.appSp(scaleFactor),
                         color = CustomTheme.colors.darkText,
-                        modifier = Modifier.align(Alignment.Top).padding(top = 2.dp)
+                        modifier = Modifier.align(Alignment.Top).padding(top = 2.dp.scaledByFont(scaleFactor))
                     )
                 }
             }
 
             SkillIcon(
                 skillCode = skillCode,
-                iconSize = 26.appSp(CustomTheme.typography.scaleFactor),
+                iconSize = 26.appSp(scaleFactor),
             )
 
             if (reversed) {
@@ -207,12 +208,11 @@ fun CardDetailsStatValue(
                     modifier = Modifier.padding(top = topPadding)
                 )
                 if (perInvestigator) {
-                    Text(
-                        text = AppIcon.PerInvestigator.glyph,
-                        fontFamily = AppIconsFont,
-                        fontSize = 18.appSp(CustomTheme.typography.scaleFactor),
+                    ArkhamScalableIconText(
+                        iconGlyph = AppIcon.PerInvestigator,
+                        size = 18.appSp(scaleFactor),
                         color = CustomTheme.colors.darkText,
-                        modifier = Modifier.align(Alignment.Top).padding(top = 2.dp)
+                        modifier = Modifier.align(Alignment.Top).padding(top = 2.dp.scaledByFont(scaleFactor))
                     )
                 }
             }

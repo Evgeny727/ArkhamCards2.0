@@ -3,7 +3,6 @@ package com.arkhamcompanion.ui.cards.components.details
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Alignment
@@ -11,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import com.arkhamcompanion.ui.components.ArkhamScalableIconText
 import com.arkhamcompanion.ui.icons.AppIcon
-import com.arkhamcompanion.ui.theme.AppIconsFont
 import com.arkhamcompanion.ui.theme.CustomTheme
 
 @Composable
@@ -26,19 +25,21 @@ fun SkillIcon(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = AppIcon.fromNameCode("skill_${skillCode}_inverted")?.glyph.toString(),
-            fontFamily = AppIconsFont,
-            fontSize = iconSize,
-            color = Color.White,
-        )
+        AppIcon.fromNameCode("skill_${skillCode}_inverted")?.let {
+            ArkhamScalableIconText(
+                iconGlyph = it,
+                size = iconSize,
+                color = Color.White,
+            )
+        }
 
-        Text(
-            text = AppIcon.fromNameCode("skill_$skillCode")?.glyph.toString(),
-            fontFamily = AppIconsFont,
-            fontSize = iconSize,
-            color = if (isWeakness) Color.Black else getSkillIconColor(skillCode)
-        )
+        AppIcon.fromNameCode("skill_$skillCode")?.let {
+            ArkhamScalableIconText(
+                iconGlyph = it,
+                size = iconSize,
+                color = if (isWeakness) Color.Black else getSkillIconColor(skillCode)
+            )
+        }
     }
 }
 
@@ -54,31 +55,27 @@ fun HealthSanityIcon(
         contentAlignment = Alignment.Center
     ) {
         if (isHealth) {
-            if (withBackground) Text(
-                text = AppIcon.HealthInverted.glyph,
-                fontFamily = AppIconsFont,
-                fontSize = iconSize,
+            if (withBackground) ArkhamScalableIconText(
+                iconGlyph = AppIcon.HealthInverted,
+                size = iconSize,
                 color = Color.White,
             )
 
-            Text(
-                text = AppIcon.Health.glyph,
-                fontFamily = AppIconsFont,
-                fontSize = iconSize,
+            ArkhamScalableIconText(
+                iconGlyph = AppIcon.Health,
+                size = iconSize,
                 color = CustomTheme.colors.health
             )
         } else {
-            if (withBackground) Text(
-                text = AppIcon.SanityInverted.glyph,
-                fontFamily = AppIconsFont,
-                fontSize = iconSize,
+            if (withBackground) ArkhamScalableIconText(
+                iconGlyph = AppIcon.SanityInverted,
+                size = iconSize,
                 color = Color.White,
             )
 
-            Text(
-                text = AppIcon.Sanity.glyph,
-                fontFamily = AppIconsFont,
-                fontSize = iconSize,
+            ArkhamScalableIconText(
+                iconGlyph = AppIcon.Sanity,
+                size = iconSize,
                 color = CustomTheme.colors.sanity
             )
         }
@@ -120,34 +117,40 @@ fun HealthSanityNumericIcon(
         horizontalArrangement = Arrangement.spacedBy((-8).dp)
     ) {
         Box(contentAlignment = Alignment.Center) {
-            Text(
-                text = AppIcon.fromNameCode("$firstNumberIcon-fill")?.glyph.toString(),
-                fontFamily = AppIconsFont,
-                fontSize = iconSize,
-                color = Color.White
-            )
-            Text(
-                text = AppIcon.fromNameCode("$firstNumberIcon-outline")?.glyph.toString(),
-                fontFamily = AppIconsFont,
-                fontSize = iconSize,
-                color = color
-            )
+            AppIcon.fromNameCode("$firstNumberIcon-fill")?.let {
+                ArkhamScalableIconText(
+                    iconGlyph = it,
+                    size = iconSize,
+                    color = Color.White,
+                )
+            }
+
+            AppIcon.fromNameCode("$firstNumberIcon-outline")?.let {
+                ArkhamScalableIconText(
+                    iconGlyph = it,
+                    size = iconSize,
+                    color = color
+                )
+            }
         }
 
         secondNumberIcon?.let {
             Box(contentAlignment = Alignment.Center) {
-                Text(
-                    text = AppIcon.fromNameCode("$it-fill")?.glyph.toString(),
-                    fontFamily = AppIconsFont,
-                    fontSize = iconSize,
-                    color = Color.White
-                )
-                Text(
-                    text = AppIcon.fromNameCode("$it-outline")?.glyph.toString(),
-                    fontFamily = AppIconsFont,
-                    fontSize = iconSize,
-                    color = color
-                )
+                AppIcon.fromNameCode("$it-fill")?.let { icon ->
+                    ArkhamScalableIconText(
+                        iconGlyph = icon,
+                        size = iconSize,
+                        color = Color.White,
+                    )
+                }
+
+                AppIcon.fromNameCode("$it-outline")?.let { icon ->
+                    ArkhamScalableIconText(
+                        iconGlyph = icon,
+                        size = iconSize,
+                        color = color
+                    )
+                }
             }
         }
     }

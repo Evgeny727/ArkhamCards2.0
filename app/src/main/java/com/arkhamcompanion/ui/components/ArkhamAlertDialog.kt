@@ -62,11 +62,10 @@ fun ArkhamAlertButton(
         ArkhamAlertButtonStyle.DESTRUCTIVE -> AppIcon.Trash
     }
     val finalIcon = icon ?: { color ->
-        Text(
-            text = appIcon.glyph,
-            fontFamily = appIcon.fontFamily,
+        ArkhamIconText(
+            iconGlyph = appIcon,
             color = color,
-            fontSize = iconSize(appIcon)
+            size = iconSize(appIcon)
         )
     }
     ArkhamSquareButton(

@@ -31,10 +31,11 @@ import coil3.request.ImageRequest
 import com.arkhamcompanion.domain.enums.CardType
 import com.arkhamcompanion.domain.enums.Faction
 import com.arkhamcompanion.domain.model.cards.CardListItem
+import com.arkhamcompanion.ui.components.ArkhamScalableIconText
 import com.arkhamcompanion.ui.components.factionColor
 import com.arkhamcompanion.ui.icons.AppIcon
+import com.arkhamcompanion.ui.icons.IconGlyph
 import com.arkhamcompanion.ui.icons.PackIcon
-import com.arkhamcompanion.ui.theme.AppIconsFont
 import com.arkhamcompanion.ui.theme.CustomTheme
 import com.arkhamcompanion.ui.theme.FactionColors
 import com.arkhamcompanion.ui.utils.appSp
@@ -147,12 +148,14 @@ fun CardListItemNameRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        if (isUnique) Text(
-            text = UNIQUE_SYMBOL,
-            style = CustomTheme.typography.run { cardTraits + regular },
-            color = factionColor.text,
-            textDecoration = if (invalid) TextDecoration.LineThrough else null
-        )
+        if (isUnique) {
+            ArkhamScalableIconText(
+                iconGlyph = AppIcon.Unique,
+                size = 12.appSp(CustomTheme.typography.scaleFactor),
+                color = factionColor.text,
+                textDecoration = if (invalid) TextDecoration.LineThrough else null
+            )
+        }
 
         Text(
             text = name.iconize(iconSize = 16.sp, color = CustomTheme.colors.darkText),
@@ -165,22 +168,24 @@ fun CardListItemNameRow(
         )
 
         //Exclude pack info for random basic weakness
-        if (packPosition != 1000) Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            val packIcon = PackIcon.fromPackCode(reprintPackCode ?: packCode)
-            Text(
-                text = packIcon.glyph,
-                fontFamily = packIcon.fontFamily,
-                style = CustomTheme.typography.run { cardTraits + regular },
-                textDecoration = if (invalid) TextDecoration.LineThrough else null,
-            )
-            Text(
-                text = packPosition.toString(),
-                style = CustomTheme.typography.run { cardTraits + regular },
-                textDecoration = if (invalid) TextDecoration.LineThrough else null,
-            )
+        if (packPosition != 1000) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                val packIcon = PackIcon.fromPackCode(reprintPackCode ?: packCode)
+                ArkhamScalableIconText(
+                    iconGlyph = packIcon,
+                    size = 16.appSp(CustomTheme.typography.scaleFactor),
+                    color = CustomTheme.colors.lightText,
+                    textDecoration = if (invalid) TextDecoration.LineThrough else null,
+                )
+                Text(
+                    text = packPosition.toString(),
+                    style = CustomTheme.typography.run { cardTraits + regular },
+                    textDecoration = if (invalid) TextDecoration.LineThrough else null,
+                )
+            }
         }
     }
 }
@@ -202,36 +207,33 @@ fun CardListItemSubname(cardListItem: CardListItem) {
         if (cardListItem.faction != Faction.Mythos && cardListItem.type != CardType.Investigator
             && cardListItem.type != CardType.Skill) {
                 val factionIcon = factionIcon(cardListItem.faction)
-                Text(
-                    text = factionIcon.glyph,
-                    fontFamily = factionIcon.fontFamily,
-                    style = CustomTheme.typography.run { cardTraits + regular },
+                ArkhamScalableIconText(
+                    iconGlyph = factionIcon,
+                    size = 16.appSp(CustomTheme.typography.scaleFactor),
                     color = factionColor(cardListItem.faction).text
                 )
                 cardListItem.faction2?.let { faction ->
                     val factionIcon = factionIcon(faction)
-                    Text(
-                        text = factionIcon.glyph,
-                        fontFamily = factionIcon.fontFamily,
-                        style = CustomTheme.typography.run { cardTraits + regular },
+                    ArkhamScalableIconText(
+                        iconGlyph = factionIcon,
+                        size = 16.appSp(CustomTheme.typography.scaleFactor),
                         color = factionColor(faction).text
                     )
                 }
                 cardListItem.faction3?.let { faction ->
                     val factionIcon = factionIcon(faction)
-                    Text(
-                        text = factionIcon.glyph,
-                        fontFamily = factionIcon.fontFamily,
-                        style = CustomTheme.typography.run { cardTraits + regular },
+                    ArkhamScalableIconText(
+                        iconGlyph = factionIcon,
+                        size = 16.appSp(CustomTheme.typography.scaleFactor),
                         color = factionColor(faction).text
                     )
                 }
         }
 
-        if (cardListItem.parallel) Text(
-            text = AppIcon.Parallel1.glyph,
-            fontFamily = AppIconsFont,
-            style = CustomTheme.typography.run { cardTraits + regular }
+        if (cardListItem.parallel) ArkhamScalableIconText(
+            iconGlyph = AppIcon.Parallel1,
+            size = 16.appSp(CustomTheme.typography.scaleFactor),
+            color = CustomTheme.colors.lightText
         )
 
         if (cardListItem.type != CardType.Investigator) {
@@ -243,10 +245,9 @@ fun CardListItemSubname(cardListItem: CardListItem) {
                 horizontalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 skills.forEach { skill ->
-                    Text(
-                        text = skill,
-                        fontFamily = AppIconsFont,
-                        style = CustomTheme.typography.run { cardTraits + regular },
+                    ArkhamScalableIconText(
+                        iconGlyph = skill,
+                        size = 16.appSp(CustomTheme.typography.scaleFactor),
                         color = CustomTheme.colors.lightText,
                     )
                 }
@@ -258,10 +259,9 @@ fun CardListItemSubname(cardListItem: CardListItem) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(2.dp)
             ) {
-                Text(
-                    text = AppIcon.Tablet.glyph,
-                    fontFamily = AppIconsFont,
-                    fontSize = 14.appSp(CustomTheme.typography.scaleFactor),
+                ArkhamScalableIconText(
+                    iconGlyph = AppIcon.Tablet,
+                    size = 14.appSp(CustomTheme.typography.scaleFactor),
                     color = CustomTheme.colors.taboo,
                 )
                 cardListItem.tabooXp?.let { xp ->
@@ -294,32 +294,32 @@ private fun buildSkillTextRow(
     combat: Int?,
     agility: Int?,
     wild: Int?
-): ImmutableList<String> {
-    val skills = mutableListOf<String>()
-    repeat(willpower ?: 0) {
-        skills.add(AppIcon.Willpower.glyph)
-    }
-    repeat(intellect ?: 0) {
-        skills.add(AppIcon.Intellect.glyph)
-    }
-    repeat(combat ?: 0) {
-        skills.add(AppIcon.Combat.glyph)
-    }
-    repeat(agility ?: 0) {
-        skills.add(AppIcon.Agility.glyph)
-    }
-    repeat(wild ?: 0) {
-        skills.add(AppIcon.Wild.glyph)
-    }
-    return skills.toImmutableList()
+): ImmutableList<IconGlyph> {
+    return buildList {
+        repeat(willpower ?: 0) {
+            add(AppIcon.Willpower)
+        }
+        repeat(intellect ?: 0) {
+            add(AppIcon.Intellect)
+        }
+        repeat(combat ?: 0) {
+            add(AppIcon.Combat)
+        }
+        repeat(agility ?: 0) {
+            add(AppIcon.Agility)
+        }
+        repeat(wild ?: 0) {
+            add(AppIcon.Wild)
+        }
+    }.toImmutableList()
 }
 
 @Stable
 private fun buildTabooXpRow(xp: Int): ImmutableList<String> {
-    val taboo = mutableListOf<String>()
-    repeat(xp.absoluteValue) {
-        if (xp > 0) taboo.add("•")
-        else taboo.add("-")
-    }
-    return taboo.toImmutableList()
+    return buildList {
+        repeat(xp.absoluteValue) {
+            if (xp > 0) add("•")
+            else add("-")
+        }
+    }.toImmutableList()
 }

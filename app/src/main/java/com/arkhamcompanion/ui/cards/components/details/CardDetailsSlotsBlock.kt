@@ -6,17 +6,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.arkhamcompanion.ui.components.ArkhamIconText
 import com.arkhamcompanion.ui.icons.AppIcon
-import com.arkhamcompanion.ui.theme.AppIconsFont
 import com.arkhamcompanion.ui.theme.CustomTheme
-import com.arkhamcompanion.ui.utils.appSp
 import kotlinx.collections.immutable.toImmutableList
 
 @Composable
@@ -47,7 +45,8 @@ private fun CardDetailsSlotIcon(
     val slotIconCode = getSlotIconCode(slot)
     val iconSize = getSlotIconSize(slot)
     val padding = when (slotIconCode) {
-        "accessory", "ally" -> 4.dp
+        "accessory" -> 4.dp
+        "ally" -> 2.dp
         else -> 0.dp
     }
 
@@ -60,20 +59,22 @@ private fun CardDetailsSlotIcon(
             ),
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = AppIcon.fromNameCode(slotIconCode)?.glyph.toString(),
-            fontFamily = AppIconsFont,
-            fontSize = iconSize.appSp(CustomTheme.typography.scaleFactor),
-            color = CustomTheme.colors.d30,
-            modifier = Modifier.padding(start = padding)
-        )
-        Text(
-            text = AppIcon.fromNameCode("${slotIconCode}_inverted")?.glyph.toString(),
-            fontFamily = AppIconsFont,
-            fontSize = iconSize.appSp(CustomTheme.typography.scaleFactor),
-            color = CustomTheme.colors.l30,
-            modifier = Modifier.padding(start = padding)
-        )
+        AppIcon.fromNameCode(slotIconCode)?.let {
+            ArkhamIconText(
+                iconGlyph = it,
+                size = iconSize.dp,
+                color = CustomTheme.colors.d30,
+                modifier = Modifier.padding(start = padding)
+            )
+        }
+        AppIcon.fromNameCode("${slotIconCode}_inverted")?.let {
+            ArkhamIconText(
+                iconGlyph = it,
+                size = iconSize.dp,
+                color = CustomTheme.colors.l30,
+                modifier = Modifier.padding(start = padding)
+            )
+        }
     }
 }
 

@@ -19,7 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.arkhamcompanion.ui.components.ArkhamIconText
 import com.arkhamcompanion.ui.icons.IconGlyph
 import com.arkhamcompanion.ui.theme.CustomTheme
 
@@ -68,8 +68,10 @@ fun ArkhamTopAppBar(
                     )
                 }
             }
-            if (rightActions != null) Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                rightActions(contentColor)
+            if (rightActions != null) {
+                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                    rightActions(contentColor)
+                }
             }
         }
     }
@@ -82,30 +84,33 @@ fun ArkhamAppBarAction(
     iconGlyph: IconGlyph? = null,
     text: String? = null
 ) {
-    if (iconGlyph != null) Box(
-        modifier = Modifier
-            .size(32.dp)
-            .clip(CustomTheme.shapes.circle)
-            .clickable(onClick = onClick),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = iconGlyph.glyph,
-            fontFamily = iconGlyph.fontFamily,
-            fontSize = 28.sp,
-            color = contentColor
-        )
-    } else if (text != null)  Box(
-        modifier = Modifier
-            .padding(4.dp)
-            .clip(CustomTheme.shapes.circle)
-            .clickable(onClick = onClick),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = text,
-            style = CustomTheme.typography.text,
-            color = contentColor,
-        )
+    if (iconGlyph != null) {
+        Box(
+            modifier = Modifier
+                .size(32.dp)
+                .clip(CustomTheme.shapes.circle)
+                .clickable(onClick = onClick),
+            contentAlignment = Alignment.Center
+        ) {
+            ArkhamIconText(
+                iconGlyph = iconGlyph,
+                size = 28.dp,
+                color = contentColor
+            )
+        }
+    } else if (text != null) {
+        Box(
+            modifier = Modifier
+                .padding(4.dp)
+                .clip(CustomTheme.shapes.circle)
+                .clickable(onClick = onClick),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = text,
+                style = CustomTheme.typography.text,
+                color = contentColor,
+            )
+        }
     }
 }

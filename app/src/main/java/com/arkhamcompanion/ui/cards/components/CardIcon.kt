@@ -14,6 +14,7 @@ import androidx.core.text.isDigitsOnly
 import com.arkhamcompanion.domain.enums.CardSubType
 import com.arkhamcompanion.domain.enums.CardType
 import com.arkhamcompanion.domain.enums.Faction
+import com.arkhamcompanion.ui.components.ArkhamScalableIconText
 import com.arkhamcompanion.ui.icons.AppIcon
 import com.arkhamcompanion.ui.icons.IconGlyph
 import com.arkhamcompanion.ui.icons.PackIcon
@@ -21,6 +22,7 @@ import com.arkhamcompanion.ui.theme.AppIconsFont
 import com.arkhamcompanion.ui.theme.CustomTheme
 import com.arkhamcompanion.ui.theme.FactionColors
 import com.arkhamcompanion.ui.utils.appSp
+import com.arkhamcompanion.ui.utils.scaledByFont
 
 @Stable
 internal fun iconScaleFactor(scaleFactor: Float) = (scaleFactor - 1) / 2 + 1
@@ -62,27 +64,28 @@ fun CardCostIcon(
     val icon = AppIcon.fromNameCode((if (inverted) "inverted_" else "") + "level_$levelText")
     if (!inverted) {
         val invertedIcon = AppIcon.fromNameCode("inverted_level_$levelText")
-        Text(
-            text = invertedIcon?.glyph.toString(),
-            fontFamily = invertedIcon?.fontFamily,
-            fontSize = 32.appSp(iconScaleFactor),
-            color = CustomTheme.colors.background,
+        invertedIcon?.let {
+            ArkhamScalableIconText(
+                iconGlyph = invertedIcon,
+                size = 32.appSp(iconScaleFactor),
+                color = CustomTheme.colors.background,
+            )
+        }
+    }
+    icon?.let {
+        ArkhamScalableIconText(
+            iconGlyph = icon,
+            size = 32.appSp(iconScaleFactor),
+            color = if (inverted) Color.White else factionColor.text,
         )
     }
-    Text(
-        text = icon?.glyph.toString(),
-        fontFamily = icon?.fontFamily,
-        fontSize = 32.appSp(iconScaleFactor),
-        color = if (inverted) Color.White else factionColor.text,
-    )
     if (type == CardType.Skill) {
         val factionIcon = factionIcon(faction, faction2, subType)
-        Text(
-            text = factionIcon.glyph,
-            fontFamily = factionIcon.fontFamily,
-            fontSize = 18.appSp(iconScaleFactor),
+        ArkhamScalableIconText(
+            iconGlyph = factionIcon,
+            size = 16.appSp(iconScaleFactor),
             color = if (inverted) Color.White else CustomTheme.colors.background,
-            modifier = Modifier.padding(bottom = 8.dp)
+            modifier = Modifier.padding(bottom = 8.dp.scaledByFont(iconScaleFactor))
         )
     } else {
         val digitCost = if (cost?.isDigitsOnly() == true) cost.toInt() else -1
@@ -102,9 +105,9 @@ fun CardCostIcon(
         Text(
             text = costIcon.toString(),
             fontFamily = AppIconsFont,
-            fontSize = (if (digitCost >= 10) 14 else 18).appSp(iconScaleFactor),
+            fontSize = (if (digitCost >= 10) 12 else 16).appSp(iconScaleFactor),
             color = if (inverted) Color.White else CustomTheme.colors.background,
-            modifier = Modifier.padding(bottom = 6.dp)
+            modifier = Modifier.padding(bottom = 6.dp.scaledByFont(iconScaleFactor))
         )
     }
 }
@@ -119,10 +122,9 @@ fun CardFactionIcon(
     iconScaleFactor: Float
 ) {
     if (subType == CardSubType.BasicWeakness || subType == CardSubType.Weakness) {
-        Text(
-            text = AppIcon.Weakness.glyph,
-            fontFamily = AppIconsFont,
-            fontSize = 32.appSp(iconScaleFactor),
+        ArkhamScalableIconText(
+            iconGlyph = AppIcon.Weakness,
+            size = 32.appSp(iconScaleFactor),
             color = CustomTheme.colors.faction.neutral.text,
         )
     } else if (encounterCode != null) {
@@ -133,10 +135,9 @@ fun CardFactionIcon(
         )
     } else {
         val factionIcon = factionIcon(faction, faction2)
-        Text(
-            text = factionIcon.glyph,
-            fontFamily = factionIcon.fontFamily,
-            fontSize = 32.appSp(iconScaleFactor),
+        ArkhamScalableIconText(
+            iconGlyph = factionIcon,
+            size = 32.appSp(iconScaleFactor),
             color = factionColor.text,
             modifier = Modifier.padding(bottom = 4.dp)
         )
@@ -146,10 +147,9 @@ fun CardFactionIcon(
 @Composable
 fun EncounterIcon(iconCode: String, iconSize: TextUnit, iconColor: Color, isPack: Boolean = false) {
     val icon = PackIcon.fromPackCode(iconCode, isPack)
-    Text(
-        text = icon.glyph,
-        fontFamily = icon.fontFamily,
-        fontSize = iconSize,
+    ArkhamScalableIconText(
+        iconGlyph = icon,
+        size = iconSize,
         color = iconColor,
     )
 }

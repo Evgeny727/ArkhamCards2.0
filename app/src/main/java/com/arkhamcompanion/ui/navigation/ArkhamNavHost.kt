@@ -64,16 +64,16 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.arkhamcompanion.ui.utils.applyScaffoldPaddings
-import com.arkhamcompanion.ui.utils.resolveExceptionToStringResId
 import com.arkhamcompanion.AppViewModel
 import com.arkhamcompanion.CardsCacheState
 import com.arkhamcompanion.CardsSyncState
 import com.arkhamcompanion.R
 import com.arkhamcompanion.ui.campaigns.Campaigns
+import com.arkhamcompanion.ui.campaigns.CampaignsScreen
 import com.arkhamcompanion.ui.cards.CardDetailsScreen
 import com.arkhamcompanion.ui.cards.CardDetailsViewModel
 import com.arkhamcompanion.ui.cards.Cards
+import com.arkhamcompanion.ui.cards.CardsFiltersScreen
 import com.arkhamcompanion.ui.cards.CardsScreen
 import com.arkhamcompanion.ui.cards.CardsSortScreen
 import com.arkhamcompanion.ui.cards.CardsSortViewModel
@@ -83,7 +83,10 @@ import com.arkhamcompanion.ui.components.ArkhamAlertButtonStyle
 import com.arkhamcompanion.ui.components.ArkhamAlertDialog
 import com.arkhamcompanion.ui.components.ArkhamSwitch
 import com.arkhamcompanion.ui.decks.Decks
+import com.arkhamcompanion.ui.decks.DecksScreen
 import com.arkhamcompanion.ui.icons.AppIcon
+import com.arkhamcompanion.ui.settings.AboutScreen
+import com.arkhamcompanion.ui.settings.BackUpScreen
 import com.arkhamcompanion.ui.settings.CollectionScreen
 import com.arkhamcompanion.ui.settings.DiagnosticsScreen
 import com.arkhamcompanion.ui.settings.Settings
@@ -95,6 +98,8 @@ import com.arkhamcompanion.ui.settings.SettingsScreen
 import com.arkhamcompanion.ui.settings.SettingsViewModel
 import com.arkhamcompanion.ui.theme.CustomTheme
 import com.arkhamcompanion.ui.theme.LocalLanguage
+import com.arkhamcompanion.ui.utils.applyScaffoldPaddings
+import com.arkhamcompanion.ui.utils.resolveExceptionToStringResId
 
 @Composable
 fun ArkhamNavHost(viewModel: AppViewModel) {
@@ -277,6 +282,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                     composable<SettingsAbout> {
 
                         //TODO: add about screen
+                        AboutScreen(innerPadding)
 
                         title = stringResource(R.string.about_arkham_companion)
                         subtitle = null
@@ -294,6 +300,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                     composable<SettingsBackup> {
 
                         //TODO: add backup screen
+                        BackUpScreen(innerPadding)
 
                         title = stringResource(R.string.backup_data)
                         subtitle = null
@@ -413,6 +420,29 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                             )
                         }
                     }
+                    composable<CardsFiltersScreen> {
+
+                        CardsFiltersScreen(innerPadding)
+
+                        title = stringResource(R.string.filters)
+                        subtitle = null
+                        color = baseColor
+                        contentColor = baseContentColor
+                        rightActions = {
+                            ArkhamAppBarAction(
+                                contentColor = CustomTheme.colors.m,
+                                onClick = {},
+                                iconGlyph = AppIcon.Trash,
+                            )
+                        }
+                        leftAction = { color ->
+                            ArkhamAppBarAction(
+                                contentColor = color,
+                                onClick = navController::navigateUp,
+                                iconGlyph = AppIcon.ArrowBack,
+                            )
+                        }
+                    }
                     composable<CardDetailsScreen> { backStackEntry ->
                         val parentEntry = remember(backStackEntry) {
                             navController.getBackStackEntry<Cards>()
@@ -450,6 +480,8 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                 ) {
                     composable<Decks> {
 
+                        DecksScreen(innerPadding)
+
                         title = stringResource(BottomBarItem.Decks.label)
                         subtitle = null
                         color = baseColor
@@ -462,6 +494,8 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                     startDestination = BottomBarItem.Campaigns.startDestination
                 ) {
                     composable<Campaigns> {
+
+                        CampaignsScreen(innerPadding)
 
                         title = stringResource(BottomBarItem.Campaigns.label)
                         subtitle = null
@@ -479,8 +513,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
 
             AnimatedVisibility(
                 modifier = Modifier.align(Alignment.BottomEnd),
-                visible = cardsCacheState is CardsCacheState.Loading
-                        && cardsState !is CardsSyncState.UpdateAvailable
+                visible = cardsCacheState is CardsCacheState.Creating
             ) {
                 CardsCacheLoading(innerPadding)
             }
@@ -509,7 +542,7 @@ private fun CardsCacheLoading(paddingValues: PaddingValues) {
                 color = CustomTheme.colors.m
             )
             Text(
-                text = stringResource(R.string.loading_cards_cache),
+                text = stringResource(R.string.creating_cards_cache),
                 color = CustomTheme.colors.l30,
                 style = CustomTheme.typography.text
             )

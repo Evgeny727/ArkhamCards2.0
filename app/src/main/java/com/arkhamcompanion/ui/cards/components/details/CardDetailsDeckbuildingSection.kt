@@ -1,13 +1,12 @@
 package com.arkhamcompanion.ui.cards.components.details
 
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.material3.Text
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
 import com.arkhamcompanion.R
 import com.arkhamcompanion.ui.components.ArkhamButton
+import com.arkhamcompanion.ui.components.ArkhamIconText
 import com.arkhamcompanion.ui.icons.AppIcon
-import com.arkhamcompanion.ui.theme.AppIconsFont
 
 fun LazyListScope.cardDetailsDeckbuildingSection(
     onShowBaseInvestigatorCards: () -> Unit,
@@ -27,11 +26,10 @@ fun LazyListScope.cardDetailsDeckbuildingSection(
                 title = stringResource(R.string.show_all_available_cards),
                 onClick = onShowBaseInvestigatorCards,
             ) { color ->
-                Text(
-                    text = AppIcon.Cards.glyph,
-                    fontFamily = AppIconsFont,
+                ArkhamIconText(
+                    iconGlyph = AppIcon.Cards,
                     color = color,
-                    fontSize = 24.sp
+                    size = 24.dp
                 )
             }
         }
@@ -41,11 +39,10 @@ fun LazyListScope.cardDetailsDeckbuildingSection(
                     title = stringResource(R.string.show_all_available_cards_for_parallel),
                     onClick = it,
                 ) { color ->
-                    Text(
-                        text = AppIcon.Parallel1.glyph,
-                        fontFamily = AppIconsFont,
+                    ArkhamIconText(
+                        iconGlyph = AppIcon.Parallel1,
                         color = color,
-                        fontSize = 24.sp
+                        size = 24.dp
                     )
                 }
             }
@@ -57,11 +54,10 @@ fun LazyListScope.cardDetailsDeckbuildingSection(
                     title = stringResource(R.string.show_all_available_cards),
                     onClick = it,
                 ) { color ->
-                    Text(
-                        text = AppIcon.Parallel1.glyph,
-                        fontFamily = AppIconsFont,
+                    ArkhamIconText(
+                        iconGlyph = AppIcon.Parallel1,
                         color = color,
-                        fontSize = 24.sp
+                        size = 24.dp
                     )
                 }
             }
@@ -71,11 +67,10 @@ fun LazyListScope.cardDetailsDeckbuildingSection(
                 title = stringResource(R.string.show_all_available_cards_for_base),
                 onClick = onShowBaseInvestigatorCards,
             ) { color ->
-                Text(
-                    text = AppIcon.Cards.glyph,
-                    fontFamily = AppIconsFont,
+                ArkhamIconText(
+                    iconGlyph = AppIcon.Cards,
                     color = color,
-                    fontSize = 24.sp
+                    size = 24.dp
                 )
             }
         }
@@ -85,11 +80,10 @@ fun LazyListScope.cardDetailsDeckbuildingSection(
             title = stringResource(R.string.create_new_deck),
             onClick = onCreateNewDeck,
         ) { color ->
-            Text(
-                text = AppIcon.Deck.glyph,
-                fontFamily = AppIconsFont,
+            ArkhamIconText(
+                iconGlyph = AppIcon.Deck,
                 color = color,
-                fontSize = 24.sp
+                size = 24.dp
             )
         }
     }
