@@ -1,6 +1,7 @@
 package com.arkhamcompanion.data.repository
 
 import android.content.Context
+import android.os.Build
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -63,6 +64,8 @@ class CardsRepositoryImpl @Inject constructor(
 
     private val cardsDao = db.cardsDao()
     private val metaDao = db.metaDao()
+
+    private val supportsWindowFunctions = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
 
     override suspend fun downloadAllCards(locale: String, onProgress: (Float) -> Unit) = runCatching {
         val translationData = cardsRemoteDataSource.fetchAllTranslationData(locale).dataAssertNoErrors
@@ -305,6 +308,63 @@ class CardsRepositoryImpl @Inject constructor(
             packs to reprints
         }
 
+        val rankedQueryPart = if (supportsWindowFunctions)
+            """
+                SELECT *, ROW_NUMBER() OVER (
+                    PARTITION BY
+                        COALESCE(duplicate_of_code, code)
+                    ORDER BY
+                        CASE
+                            WHEN duplicate_of_code IS NULL THEN 0
+                            ELSE 1
+                        END,
+                        code
+                ) AS duplicate_rank FROM filtered_cards
+            """.trimIndent()
+        else """
+            WITH deduplicated_cards AS (
+                SELECT
+                    CASE
+                        WHEN COUNT(
+                            CASE WHEN duplicate_of_code IS NULL THEN 1 END
+                        ) > 0
+                        THEN MIN(
+                            CASE WHEN duplicate_of_code IS NULL THEN code END
+                        )
+                        ELSE MIN(code)
+                    END AS winner_code
+                FROM filtered_cards
+                GROUP BY COALESCE(duplicate_of_code, code)
+            )
+            SELECT fc.*
+            FROM filtered_cards fc
+            JOIN deduplicated_cards dc
+                ON dc.winner_code = fc.code
+        """.trimIndent()
+
+        val spoilerQueryPart = if (spoilerState) {
+            if (supportsWindowFunctions) "SELECT ${projection ?: "*"}, MIN(pack_position) OVER (" +
+                    "PARTITION BY encounter_code" +
+                    ") AS encounter_group FROM ranked_cards "
+            else """
+                SELECT ${projection ?: "*"} FROM (
+                    SELECT rc.*, eg.encounter_group
+                    FROM ranked_cards rc
+                    JOIN (
+                        SELECT encounter_code, MIN(pack_position) AS encounter_group
+                        FROM ranked_cards 
+                        GROUP BY encounter_code
+                    ) eg
+                        ON eg.encounter_code = rc.encounter_code
+                )
+            """.trimIndent()
+        }
+        else "SELECT ${projection ?: "*"} FROM ranked_cards "
+
+        val finalQueryPart = spoilerQueryPart +
+                (if (supportsWindowFunctions) "WHERE duplicate_rank = 1" else "") +
+                if (sortClause.isNotEmpty()) " ORDER BY $sortClause" else ""
+
         return RoomRawQuery(
             sql = """
                 WITH filtered_cards AS (
@@ -435,28 +495,9 @@ class CardsRepositoryImpl @Inject constructor(
                         )""".trimIndent() else ""}
                 ),
                 
-                ranked_cards AS (
-                    SELECT *, ROW_NUMBER() OVER (
-                        PARTITION BY
-                            COALESCE(duplicate_of_code, code)
-                        ORDER BY
-                            CASE
-                                WHEN duplicate_of_code IS NULL THEN 0
-                                ELSE 1
-                            END,
-                            code
-                    ) AS duplicate_rank FROM filtered_cards
-                )
+                ranked_cards AS ($rankedQueryPart)
 
-                ${
-                    if (sortClause.isNotEmpty()) {
-                        (if (spoilerState) "SELECT ${projection ?: "*"}, MIN(pack_position) OVER (" +
-                                "PARTITION BY encounter_code" +
-                                ") AS encounter_group FROM ranked_cards WHERE duplicate_rank = 1"
-                        else "SELECT ${projection ?: "*"} FROM ranked_cards WHERE duplicate_rank = 1") +
-                        " ORDER BY $sortClause"
-                    } else ""
-                }
+                $finalQueryPart
             """.trimIndent(),
             onBindStatement = { statement ->
                 var index = 1

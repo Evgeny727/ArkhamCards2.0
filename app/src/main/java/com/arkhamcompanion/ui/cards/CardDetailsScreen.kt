@@ -67,6 +67,18 @@ fun CardDetailsScreen(
         CardTextStyleResolver(flavorStyles)
     }
 
+    if (cardCodes.isEmpty()) Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxSize()
+    ) {
+        CircularProgressIndicator(
+            modifier = Modifier.size(32.dp),
+            color = CustomTheme.colors.m)
+    }
+
     HorizontalPager(
         state = pagerState,
         key = { page -> cardCodes[page].code },
