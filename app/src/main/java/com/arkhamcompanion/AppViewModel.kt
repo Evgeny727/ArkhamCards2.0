@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.cancellation.CancellationException
 
 data class UiErrorState(val exception: Throwable)
 
@@ -30,6 +31,7 @@ class AppViewModel @Inject constructor(
     val errors = _errors.asSharedFlow()
 
     fun emitError(throwable: Throwable) {
+        if (throwable is CancellationException) return
         analyticsRepository.logError(throwable)
         _errors.tryEmit(UiErrorState(throwable))
     }
@@ -61,8 +63,10 @@ class AppViewModel @Inject constructor(
         }
     }
 
-    suspend fun checkIfCardsReady(language: String) {
-        cardsSyncManager.ensureCardsReady(language)
+    fun checkIfCardsReady(language: String) {
+        viewModelScope.launch {
+            cardsSyncManager.ensureCardsReady(language)
+        }
     }
 
     fun confirmCardsUpdate(language: String) {
@@ -88,7 +92,12 @@ class AppViewModel @Inject constructor(
     }
 
     fun updateLocale(locale: String) {
-        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locale))
+        val appLocale = when (locale) {
+            "zh-cn" -> "zh-Hans"
+            "zh" -> "zh-Hant"
+            else -> locale
+        }
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(appLocale))
         viewModelScope.launch {
             cardsSyncManager.download(locale)
         }
@@ -97,12 +106,12 @@ class AppViewModel @Inject constructor(
     fun resolveLanguageTag(language: String): String {
         return if (language.startsWith("zh-Hans") ||
             language.startsWith("zh-CN") ||
-            language.startsWith("zh-SG")) "zh"
+            language.startsWith("zh-SG")) "zh-cn"
         else if (language.startsWith("zh-Hant") ||
             language.startsWith("zh-TW") ||
             language.startsWith("zh-HK") ||
-            language.startsWith("zh-MO")) "zh-cn"
-        else language.substringBefore("-")
+            language.startsWith("zh-MO")) "zh"
+        else language.substringBefore("-").takeIf { it in SUPPORTED_LANGUAGES } ?: "en"
     }
 
     fun recreateCardsCache() {

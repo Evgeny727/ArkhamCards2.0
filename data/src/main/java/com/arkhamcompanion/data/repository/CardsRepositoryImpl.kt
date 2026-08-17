@@ -84,8 +84,11 @@ class CardsRepositoryImpl @Inject constructor(
             it.cycle.toEntity(it.translations.getOrNull(0)?.name ?: it.cycle.real_name)
         }
         val packEntities = translationData.cycle.flatMap { cycle ->
-            cycle.packs.map {
-                it.pack.toEntity(it.translations.getOrNull(0)?.name ?: it.pack.real_name)
+            cycle.packs.mapNotNull {
+                //Filter out books from packs, there're no cards with such pack
+                if (it.pack.code != "books")
+                    it.pack.toEntity(it.translations.getOrNull(0)?.name ?: it.pack.real_name)
+                else null
             }
         }
         val translatedEncountersMap = translationData.card_encounter_set.associateBy { it.encounterSet.code }
@@ -136,7 +139,9 @@ class CardsRepositoryImpl @Inject constructor(
             metaDao.upsertTabooSets(tabooSetEntities)
             cardsDao.upsertCardTypes(cardTypeEntities)
             cardsDao.upsertCardSubtypes(cardSubtypeEntities)
-            cardsDao.upsertAllCards(allCards)
+            allCards.chunked(500).forEach {
+                cardsDao.upsertAllCards(it)
+            }
         }
         onProgress(0.85f)
 

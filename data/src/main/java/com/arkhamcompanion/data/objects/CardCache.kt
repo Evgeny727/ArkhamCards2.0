@@ -281,11 +281,14 @@ object CardCache {
 
             if (card.xp != null) {
                 upgrades[card.realName]?.forEach { upgrade ->
-                    if (card.code != upgrade.code &&
-                        (card.xp != upgrade.xp || card.realSubname != upgrade.subname)
-                        ) {
+                    if (card.code != upgrade.code){
+                        var xp = card.xp
+                        if (card.exceptional) xp *= 2
+
+                        if (xp != upgrade.xp || card.realSubname != upgrade.subname) {
                             level.addToSet(card.code, upgrade.code)
                             level.addToSet(upgrade.code, card.code)
+                        }
                     }
                 }
             }

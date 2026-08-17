@@ -327,7 +327,7 @@ fun FlippableCard(
             }
     ) {
         AsyncImage(
-            model = frontUrl,
+            model = if (showBack) backUrl else frontUrl,
             contentDescription = null,
             onSuccess = { onSuccess() },
             onLoading = { onLoading() },
@@ -336,23 +336,7 @@ fun FlippableCard(
                 .fillMaxSize()
                 .clip(CustomTheme.shapes.large)
                 .graphicsLayer {
-                    alpha = if (showBack) 0f else 1f
-                },
-            contentScale = ContentScale.Crop,
-        )
-
-        AsyncImage(
-            model = backUrl,
-            contentDescription = null,
-            onSuccess = { onSuccess() },
-            onLoading = { onLoading() },
-            onError = { onError() },
-            modifier = Modifier
-                .fillMaxSize()
-                .clip(CustomTheme.shapes.large)
-                .graphicsLayer {
-                    alpha = if (showBack) 1f else 0f
-                    rotationY = 180f
+                    rotationY = if (showBack) 180f else 0f
                 },
             contentScale = ContentScale.Crop,
         )

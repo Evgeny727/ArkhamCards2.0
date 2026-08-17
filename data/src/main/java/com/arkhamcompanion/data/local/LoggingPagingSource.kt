@@ -9,6 +9,12 @@ class LoggingPagingSource<Key : Any, Value : Any>(
     private val analyticsRepository: AnalyticsRepository,
 ) : PagingSource<Key, Value>() {
 
+    init {
+        delegate.registerInvalidatedCallback {
+            invalidate()
+        }
+    }
+
     override suspend fun load(
         params: LoadParams<Key>,
     ): LoadResult<Key, Value> {
