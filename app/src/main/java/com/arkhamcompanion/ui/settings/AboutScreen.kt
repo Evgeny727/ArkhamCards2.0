@@ -1,7 +1,5 @@
 package com.arkhamcompanion.ui.settings
 
-import androidx.activity.compose.BackHandler
-import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,11 +17,6 @@ fun AboutScreen(
     innerPadding: PaddingValues,
     modifier: Modifier = Modifier,
 ) {
-    val activity = LocalActivity.current
-    BackHandler {
-        activity?.finish()
-    }
-
     Box(
         modifier = modifier.applyScaffoldPaddings(innerPadding)
             .fillMaxSize(),

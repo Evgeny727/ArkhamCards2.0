@@ -366,7 +366,7 @@ fun ArkhamNavHost(viewModel: AppViewModel) {
                         rightActions = {
                             ArkhamAppBarAction(
                                 contentColor = CustomTheme.colors.m,
-                                onClick = {  },
+                                onClick = { navController.navigateSingleTop(CardsFiltersScreen) },
                                 iconGlyph = AppIcon.Filter,
                             )
                             ArkhamAppBarAction(
