@@ -2,7 +2,12 @@ package com.arkhamcompanion.domain.model.cards
 
 sealed interface CardListItemUiModel {
     data class CardItem(val card: CardListItem) : CardListItemUiModel
-    data class CategoryHeader(val key: String, val category: CardsHeaderType?, val value: Any?) : CardListItemUiModel
+    data class CategoryHeader(
+        val key: String,
+        val firstCardCode: String,
+        val category: CardsHeaderType?,
+        val value: Any?
+    ) : CardListItemUiModel
 }
 
 enum class CardsHeaderType {

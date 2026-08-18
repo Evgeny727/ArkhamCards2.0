@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
@@ -24,7 +23,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -46,44 +44,29 @@ class CardsViewModel @Inject constructor(
 
     fun toggleSpoiler(value: Boolean) {
         _spoilerState.value = value
-        viewModelScope.launch { _scrollToTop.emit(Unit) }
     }
 
     private val _searchOptions = MutableStateFlow(CardsSearchOptions())
     val searchOptions = _searchOptions.asStateFlow()
 
-    private val _scrollToTop = MutableSharedFlow<Unit>()
-    val scrollToTop = _scrollToTop.asSharedFlow()
-
     fun updateSearchQuery(query: String) {
         _searchOptions.update { it.copy(searchQuery = query) }
-        if (query.isNotBlank()) viewModelScope.launch { _scrollToTop.emit(Unit) }
     }
 
     fun clearSearchQuery() {
         _searchOptions.update { it.copy(searchQuery = "") }
-        viewModelScope.launch { _scrollToTop.emit(Unit) }
     }
 
     fun onSearchGameTextChange(state: Boolean) {
         _searchOptions.update { it.copy(searchGame = state) }
-        if (_searchOptions.value.searchQuery.isNotBlank()) viewModelScope.launch {
-            _scrollToTop.emit(Unit)
-        }
     }
 
     fun onSearchFlavorTextChange(state: Boolean) {
         _searchOptions.update { it.copy(searchFlavor = state) }
-        if (_searchOptions.value.searchQuery.isNotBlank()) viewModelScope.launch {
-            _scrollToTop.emit(Unit)
-        }
     }
 
     fun onSearchBackTextChange(state: Boolean) {
         _searchOptions.update { it.copy(searchBack = state) }
-        if (_searchOptions.value.searchQuery.isNotBlank()) viewModelScope.launch {
-            _scrollToTop.emit(Unit)
-        }
     }
 
     private val _cardsSearchPreferences = userPreferencesRepository.cardsSearchPreferences.stateIn(
@@ -91,18 +74,6 @@ class CardsViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(5_000L),
         initialValue = CardsSearchPreferences()
     )
-
-    init {
-        scrollListOnChange()
-    }
-
-    fun scrollListOnChange() {
-        viewModelScope.launch {
-            _cardsSearchPreferences.collect {
-                _scrollToTop.emit(Unit)
-            }
-        }
-    }
 
     @OptIn(FlowPreview::class)
     private val _searchConfig = combine(

@@ -107,6 +107,7 @@ internal fun Flow<PagingData<CardListItemEntity>>.withCategoryHeaders(
             }
             CardListItemUiModel.CategoryHeader(
                 key = "header_${headerOptions.second?.name ?: "all_cards"}_${value.toString()}_${afterItem.id}",
+                firstCardCode = afterItem.code,
                 category = headerOptions.second,
                 value = value
             )
