@@ -229,26 +229,35 @@ fun SingleCard.toEntity(
 /**
  * Extension function to convert [CoreCardText] to [Translation]
  */
-fun CoreCardText?.toTranslation(card: SingleCard): Translation = Translation(
-    backFlavor = (this?.back_flavor ?: card.real_back_flavor)?.preprocessCardText(processBullets = false),
-    backName = this?.back_name ?: card.real_back_name,
-    backSubname = this?.back_subname ?: card.real_back_subname,
-    backText = (this?.back_text ?: card.real_back_text)?.preprocessCardText(processBullets = true),
-    backTraits = this?.back_traits ?: card.real_back_traits,
-    customizationChange = this?.customization_change ?: card.real_customization_change,
-    customizationText = this?.customization_text ?: card.real_customization_text,
-    flavor = (this?.flavor ?: card.real_flavor)?.preprocessCardText(processBullets = false),
-    name = this?.name ?: card.real_name,
-    slot = (this?.slot ?: card.real_slot)?.ifBlank { null },
-    subname = this?.subname ?: card.real_subname,
-    tabooOriginalBackText = (this?.taboo_original_back_text ?: card.real_taboo_original_back_text)
-        ?.preprocessCardText(processBullets = true),
-    tabooOriginalText = (this?.taboo_original_text ?: card.real_taboo_original_text)
-        ?.preprocessCardText(processBullets = true),
-    tabooTextChange = this?.taboo_text_change ?: card.real_taboo_text_change,
-    text = (this?.text ?: card.real_text)?.preprocessCardText(processBullets = true),
-    traits = this?.traits ?: card.real_traits,
-)
+fun CoreCardText?.toTranslation(card: SingleCard): Translation {
+    val backTraits = this?.back_traits
+        ?: if (card.double_sided == true &&
+            (card.type_code.rawValue == "location" || card.type_code.rawValue == "enemy_location")
+            ) {
+                this?.traits ?: card.real_traits
+        } else card.real_back_traits
+
+    return Translation(
+        backFlavor = (this?.back_flavor ?: card.real_back_flavor)?.preprocessCardText(processBullets = false),
+        backName = this?.back_name ?: card.real_back_name,
+        backSubname = this?.back_subname ?: card.real_back_subname,
+        backText = (this?.back_text ?: card.real_back_text)?.preprocessCardText(processBullets = true),
+        backTraits = backTraits,
+        customizationChange = this?.customization_change ?: card.real_customization_change,
+        customizationText = this?.customization_text ?: card.real_customization_text,
+        flavor = (this?.flavor ?: card.real_flavor)?.preprocessCardText(processBullets = false),
+        name = this?.name ?: card.real_name,
+        slot = (this?.slot ?: card.real_slot)?.ifBlank { null },
+        subname = this?.subname ?: card.real_subname,
+        tabooOriginalBackText = (this?.taboo_original_back_text ?: card.real_taboo_original_back_text)
+            ?.preprocessCardText(processBullets = true),
+        tabooOriginalText = (this?.taboo_original_text ?: card.real_taboo_original_text)
+            ?.preprocessCardText(processBullets = true),
+        tabooTextChange = this?.taboo_text_change ?: card.real_taboo_text_change,
+        text = (this?.text ?: card.real_text)?.preprocessCardText(processBullets = true),
+        traits = this?.traits ?: card.real_traits,
+    )
+}
 
 /**
  * Extension function to convert [GetTranslationDataQuery.Card_type_name] to [CardTypeEntity]
