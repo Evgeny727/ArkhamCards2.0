@@ -8,7 +8,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -17,7 +21,9 @@ import com.arkhamcompanion.domain.model.meta.Pack
 import com.arkhamcompanion.domain.model.settings.Collection
 import com.arkhamcompanion.ui.cards.components.CardSectionHeader
 import com.arkhamcompanion.ui.cards.components.CardSectionHeaderIconButton
+import com.arkhamcompanion.ui.components.ArkhamButton
 import com.arkhamcompanion.ui.components.ArkhamCheckboxButton
+import com.arkhamcompanion.ui.components.ArkhamIconText
 import com.arkhamcompanion.ui.icons.AppIcon
 import com.arkhamcompanion.ui.icons.PackIcon
 import com.arkhamcompanion.ui.settings.components.ChapterBuilder
@@ -69,6 +75,9 @@ fun CollectionScreen(
                 }
             }
         }.map { it.build() }.toImmutableList()
+    }
+    var expandedReprintCycles by rememberSaveable {
+        mutableStateOf<Set<String>>(emptySet())
     }
 
     LazyColumn(
@@ -129,6 +138,11 @@ fun CollectionScreen(
                 }
                 cycles.forEach { (cycleName, reprintPacks, reprintCodes, packs, packCodes) ->
                     val isReprint = reprintPacks.isNotEmpty()
+
+                    val isCommonPacksExpanded =
+                        !isReprint || cycleName in expandedReprintCycles
+                                || packs.any { it.code in collection.packs }
+
                     if (isReprint) {
                         item(key = "cycle_${cycleName}_new", contentType = "cycle_header") {
                             CardSectionHeader(
@@ -180,63 +194,83 @@ fun CollectionScreen(
                         HorizontalDivider(color = CustomTheme.colors.divider)
                     }
 
-                    item(key = "cycle_${cycleName}_old", contentType = "cycle_header") {
-                        CardSectionHeader(
-                            title = cycleName + if (isReprint) " (1 + 6)" else "",
-                        ) {
-                            CardSectionHeaderIconButton(
-                                iconGlyph = AppIcon.PlusButton,
-                            ) {
-                                val newCollection = collection.copy(
-                                    packs = (collection.packs + packCodes).toImmutableSet()
+                    if (!isCommonPacksExpanded) {
+                        item(key = "expand_$cycleName", contentType = "expand_button") {
+                            ArkhamButton(
+                                title = stringResource(R.string.show_original_release_packs),
+                                onClick = {
+                                    expandedReprintCycles += cycleName
+                                },
+                                modifier = Modifier.padding(8.dp)
+                            ) { color ->
+                                ArkhamIconText(
+                                    iconGlyph = AppIcon.Show,
+                                    color = color,
+                                    size = 28.dp
                                 )
-                                onCollectionChange(newCollection)
-                            }
-                            CardSectionHeaderIconButton(
-                                iconGlyph = AppIcon.MinusButton,
-                            ) {
-                                val newCollection = collection.copy(
-                                    packs = (collection.packs - packCodes).toImmutableSet()
-                                )
-                                onCollectionChange(newCollection)
                             }
                         }
                     }
 
-                    items(packs, key = { it.code }) { pack ->
-                        val packIcon = PackIcon.fromPackCode(pack.code)
-                        val selected = collection.packs.contains(pack.code)
-
-                        ArkhamCheckboxButton(
-                            title = if (pack.code != "core2") pack.name else stringResource(R.string.second_core_set),
-                            iconGlyph = packIcon,
-                            isSelected = selected,
-                            isPackRow = true,
-                            modifier = Modifier.padding(8.dp)
-                        ) { value ->
-                            val newCollection = if (value) {
-                                val newPacks = if (pack.code == "core2") {
-                                    setOf("core", pack.code)
-                                } else {
-                                    setOf(pack.code)
+                    if (isCommonPacksExpanded) {
+                        item(key = "cycle_${cycleName}_old", contentType = "cycle_header") {
+                            CardSectionHeader(
+                                title = cycleName + if (isReprint) " (1 + 6)" else "",
+                            ) {
+                                CardSectionHeaderIconButton(
+                                    iconGlyph = AppIcon.PlusButton,
+                                ) {
+                                    val newCollection = collection.copy(
+                                        packs = (collection.packs + packCodes).toImmutableSet()
+                                    )
+                                    onCollectionChange(newCollection)
                                 }
-                                collection.copy(
-                                    packs = (collection.packs + newPacks).toImmutableSet()
-                                )
-                            } else {
-                                val newPacks = if (pack.code == "core") {
-                                    setOf(pack.code, "core2")
-                                } else {
-                                    setOf(pack.code)
+                                CardSectionHeaderIconButton(
+                                    iconGlyph = AppIcon.MinusButton,
+                                ) {
+                                    val newCollection = collection.copy(
+                                        packs = (collection.packs - packCodes).toImmutableSet()
+                                    )
+                                    onCollectionChange(newCollection)
                                 }
-                                collection.copy(
-                                    packs = (collection.packs - newPacks).toImmutableSet()
-                                )
                             }
-
-                            onCollectionChange(newCollection)
                         }
-                        HorizontalDivider(color = CustomTheme.colors.divider)
+
+                        items(packs, key = { it.code }) { pack ->
+                            val packIcon = PackIcon.fromPackCode(pack.code)
+                            val selected = collection.packs.contains(pack.code)
+
+                            ArkhamCheckboxButton(
+                                title = if (pack.code != "core2") pack.name else stringResource(R.string.second_core_set),
+                                iconGlyph = packIcon,
+                                isSelected = selected,
+                                isPackRow = true,
+                                modifier = Modifier.padding(8.dp)
+                            ) { value ->
+                                val newCollection = if (value) {
+                                    val newPacks = if (pack.code == "core2") {
+                                        setOf("core", pack.code)
+                                    } else {
+                                        setOf(pack.code)
+                                    }
+                                    collection.copy(
+                                        packs = (collection.packs + newPacks).toImmutableSet()
+                                    )
+                                } else {
+                                    val newPacks = if (pack.code == "core") {
+                                        setOf(pack.code, "core2")
+                                    } else {
+                                        setOf(pack.code)
+                                    }
+                                    collection.copy(
+                                        packs = (collection.packs - newPacks).toImmutableSet()
+                                    )
+                                }
+
+                                onCollectionChange(newCollection)
+                            }
+                            HorizontalDivider(color = CustomTheme.colors.divider)
+                        }
                     }
                 }
             }
