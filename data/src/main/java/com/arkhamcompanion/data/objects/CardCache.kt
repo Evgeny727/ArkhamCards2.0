@@ -24,7 +24,7 @@ private val TAG_REGEX_FALLBACKS: Map<String, Regex> = mapOf(
 private val ACTION_REGEX =
     Regex("<b>(Fight|Engage|Investigate|Draw|Move|Evade|Parley|Resign)")
 private val CHAOS_REGEX =
-    Regex("""\[(auto_fail|bless|skull|cultist|curse|tablet|frost|elder_sign|elder_thing)""")
+    Regex("""\[(auto_fail|bless|skull|cultist|curse|tablet|frost|blood|elder_sign|elder_thing)""")
 
 object CardCache {
 
