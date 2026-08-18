@@ -400,7 +400,12 @@ enum class AppIcon(
     Ally("ally", 0xEA56),
     Logo("logo", 0xEA58),
     Unique("unique", 0xEA59),
-    Filter("filter", 0xEA5B);
+    Blood("blood", 0xEA5A),
+    Filter("filter", 0xEA5B),
+    TokenBloodSealed("token_blood_sealed", 0xEA5C),
+    TokenBloodFill("token_blood_fill", 0xEA5D),
+    TokenBloodOverlay("token_blood_overlay", 0xEA5E),
+    TokenBloodHighlight("token_blood_highlight", 0xEA5F);
 
     override val glyph: String
         get() = code.toChar().toString()
