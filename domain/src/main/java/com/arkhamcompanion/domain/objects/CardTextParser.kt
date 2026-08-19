@@ -1,4 +1,4 @@
-package com.arkhamcompanion.data.objects
+package com.arkhamcompanion.domain.objects
 
 import com.arkhamcompanion.domain.model.cards.CardText
 import com.arkhamcompanion.domain.model.cards.CardTextStyleFlags

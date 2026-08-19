@@ -26,7 +26,7 @@
     <string name="things0_and_things1">%s и %s</string>
     <string name="list_and_last">%s, и %s</string>
     <string name="close">Закрыть</string>
-    <string name="name_subname">%s <i>(%s)</i></string>
+    <string name="name_subname">%s &lt;i&gt;(%s)&lt;/i&gt;</string>
     <string name="none">Нет</string>
     <string name="killed">Убит</string>
     <string name="insane">Сошёл с ума</string>
@@ -62,7 +62,7 @@
     <string name="undo">Откатить</string>
     <string name="cancel">Отмена</string>
     <string name="draw_weakness">Взять слабость</string>
-    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution"><b>Внимание:</b> Если ваш сыщик побеждён, полученные травмы будут учтены при розыгрыше исхода.</string>
+    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution">&lt;b&gt;Внимание:&lt;/b&gt; Если ваш сыщик побеждён, полученные травмы будут учтены при розыгрыше исхода.</string>
     <string name="in_your_campaign_log_record_that">Запишите в журнале кампании:</string>
     <string name="choose_lead_investigator">Выберите ведущего сыщика</string>
     <string name="lead_investigator">Ведущий сыщик</string>
@@ -71,7 +71,7 @@
     <string name="defeated_physical_trauma">Побеждён: физическая травма</string>
     <string name="defeated_mental_trauma">Побеждён: ментальная травма</string>
     <string name="defeated_no_trauma">Побеждён: без травмы</string>
-    <string name="proceed_to_next_scenario">Перейдите к сценарию <b>%s</b>.</string>
+    <string name="proceed_to_next_scenario">Перейдите к сценарию &lt;b&gt;%s&lt;/b&gt;.</string>
     <string name="secondary_class">Побочный класс</string>
     <string name="deck_size">Размер колоды</string>
     <string name="available_weaknesses">Доступные слабости</string>
@@ -391,7 +391,7 @@
     <string name="delete_campaign">Удалить кампанию</string>
     <string name="show_story_assets_from_other_campaigns">Показать сюжетные активы из других кампаний</string>
     <string name="story_assets">Сюжетные активы</string>
-    <string name="scenario_challenge_centers_around_investigator_prerequisites">Сценарий-испытание <i>%s</i> разворачивается вокруг %s, поэтому у него следующие начальные требования:</string>
+    <string name="scenario_challenge_centers_around_investigator_prerequisites">Сценарий-испытание &lt;i&gt;%s&lt;/i&gt; разворачивается вокруг %s, поэтому у него следующие начальные требования:</string>
     <string name="investigator_must_be_chosen_playing_this_scenario">Среди сыщиков, которые проходят этот сценарий, обязательно должен быть сыщик %s.</string>
     <string name="app_not_enforce_challenge_scenario_prerequisites">Приложение не проверяет, выполнили ли вы начальные требования сценария-испытания, поэтому убедитесь в этом самостоятельно.</string>
     <string name="play_this_scenario">Играть сценарий</string>
@@ -400,7 +400,7 @@
     <string name="campaign_log">Журнал кампании</string>
     <string name="select_cards">Выберите карты</string>
     <string name="the_investigators_must_decide_choose_one">Сыщики должны решить (выберите одно):</string>
-    <string name="confirm_included_automatically">%s <i>(учтено автоматически)</i></string>
+    <string name="confirm_included_automatically">%s &lt;i&gt;(учтено автоматически)&lt;/i&gt;</string>
     <string name="supply_to_use_count">%s использовать (%s)</string>
     <string name="too_many">Слишком много</string>
     <string name="not_enough">Недостаточно</string>
@@ -464,16 +464,16 @@
     <string name="start_playing_the_scenario_now">Вы готовы играть сценарий.</string>
     <string name="investigator_earns_card_advanced">%s получает карту %s (Продвинутую)</string>
     <string name="investigator_earns_card">%s получает карту %s</string>
-    <string name="in_your_campaign_log_record_text">Запишите в журнале кампании, что <i>%s</i></string>
-    <string name="in_your_campaign_log_cross_out">В вашем журнале кампании вычеркните <i>%s</i></string>
-    <string name="in_your_campaign_log_record_log_text">Запишите в журнале кампании, что <i>%s</i></string>
-    <string name="in_your_campaign_log_section_record_log_text">В графе «%s» журнала кампании запишите <i>%s</i>.</string>
+    <string name="in_your_campaign_log_record_text">Запишите в журнале кампании, что &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_cross_out">В вашем журнале кампании вычеркните &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_record_log_text">Запишите в журнале кампании, что &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_section_record_log_text">В графе «%s» журнала кампании запишите &lt;i&gt;%s&lt;/i&gt;.</string>
     <string name="add_token_to_the_chaos_bag">Добавьте %s в мешок хаоса.</string>
     <string name="remove_token_from_the_chaos_bag">Удалите %s из мешка хаоса.</string>
     <string name="investigator_removes_card_advanced">%s удаляет %s (Продвинутую)</string>
     <string name="investigator_removes_card">%s удаляет %s</string>
     <string name="remove_card_length">Удалите %s (%s)</string>
-    <string name="suffer_physical_or_mental_trauma_your_choice">Вы получаете 1 физическую или ментальную травму <i>(на ваш выбор)</i>.</string>
+    <string name="suffer_physical_or_mental_trauma_your_choice">Вы получаете 1 физическую или ментальную травму &lt;i&gt;(на ваш выбор)&lt;/i&gt;.</string>
     <string name="physical_trauma">Физическая травма</string>
     <string name="mental_trauma">Ментальная травма</string>
     <string name="all_weaknesses_have_been_assigned">Все слабости назначены.</string>
@@ -482,9 +482,9 @@
     <string name="standard">Обычный</string>
     <string name="hard">Сложный</string>
     <string name="expert">Экстремальный</string>
-    <string name="because_you_are_playing_on_difficulty">Поскольку вы играете на сложности «<b>%s</b>»:</string>
-    <string name="because_you_have_already_completed_scenario">Поскольку вы прошли <b>%s</b>:</string>
-    <string name="because_you_not_completed_scenario">Поскольку вы не прошли <b>%s</b>:</string>
+    <string name="because_you_are_playing_on_difficulty">Поскольку вы играете на сложности «&lt;b&gt;%s&lt;/b&gt;»:</string>
+    <string name="because_you_have_already_completed_scenario">Поскольку вы прошли &lt;b&gt;%s&lt;/b&gt;:</string>
+    <string name="because_you_not_completed_scenario">Поскольку вы не прошли &lt;b&gt;%s&lt;/b&gt;:</string>
     <plurals name="check_campaign_log_count_mark_section">
         <item quantity="one">Сверьтесь с журналом кампании. Поскольку там %s метка в графе «%s»</item>
         <item quantity="few">Сверьтесь с журналом кампании. Поскольку там %s метки в графе «%s»</item>
@@ -497,12 +497,12 @@
         <item quantity="many">Сверьтесь с журналом кампании. Поскольку там %s записей в графе «%s»</item>
         <item quantity="other">Сверьтесь с журналом кампании. Поскольку там %s записей в графе «%s»</item>
     </plurals>
-    <string name="check_campaign_log_because_entry">Сверьтесь с журналом кампании. Поскольку <i>%s</i></string>
-    <string name="check_campaign_log_is_the_section_not_crossed_off">Сверьтесь с журналом кампании, <i>%s</i> не вычеркнута?</string>
+    <string name="check_campaign_log_because_entry">Сверьтесь с журналом кампании. Поскольку &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="check_campaign_log_is_the_section_not_crossed_off">Сверьтесь с журналом кампании, &lt;i&gt;%s&lt;/i&gt; не вычеркнута?</string>
     <plurals name="investigators_must_read_prompt_plural">
-        <item quantity="one">%s читает <b>%s</b>.</item>
-        <item quantity="few">%s должны прочитать <b>%s</b>.</item>
-        <item quantity="many">%s должны прочитать <b>%s</b>.</item>
+        <item quantity="one">%s читает &lt;b&gt;%s&lt;/b&gt;.</item>
+        <item quantity="few">%s должны прочитать &lt;b&gt;%s&lt;/b&gt;.</item>
+        <item quantity="many">%s должны прочитать &lt;b&gt;%s&lt;/b&gt;.</item>
         <item quantity="other">%s должны прочитать </item>
     </plurals>
     <string name="does_any_investigator_have_card_in_deck">Есть ли у какого-либо сыщика «%s» в колоде?</string>
@@ -514,9 +514,9 @@
         <item quantity="many">Поскольку играет %s игроков:</item>
         <item quantity="other">Поскольку играет %s игроков:</item>
     </plurals>
-    <string name="if_the_lead_investigator_was_killed">Если ведущий сыщик был <b>убит</b>.</string>
-    <string name="if_all_investigators_were_killed">Если все сыщики были <b>убиты</b>.</string>
-    <string name="check_section_if_text">Проверьте %s. <i>Есть ли там запись %s</i></string>
+    <string name="if_the_lead_investigator_was_killed">Если ведущий сыщик был &lt;b&gt;убит&lt;/b&gt;.</string>
+    <string name="if_all_investigators_were_killed">Если все сыщики были &lt;b&gt;убиты&lt;/b&gt;.</string>
+    <string name="check_section_if_text">Проверьте %s. &lt;i&gt;Есть ли там запись %s&lt;/i&gt;</string>
     <string name="choose_side_scenario">Выберите сценарий-ответвление</string>
     <string name="add_side_scenario">Добавить сценарий-ответвление</string>
     <string name="side_scenarios_cannot_be_added_until_the_previous_following_interludes_completed">Сценарии-ответвления не могут быть добавлены в кампанию, пока предыдущий сценарий и все последующие интерлюдии не будут завершены.</string>
@@ -842,8 +842,8 @@
         <item quantity="other">Случайным образом будут выбраны 2 карты из следующих:\n\n%s</item>
     </plurals>
     <string name="edit_collection_in_settings">Укажите в Настройках, какие допы у вас есть, чтобы видеть доступные вам карты.</string>
-    <string name="additional_options_upgrade_fortune_gambit_card"><b>Дополнительные возможности</b>: Когда вы улучшаете карту [[Удачи]] или [[Авантюру]], вы можете вместо этого выплатить её полную цену в опыте и оставить низкоуровневую версию в своей колоде (та карта не идёт в счёт экземпляров одноимённых карт в вашей колоде).</string>
-    <string name="shrewd_analysis_rule_text"><b>Тонкий анализ</b>: Если выполнены условия кампании, вы можете использовать «Тонкий анализ», чтобы улучшить две карты случайным образом, заплатив опыт только за одну.\n\n<i>Обратите внимание: приложение увеличит количество полученного вами опыта, чтобы второе улучшение было «бесплатным».</i></string>
+    <string name="additional_options_upgrade_fortune_gambit_card">&lt;b&gt;Дополнительные возможности&lt;/b&gt;: Когда вы улучшаете карту [[Удачи]] или [[Авантюру]], вы можете вместо этого выплатить её полную цену в опыте и оставить низкоуровневую версию в своей колоде (та карта не идёт в счёт экземпляров одноимённых карт в вашей колоде).</string>
+    <string name="shrewd_analysis_rule_text">&lt;b&gt;Тонкий анализ&lt;/b&gt;: Если выполнены условия кампании, вы можете использовать «Тонкий анализ», чтобы улучшить две карты случайным образом, заплатив опыт только за одну.\n\n&lt;i&gt;Обратите внимание: приложение увеличит количество полученного вами опыта, чтобы второе улучшение было «бесплатным».&lt;/i&gt;</string>
     <string name="upgrade_results">Результаты улучшения</string>
     <string name="upgrade_with_shrewd_analysis">Улучшить «Тонким анализом»</string>
     <string name="the_pit_of_despair">Яма отчаяния</string>
@@ -930,7 +930,7 @@
     <string name="location">Локация</string>
     <string name="actions">Действия</string>
     <string name="undo_deck_upgrade">Удалить улучшение колоды?</string>
-    <string name="additional_options_upgrade_spell"><b>Дополнительные возможности</b>: Когда вы улучшаете [[Заклинание]], вы можете вместо этого выплатить его полную цену в опыте и оставить низкоуровневую версию в своей колоде (та карта не идёт в счёт экземпляров одноимённых карт в вашей колоде).</string>
+    <string name="additional_options_upgrade_spell">&lt;b&gt;Дополнительные возможности&lt;/b&gt;: Когда вы улучшаете [[Заклинание]], вы можете вместо этого выплатить его полную цену в опыте и оставить низкоуровневую версию в своей колоде (та карта не идёт в счёт экземпляров одноимённых карт в вашей колоде).</string>
     <string name="spent_of_adjusted_xp">%s из %s опыта потрачено</string>
     <string name="upgrading">Улучшение</string>
     <string name="editing">Редактирование</string>
@@ -1175,12 +1175,12 @@
     <string name="select_traits">Выберите черты</string>
     <string name="random_weaknesses_will_be_drawn_that_match_these_traits">Будет взята случайная слабость с указанными чертами.</string>
     <string name="edit_selection">Править выделение</string>
-    <string name="check_campaign_log_if_text">Сверьтесь с журналом. Если <i>%s</i></string>
+    <string name="check_campaign_log_if_text">Сверьтесь с журналом. Если &lt;i&gt;%s&lt;/i&gt;</string>
     <string name="discord">Дискорд</string>
     <string name="vk">ВК</string>
     <string name="telegram">Телеграм</string>
     <string name="in_your_campaign_log_section_record_name">В графе «%s» журнала кампании запишите %s. </string>
-    <string name="in_your_campaign_log_section_cross_out">Вычеркните <i>%s</i> из графы «%s» журнала кампании.</string>
+    <string name="in_your_campaign_log_section_cross_out">Вычеркните &lt;i&gt;%s&lt;/i&gt; из графы «%s» журнала кампании.</string>
     <string name="adjust_campaign_values_after_scenario">Значения ниже уже учитывают травмы, победные очки и сюжетные активы, полученные при розыгрыше исходов.\n\nЕсли у вас есть карты или эффекты, не учтённые приложением, вы можете вручную поправить указанные значения перед сохранением каждого из сыщиков.</string>
     <string name="unarchive_campaign">Разархивировать кампанию</string>
     <string name="archive_campaign">Архивировать кампанию</string>
@@ -1261,14 +1261,14 @@
     <string name="in_the_section_of_the_campaign_log_cross_out_name">Вычеркните имя «%s» в графе журнала «%s».</string>
     <string name="in_the_section_of_the_campaign_log_write_mia_to_name">Запишите «Пропал(а)» напротив %s в графе журнала «%s».</string>
     <string name="in_the_section_of_the_campaign_log_cross_out_mia_to_name">Вычеркните слово «Пропал» напротив %s в графе журнала «%s».</string>
-    <string name="if_the_lead_investigator_was_driven_insane">Если ведущий сыщик <b>сошёл с ума</b>.</string>
-    <string name="if_all_investigators_were_driven_insane">Если все сыщики <b>сошли с ума</b>.</string>
+    <string name="if_the_lead_investigator_was_driven_insane">Если ведущий сыщик &lt;b&gt;сошёл с ума&lt;/b&gt;.</string>
+    <string name="if_all_investigators_were_driven_insane">Если все сыщики &lt;b&gt;сошли с ума&lt;/b&gt;.</string>
     <string name="if_the_lead_investigator_is_still_alive">Если ведущий сыщик всё ещё жив.</string>
     <string name="if_all_investigators_are_still_alive">Если все сыщики всё ещё живы.</string>
     <string name="the_entity">Существо</string>
     <string name="resolute">Неколебимый</string>
     <string name="mia">Пропал</string>
-    <string name="sidestory_description">Ответвление — это сценарий, который можно сыграть между двумя любыми сценариями в рамках сюжетной кампании карточной игры «Ужас Аркхэма».\n- Чтобы сыграть сценарий-ответвление, каждый участвующий в кампании сыщик должен потратить определённое количество опыта.\n- Слабости, травмы, опыт и награды, полученные сыщиками в сценарии-ответвлении, остаются с ними до конца кампании.\n- Каждое ответвление можно сыграть только раз за кампанию.\n\n<b>Обратите внимание:</b> Приложение сможет учесть плату в опыте за участие в ответвлении только <b>после его окончания</b>, за счёт снижения количества заработанного опыта. Убедитесь самостоятельно, что у вас достаточно непотраченных очков опыта для участия в ответвлении.</string>
+    <string name="sidestory_description">Ответвление — это сценарий, который можно сыграть между двумя любыми сценариями в рамках сюжетной кампании карточной игры «Ужас Аркхэма».\n- Чтобы сыграть сценарий-ответвление, каждый участвующий в кампании сыщик должен потратить определённое количество опыта.\n- Слабости, травмы, опыт и награды, полученные сыщиками в сценарии-ответвлении, остаются с ними до конца кампании.\n- Каждое ответвление можно сыграть только раз за кампанию.\n\n&lt;b&gt;Обратите внимание:&lt;/b&gt; Приложение сможет учесть плату в опыте за участие в ответвлении только &lt;b&gt;после его окончания&lt;/b&gt;, за счёт снижения количества заработанного опыта. Убедитесь самостоятельно, что у вас достаточно непотраченных очков опыта для участия в ответвлении.</string>
     <string name="ice_and_death_part_1">Лёд и смерть, часть I</string>
     <string name="ice_and_death_part_2">Лёд и смерть, часть II</string>
     <string name="ice_and_death_part_3">Лёд и смерть, часть III</string>
@@ -1288,7 +1288,7 @@
     <string name="the_heart_of_madness_seals_recovered">Сердце безумия: Найденные печати</string>
     <string name="negative_modifier">Отрицательный модификатор</string>
     <string name="modifier_draws_another">%s + ещё жетон</string>
-    <string name="heal_physical_or_mental_trauma_your_choice">Вы можете вылечить 1 травму <i>(физическую или ментальную — на ваш выбор)</i></string>
+    <string name="heal_physical_or_mental_trauma_your_choice">Вы можете вылечить 1 травму &lt;i&gt;(физическую или ментальную — на ваш выбор)&lt;/i&gt;</string>
     <string name="in_section_campaign_log_draw_check_mark_next_to_partner">Отметьте галочкой имя «%s» в графе журнала «%s».</string>
     <string name="choose_heal_type">Выберите тип лечения</string>
     <string name="chosen_heal_type">Выбранные тип лечения</string>
@@ -1416,9 +1416,6 @@
     <string name="add_card">Добавить %s:</string>
     <string name="select_name">Выбрать %s</string>
     <string name="note_selected_at_creation_time">Внимание: Это следует делать лишь при создании колоды, а не между сценариями.</string>
-    <string name="translation_credits"><b>Перевод:</b>\n• Испанский: %s\n• Французский: %s\n• Немецкий: %s\n• Русский: %s\n• Корейский: %s</string>
-    <string name="contributions_credits"><b>Помощь в создании:</b>\n• Визуальный дизайн: %s\n• Цифровой мешок хаоса + калькулятор вероятностей: %s\n• Интеграция с Dissonant Voices: %s\n• Дополнительная разработка и поддержка: %s</string>
-    <string name="icon_design_credits"><b>Пиктографика:</b>\n• Оригинальный дизайн: %s</string>
     <string name="locations">Локации</string>
     <string name="login_required_to_save_deck_upgrade">Чтобы сохранить колоду, войдите в аккаунт</string>
     <string name="campaign_is_new_warning">Эта кампания добавлена недавно и может содержать ошибки.</string>
@@ -1515,8 +1512,8 @@
     <string name="destiny_tarot_reading">Расклад Таро «Судьба»</string>
     <string name="delete_your_account">Удалить аккаунт</string>
     <string name="loading_account_details">Загрузка информации…</string>
-    <string name="delete_account_warning">Вы действительно хотите <b>окончательно</b> удалить ваш аккаунт? Это <b>необратимое действие</b>.</string>
-    <string name="you_are_currently_signed_in_as_handle">Вы вошли как <b>%s</b>.</string>
+    <string name="delete_account_warning">Вы действительно хотите &lt;b&gt;окончательно&lt;/b&gt; удалить ваш аккаунт? Это &lt;b&gt;необратимое действие&lt;/b&gt;.</string>
+    <string name="you_are_currently_signed_in_as_handle">Вы вошли как &lt;b&gt;%s&lt;/b&gt;.</string>
     <plurals name="the_friends_campaign_that_you_have_participated_in_will_have_your_decks_removed">
         <item quantity="one">Ваши колоды будут удалены из кампании вашего друга, в которой вы участвовали:</item>
         <item quantity="few">Ваши колоды будут удалены из %s кампаний ваших друзей, в которых вы участвовали:</item>
@@ -1630,9 +1627,9 @@
     <string name="do_you_want_to_use_the_app_to_randomize_choices">Хотите использовать приложение, чтобы сделать выборы случайным образом?</string>
     <string name="the_cell_travels_from_depart_to_arrive">Ячейка отправляется из %s в %s.</string>
     <plurals name="mark_time_in_your_campaign_log">
-        <item quantity="one">Отметьте %s <b>время</b> в журнале кампании.</item>
-        <item quantity="few">Отметьте %s <b>времени</b> в журнале кампании.</item>
-        <item quantity="many">Отметьте %s <b>времени</b> в журнале кампании.</item>
+        <item quantity="one">Отметьте %s &lt;b&gt;время&lt;/b&gt; в журнале кампании.</item>
+        <item quantity="few">Отметьте %s &lt;b&gt;времени&lt;/b&gt; в журнале кампании.</item>
+        <item quantity="many">Отметьте %s &lt;b&gt;времени&lt;/b&gt; в журнале кампании.</item>
         <item quantity="other">Отметьте %s </item>
     </plurals>
     <string name="this_includes_the_cost_of_experience_cost_of_playing_the_sidestory">Это включает в себя цену в опыте для сценария-ответвления.</string>
@@ -1656,7 +1653,7 @@
     <string name="use_expedited_ticket">Использовать курьерский билет.</string>
     <string name="time_cost_xp_cost">Цена во времени: %s</string>
     <string name="additional_experience_cost_for_investigator_cost">Дополнительная цена в опыте для %s: %s</string>
-    <string name="side_story_description">Ответвление — это сценарий, который можно сыграть между двумя любыми сценариями в рамках сюжетной кампании карточной игры «Ужас Аркхэма».\n- Так как вы играете в кампанию <i>«Алые ключи»</i>, цена сценария-ответвления выплачивается во <b>времени</b>, а не в опыте.\n- Слабости, травмы, опыт и награды сценариев-ответвлений остаются с сыщиками до конца кампании.\n- Каждый сценарий-ответвление можно сыграть только один раз за кампанию.</string>
+    <string name="side_story_description">Ответвление — это сценарий, который можно сыграть между двумя любыми сценариями в рамках сюжетной кампании карточной игры «Ужас Аркхэма».\n- Так как вы играете в кампанию &lt;i&gt;«Алые ключи»&lt;/i&gt;, цена сценария-ответвления выплачивается во &lt;b&gt;времени&lt;/b&gt;, а не в опыте.\n- Слабости, травмы, опыт и награды сценариев-ответвлений остаются с сыщиками до конца кампании.\n- Каждый сценарий-ответвление можно сыграть только один раз за кампанию.</string>
     <plurals name="mark_distance_time">
         <item quantity="one">Отметьте %s время</item>
         <item quantity="few">Отметьте %s времени</item>
@@ -1718,9 +1715,9 @@
         <item quantity="other">Прочтите отчёты: %s</item>
     </plurals>
     <plurals name="mark_time_time_cell_travels_from_depart_to_arrive_on_the_way_to_somewhere_else">
-        <item quantity="one">Отметьте %s <b>время</b>, потраченное на перемещение из %s в %s по пути куда-то ещё.</item>
-        <item quantity="few">Отметьте %s <b>времени</b>, потраченных на перемещение из %s в %s по пути куда-то ещё.</item>
-        <item quantity="many">Отметьте %s <b>времени</b>, потраченных на перемещение из %s в %s по пути куда-то ещё.</item>
+        <item quantity="one">Отметьте %s &lt;b&gt;время&lt;/b&gt;, потраченное на перемещение из %s в %s по пути куда-то ещё.</item>
+        <item quantity="few">Отметьте %s &lt;b&gt;времени&lt;/b&gt;, потраченных на перемещение из %s в %s по пути куда-то ещё.</item>
+        <item quantity="many">Отметьте %s &lt;b&gt;времени&lt;/b&gt;, потраченных на перемещение из %s в %s по пути куда-то ещё.</item>
         <item quantity="other">Отметьте %s </item>
     </plurals>
     <string name="min">Мин</string>
@@ -1810,7 +1807,6 @@
     <string name="some_decks_may_not_load_fully_and_campaigns_might_appear_incomplete_until_this_is_fixed">Некоторые колоды могут загружаться не полностью, а кампании могут выглядеть незавершенными, пока это не будет исправлено.</string>
     <string name="download_cards">Скачать карты</string>
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">Прошло уже больше недели с тех пор, как вы проверяли наличие новых карт.</string>
-    <string name="chinese_simplified_translators">• Китайский (Упрощённый): %s</string>
     <string name="narration">Голосовое сопровождение</string>
     <string name="these_cards_might_have_been_updated">Эти карты могут быть обновлены, взяты из нового списка табу или содержать незначительные исправления.</string>
     <string name="create_new_deck">Создать колоду</string>
@@ -1964,4 +1960,9 @@
     <string name="load_cards_cache_error">Не удалось загрузить кэш карт</string>
     <string name="create_cards_cache_error">Не удалось создать кэш карт</string>
     <string name="clear_cards_database_error">Не удалось очистить базу карт</string>
+    <string name="app_version">Версия %s</string>
+    <string name="about_app_text">Все права на представленную в этом приложении информацию о карточной игре «Ужас Аркхэма» — как текстовую, так и графическую — принадлежат компании Fantasy Flight Games. Создатели этого приложения не аффилированы и никоим образом не поддерживаются Fantasy Flight Games.\n\nПриложение создано Егением Карелиным в качестве фанатского проекта в поддержку сообщества игры «Ужас Аркхэма. Карточная игра». Дизайн приложения — %s. Если вам приходится искать карты, следить за множеством колод и кампаний одновременно, надеюсь, это приложение будет вам полезно.\n\nСообщения об ошибках и предложения присылайте на arkhamcompanion@gmail.com\n\nОгромная благодарность приложению ArkhamCards и сайту arkham.build за предоставление структурированных данных, изображений карт и доступ через API. Без их постоянной поддержки этот проект не был бы возможен.</string>
+    <string name="app_translations_text">&lt;b&gt;Перевод:&lt;/b&gt;\n• Испанский: %s\n• Французский: %s\n• Немецкий: %s\n• Корейский: %s\n• Китайский (Упрощённый): %s</string>
+    <string name="app_contributions_text">&lt;b&gt;Помощь в создании:&lt;/b&gt;\n• Визуальный дизайн: %s</string>
+    <string name="app_icons_attribution_text">&lt;b&gt;Пиктографика:&lt;/b&gt;\n• Оригинальный дизайн: %s</string>
 </resources>

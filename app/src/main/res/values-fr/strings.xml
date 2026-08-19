@@ -352,7 +352,7 @@
     <string name="cards">Cartes</string>
     <string name="settings">Paramètres</string>
     <string name="additional_taboo_xp">( +%s expérience).</string>
-    <string name="taboo_description">La Liste des Tabous est une liste de cartes pour <i>Horreur à Arkham : le Jeu de Cartes</i> comportant des restrictions de construction du deck ou des changements de texte optionnels. Cette liste est conçue pour établir un meilleur équilibre entre la puissance des investigateurs et la difficulté du scénario, tout en appliquant des modifications dans la manière de construire son deck au fil du temps.</string>
+    <string name="taboo_description">La Liste des Tabous est une liste de cartes pour &lt;i&gt;Horreur à Arkham : le Jeu de Cartes&lt;/i&gt; comportant des restrictions de construction du deck ou des changements de texte optionnels. Cette liste est conçue pour établir un meilleur équilibre entre la puissance des investigateurs et la difficulté du scénario, tout en appliquant des modifications dans la manière de construire son deck au fil du temps.</string>
     <string name="taboo_using_description">Adhérer à la Liste des Tabous est entièrement optionnel. Les investigateurs ne sont pas obligés de se conformer aux restrictions indiquées ici ; mais s’ils choisissent de le faire, ils doivent les appliquer dans leur intégralité (au lieu de choisir celles qu’ils souhaitent utiliser et celles qu’ils veulent laisser de côté).</string>
     <string name="note_not_all_cards_have_translations_available">Note : toutes les cartes ne disposent pas de traductions.</string>
     <string name="taboo_list">Liste des Tabous</string>
@@ -489,13 +489,13 @@
     <string name="ally_arcane">Allié. Arcane</string>
     <string name="things0_and_things1">%s et %s</string>
     <string name="list_and_last">%s et %s</string>
-    <string name="name_subname">%s <i>(%s)</i></string>
+    <string name="name_subname">%s &lt;i&gt;(%s)&lt;/i&gt;</string>
     <string name="campaign_setup">Mise en place de la campagne</string>
     <string name="choose_lead_investigator">Choisissez l\'investigateur principal</string>
     <string name="lead_investigator">Investigateur principal</string>
     <string name="alive">Vivant</string>
     <string name="resigned">Abandon</string>
-    <string name="proceed_to_next_scenario">Passez à <b>%s</b>.</string>
+    <string name="proceed_to_next_scenario">Passez à &lt;b&gt;%s&lt;/b&gt;.</string>
     <string name="mark_played_scenarios_to_add_results">Marquez les scénarios que vous avez déjà joués pour les rendre visibles dans les résultats de recherche.</string>
     <string name="loading">Chargement en cours</string>
     <string name="label_all">%s : Tous</string>
@@ -527,15 +527,15 @@
     <string name="select_deck">Choisir un deck</string>
     <string name="view_deck">Voir le deck</string>
     <string name="update_decks_with_scenario_results">Mettre à jour le deck avec les résultats du scénario</string>
-    <string name="in_your_campaign_log_cross_out">Dans votre Carnet de Campagne, rayez <i>%s</i></string>
-    <string name="in_your_campaign_log_record_log_text">Dans votre Carnet de Campagne, indiquez que <i>%s</i></string>
+    <string name="in_your_campaign_log_cross_out">Dans votre Carnet de Campagne, rayez &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_record_log_text">Dans votre Carnet de Campagne, indiquez que &lt;i&gt;%s&lt;/i&gt;</string>
     <string name="remove_card_length">Retirer %s (%s)</string>
-    <string name="suffer_physical_or_mental_trauma_your_choice">Vous subissez 1 traumatisme physique ou mental <i>(votre choix)</i>.</string>
+    <string name="suffer_physical_or_mental_trauma_your_choice">Vous subissez 1 traumatisme physique ou mental &lt;i&gt;(votre choix)&lt;/i&gt;.</string>
     <string name="all_weaknesses_have_been_assigned">Toutes les faiblesses ont été assignées.</string>
     <string name="use_app_to_randomize_weaknesses_question">Voulez-vous utiliser l\'application pour choisir les faiblesses au hasard ?</string>
-    <string name="because_you_are_playing_on_difficulty">Comme vous jouez en difficulté <b>%s</b> :</string>
-    <string name="because_you_have_already_completed_scenario">Étant donné que vous avez déjà terminé <b>%s</b> :</string>
-    <string name="because_you_not_completed_scenario">Étant donné que vous n\'avez pas encore terminé <b>%s</b> :</string>
+    <string name="because_you_are_playing_on_difficulty">Comme vous jouez en difficulté &lt;b&gt;%s&lt;/b&gt; :</string>
+    <string name="because_you_have_already_completed_scenario">Étant donné que vous avez déjà terminé &lt;b&gt;%s&lt;/b&gt; :</string>
+    <string name="because_you_not_completed_scenario">Étant donné que vous n\'avez pas encore terminé &lt;b&gt;%s&lt;/b&gt; :</string>
     <plurals name="check_campaign_log_count_mark_section">
         <item quantity="one">Vérifiez votre Carnet de Campagne. Étant donné qu\'il y a %s trait sous la mention « %s » :</item>
         <item quantity="many">Vérifiez votre Carnet de Campagne. Étant donné qu\'il y a %s traits sous la mention « %s » :</item>
@@ -546,11 +546,11 @@
         <item quantity="many">Vérifiez votre Carnet de Campagne. Étant donné qu\'il y a %s noms inscrits sous la mention « %s » :</item>
         <item quantity="other">Vérifiez votre Carnet de Campagne. Étant donné qu\'il y a %s noms inscrits sous la mention « %s » :</item>
     </plurals>
-    <string name="check_campaign_log_because_entry">Vérifiez votre Carnet de Campagne. Étant donné que <i>%s</i> :</string>
-    <string name="check_campaign_log_is_the_section_not_crossed_off">Vérifiez votre Carnet de Campagne, <i>%s</i> n\'est-il pas rayé ?</string>
+    <string name="check_campaign_log_because_entry">Vérifiez votre Carnet de Campagne. Étant donné que &lt;i&gt;%s&lt;/i&gt; :</string>
+    <string name="check_campaign_log_is_the_section_not_crossed_off">Vérifiez votre Carnet de Campagne, &lt;i&gt;%s&lt;/i&gt; n\'est-il pas rayé ?</string>
     <plurals name="investigators_must_read_prompt_plural">
-        <item quantity="one">%s doit lire <b>%s</b>.</item>
-        <item quantity="many">%s doivent lire <b>%s</b>.</item>
+        <item quantity="one">%s doit lire &lt;b&gt;%s&lt;/b&gt;.</item>
+        <item quantity="many">%s doivent lire &lt;b&gt;%s&lt;/b&gt;.</item>
         <item quantity="other">%s doivent lire </item>
     </plurals>
     <string name="does_any_investigator_have_card_in_deck">Un investigateur a-t-il la carte « %s » dans son deck ?</string>
@@ -561,9 +561,9 @@
         <item quantity="many">Étant donné qu\'il y a %s joueurs en jeu :</item>
         <item quantity="other">Étant donné qu\'il y a %s joueurs en jeu :</item>
     </plurals>
-    <string name="if_the_lead_investigator_was_killed">Si l\'investigateur principal a été <b>tué</b>.</string>
-    <string name="if_all_investigators_were_killed">Si tous les investigateurs ont été <b>tués</b>.</string>
-    <string name="check_section_if_text">Vérifiez vos %s. Si <i>%s..</i></string>
+    <string name="if_the_lead_investigator_was_killed">Si l\'investigateur principal a été &lt;b&gt;tué&lt;/b&gt;.</string>
+    <string name="if_all_investigators_were_killed">Si tous les investigateurs ont été &lt;b&gt;tués&lt;/b&gt;.</string>
+    <string name="check_section_if_text">Vérifiez vos %s. Si &lt;i&gt;%s..&lt;/i&gt;</string>
     <string name="are_you_sure_you_want_to_delete_the_campaign">Êtes-vous sûr de vouloir supprimer la campagne : %s ?</string>
     <string name="scenario_attempt_count">%s (Tentative %s)</string>
     <string name="add_investigator">Ajouter un investigateur</string>
@@ -591,8 +591,8 @@
     <string name="draw_chaos_tokens">Révéler un pion Chaos</string>
     <string name="draw_random_basic_weakness">Piocher une faiblesse de base au hasard</string>
     <string name="start_playing_the_scenario_now">Vous êtes maintenant prêt à commencer.</string>
-    <string name="in_your_campaign_log_record_text">Dans votre Carnet de Campagne, notez que <i>%s</i></string>
-    <string name="in_your_campaign_log_section_record_log_text">Dans votre Carnet de Campagne, sous la mention « %s », notez <i>%s</i>.</string>
+    <string name="in_your_campaign_log_record_text">Dans votre Carnet de Campagne, notez que &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_section_record_log_text">Dans votre Carnet de Campagne, sous la mention « %s », notez &lt;i&gt;%s&lt;/i&gt;.</string>
     <string name="add_token_to_the_chaos_bag">Ajoutez un pion %s dans la réserve du Chaos.</string>
     <string name="remove_token_from_the_chaos_bag">Retirez %s de la réserve du Chaos.</string>
     <string name="clean_up_broken_campaigns">Nettoyer les campagnes corrompues</string>
@@ -641,7 +641,7 @@
     <string name="defeated_physical_trauma">Vaincus : traumatisme physique</string>
     <string name="defeated_mental_trauma">Vaincus : traumatisme mental</string>
     <string name="defeated_no_trauma">Vaincus : aucun traumatisme</string>
-    <string name="scenario_challenge_centers_around_investigator_prerequisites">Le scénario défi <i>%s</i> est centré sur l\'investigateur %s, et a donc les conditions préalables suivantes :</string>
+    <string name="scenario_challenge_centers_around_investigator_prerequisites">Le scénario défi &lt;i&gt;%s&lt;/i&gt; est centré sur l\'investigateur %s, et a donc les conditions préalables suivantes :</string>
     <string name="investigator_must_be_chosen_playing_this_scenario">%s doit être choisi comme l\'un des investigateurs quand vous jouez ce scénario.</string>
     <string name="app_not_enforce_challenge_scenario_prerequisites">L\'application ne vérifie pas si les prérequis pour jouer les Scénarios Défis sont respectés. Veuillez donc les vérifier manuellement.</string>
     <string name="play_this_scenario">Jouer ce scénario</string>
@@ -654,12 +654,12 @@
     <string name="experience_cost_investigator_cost_other_investigator">Coût en expérience : %s pour %s, %s pour les autres investigateurs</string>
     <string name="side">Indépendant</string>
     <string name="challenge">Défi</string>
-    <string name="challenge_scenarios_description">Les scénarios défis sont des scénarios spéciaux à télécharger qui utilisent des extensions déjà publiées pour <i>Horreur à Arkham : le Jeu de Cartes</i> et des cartes supplémentaires à imprimer, afin de créer un contenu nouveau. Ces scénarios sont conçus pour être joués avec certains prérequis de manière à offrir une expérience ludique particulière.</string>
+    <string name="challenge_scenarios_description">Les scénarios défis sont des scénarios spéciaux à télécharger qui utilisent des extensions déjà publiées pour &lt;i&gt;Horreur à Arkham : le Jeu de Cartes&lt;/i&gt; et des cartes supplémentaires à imprimer, afin de créer un contenu nouveau. Ces scénarios sont conçus pour être joués avec certains prérequis de manière à offrir une expérience ludique particulière.</string>
     <string name="download_printable_cards">Télécharger les cartes à imprimer</string>
     <string name="return_to_threads_of_fate">Renouveau – Les Fils du Destin</string>
     <string name="return_to_heart_of_the_elders">Renouveau – Le Cœur des Anciens</string>
     <string name="return_to_shattered_aeons">Renouveau – Paradoxes Temporels</string>
-    <string name="confirm_included_automatically">%s <i>(inclus automatiquement)</i></string>
+    <string name="confirm_included_automatically">%s &lt;i&gt;(inclus automatiquement)&lt;/i&gt;</string>
     <string name="return_to_the_forgotten_age">Renouveau – La Civilisation Oubliée</string>
     <string name="return_to_the_untamed_wilds">Renouveau – Une Contrée Sauvage</string>
     <string name="return_to_the_doom_of_eztli">Renouveau – Le Fléau des Eztli</string>
@@ -676,7 +676,7 @@
     <string name="scenario_or_interlude">Scénario ou Interlude</string>
     <string name="alphabetize_guide_encounter_sets">Classer les sets de rencontre par ordre alphabétique</string>
     <string name="draw_weakness">Piocher une faiblesse</string>
-    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution"><b>Note :</b> Les traumatismes liés à la défaite des investigateurs sont traités lors de la résolution du scénario.</string>
+    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution">&lt;b&gt;Note :&lt;/b&gt; Les traumatismes liés à la défaite des investigateurs sont traités lors de la résolution du scénario.</string>
     <string name="contact_us">Contact</string>
     <plurals name="count_resupply">
         <item quantity="one">%s rééquipement</item>
@@ -807,8 +807,8 @@
         <item quantity="other">Deux cartes vont être choisies aléatoirement parmi celles-ci :\n\n%s</item>
     </plurals>
     <string name="edit_collection_in_settings">Vous pouvez modifier votre collection dans les Paramètres pour ajuster les cartes éligibles.</string>
-    <string name="additional_options_upgrade_fortune_gambit_card"><b>Options Supplémentaires</b> : quand vous améliorez une carte [[Chance]] ou [[Stratagème]], vous avez le droit, à la place, de payer le coût total en expérience de la version de niveau plus élevé et de conserver la version de niveau inférieur dans votre deck (elle ne compte ni dans la limite de taille du deck ni dans la limite du nombre d’exemplaires de cette carte dans votre deck).</string>
-    <string name="shrewd_analysis_rule_text"><b>Analyse Subtile</b> : entre chaque scénario d\'une campagne, vous pouvez utiliser l\'Analyse Subtile pour choisir deux améliorations au hasard et n\'en payer qu\'une.\n\n<i>Note : l\'application gère cela en ajustant votre expérience pour compter l\'amélioration comme étant "gratuite".</i></string>
+    <string name="additional_options_upgrade_fortune_gambit_card">&lt;b&gt;Options Supplémentaires&lt;/b&gt; : quand vous améliorez une carte [[Chance]] ou [[Stratagème]], vous avez le droit, à la place, de payer le coût total en expérience de la version de niveau plus élevé et de conserver la version de niveau inférieur dans votre deck (elle ne compte ni dans la limite de taille du deck ni dans la limite du nombre d’exemplaires de cette carte dans votre deck).</string>
+    <string name="shrewd_analysis_rule_text">&lt;b&gt;Analyse Subtile&lt;/b&gt; : entre chaque scénario d\'une campagne, vous pouvez utiliser l\'Analyse Subtile pour choisir deux améliorations au hasard et n\'en payer qu\'une.\n\n&lt;i&gt;Note : l\'application gère cela en ajustant votre expérience pour compter l\'amélioration comme étant "gratuite".&lt;/i&gt;</string>
     <string name="upgrade_results">Résultats de l\'amélioration</string>
     <string name="upgrade_with_shrewd_analysis">Améliorer avec l\'Analyse Subtile</string>
     <string name="the_pit_of_despair">Le Gouffre du Désespoir</string>
@@ -892,7 +892,7 @@
     <string name="location">Lieu</string>
     <string name="actions">Actions</string>
     <string name="undo_deck_upgrade">Annuler les améliorations du deck ?</string>
-    <string name="additional_options_upgrade_spell"><b>Options Supplémentaires</b> : quand vous améliorez une carte [[Sort]], vous avez le droit, à la place, de payer le coût total en expérience de la version de niveau plus élevé et de conserver la version de niveau inférieur dans votre deck (elle ne compte ni dans la limite de taille du deck ni dans la limite du nombre d\'exemplaires de cette carte dans votre deck).</string>
+    <string name="additional_options_upgrade_spell">&lt;b&gt;Options Supplémentaires&lt;/b&gt; : quand vous améliorez une carte [[Sort]], vous avez le droit, à la place, de payer le coût total en expérience de la version de niveau plus élevé et de conserver la version de niveau inférieur dans votre deck (elle ne compte ni dans la limite de taille du deck ni dans la limite du nombre d\'exemplaires de cette carte dans votre deck).</string>
     <string name="spent_of_adjusted_xp">%s XP dépensée sur %s</string>
     <string name="upgrading">Amélioration</string>
     <string name="editing">Modification</string>
@@ -1142,12 +1142,12 @@
     <string name="select_traits">Choisir les traits</string>
     <string name="random_weaknesses_will_be_drawn_that_match_these_traits">Des faiblesses correspondant à ces traits seront tirées au hasard.</string>
     <string name="edit_selection">Modifier la sélection</string>
-    <string name="check_campaign_log_if_text">Vérifiez votre Carnet de Campagne. Si <i>%s</i> :</string>
+    <string name="check_campaign_log_if_text">Vérifiez votre Carnet de Campagne. Si &lt;i&gt;%s&lt;/i&gt; :</string>
     <string name="discord">Discord</string>
     <string name="vk">VK</string>
     <string name="telegram">Télégramme</string>
     <string name="in_your_campaign_log_section_record_name">Dans votre Carnet de Campagne, sous la mention « %s », notez %s.</string>
-    <string name="in_your_campaign_log_section_cross_out">Dans votre Carnet de Campagne, sous la mention « %s », rayez <i>%s</i>.</string>
+    <string name="in_your_campaign_log_section_cross_out">Dans votre Carnet de Campagne, sous la mention « %s », rayez &lt;i&gt;%s&lt;/i&gt;.</string>
     <string name="unarchive_campaign">Désarchiver cette campagne</string>
     <string name="archive_campaign">Archiver cette campagne</string>
     <string name="show_archived_campaigns">Afficher les campagnes archivées</string>
@@ -1230,14 +1230,14 @@
     <string name="in_the_section_of_the_campaign_log_cross_out_name">Dans la section « %s » du Carnet de Campagne, barrez %s.</string>
     <string name="in_the_section_of_the_campaign_log_write_mia_to_name">Dans la section « %s » du Carnet de Campagne, écrivez « a disparu » à côté de %s.</string>
     <string name="in_the_section_of_the_campaign_log_cross_out_mia_to_name">Dans la section « %s » du Carnet de Campagne, barrez « a disparu » à côté de %s.</string>
-    <string name="if_the_lead_investigator_was_driven_insane">Si l\'investigateur principal est devenu <b>dément</b>.</string>
-    <string name="if_all_investigators_were_driven_insane">Si tous les investigateurs sont devenus <b>déments</b>.</string>
+    <string name="if_the_lead_investigator_was_driven_insane">Si l\'investigateur principal est devenu &lt;b&gt;dément&lt;/b&gt;.</string>
+    <string name="if_all_investigators_were_driven_insane">Si tous les investigateurs sont devenus &lt;b&gt;déments&lt;/b&gt;.</string>
     <string name="if_the_lead_investigator_is_still_alive">Si l\'investigateur principal est encore en vie.</string>
     <string name="if_all_investigators_are_still_alive">Si tous les investigateurs sont encore en vie.</string>
     <string name="the_entity">L\'Entité</string>
     <string name="resolute">Déterminé</string>
     <string name="mia">a disparu</string>
-    <string name="sidestory_description">Une aventure annexe est un scénario qui peut être joué entre n’importe quels scénarios d’une campagne d’<i>Horreur à Arkham : le Jeu de Cartes</i>.\n- Chaque joueur doit dépenser un certain nombre de points d’expérience pour se lancer dans une aventure annexe.\n- Les joueurs conservent pour le reste de la campagne les faiblesses, l’expérience, les récompenses et les traumatismes obtenus en jouant une aventure annexe.\n- Chacune d’elle ne peut être jouée qu’une seule fois au cours d’une campagne.\n<b>Note :</b> Lorsque que vous utilisez cette application, l\'expérience requise pour jouer ces scénarios est automatiquement déduite à la <b>fin du scénario</b>. Soyez donc certain d\'avoir suffisamment de points d\'expérience de côté pour pouvoir accéder aux aventures annexes.</string>
+    <string name="sidestory_description">Une aventure annexe est un scénario qui peut être joué entre n’importe quels scénarios d’une campagne d’&lt;i&gt;Horreur à Arkham : le Jeu de Cartes&lt;/i&gt;.\n- Chaque joueur doit dépenser un certain nombre de points d’expérience pour se lancer dans une aventure annexe.\n- Les joueurs conservent pour le reste de la campagne les faiblesses, l’expérience, les récompenses et les traumatismes obtenus en jouant une aventure annexe.\n- Chacune d’elle ne peut être jouée qu’une seule fois au cours d’une campagne.\n&lt;b&gt;Note :&lt;/b&gt; Lorsque que vous utilisez cette application, l\'expérience requise pour jouer ces scénarios est automatiquement déduite à la &lt;b&gt;fin du scénario&lt;/b&gt;. Soyez donc certain d\'avoir suffisamment de points d\'expérience de côté pour pouvoir accéder aux aventures annexes.</string>
     <string name="ice_and_death_part_1">De Glace et de Mort : Partie I</string>
     <string name="ice_and_death_part_2">De Glace et de Mort : Partie II</string>
     <string name="ice_and_death_part_3">De Glace et de Mort : Partie III</string>
@@ -1255,7 +1255,7 @@
     <string name="ice_and_death_supplies_recovered">De Glace et de Mort – Matériel Récupéré</string>
     <string name="the_heart_of_madness_seals_placed">Le Cœur de la Folie – Sceaux Placés</string>
     <string name="the_heart_of_madness_seals_recovered">Le Cœur de la Folie – Sceaux Activés</string>
-    <string name="heal_physical_or_mental_trauma_your_choice">Vous pouvez soigner 1 traumatisme physique ou 1 traumatisme mental <i>(vous choisissez)</i></string>
+    <string name="heal_physical_or_mental_trauma_your_choice">Vous pouvez soigner 1 traumatisme physique ou 1 traumatisme mental &lt;i&gt;(vous choisissez)&lt;/i&gt;</string>
     <string name="in_section_campaign_log_draw_check_mark_next_to_partner">Dans votre Carnet de Campagne, sous la mention %s, inscrivez un trait à côté de %s.</string>
     <string name="choose_heal_type">Choisissez quoi soigner</string>
     <string name="chosen_heal_type">Choisissez quoi soigner</string>
@@ -1381,9 +1381,6 @@
     <string name="add_card">Ajouter %s :</string>
     <string name="select_name">Choisir %s</string>
     <string name="note_selected_at_creation_time">Note : ceci devrait être choisi à la création du deck et non entre les scénarios.</string>
-    <string name="translation_credits"><b>Traduction :</b>\n• Espagnol : %s\n• Français : %s\n• Allemand : %s\n• Russe : %s\n• Coréen : %s</string>
-    <string name="contributions_credits"><b>Autres Contributions :</b>\n• Aspect Visuel : %s\n• Réserve du Chaos digitale + calculateur de probabilités : %s\n• Intégration audio de Dissonant Voices : %s\n• Entretien des fonctionnalités et des mises à jours : %s</string>
-    <string name="icon_design_credits"><b>Attribution d\'icônes :</b>\n• Visuel des icônes d\'origine : %s</string>
     <string name="call_of_the_plaguebearer">Call of the Plaguebearer</string>
     <string name="eliminated">Éliminé</string>
     <string name="locations">Lieux</string>
@@ -1482,8 +1479,8 @@
     <string name="the_tatterdemalion">The Tatterdemalion</string>
     <string name="delete_your_account">Supprimer votre compte</string>
     <string name="loading_account_details">Chargement des détails du compte…</string>
-    <string name="delete_account_warning">Êtes-vous sûr(e) de vouloir supprimer votre compte <b>définitivement</b> ? Cela <b>ne peut être annulé</b>.</string>
-    <string name="you_are_currently_signed_in_as_handle">Vous êtes actuellement connecté en tant que <b>%s</b>.</string>
+    <string name="delete_account_warning">Êtes-vous sûr(e) de vouloir supprimer votre compte &lt;b&gt;définitivement&lt;/b&gt; ? Cela &lt;b&gt;ne peut être annulé&lt;/b&gt;.</string>
+    <string name="you_are_currently_signed_in_as_handle">Vous êtes actuellement connecté en tant que &lt;b&gt;%s&lt;/b&gt;.</string>
     <plurals name="the_friends_campaign_that_you_have_participated_in_will_have_your_decks_removed">
         <item quantity="one">La campagne de l\'ami à laquelle vous avez participé verra vos decks supprimés :</item>
         <item quantity="many">Les %s campagnes d\'amis auxquelles vous avez participé verront vos decks supprimés :</item>
@@ -1595,8 +1592,8 @@
     <string name="do_you_want_to_use_the_app_to_randomize_choices">Voulez-vous utiliser l\'application pour faire des choix aléatoires ?</string>
     <string name="the_cell_travels_from_depart_to_arrive">La cellule voyage depuis %s jusqu\'à %s.</string>
     <plurals name="mark_time_in_your_campaign_log">
-        <item quantity="one">Cochez %s case <b>Temps</b> dans le Carnet de Campagne.</item>
-        <item quantity="many">Cochez %s cases <b>Temps</b> dans le Carnet de Campagne.</item>
+        <item quantity="one">Cochez %s case &lt;b&gt;Temps&lt;/b&gt; dans le Carnet de Campagne.</item>
+        <item quantity="many">Cochez %s cases &lt;b&gt;Temps&lt;/b&gt; dans le Carnet de Campagne.</item>
         <item quantity="other">Cochez %s cases </item>
     </plurals>
     <string name="this_includes_the_cost_of_experience_cost_of_playing_the_sidestory">Cela inclut le coût de l\'expérience du jeu de l\'aventure annexe.</string>
@@ -1616,11 +1613,11 @@
     <string name="asset_class_choice">Choix de la Classe du Soutien</string>
     <string name="skill_class_choice">Choix de la classe de la Compétence</string>
     <string name="event_class_choice">Choix de la classe de l\'Événement</string>
-    <string name="side_story_in_tsk_description">Si vous souhaitez incorporer une aventure annexe à votre campagne, il vous suffit de voyager vers ce lieu et de cocher un nombre de cases <b>Temps</b> supplémentaires égal au coût en expérience requis pour jouer cette aventure annexe (à la place de dépenser des points d\'expériences).</string>
+    <string name="side_story_in_tsk_description">Si vous souhaitez incorporer une aventure annexe à votre campagne, il vous suffit de voyager vers ce lieu et de cocher un nombre de cases &lt;b&gt;Temps&lt;/b&gt; supplémentaires égal au coût en expérience requis pour jouer cette aventure annexe (à la place de dépenser des points d\'expériences).</string>
     <string name="use_expedited_ticket">Utilisez le Billet Express</string>
     <string name="time_cost_xp_cost">Coût en temps : %s</string>
     <string name="additional_experience_cost_for_investigator_cost">Coût d\'expérience supplémentaire pour %s : %s</string>
-    <string name="side_story_description">Une aventure annexe est un scénario qui peut être joué entre deux scénarios quelconques d\'une campagne <i>Horreur à Arkham : le Jeu de Cartes</i>.\n- Comme vous jouez la campagne <i>Les Clefs Écarlates</i>, une aventure annexe coûte une certaine quantité de <b>temps</b> au lieu d\'expérience.\n- Les faiblesses, les traumatismes, l\'expérience et les récompenses accordés en jouant une aventure annexe sont conservés par les investigateurs pour le reste de la campagne.\n- Chaque aventure annexe ne peut être jouée qu\'une seule fois par campagne.</string>
+    <string name="side_story_description">Une aventure annexe est un scénario qui peut être joué entre deux scénarios quelconques d\'une campagne &lt;i&gt;Horreur à Arkham : le Jeu de Cartes&lt;/i&gt;.\n- Comme vous jouez la campagne &lt;i&gt;Les Clefs Écarlates&lt;/i&gt;, une aventure annexe coûte une certaine quantité de &lt;b&gt;temps&lt;/b&gt; au lieu d\'expérience.\n- Les faiblesses, les traumatismes, l\'expérience et les récompenses accordés en jouant une aventure annexe sont conservés par les investigateurs pour le reste de la campagne.\n- Chaque aventure annexe ne peut être jouée qu\'une seule fois par campagne.</string>
     <plurals name="mark_distance_time">
         <item quantity="one">Cochez %s case Temps</item>
         <item quantity="many">Cochez %s cases Temps</item>
@@ -1677,8 +1674,8 @@
         <item quantity="other">Lisez les rapports de situation : %s</item>
     </plurals>
     <plurals name="mark_time_time_cell_travels_from_depart_to_arrive_on_the_way_to_somewhere_else">
-        <item quantity="one">Cochez %s case <b>Temps</b> pour que la cellule voyage entre %s et %s puis continue vers une autre destination.</item>
-        <item quantity="many">Cochez %s cases <b>Temps</b> pour que la cellule voyage entre %s et %s puis continue vers une autre destination.</item>
+        <item quantity="one">Cochez %s case &lt;b&gt;Temps&lt;/b&gt; pour que la cellule voyage entre %s et %s puis continue vers une autre destination.</item>
+        <item quantity="many">Cochez %s cases &lt;b&gt;Temps&lt;/b&gt; pour que la cellule voyage entre %s et %s puis continue vers une autre destination.</item>
         <item quantity="other">Cochez %s cases </item>
     </plurals>
     <string name="error_more_than_5_cards_not_seeker_neutral_paradox_traited">Vous ne pouvez pas avoir plus de 5 cartes qui ne sont pas Chercheur, Neutre ou avec le trait Paradoxe.</string>
@@ -1787,7 +1784,6 @@
     <string name="some_decks_may_not_load_fully_and_campaigns_might_appear_incomplete_until_this_is_fixed">Il se peut que certains decks ne se chargent pas complètement et que certaines campagnes apparaissent incomplètes jusqu\'à ce que cela soit résolu.</string>
     <string name="download_cards">Télécharger les cartes</string>
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">Cela fait plus d\'une semaine que vous n\'avez pas vérifié les mises à jour des cartes.</string>
-    <string name="chinese_simplified_translators">Chinois (Simplifié): %s</string>
     <string name="narration">Narration</string>
     <string name="these_cards_might_have_been_updated">Il se peut que ces cartes aient été mises à jour dans la liste des tabous ou qu\'elles contiennent de corrections mineures.</string>
     <string name="create_new_deck">Créer un nouveau deck</string>

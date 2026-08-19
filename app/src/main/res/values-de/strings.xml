@@ -482,13 +482,13 @@
     <string name="ally_arcane">Verbündeter. Arkan</string>
     <string name="things0_and_things1">%s und %s</string>
     <string name="list_and_last">%s, und %s</string>
-    <string name="name_subname">%s <i>(%s)</i></string>
+    <string name="name_subname">%s &lt;i&gt;(%s)&lt;/i&gt;</string>
     <string name="campaign_setup">Kampagnenvorbereitung</string>
     <string name="choose_lead_investigator">Ermittlungsleiter wählen</string>
     <string name="lead_investigator">Ermittlungsleiter</string>
     <string name="alive">Am Leben</string>
     <string name="resigned">Aufgegeben</string>
-    <string name="proceed_to_next_scenario">Fahre mit <b>%s</b> fort.</string>
+    <string name="proceed_to_next_scenario">Fahre mit &lt;b&gt;%s&lt;/b&gt; fort.</string>
     <string name="mark_played_scenarios_to_add_results">Markiere die abgeschlossenen Szenarien, damit diese in den Suchergebnissen erscheinen.</string>
     <string name="loading">Laden</string>
     <string name="label_all">%s: Alle</string>
@@ -516,15 +516,15 @@
     <string name="campaign_cards">Kampagnenkarten</string>
     <string name="view_deck">Deck anzeigen</string>
     <string name="update_decks_with_scenario_results">Deck mit den Szenario-Ergebnissen verbessern</string>
-    <string name="in_your_campaign_log_cross_out">Streiche <i>%s</i> im Kampagnenlogbuch</string>
-    <string name="in_your_campaign_log_record_log_text">Notiere im Kampagnenlogbuch, dass <i>%s</i></string>
+    <string name="in_your_campaign_log_cross_out">Streiche &lt;i&gt;%s&lt;/i&gt; im Kampagnenlogbuch</string>
+    <string name="in_your_campaign_log_record_log_text">Notiere im Kampagnenlogbuch, dass &lt;i&gt;%s&lt;/i&gt;</string>
     <string name="remove_card_length">Entferne %s (%s)</string>
-    <string name="suffer_physical_or_mental_trauma_your_choice">Du erleidest 1 körperliches oder seelisches Trauma <i>(du entscheidest)</i>.</string>
+    <string name="suffer_physical_or_mental_trauma_your_choice">Du erleidest 1 körperliches oder seelisches Trauma &lt;i&gt;(du entscheidest)&lt;/i&gt;.</string>
     <string name="all_weaknesses_have_been_assigned">Alle Schwächen wurden zugewiesen.</string>
     <string name="use_app_to_randomize_weaknesses_question">Soll die App die zufällige Auswahl der Schwächen übernehmen?</string>
-    <string name="because_you_are_playing_on_difficulty">Da du auf <b>%s</b> Schwierigkeit spielst:</string>
-    <string name="because_you_have_already_completed_scenario">Da du bereits <b>%s</b> abgeschlossen hast:</string>
-    <string name="because_you_not_completed_scenario">Da du <b>%s</b> noch nicht abgeschlossen hast:</string>
+    <string name="because_you_are_playing_on_difficulty">Da du auf &lt;b&gt;%s&lt;/b&gt; Schwierigkeit spielst:</string>
+    <string name="because_you_have_already_completed_scenario">Da du bereits &lt;b&gt;%s&lt;/b&gt; abgeschlossen hast:</string>
+    <string name="because_you_not_completed_scenario">Da du &lt;b&gt;%s&lt;/b&gt; noch nicht abgeschlossen hast:</string>
     <plurals name="check_campaign_log_count_mark_section">
         <item quantity="one">Überprüfe das Kampagnenlogbuch. Da sich %s Zählstrich unter \'%s\' befindet</item>
         <item quantity="other">Überprüfe das Kampagnenlogbuch. Da sich %s Zählstriche unter \'%s\' befindet</item>
@@ -533,11 +533,11 @@
         <item quantity="one">Überprüfe das Kampagnenlogbuch. Da sich %s Eintrag unter \'%s\' befindet</item>
         <item quantity="other">Überprüfe das Kampagnenlogbuch. Da sich %s Einträge unter \'%s\' befindet</item>
     </plurals>
-    <string name="check_campaign_log_because_entry">Überprüfe das Kampagnenlogbuch. Da <i>%s</i></string>
-    <string name="check_campaign_log_is_the_section_not_crossed_off">Überprüfe das Kampagnenlogbuch. Ist <i>%s</i> nicht durchgestrichen?</string>
+    <string name="check_campaign_log_because_entry">Überprüfe das Kampagnenlogbuch. Da &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="check_campaign_log_is_the_section_not_crossed_off">Überprüfe das Kampagnenlogbuch. Ist &lt;i&gt;%s&lt;/i&gt; nicht durchgestrichen?</string>
     <plurals name="investigators_must_read_prompt_plural">
-        <item quantity="one">%s muss <b>%s</b> lesen.</item>
-        <item quantity="other">%s müssen <b>%s</b> lesen.</item>
+        <item quantity="one">%s muss &lt;b&gt;%s&lt;/b&gt; lesen.</item>
+        <item quantity="other">%s müssen &lt;b&gt;%s&lt;/b&gt; lesen.</item>
     </plurals>
     <string name="does_any_investigator_have_card_in_deck">Hat ein Ermittler "%s" in seinem Deck?</string>
     <string name="was_investigator_with_card_in_deck_defeated">Wurde ein Ermittler mit "%s" in seinem Deck besiegt?</string>
@@ -546,9 +546,9 @@
         <item quantity="one">Da sich %s Spieler im Spiel befindet:</item>
         <item quantity="other">Da sich %s Spieler im Spiel befinden:</item>
     </plurals>
-    <string name="if_the_lead_investigator_was_killed">Falls der Ermittlungsleiter <b>getötet</b> wurde.</string>
-    <string name="if_all_investigators_were_killed">Falls alle Ermittler <b>getötet</b> wurden.</string>
-    <string name="check_section_if_text">Überprüfe %s. Falls notiert ist: <i>%s</i></string>
+    <string name="if_the_lead_investigator_was_killed">Falls der Ermittlungsleiter &lt;b&gt;getötet&lt;/b&gt; wurde.</string>
+    <string name="if_all_investigators_were_killed">Falls alle Ermittler &lt;b&gt;getötet&lt;/b&gt; wurden.</string>
+    <string name="check_section_if_text">Überprüfe %s. Falls notiert ist: &lt;i&gt;%s&lt;/i&gt;</string>
     <string name="are_you_sure_you_want_to_delete_the_campaign">Bist du sicher, dass du die Kampagne %s löschen willst</string>
     <string name="scenario_attempt_count">%s (Versuch %s)</string>
     <string name="select_deck">Deck auswählen</string>
@@ -575,8 +575,8 @@
     <string name="draw_chaos_tokens">Chaosmarker ziehen</string>
     <string name="draw_random_basic_weakness">Zufällige Grundschwäche ziehen</string>
     <string name="start_playing_the_scenario_now">Das Spiel kann nun beginnen.</string>
-    <string name="in_your_campaign_log_record_text">Im Kampagnenlogbuch wird notiert: <i>%s</i></string>
-    <string name="in_your_campaign_log_section_record_log_text">Im Kampagnenlogbuch wird unter "%s" notiert: <i>%s</i>.</string>
+    <string name="in_your_campaign_log_record_text">Im Kampagnenlogbuch wird notiert: &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_section_record_log_text">Im Kampagnenlogbuch wird unter "%s" notiert: &lt;i&gt;%s&lt;/i&gt;.</string>
     <string name="add_token_to_the_chaos_bag">Füge einen %s zum Chaosbeutel hinzu.</string>
     <string name="remove_token_from_the_chaos_bag">Entferne einen %s aus dem Chaosbeutel.</string>
     <string name="odds_calculator">Wahrscheinlichkeitsrechner</string>
@@ -626,7 +626,7 @@
     <string name="defeated_physical_trauma">Besiegt: Körperliches Trauma</string>
     <string name="defeated_mental_trauma">Besiegt: Seelisches Trauma</string>
     <string name="defeated_no_trauma">Besiegt: Kein Trauma</string>
-    <string name="scenario_challenge_centers_around_investigator_prerequisites">Das Herausforderungsszenario <i>%s</i> dreht sich um den Ermittler %s. Deshalb gelten folgende Grundvoraussetzungen:</string>
+    <string name="scenario_challenge_centers_around_investigator_prerequisites">Das Herausforderungsszenario &lt;i&gt;%s&lt;/i&gt; dreht sich um den Ermittler %s. Deshalb gelten folgende Grundvoraussetzungen:</string>
     <string name="investigator_must_be_chosen_playing_this_scenario">%s muss als einer der Ermittler für dieses Szenario gewählt werden.</string>
     <string name="app_not_enforce_challenge_scenario_prerequisites">Die App erzwingt nicht die besonderen Anforderungen für Herausforderungsszenarien. Dies muss manuell sichergestellt werden.</string>
     <string name="play_this_scenario">Spiele dieses Szenario</string>
@@ -639,12 +639,12 @@
     <string name="experience_cost_investigator_cost_other_investigator">Erfahrungspunktekosten: %s für %s, %s für jeden anderen Ermittler</string>
     <string name="side">Seite</string>
     <string name="challenge">Herausforderung</string>
-    <string name="challenge_scenarios_description">Herausforderungsszenarios sind spezielle „Print and Play“-Szenarios, die bereits vorhandene Produkte aus der <i>Arkham Horror: Das Kartenspiel</i>-Sammlung nutzen und mit „Print and Play“-Karten kombinieren, um neue Abenteuer zu erschaffen. Diese Szenarios werden mit bestimmten Grundvoraussetzungen entwickelt, um ein herausforderndes und kniffliges Erlebnis zu erschaffen.</string>
+    <string name="challenge_scenarios_description">Herausforderungsszenarios sind spezielle „Print and Play“-Szenarios, die bereits vorhandene Produkte aus der &lt;i&gt;Arkham Horror: Das Kartenspiel&lt;/i&gt;-Sammlung nutzen und mit „Print and Play“-Karten kombinieren, um neue Abenteuer zu erschaffen. Diese Szenarios werden mit bestimmten Grundvoraussetzungen entwickelt, um ein herausforderndes und kniffliges Erlebnis zu erschaffen.</string>
     <string name="download_printable_cards">Druckbare Karten herunterladen</string>
     <string name="return_to_threads_of_fate">Rückkehr zu: Fäden des Schicksals</string>
     <string name="return_to_heart_of_the_elders">Rückkehr zu: Das Herz der Älteren</string>
     <string name="return_to_shattered_aeons">Rückkehr zu: Zerstörte Zeitalter</string>
-    <string name="confirm_included_automatically">%s <i>(automatisch hinzugefügt)</i></string>
+    <string name="confirm_included_automatically">%s &lt;i&gt;(automatisch hinzugefügt)&lt;/i&gt;</string>
     <string name="return_to_the_forgotten_age">Rückkehr zu: Das vergessene Zeitalter</string>
     <string name="return_to_the_untamed_wilds">Rückkehr zu: Die ungezähmte Wildnis</string>
     <string name="return_to_the_doom_of_eztli">Rückkehr zu: Das Verderben von Eztli</string>
@@ -661,7 +661,7 @@
     <string name="scenario_or_interlude">Szenario oder Zwischenspiel</string>
     <string name="alphabetize_guide_encounter_sets">Begegnungsset alphabetisch sortieren</string>
     <string name="draw_weakness">Schwäche ziehen</string>
-    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution"><b>Hinweis:</b> Trauma von besiegten Ermittlern wird in der Szenario Auflösung abgehandelt.</string>
+    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution">&lt;b&gt;Hinweis:&lt;/b&gt; Trauma von besiegten Ermittlern wird in der Szenario Auflösung abgehandelt.</string>
     <string name="contact_us">Kontaktinformationen</string>
     <plurals name="count_resupply">
         <item quantity="one">%s Ausrüstungspunkt</item>
@@ -786,8 +786,8 @@
         <item quantity="other">Zwei zufällige Karten werden aus der folgenden Auswahl ausgewählt::\n\n%s</item>
     </plurals>
     <string name="edit_collection_in_settings">Die Sammlung kann unter Einstellungen bearbeitet werden, um die erlaubten Auswahlmöglichkeiten zu verändern.</string>
-    <string name="additional_options_upgrade_fortune_gambit_card"><b>Zusätzliche Optionen</b>: Beim Upgrade einer [[Glücksfall]] oder [[Schachzug]] Karte kannst du die vollen Erfahrungspunkte für die Karte mit dem höheren Level ausgeben, um die Karte mit dem niedrigeren Level im Deck zu behalten (sie zählt nicht gegen die Deckgröße oder die Anzahl der Kopien dieser Karte im Deck).</string>
-    <string name="shrewd_analysis_rule_text"><b>Scharfsinnige Analyse</b>: Falls die Kampagnenvoraussetzungen erfüllt werden, kann Scharfsinnige Analyse verwendet werden, um beide Upgrades zufällig zu wählen, und nur für eines zu bezahlen.\n\n<i>Hinweis: Die App berücksichtig dies indem die Erfahrungspunkte für das \'kostenlose\' Upgrade angepasst werden. </i></string>
+    <string name="additional_options_upgrade_fortune_gambit_card">&lt;b&gt;Zusätzliche Optionen&lt;/b&gt;: Beim Upgrade einer [[Glücksfall]] oder [[Schachzug]] Karte kannst du die vollen Erfahrungspunkte für die Karte mit dem höheren Level ausgeben, um die Karte mit dem niedrigeren Level im Deck zu behalten (sie zählt nicht gegen die Deckgröße oder die Anzahl der Kopien dieser Karte im Deck).</string>
+    <string name="shrewd_analysis_rule_text">&lt;b&gt;Scharfsinnige Analyse&lt;/b&gt;: Falls die Kampagnenvoraussetzungen erfüllt werden, kann Scharfsinnige Analyse verwendet werden, um beide Upgrades zufällig zu wählen, und nur für eines zu bezahlen.\n\n&lt;i&gt;Hinweis: Die App berücksichtig dies indem die Erfahrungspunkte für das \'kostenlose\' Upgrade angepasst werden. &lt;/i&gt;</string>
     <string name="upgrade_results">Upgrade Ergebnis</string>
     <string name="upgrade_with_shrewd_analysis">Upgrade mit Scharfsinniger Analyse</string>
     <string name="the_pit_of_despair">Die Grotte der Verzweiflung</string>
@@ -868,7 +868,7 @@
     <string name="location">Ort</string>
     <string name="actions">Aktionen</string>
     <string name="undo_deck_upgrade">Deck Upgrade rückgängig machen?</string>
-    <string name="additional_options_upgrade_spell"><b>Zusätzliche Optionen</b>: Sobald du eine [[Zauber]]-Karte verbesserst, darfst du stattdessen die vollständigen Erfahrungspunktekosten der höherstufigen Version bezahlen und die niedrigstufige Version in deinem Deck behalten (sie zählt nicht gegen deine Deckgröße oder die Anzahl Kopien dieser Karte in deinem Deck).</string>
+    <string name="additional_options_upgrade_spell">&lt;b&gt;Zusätzliche Optionen&lt;/b&gt;: Sobald du eine [[Zauber]]-Karte verbesserst, darfst du stattdessen die vollständigen Erfahrungspunktekosten der höherstufigen Version bezahlen und die niedrigstufige Version in deinem Deck behalten (sie zählt nicht gegen deine Deckgröße oder die Anzahl Kopien dieser Karte in deinem Deck).</string>
     <string name="spent_of_adjusted_xp">%s von %s Erfahrung ausgegeben</string>
     <string name="upgrading">Verbessern</string>
     <string name="editing">Bearbeiten</string>
@@ -1109,10 +1109,10 @@
     <string name="select_traits">Merkmale wählen</string>
     <string name="random_weaknesses_will_be_drawn_that_match_these_traits">Es werden zufällige Schwächen gezogen, die diese Merkmale besitzen.</string>
     <string name="edit_selection">Auswahl bearbeiten</string>
-    <string name="check_campaign_log_if_text">Überprüfe das Kampagnenlogbuch. <i>Falls %s</i></string>
+    <string name="check_campaign_log_if_text">Überprüfe das Kampagnenlogbuch. &lt;i&gt;Falls %s&lt;/i&gt;</string>
     <string name="discord">Discord</string>
     <string name="in_your_campaign_log_section_record_name">Im Kampagnenlogbuch unter "%s" wird notiert %s. </string>
-    <string name="in_your_campaign_log_section_cross_out">Im Kampagnenlogbuch unter "%s" wird <i>%s</i> durchgestrichen.</string>
+    <string name="in_your_campaign_log_section_cross_out">Im Kampagnenlogbuch unter "%s" wird &lt;i&gt;%s&lt;/i&gt; durchgestrichen.</string>
     <string name="unarchive_campaign">Kampagne aus dem Archiv zurückholen</string>
     <string name="archive_campaign">Kampagne archivieren</string>
     <string name="show_archived_campaigns">Archivierte Kampagnen anzeigen</string>
@@ -1191,14 +1191,14 @@
     <string name="in_the_section_of_the_campaign_log_cross_out_name">Streiche im Abschnitt %s im Kampagnenlogbuch %s durch,</string>
     <string name="in_the_section_of_the_campaign_log_write_mia_to_name">Füge im Abschnitt %s im Kampagnenlogbuch neben %s ein "Vermisst" hinzu.</string>
     <string name="in_the_section_of_the_campaign_log_cross_out_mia_to_name">Streiche im Abschnitt %s im Kampagnenlogbuch neben %s das "Vermisst" durch.</string>
-    <string name="if_the_lead_investigator_was_driven_insane">Falls der Ermittlungsleiter <b>wahnsinnig</b> geworden ist.</string>
-    <string name="if_all_investigators_were_driven_insane">Falls alle Ermittler <b>wahnsinnig</b> geworden sind.</string>
+    <string name="if_the_lead_investigator_was_driven_insane">Falls der Ermittlungsleiter &lt;b&gt;wahnsinnig&lt;/b&gt; geworden ist.</string>
+    <string name="if_all_investigators_were_driven_insane">Falls alle Ermittler &lt;b&gt;wahnsinnig&lt;/b&gt; geworden sind.</string>
     <string name="if_the_lead_investigator_is_still_alive">Falls der Ermittlungsleiter noch am Leben ist.</string>
     <string name="if_all_investigators_are_still_alive">Falls alle Ermittler noch am Leben sind.</string>
     <string name="the_entity">Das Wesen</string>
     <string name="resolute">Entschlossen</string>
     <string name="mia">Vermisst</string>
-    <string name="sidestory_description">Eine Nebengeschichte ist ein Szenario, das zwischen zwei beliebigen Szenarien einer Kampagne von <i>Arkham Horror: Das Kartenspiel</i> gespielt werden kann.\n- Das Spielen einer Nebengeschichte kostet jeden Ermittler in der Kampagne eine bestimmte Menge Erfahrungspunkte.\n- Die Ermittler behalten Schwächen, Traumata, Erfahrungspunkte und Belohnungen für das Spielen einer Nebengeschichte für den Rest der Kampagne.\n- Jede Nebengeschichte darf nur ein Mal pro Kampagne gespielt werden.\n\n<b>Hinweis:</b> Bei Verwendung der App werden die erforderlichen Erfahrungspunkte automatisch am <b>Ende des Szenarios</b> abgezogen, aber du solltest sicherstellen, dass du bereits über genügend Erfahrungspunkte verfügst, um dies zu begleichen.</string>
+    <string name="sidestory_description">Eine Nebengeschichte ist ein Szenario, das zwischen zwei beliebigen Szenarien einer Kampagne von &lt;i&gt;Arkham Horror: Das Kartenspiel&lt;/i&gt; gespielt werden kann.\n- Das Spielen einer Nebengeschichte kostet jeden Ermittler in der Kampagne eine bestimmte Menge Erfahrungspunkte.\n- Die Ermittler behalten Schwächen, Traumata, Erfahrungspunkte und Belohnungen für das Spielen einer Nebengeschichte für den Rest der Kampagne.\n- Jede Nebengeschichte darf nur ein Mal pro Kampagne gespielt werden.\n\n&lt;b&gt;Hinweis:&lt;/b&gt; Bei Verwendung der App werden die erforderlichen Erfahrungspunkte automatisch am &lt;b&gt;Ende des Szenarios&lt;/b&gt; abgezogen, aber du solltest sicherstellen, dass du bereits über genügend Erfahrungspunkte verfügst, um dies zu begleichen.</string>
     <string name="ice_and_death_part_1">Eis und Tod, Teil I</string>
     <string name="ice_and_death_part_2">Eis und Tod, Teil II</string>
     <string name="ice_and_death_part_3">Eis und Tod, Teil III</string>
@@ -1216,7 +1216,7 @@
     <string name="ice_and_death_supplies_recovered">Eis und Tod - Geborgene Vorräte</string>
     <string name="the_heart_of_madness_seals_placed">Das Herz des Wahnsinns - Eingesetzte Siegel</string>
     <string name="the_heart_of_madness_seals_recovered">Das Herz des Wahnsinns - Geborgene Siegel</string>
-    <string name="heal_physical_or_mental_trauma_your_choice">Du darfst 1 körperliches oder seelisches Trauma <i>(deine Wahl)</i> heilen</string>
+    <string name="heal_physical_or_mental_trauma_your_choice">Du darfst 1 körperliches oder seelisches Trauma &lt;i&gt;(deine Wahl)&lt;/i&gt; heilen</string>
     <string name="in_section_campaign_log_draw_check_mark_next_to_partner">Füge im Abschnitt %s im Kampagnenlogbuch neben %s einen Haken hinzu.</string>
     <string name="choose_heal_type">Wähle Art der Heilung</string>
     <string name="chosen_heal_type">Gewähle Art der Heilung</string>
@@ -1340,9 +1340,6 @@
     <string name="add_card">Füge %s hinzu:</string>
     <string name="select_name">Wähle %s aus</string>
     <string name="note_selected_at_creation_time">Hinweis: Dies sollte beim Erstellen eines Decks ausgewählt werden, nicht zwischen Szenarien.</string>
-    <string name="translation_credits"><b>Übersetzungen:</b>\n• Spanisch: %s\n• Französisch: %s\n• Deutsch: %s\n• Russisch: %s\n• Koreanisch: %s</string>
-    <string name="contributions_credits"><b>Weitere Beiträge:</b>\n• Visuelles Design: %s\n• Digitaler Chaosbeutel + Wahrscheinlichkeitsrechner: %s\n• Audiointegration von Dissonant Voices: %s\n• Tooling und Build Support: %s</string>
-    <string name="icon_design_credits"><b>Symbolzuordnung:</b>\n• Original Symbol Designs: %s</string>
     <string name="eliminated">Eliminiert</string>
     <string name="locations">Orte</string>
     <string name="login_required_to_save_deck_upgrade">Login vonnöten um die Deck Verbesserungen zu speichern</string>
@@ -1449,8 +1446,8 @@
     <string name="starfall">Sternenschauer</string>
     <string name="delete_your_account">Lösche deinen Konto</string>
     <string name="loading_account_details">Lade Kontodetails…</string>
-    <string name="delete_account_warning">Bist du sicher, dass du dein Konto <b>permanent</b> löschen möchtest? Dies kann <b>nicht mehr rückgängig</b> gemacht werden.</string>
-    <string name="you_are_currently_signed_in_as_handle">Du bist derzeit als <b>%s</b> angemeldet.</string>
+    <string name="delete_account_warning">Bist du sicher, dass du dein Konto &lt;b&gt;permanent&lt;/b&gt; löschen möchtest? Dies kann &lt;b&gt;nicht mehr rückgängig&lt;/b&gt; gemacht werden.</string>
+    <string name="you_are_currently_signed_in_as_handle">Du bist derzeit als &lt;b&gt;%s&lt;/b&gt; angemeldet.</string>
     <plurals name="the_friends_campaign_that_you_have_participated_in_will_have_your_decks_removed">
         <item quantity="one">Deine Decks werden entfernt aus der Kampagne deines Freundes, an der du teilgenommen hast:</item>
         <item quantity="other">Deine Decks werden entfernt aus den %s Kampagnen deines Freundes, an den du teilgenommen hast:</item>
@@ -1548,8 +1545,8 @@
     <string name="do_you_want_to_use_the_app_to_randomize_choices">Möchtest du mit der App Entscheidungen zufällig treffen?</string>
     <string name="the_cell_travels_from_depart_to_arrive">Die Zelle reist von %s nach %s.</string>
     <plurals name="mark_time_in_your_campaign_log">
-        <item quantity="one">Streiche %s <b>Zeit</b> im Kampagnenlogbuch ab.</item>
-        <item quantity="other">Streiche %s <b>Zeit</b> im Kampagnenlogbuch ab.</item>
+        <item quantity="one">Streiche %s &lt;b&gt;Zeit&lt;/b&gt; im Kampagnenlogbuch ab.</item>
+        <item quantity="other">Streiche %s &lt;b&gt;Zeit&lt;/b&gt; im Kampagnenlogbuch ab.</item>
     </plurals>
     <string name="this_includes_the_cost_of_experience_cost_of_playing_the_sidestory">Dies beinhaltet die Erfahrungspunktekosten zum Spielen der Nebengeschichte.</string>
     <string name="deck_owned_by_other_player_campaign_saving_changes">Dieses Deck gehört einem anderen Spieler. Du kannst Änderungen jetzt speichern und dann werden wird dem anderen Spieler die Möglichkeit gegeben diese beim nächsten App Start zu übernehmen.</string>
@@ -1572,7 +1569,7 @@
     <string name="use_expedited_ticket">Benutze Express-Fahrschein</string>
     <string name="time_cost_xp_cost">Zeitkosten: %s</string>
     <string name="additional_experience_cost_for_investigator_cost">Zusätzliche Erfahrungspunktekosten für %s: %s</string>
-    <string name="side_story_description">Eine Nebengeschichte ist ein Szenario, das zwischen zwei beliebigen Szenarien einer Kampagne von <i>Arkham Horror: Das Kartenspiel</i> gespielt werden kann.\n- Weil du die Kampagne <i>Die Scharlachroten Schlüssel</i> spielst,  kostet eine Nebengeschichte eine bestimmte Menge <b>Zeit</b> anstatt Erfahrungspunkte.\n- Die Ermittler behalten Schwächen, Traumata, Erfahrungspunkte und Belohnungen für das Spielen einer Nebengeschichte für den Rest der Kampagne.\n- Jede Nebengeschichte darf nur ein Mal pro Kampagne gespielt werden.</string>
+    <string name="side_story_description">Eine Nebengeschichte ist ein Szenario, das zwischen zwei beliebigen Szenarien einer Kampagne von &lt;i&gt;Arkham Horror: Das Kartenspiel&lt;/i&gt; gespielt werden kann.\n- Weil du die Kampagne &lt;i&gt;Die Scharlachroten Schlüssel&lt;/i&gt; spielst,  kostet eine Nebengeschichte eine bestimmte Menge &lt;b&gt;Zeit&lt;/b&gt; anstatt Erfahrungspunkte.\n- Die Ermittler behalten Schwächen, Traumata, Erfahrungspunkte und Belohnungen für das Spielen einer Nebengeschichte für den Rest der Kampagne.\n- Jede Nebengeschichte darf nur ein Mal pro Kampagne gespielt werden.</string>
     <plurals name="mark_distance_time">
         <item quantity="one">Streiche %s Zeit ab</item>
         <item quantity="other">Streiche %s Zeit ab</item>
@@ -1624,8 +1621,8 @@
         <item quantity="other">Gelesene Statusberichte: %s</item>
     </plurals>
     <plurals name="mark_time_time_cell_travels_from_depart_to_arrive_on_the_way_to_somewhere_else">
-        <item quantity="one">Streiche %s <b>Zeit</b> ab, da die Zelle von %s nach %s auf dem Weg zu einem anderen Ort reist.</item>
-        <item quantity="other">Streiche %s <b>Zeit</b> ab, da die Zelle von %s nach %s auf dem Weg zu einem anderen Ort reist.</item>
+        <item quantity="one">Streiche %s &lt;b&gt;Zeit&lt;/b&gt; ab, da die Zelle von %s nach %s auf dem Weg zu einem anderen Ort reist.</item>
+        <item quantity="other">Streiche %s &lt;b&gt;Zeit&lt;/b&gt; ab, da die Zelle von %s nach %s auf dem Weg zu einem anderen Ort reist.</item>
     </plurals>
     <string name="error_more_than_5_cards_not_seeker_neutral_paradox_traited">Du kannst nicht mehr als 5 Karten haben die kein Sucher, Neutral oder Paradox Merkmal besitzen.</string>
     <string name="min">Min</string>
@@ -1722,7 +1719,6 @@
     <string name="some_decks_may_not_load_fully_and_campaigns_might_appear_incomplete_until_this_is_fixed">Manche Decks könnten nicht vollständig laden und Kampagnen könnten unvollständig sein, bis dies behoben ist.</string>
     <string name="download_cards">Karten herunterladen</string>
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">Es ist mehr als eine Woche her, dass du nach neuen Karten gesucht hast.</string>
-    <string name="chinese_simplified_translators">Chinesisch (vereinfacht): %s</string>
     <string name="narration">Erzählung</string>
     <string name="these_cards_might_have_been_updated">Diese Karten wurden möglicherweise anhand einer neuen Tabu-Liste aktualisiert oder enthalten kleinere Korrekturen.</string>
     <string name="fatigue">Erschöpfung</string>

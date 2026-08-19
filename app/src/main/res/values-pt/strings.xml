@@ -34,7 +34,7 @@
     <string name="list_and_last">%s e %s</string>
     <string name="close">Fechado</string>
     <string name="all_cards">Todas as Cartas</string>
-    <string name="name_subname">%s <i>(%s)</i></string>
+    <string name="name_subname">%s &lt;i&gt;(%s)&lt;/i&gt;</string>
     <string name="none">Nenhum</string>
     <string name="killed">Assassinado</string>
     <string name="insane">Insano</string>
@@ -72,7 +72,7 @@
     <string name="undo_anyway">Voltar assim mesmo</string>
     <string name="cancel">Cancelar</string>
     <string name="draw_weakness">Comprar Fraqueza</string>
-    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution"><b>Nota:</b> Trauma do investigador derrotado é tratado durante a resolução do cenário.</string>
+    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution">&lt;b&gt;Nota:&lt;/b&gt; Trauma do investigador derrotado é tratado durante a resolução do cenário.</string>
     <string name="in_your_campaign_log_record_that">Em seu Registro de Campanha, anote que:</string>
     <string name="choose_lead_investigator">Escolha o investigador chefe</string>
     <string name="lead_investigator">Investigador chefe</string>
@@ -81,7 +81,7 @@
     <string name="defeated_physical_trauma">Derrotado: trauma físico</string>
     <string name="defeated_mental_trauma">Derrotado: Trauma mental</string>
     <string name="defeated_no_trauma">Derrotado: sem trauma</string>
-    <string name="proceed_to_next_scenario">Prossiga para <b>%s</b>.</string>
+    <string name="proceed_to_next_scenario">Prossiga para &lt;b&gt;%s&lt;/b&gt;.</string>
     <string name="secondary_class">Classe Secundária</string>
     <string name="deck_size">Tamanho do Baralho</string>
     <string name="available_weaknesses">Fraquezas disponíveis</string>
@@ -504,8 +504,8 @@
     <string name="copy_deck_description">Faça uma cópia de um baralho para poder usá-lo em uma campanha diferente ou escolher diferentes atualizações.</string>
     <string name="level_level">Nível %s</string>
     <string name="keep_level_after_upgrade">Manter nível %s depois da atualização\nNão contará para o tamanho do baralho</string>
-    <string name="additional_options_upgrade_fortune_gambit_card"><b>Opções Adicionais</b>: Ao atualizar uma carta [[Fortune]] ou [[Gambit]], você pode pagar o custo total de experiência na versão de nível superior e deixar a versão de nível inferior em seu baralho (isso não conta para o tamanho do seu baralho ou para o número de cópias daquela carta no seu baralho).</string>
-    <string name="additional_options_upgrade_spell"><b>Opções Adicionais</b>: Ao atualizar um [[Spell]], você pode pagar o custo total de experiência na versão de nível superior e deixar a versão de nível inferior em seu deck (isso não conta para o tamanho do seu baralho ou para o número de cópias daquela carta no seu baralho).</string>
+    <string name="additional_options_upgrade_fortune_gambit_card">&lt;b&gt;Opções Adicionais&lt;/b&gt;: Ao atualizar uma carta [[Fortune]] ou [[Gambit]], você pode pagar o custo total de experiência na versão de nível superior e deixar a versão de nível inferior em seu baralho (isso não conta para o tamanho do seu baralho ou para o número de cópias daquela carta no seu baralho).</string>
+    <string name="additional_options_upgrade_spell">&lt;b&gt;Opções Adicionais&lt;/b&gt;: Ao atualizar um [[Spell]], você pode pagar o custo total de experiência na versão de nível superior e deixar a versão de nível inferior em seu deck (isso não conta para o tamanho do seu baralho ou para o número de cópias daquela carta no seu baralho).</string>
     <plurals name="this_upgrade_will_cost_count_experience">
         <item quantity="one">Esta atualização custará %s experiência.</item>
         <item quantity="many">Estas atualizações custarão %s experiência.</item>
@@ -518,7 +518,7 @@
     </plurals>
     <string name="edit_collection_in_settings">Você pode alterar sua coleção nas Configurações para ajustar as escolhas aceitáveis.</string>
     <string name="shrewd_analysis_rule">Regra de Shrewd Analysis</string>
-    <string name="shrewd_analysis_rule_text"><b>Shrewd Analysis</b>: Se você encontrar as condições de campanha, você pode usar Shrewd Analysis para escolher ambas as atualizações aleatoriamente e somente pagar por uma.\n\n<i>Observação: o aplicativo lida com isso ajustando a experiência de acordo com a atualização ‘gratuita’.</i></string>
+    <string name="shrewd_analysis_rule_text">&lt;b&gt;Shrewd Analysis&lt;/b&gt;: Se você encontrar as condições de campanha, você pode usar Shrewd Analysis para escolher ambas as atualizações aleatoriamente e somente pagar por uma.\n\n&lt;i&gt;Observação: o aplicativo lida com isso ajustando a experiência de acordo com a atualização ‘gratuita’.&lt;/i&gt;</string>
     <string name="upgrade_results">Resultados de Atualização</string>
     <string name="upgrade_with_shrewd_analysis">Atualização com Shrewd Analysis</string>
     <string name="faction_name_level">Classe: %s, Nível: %s</string>
@@ -651,7 +651,7 @@
     <string name="add_investigator">Adicionar Investigador</string>
     <string name="show_story_assets_from_other_campaigns">Mostrar Ativos de historia de outras campanhas</string>
     <string name="story_assets">Ativos de História</string>
-    <string name="scenario_challenge_centers_around_investigator_prerequisites">O Desafio do Cenário <i>%s</i> gira em torno do investigador %s e, portanto, tem os seguintes pré-requisitos:</string>
+    <string name="scenario_challenge_centers_around_investigator_prerequisites">O Desafio do Cenário &lt;i&gt;%s&lt;/i&gt; gira em torno do investigador %s e, portanto, tem os seguintes pré-requisitos:</string>
     <string name="investigator_must_be_chosen_playing_this_scenario">%s deve ser escolhido como um dos investigadores ao jogar este cenário.</string>
     <string name="app_not_enforce_challenge_scenario_prerequisites">O aplicativo não força pré-requisitos de Cenário Desafiador, por favor, confirme se eles se aplicam manualmente.</string>
     <string name="play_this_scenario">Jogar este cenário</string>
@@ -667,7 +667,7 @@
     <string name="delete_standalone">Excluir cenário independente</string>
     <string name="select_cards">Escolher Cartas</string>
     <string name="the_investigators_must_decide_choose_one">Os investigadores devem decidir (escolha um):</string>
-    <string name="confirm_included_automatically">%s <i>(incluído automaticamente)</i></string>
+    <string name="confirm_included_automatically">%s &lt;i&gt;(incluído automaticamente)&lt;/i&gt;</string>
     <string name="supply_to_use_count">%s para usar (%s)</string>
     <string name="reads_bad_prompt">Lê “%s”</string>
     <string name="doesnt_get_any">Não ganha nada</string>
@@ -727,16 +727,16 @@
     <string name="start_playing_the_scenario_now">Comece a jogar o cenário agora.</string>
     <string name="investigator_earns_card_advanced">%s ganha %s (Avançado).</string>
     <string name="investigator_earns_card">%s ganha %s.</string>
-    <string name="in_your_campaign_log_record_text">Em seu Registro de Campanha, anote que <i>%s</i></string>
-    <string name="in_your_campaign_log_cross_out">Em seu Registro de Campanha, risque <i>%s</i></string>
-    <string name="in_your_campaign_log_record_log_text">Em seu Registro de Campanha, anote que <i>%s</i></string>
-    <string name="in_your_campaign_log_section_record_log_text">Em seu Registro de Campanha, embaixo de "%s", anote <i>%s</i>.</string>
+    <string name="in_your_campaign_log_record_text">Em seu Registro de Campanha, anote que &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_cross_out">Em seu Registro de Campanha, risque &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_record_log_text">Em seu Registro de Campanha, anote que &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_section_record_log_text">Em seu Registro de Campanha, embaixo de "%s", anote &lt;i&gt;%s&lt;/i&gt;.</string>
     <string name="add_token_to_the_chaos_bag">Adicionar %s à bolsa do caos.</string>
     <string name="remove_token_from_the_chaos_bag">Remova %s da bolsa do caos.</string>
     <string name="investigator_removes_card_advanced">%s remova %s (Avançado)</string>
     <string name="investigator_removes_card">%s remova %s</string>
     <string name="remove_card_length">Remova %s (%s)</string>
-    <string name="suffer_physical_or_mental_trauma_your_choice">Você sofreu um trauma físico ou mental <i>(de sua escolha)</i>.</string>
+    <string name="suffer_physical_or_mental_trauma_your_choice">Você sofreu um trauma físico ou mental &lt;i&gt;(de sua escolha)&lt;/i&gt;.</string>
     <string name="physical_trauma">Trauma físico</string>
     <string name="mental_trauma">Trauma mental</string>
     <string name="all_weaknesses_have_been_assigned">Todas as fraquezas foram atribuídas.</string>
@@ -745,9 +745,9 @@
     <string name="standard">Normal</string>
     <string name="hard">Difícil</string>
     <string name="expert">Expert</string>
-    <string name="because_you_are_playing_on_difficulty">Porque você está jogando na dificuldade <b>%s</b>:</string>
-    <string name="because_you_have_already_completed_scenario">Porque você já completou <b>%s</b>:</string>
-    <string name="because_you_not_completed_scenario">Porque você ainda não completou <b>%s</b>:</string>
+    <string name="because_you_are_playing_on_difficulty">Porque você está jogando na dificuldade &lt;b&gt;%s&lt;/b&gt;:</string>
+    <string name="because_you_have_already_completed_scenario">Porque você já completou &lt;b&gt;%s&lt;/b&gt;:</string>
+    <string name="because_you_not_completed_scenario">Porque você ainda não completou &lt;b&gt;%s&lt;/b&gt;:</string>
     <plurals name="check_campaign_log_count_mark_section">
         <item quantity="one">Verifique o Registro de Campanha. Porque existe %s marca em ‘%s’</item>
         <item quantity="many">Verifique o Registro de Campanha. Porque existe %s marcas em ‘%s’</item>
@@ -758,14 +758,14 @@
         <item quantity="many">Verifique o Registro de Campanha. Porque tem %s entradas em ‘%s’</item>
         <item quantity="other">Verifique o Registro de Campanha. Porque tem %s entradas em ‘%s’</item>
     </plurals>
-    <string name="check_campaign_log_because_entry">Verifique o Registro de Campanha.Por causa <i>%s</i></string>
-    <string name="check_campaign_log_is_the_section_not_crossed_off">Verifique o Registro de Campanha. A <i>%s</i> não está riscada?</string>
+    <string name="check_campaign_log_because_entry">Verifique o Registro de Campanha.Por causa &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="check_campaign_log_is_the_section_not_crossed_off">Verifique o Registro de Campanha. A &lt;i&gt;%s&lt;/i&gt; não está riscada?</string>
     <string name="does_any_investigator_have_card_in_deck">Algum investigador tem “%s” no seu baralho?</string>
     <string name="was_investigator_with_card_in_deck_defeated">Um investigador com “%s” em seu baralho, foi derrotado?</string>
     <string name="for_each_investigator_with_card_in_deck">Para cada investigador com “%s” em seu baralho:</string>
     <plurals name="investigators_must_read_prompt_plural">
-        <item quantity="one">%s deve ler <b>%s</b>.</item>
-        <item quantity="many">%s devem ler <b>%s</b>.</item>
+        <item quantity="one">%s deve ler &lt;b&gt;%s&lt;/b&gt;.</item>
+        <item quantity="many">%s devem ler &lt;b&gt;%s&lt;/b&gt;.</item>
         <item quantity="other">%s devem ler </item>
     </plurals>
     <plurals name="because_there_is_player_count_in_game_plural">
@@ -773,9 +773,9 @@
         <item quantity="many">Porque há %s jogadores no jogo:</item>
         <item quantity="other">Porque há %s jogadores no jogo:</item>
     </plurals>
-    <string name="if_the_lead_investigator_was_killed">Se o investigador líder foi <b>morto</b>.</string>
-    <string name="if_all_investigators_were_killed">Se todos os investigadores foram <b>mortos</b>.</string>
-    <string name="check_section_if_text">Verifique %s. <i>Se %s</i></string>
+    <string name="if_the_lead_investigator_was_killed">Se o investigador líder foi &lt;b&gt;morto&lt;/b&gt;.</string>
+    <string name="if_all_investigators_were_killed">Se todos os investigadores foram &lt;b&gt;mortos&lt;/b&gt;.</string>
+    <string name="check_section_if_text">Verifique %s. &lt;i&gt;Se %s&lt;/i&gt;</string>
     <string name="cant_add_side_scenario_right_now">Não é possível adicionar cenário independente agora.</string>
     <string name="side_scenarios_cannot_be_added_until_the_previous_following_interludes_completed">Os cenários independentes não podem ser adicionados a uma campanha até que o cenário anterior e os intervalos seguintes sejam concluídos.</string>
     <string name="choose_side_scenario">Escolha o Cenário Independente</string>
@@ -1145,11 +1145,11 @@
     <string name="select_traits">Selecionar Propriedades</string>
     <string name="random_weaknesses_will_be_drawn_that_match_these_traits">Serão sorteados fraquezas aleatórios que correspondam a essas propriedades.</string>
     <string name="edit_selection">Editar seleção</string>
-    <string name="check_campaign_log_if_text">Verifique o registro da campanha. <i>Se %s</i></string>
+    <string name="check_campaign_log_if_text">Verifique o registro da campanha. &lt;i&gt;Se %s&lt;/i&gt;</string>
     <string name="discord">Discord</string>
     <string name="vk">VK</string>
     <string name="telegram">Telegram</string>
-    <string name="in_your_campaign_log_section_cross_out">No seu registro de campanha, em "%s", risque <i>%s</i>.</string>
+    <string name="in_your_campaign_log_section_cross_out">No seu registro de campanha, em "%s", risque &lt;i&gt;%s&lt;/i&gt;.</string>
     <string name="unarchive_campaign">Desarquivar campanha</string>
     <string name="archive_campaign">Arquivar campanha</string>
     <string name="show_archived_campaigns">Mostrar campanhas arquivadas</string>
@@ -1232,14 +1232,14 @@
     <string name="in_the_section_of_the_campaign_log_cross_out_name">Na seção %s do Registro da campanha, risque %s,</string>
     <string name="in_the_section_of_the_campaign_log_write_mia_to_name">Na seção %s do Registro da campanha, escreva "MIA" ao lado de %s.</string>
     <string name="in_the_section_of_the_campaign_log_cross_out_mia_to_name">Na seção %s do Registro da campanha, risque "MIA" próximo ao %s.</string>
-    <string name="if_the_lead_investigator_was_driven_insane">Se o investigador líder ficou <b>louco</b>.</string>
-    <string name="if_all_investigators_were_driven_insane">Se todos os investigadores ficaram <b>loucos</b>.</string>
+    <string name="if_the_lead_investigator_was_driven_insane">Se o investigador líder ficou &lt;b&gt;louco&lt;/b&gt;.</string>
+    <string name="if_all_investigators_were_driven_insane">Se todos os investigadores ficaram &lt;b&gt;loucos&lt;/b&gt;.</string>
     <string name="if_the_lead_investigator_is_still_alive">Se o investigador líder ainda estiver vivo.</string>
     <string name="if_all_investigators_are_still_alive">Se todos os investigadores ainda estiverem vivos.</string>
     <string name="the_entity">A Entidade</string>
     <string name="resolute">Resoluta</string>
     <string name="mia">Desaparecido</string>
-    <string name="sidestory_description">Uma história paralela é um cenário que pode ser jogado entre quaisquer dois cenários de uma campanha de <i>Arkham Horror: The Card Game</i>.\n- Jogar uma história paralela custa a cada investigador na campanha uma certa quantidade de experiência, que deve ser paga ao iniciar o cenário.\n- Fraquezas, traumas, experiência e recompensas concedidas ao jogar uma história paralela fica com os investigadores pelo restante da campanha.\n- Cada história paralela só pode ser jogada uma vez por campanha.\n\n<b>Observação:</b> ao usar este aplicativo, a experiência necessária para jogar esses cenários serão deduzidos automaticamente no <b>final do cenário</b>, mas você deve ter certeza de que tem experiência suficiente para pagar por isso.</string>
+    <string name="sidestory_description">Uma história paralela é um cenário que pode ser jogado entre quaisquer dois cenários de uma campanha de &lt;i&gt;Arkham Horror: The Card Game&lt;/i&gt;.\n- Jogar uma história paralela custa a cada investigador na campanha uma certa quantidade de experiência, que deve ser paga ao iniciar o cenário.\n- Fraquezas, traumas, experiência e recompensas concedidas ao jogar uma história paralela fica com os investigadores pelo restante da campanha.\n- Cada história paralela só pode ser jogada uma vez por campanha.\n\n&lt;b&gt;Observação:&lt;/b&gt; ao usar este aplicativo, a experiência necessária para jogar esses cenários serão deduzidos automaticamente no &lt;b&gt;final do cenário&lt;/b&gt;, mas você deve ter certeza de que tem experiência suficiente para pagar por isso.</string>
     <string name="ice_and_death_part_1">Gelo e Morte: Parte 1</string>
     <string name="ice_and_death_part_2">Gelo e Morte: Parte 2</string>
     <string name="ice_and_death_part_3">Gelo e Morte: Parte 3</string>
@@ -1257,7 +1257,7 @@
     <string name="ice_and_death_supplies_recovered">Gelo e Morte - Suprimentos Recuperados</string>
     <string name="the_heart_of_madness_seals_placed">O Coração da Loucura - elos Posicionados</string>
     <string name="the_heart_of_madness_seals_recovered">O Coração da Loucura - Selos Recuperados</string>
-    <string name="heal_physical_or_mental_trauma_your_choice">Você pode curar 1 trauma físico ou mental <i>(sua escolha)</i></string>
+    <string name="heal_physical_or_mental_trauma_your_choice">Você pode curar 1 trauma físico ou mental &lt;i&gt;(sua escolha)&lt;/i&gt;</string>
     <string name="in_section_campaign_log_draw_check_mark_next_to_partner">Na seção %s do Registro da campanha, faça uma marcação ao lado de %s.</string>
     <string name="choose_heal_type">Escolha o tipo de cura</string>
     <string name="chosen_heal_type">Tipo de cura escolhido</string>

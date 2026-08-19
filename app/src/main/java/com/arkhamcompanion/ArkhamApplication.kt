@@ -1,7 +1,6 @@
 package com.arkhamcompanion
 
 import android.app.Application
-import com.google.firebase.BuildConfig
 import com.google.firebase.Firebase
 import com.google.firebase.crashlytics.crashlytics
 import dagger.hilt.android.HiltAndroidApp

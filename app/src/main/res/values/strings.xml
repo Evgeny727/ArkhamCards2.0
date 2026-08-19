@@ -487,13 +487,13 @@
     <string name="ally_arcane">Ally. Arcane</string>
     <string name="things0_and_things1">%s and %s</string>
     <string name="list_and_last">%s, and %s</string>
-    <string name="name_subname">%s <i>(%s)</i></string>
+    <string name="name_subname">%s &lt;i&gt;(%s)&lt;/i&gt;</string>
     <string name="campaign_setup">Campaign Setup</string>
     <string name="choose_lead_investigator">Choose lead investigator</string>
     <string name="lead_investigator">Lead Investigator</string>
     <string name="alive">Alive</string>
     <string name="resigned">Resigned</string>
-    <string name="proceed_to_next_scenario">Proceed to <b>%s</b>.</string>
+    <string name="proceed_to_next_scenario">Proceed to &lt;b&gt;%s&lt;/b&gt;.</string>
     <string name="mark_played_scenarios_to_add_results">Mark the scenarios you\'ve played through to make the results start showing up in search results.</string>
     <string name="loading">Loading</string>
     <string name="label_all">%s: All</string>
@@ -524,15 +524,15 @@
     <string name="select_deck">Select deck</string>
     <string name="view_deck">View deck</string>
     <string name="update_decks_with_scenario_results">Update decks with scenario results</string>
-    <string name="in_your_campaign_log_cross_out">In your Campaign Log, cross out <i>%s</i></string>
-    <string name="in_your_campaign_log_record_log_text">In your Campaign Log, record that <i>%s</i></string>
+    <string name="in_your_campaign_log_cross_out">In your Campaign Log, cross out &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_record_log_text">In your Campaign Log, record that &lt;i&gt;%s&lt;/i&gt;</string>
     <string name="remove_card_length">Remove %s (%s)</string>
-    <string name="suffer_physical_or_mental_trauma_your_choice">You suffer 1 physical or mental trauma <i>(your choice)</i>.</string>
+    <string name="suffer_physical_or_mental_trauma_your_choice">You suffer 1 physical or mental trauma &lt;i&gt;(your choice)&lt;/i&gt;.</string>
     <string name="all_weaknesses_have_been_assigned">All weaknesses have been assigned.</string>
     <string name="use_app_to_randomize_weaknesses_question">Do you want to use the app to randomize weaknesses?</string>
-    <string name="because_you_are_playing_on_difficulty">Because you are playing on <b>%s</b> difficulty:</string>
-    <string name="because_you_have_already_completed_scenario">Because you have already completed <b>%s</b>:</string>
-    <string name="because_you_not_completed_scenario">Because you have not yet completed <b>%s</b>:</string>
+    <string name="because_you_are_playing_on_difficulty">Because you are playing on &lt;b&gt;%s&lt;/b&gt; difficulty:</string>
+    <string name="because_you_have_already_completed_scenario">Because you have already completed &lt;b&gt;%s&lt;/b&gt;:</string>
+    <string name="because_you_not_completed_scenario">Because you have not yet completed &lt;b&gt;%s&lt;/b&gt;:</string>
     <plurals name="check_campaign_log_count_mark_section">
         <item quantity="one">Check Campaign Log. Because there is %s mark under \'%s\'</item>
         <item quantity="other">Check Campaign Log. Because there are %s marks under \'%s\'</item>
@@ -541,11 +541,11 @@
         <item quantity="one">Check Campaign Log. Because there is %s entry under \'%s\'</item>
         <item quantity="other">Check Campaign Log. Because there are %s entries under \'%s\'</item>
     </plurals>
-    <string name="check_campaign_log_because_entry">Check Campaign Log. Because <i>%s</i></string>
-    <string name="check_campaign_log_is_the_section_not_crossed_off">Check Campaign Log, is the <i>%s</i> not crossed off?</string>
+    <string name="check_campaign_log_because_entry">Check Campaign Log. Because &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="check_campaign_log_is_the_section_not_crossed_off">Check Campaign Log, is the &lt;i&gt;%s&lt;/i&gt; not crossed off?</string>
     <plurals name="investigators_must_read_prompt_plural">
-        <item quantity="one">%s must read <b>%s</b>.</item>
-        <item quantity="other">%s must read <b>%s</b>.</item>
+        <item quantity="one">%s must read &lt;b&gt;%s&lt;/b&gt;.</item>
+        <item quantity="other">%s must read &lt;b&gt;%s&lt;/b&gt;.</item>
     </plurals>
     <string name="does_any_investigator_have_card_in_deck">Does any investigator have "%s" in their deck?</string>
     <string name="was_investigator_with_card_in_deck_defeated">Was an investigator with "%s" in their deck defeated?</string>
@@ -554,9 +554,9 @@
         <item quantity="one">Because there is %s player in the game:</item>
         <item quantity="other">Because there are %s players in the game:</item>
     </plurals>
-    <string name="if_the_lead_investigator_was_killed">If the lead investigator was <b>killed</b>.</string>
-    <string name="if_all_investigators_were_killed">If all investigators were <b>killed</b>.</string>
-    <string name="check_section_if_text">Check %s. <i>If %s</i></string>
+    <string name="if_the_lead_investigator_was_killed">If the lead investigator was &lt;b&gt;killed&lt;/b&gt;.</string>
+    <string name="if_all_investigators_were_killed">If all investigators were &lt;b&gt;killed&lt;/b&gt;.</string>
+    <string name="check_section_if_text">Check %s. &lt;i&gt;If %s&lt;/i&gt;</string>
     <string name="are_you_sure_you_want_to_delete_the_campaign">Are you sure you want to delete the campaign: %s</string>
     <string name="scenario_attempt_count">%s (Attempt %s)</string>
     <string name="add_investigator">Add Investigator</string>
@@ -583,8 +583,8 @@
     <string name="draw_chaos_tokens">Draw chaos tokens</string>
     <string name="draw_random_basic_weakness">Draw random basic weakness</string>
     <string name="start_playing_the_scenario_now">Start playing the scenario now.</string>
-    <string name="in_your_campaign_log_record_text">In your Campaign Log, record that <i>%s</i></string>
-    <string name="in_your_campaign_log_section_record_log_text">In your Campaign Log, under "%s", record <i>%s</i>.</string>
+    <string name="in_your_campaign_log_record_text">In your Campaign Log, record that &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_section_record_log_text">In your Campaign Log, under "%s", record &lt;i&gt;%s&lt;/i&gt;.</string>
     <string name="add_token_to_the_chaos_bag">Add %s to the chaos bag.</string>
     <string name="remove_token_from_the_chaos_bag">Remove %s from the chaos bag.</string>
     <string name="odds_calculator">Odds calculator</string>
@@ -635,7 +635,7 @@
     <string name="defeated_physical_trauma">Defeated: physical trauma</string>
     <string name="defeated_mental_trauma">Defeated: mental trauma</string>
     <string name="defeated_no_trauma">Defeated: no trauma</string>
-    <string name="scenario_challenge_centers_around_investigator_prerequisites">The <i>%s</i> challenge scenario centers around the investigator %s, and therefore has the following prerequisites:</string>
+    <string name="scenario_challenge_centers_around_investigator_prerequisites">The &lt;i&gt;%s&lt;/i&gt; challenge scenario centers around the investigator %s, and therefore has the following prerequisites:</string>
     <string name="investigator_must_be_chosen_playing_this_scenario">%s must be chosen as one of the investigators when playing this scenario.</string>
     <string name="app_not_enforce_challenge_scenario_prerequisites">The app does not enforce Challenge Scenario prerequisites, so please confirm that they apply manually.</string>
     <string name="play_this_scenario">Play this scenario</string>
@@ -648,12 +648,12 @@
     <string name="experience_cost_investigator_cost_other_investigator">Experience cost: %s for %s, %s for each other investigator</string>
     <string name="side">Side</string>
     <string name="challenge">Challenge</string>
-    <string name="challenge_scenarios_description">Challenge scenarios are special print-and-play scenarios that utilize existing products in the <i>Arkham Horror: The Card Game</i> collection, along with additional print-and-play cards, to create new content. These scenarios are designed with certain prerequisites in mind, in order to craft a challenging puzzle-like experience. Printable cards can be downloaded from Fantasy Flight Games under the "Parallel Investigators" section.</string>
+    <string name="challenge_scenarios_description">Challenge scenarios are special print-and-play scenarios that utilize existing products in the &lt;i&gt;Arkham Horror: The Card Game&lt;/i&gt; collection, along with additional print-and-play cards, to create new content. These scenarios are designed with certain prerequisites in mind, in order to craft a challenging puzzle-like experience. Printable cards can be downloaded from Fantasy Flight Games under the "Parallel Investigators" section.</string>
     <string name="download_printable_cards">Download printable cards</string>
     <string name="return_to_threads_of_fate">Return to Threads of Fate</string>
     <string name="return_to_heart_of_the_elders">Return to Heart of the Elders</string>
     <string name="return_to_shattered_aeons">Return to Shattered Aeons</string>
-    <string name="confirm_included_automatically">%s <i>(included automatically)</i></string>
+    <string name="confirm_included_automatically">%s &lt;i&gt;(included automatically)&lt;/i&gt;</string>
     <string name="return_to_the_forgotten_age">Return to The Forgotten Age</string>
     <string name="return_to_the_untamed_wilds">Return to The Untamed Wilds</string>
     <string name="return_to_the_doom_of_eztli">Return to The Doom of Eztli</string>
@@ -671,7 +671,7 @@
     <string name="scenario_or_interlude">Scenario or Interlude</string>
     <string name="alphabetize_guide_encounter_sets">Alphabetize guide encounter sets</string>
     <string name="draw_weakness">Draw Weakness</string>
-    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution"><b>Note:</b> Trauma from investigator defeat is handled during scenario resolution.</string>
+    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution">&lt;b&gt;Note:&lt;/b&gt; Trauma from investigator defeat is handled during scenario resolution.</string>
     <string name="contact_us">Contact us</string>
     <plurals name="count_resupply">
         <item quantity="one">%s resupply</item>
@@ -798,8 +798,8 @@
         <item quantity="other">Two random cards will be chosen among the following choices:\n\n%s</item>
     </plurals>
     <string name="edit_collection_in_settings">You can edit your collection under Settings to adjust the eligible choices.</string>
-    <string name="additional_options_upgrade_fortune_gambit_card"><b>Additional Options</b>: When you upgrade a [[Fortune]] or [[Gambit]] card, you may instead pay the full experience cost on the higher level version and leave the lower level version in your deck (it does not count towards your deck size or the number of copies of that card in your deck).</string>
-    <string name="shrewd_analysis_rule_text"><b>Shrewd Analysis</b>: If you meet the campaign conditions, you may use Shrewd Analysis to choose both upgrades randomly and only pay for one.\n\n<i>Note: the app handles this by adjusting experience to account for the \'free\' upgrade.</i></string>
+    <string name="additional_options_upgrade_fortune_gambit_card">&lt;b&gt;Additional Options&lt;/b&gt;: When you upgrade a [[Fortune]] or [[Gambit]] card, you may instead pay the full experience cost on the higher level version and leave the lower level version in your deck (it does not count towards your deck size or the number of copies of that card in your deck).</string>
+    <string name="shrewd_analysis_rule_text">&lt;b&gt;Shrewd Analysis&lt;/b&gt;: If you meet the campaign conditions, you may use Shrewd Analysis to choose both upgrades randomly and only pay for one.\n\n&lt;i&gt;Note: the app handles this by adjusting experience to account for the \'free\' upgrade.&lt;/i&gt;</string>
     <string name="upgrade_results">Upgrade results</string>
     <string name="upgrade_with_shrewd_analysis">Upgrade with Shrewd Analysis</string>
     <string name="the_pit_of_despair">The Pit of Despair</string>
@@ -880,7 +880,7 @@
     <string name="location">Location</string>
     <string name="actions">Actions</string>
     <string name="undo_deck_upgrade">Undo deck upgrade?</string>
-    <string name="additional_options_upgrade_spell"><b>Additional Options</b>: When you upgrade a [[Spell]], you may instead pay the full experience cost on the higher level version and leave the lower level version in your deck (it does not count towards your deck size or the number of copies of that card in your deck).</string>
+    <string name="additional_options_upgrade_spell">&lt;b&gt;Additional Options&lt;/b&gt;: When you upgrade a [[Spell]], you may instead pay the full experience cost on the higher level version and leave the lower level version in your deck (it does not count towards your deck size or the number of copies of that card in your deck).</string>
     <string name="spent_of_adjusted_xp">%s of %s XP spent</string>
     <string name="upgrading">Upgrading</string>
     <string name="editing">Editing</string>
@@ -1128,12 +1128,12 @@
     <string name="select_traits">Select Traits</string>
     <string name="random_weaknesses_will_be_drawn_that_match_these_traits">Random weaknesses will be drawn that match these traits.</string>
     <string name="edit_selection">Edit selection</string>
-    <string name="check_campaign_log_if_text">Check Campaign Log. <i>If %s</i></string>
+    <string name="check_campaign_log_if_text">Check Campaign Log. &lt;i&gt;If %s&lt;/i&gt;</string>
     <string name="discord">Discord</string>
     <string name="vk">VK</string>
     <string name="telegram">Telegram</string>
     <string name="in_your_campaign_log_section_record_name">In your Campaign Log, under "%s", record %s. </string>
-    <string name="in_your_campaign_log_section_cross_out">In your Campaign Log, under "%s", cross out <i>%s</i>.</string>
+    <string name="in_your_campaign_log_section_cross_out">In your Campaign Log, under "%s", cross out &lt;i&gt;%s&lt;/i&gt;.</string>
     <string name="unarchive_campaign">Unarchive campaign</string>
     <string name="archive_campaign">Archive campaign</string>
     <string name="show_archived_campaigns">Show archived campaigns</string>
@@ -1216,14 +1216,14 @@
     <string name="in_the_section_of_the_campaign_log_cross_out_name">In the %s section of the Campaign Log, cross out %s,</string>
     <string name="in_the_section_of_the_campaign_log_write_mia_to_name">In the %s section of the Campaign Log, write "MIA" next to %s.</string>
     <string name="in_the_section_of_the_campaign_log_cross_out_mia_to_name">In the %s section of the Campaign Log, cross out "MIA" next to %s.</string>
-    <string name="if_the_lead_investigator_was_driven_insane">If the lead investigator was driven <b>insane</b>.</string>
-    <string name="if_all_investigators_were_driven_insane">If all investigators were driven <b>insane</b>.</string>
+    <string name="if_the_lead_investigator_was_driven_insane">If the lead investigator was driven &lt;b&gt;insane&lt;/b&gt;.</string>
+    <string name="if_all_investigators_were_driven_insane">If all investigators were driven &lt;b&gt;insane&lt;/b&gt;.</string>
     <string name="if_the_lead_investigator_is_still_alive">If the lead investigator is still alive.</string>
     <string name="if_all_investigators_are_still_alive">If all investigators are still alive.</string>
     <string name="the_entity">The Entity</string>
     <string name="resolute">Resolute</string>
     <string name="mia">MIA</string>
-    <string name="sidestory_description">A side-story is a scenario that may be played between any two scenarios of an <i>Arkham Horror: The Card Game</i> campaign.\n- Playing a side-story costs each investigator in the campaign a certain amount of experience, which should be paid when you start the scenario.\n- Weaknesses, trauma, experience, and rewards granted by playing a side-story stay with the investigators for the remainder of the campaign.\n- Each side-story may only be played once per campaign.\n\n<b>Note:</b> When using this app, the experience required to play these scenarios will be deducted automatically at the <b>end of the scenario</b>, but you should be sure you have sufficient experience set aside to pay for it.</string>
+    <string name="sidestory_description">A side-story is a scenario that may be played between any two scenarios of an &lt;i&gt;Arkham Horror: The Card Game&lt;/i&gt; campaign.\n- Playing a side-story costs each investigator in the campaign a certain amount of experience, which should be paid when you start the scenario.\n- Weaknesses, trauma, experience, and rewards granted by playing a side-story stay with the investigators for the remainder of the campaign.\n- Each side-story may only be played once per campaign.\n\n&lt;b&gt;Note:&lt;/b&gt; When using this app, the experience required to play these scenarios will be deducted automatically at the &lt;b&gt;end of the scenario&lt;/b&gt;, but you should be sure you have sufficient experience set aside to pay for it.</string>
     <string name="ice_and_death_part_1">Ice and Death: Part 1</string>
     <string name="ice_and_death_part_2">Ice and Death: Part 2</string>
     <string name="ice_and_death_part_3">Ice and Death: Part 3</string>
@@ -1241,7 +1241,7 @@
     <string name="ice_and_death_supplies_recovered">Ice and Death - Supplies Recovered</string>
     <string name="the_heart_of_madness_seals_placed">The Heart of Madness - Seals Placed</string>
     <string name="the_heart_of_madness_seals_recovered">The Heart of Madness - Seals Recovered</string>
-    <string name="heal_physical_or_mental_trauma_your_choice">You may heal 1 physical or mental trauma <i>(your choice)</i></string>
+    <string name="heal_physical_or_mental_trauma_your_choice">You may heal 1 physical or mental trauma &lt;i&gt;(your choice)&lt;/i&gt;</string>
     <string name="in_section_campaign_log_draw_check_mark_next_to_partner">In the %s section of the Campaign Log, draw a check mark next to %s.</string>
     <string name="choose_heal_type">Choose heal type</string>
     <string name="chosen_heal_type">Chosen heal type</string>
@@ -1365,9 +1365,6 @@
     <string name="add_card">Add %s:</string>
     <string name="select_name">Select %s</string>
     <string name="note_selected_at_creation_time">Note: This should only be selected at deck creation time, not between scenarios.</string>
-    <string name="translation_credits"><b>Translation:</b>\n• Spanish: %s\n• French: %s\n• German: %s\n• Russian: %s\n• Korean: %s</string>
-    <string name="contributions_credits"><b>Additional Contributions:</b>\n• Visual Design: %s\n• Digital chaos bag + odds calculator: %s\n• Dissonant Voices audio integration: %s\n• Tooling and build support: %s</string>
-    <string name="icon_design_credits"><b>Icon Attribution:</b>\n• Original icon designs: %s</string>
     <string name="call_of_the_plaguebearer">Call of the Plaguebearer</string>
     <string name="eliminated">Eliminated</string>
     <string name="locations">Locations</string>
@@ -1491,8 +1488,8 @@
     <string name="lucid_nightmare">Lucid Nightmare</string>
     <string name="delete_your_account">Delete your account</string>
     <string name="loading_account_details">Loading account details…</string>
-    <string name="delete_account_warning">Are you sure that you want to <b>permanently</b> delete your account? This <b>cannot be undone</b>.</string>
-    <string name="you_are_currently_signed_in_as_handle">You are currently signed in as <b>%s</b>.</string>
+    <string name="delete_account_warning">Are you sure that you want to &lt;b&gt;permanently&lt;/b&gt; delete your account? This &lt;b&gt;cannot be undone&lt;/b&gt;.</string>
+    <string name="you_are_currently_signed_in_as_handle">You are currently signed in as &lt;b&gt;%s&lt;/b&gt;.</string>
     <plurals name="the_friends_campaign_that_you_have_participated_in_will_have_your_decks_removed">
         <item quantity="one">The friend\'s campaign that you have participated in will have your decks removed:</item>
         <item quantity="other">The %s campaigns from friends that you have participated in will have your decks removed:</item>
@@ -1605,8 +1602,8 @@
     <string name="do_you_want_to_use_the_app_to_randomize_choices">Do you want to use the app to randomize choices?</string>
     <string name="the_cell_travels_from_depart_to_arrive">The cell travels from %s to %s.</string>
     <plurals name="mark_time_in_your_campaign_log">
-        <item quantity="one">Mark %s <b>time</b> in your Campaign Log.</item>
-        <item quantity="other">Mark %s <b>time</b> in your Campaign Log.</item>
+        <item quantity="one">Mark %s &lt;b&gt;time&lt;/b&gt; in your Campaign Log.</item>
+        <item quantity="other">Mark %s &lt;b&gt;time&lt;/b&gt; in your Campaign Log.</item>
     </plurals>
     <string name="this_includes_the_cost_of_experience_cost_of_playing_the_sidestory">This includes the cost of experience cost of playing the side-story.</string>
     <string name="deck_owned_by_other_player_campaign_saving_changes">This deck is owned by another player. You can record the changes now and they will be given an opportunity to save them to their deck when they next open the app.</string>
@@ -1629,7 +1626,7 @@
     <string name="use_expedited_ticket">Use expedited ticket</string>
     <string name="time_cost_xp_cost">Time cost: %s</string>
     <string name="additional_experience_cost_for_investigator_cost">Additional experience cost for %s: %s</string>
-    <string name="side_story_description">A side-story is a scenario that may be played between any two scenarios of an <i>Arkham Horror: The Card Game</i> campaign.\n- Because you are playing <i>The Scarlet Keys</i> campaign, a side-story costs a certain amount of <b>time</b> instead of experience.\n- Weaknesses, trauma, experience, and rewards granted by playing a side-story stay with the investigators for the remainder of the campaign.\n- Each side-story may only be played once per campaign.</string>
+    <string name="side_story_description">A side-story is a scenario that may be played between any two scenarios of an &lt;i&gt;Arkham Horror: The Card Game&lt;/i&gt; campaign.\n- Because you are playing &lt;i&gt;The Scarlet Keys&lt;/i&gt; campaign, a side-story costs a certain amount of &lt;b&gt;time&lt;/b&gt; instead of experience.\n- Weaknesses, trauma, experience, and rewards granted by playing a side-story stay with the investigators for the remainder of the campaign.\n- Each side-story may only be played once per campaign.</string>
     <plurals name="mark_distance_time">
         <item quantity="one">Mark %s time</item>
         <item quantity="other">Mark %s time</item>
@@ -1681,8 +1678,8 @@
         <item quantity="other">Read status reports: %s</item>
     </plurals>
     <plurals name="mark_time_time_cell_travels_from_depart_to_arrive_on_the_way_to_somewhere_else">
-        <item quantity="one">Mark %s <b>time</b> as the cell travels from %s to %s on the way to somewhere else.</item>
-        <item quantity="other">Mark %s <b>time</b> as the cell travels from %s to %s on the way to somewhere else.</item>
+        <item quantity="one">Mark %s &lt;b&gt;time&lt;/b&gt; as the cell travels from %s to %s on the way to somewhere else.</item>
+        <item quantity="other">Mark %s &lt;b&gt;time&lt;/b&gt; as the cell travels from %s to %s on the way to somewhere else.</item>
     </plurals>
     <string name="error_more_than_5_cards_not_seeker_neutral_paradox_traited">You cannot have more than 5 cards that are not Seeker, Neutral, or Paradox traited.</string>
     <string name="min">Min</string>
@@ -1795,7 +1792,6 @@
     <string name="some_decks_may_not_load_fully_and_campaigns_might_appear_incomplete_until_this_is_fixed">Some decks may not load fully and campaigns might appear incomplete until this is fixed.</string>
     <string name="download_cards">Download cards</string>
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">It has been more than a week since you checked for new cards.</string>
-    <string name="chinese_simplified_translators">Chinese (Simplified): %s</string>
     <string name="narration">Narration</string>
     <string name="these_cards_might_have_been_updated">These cards might have been updated, from a new taboo list, or contain minor corrections.</string>
     <string name="fatigue">Fatigue</string>
@@ -1962,4 +1958,9 @@
     <string name="load_cards_cache_error">Unable to load cards cache</string>
     <string name="create_cards_cache_error">Unable to create cards cache</string>
     <string name="clear_cards_database_error">Unable to clear cards database</string>
+    <string name="app_version">Version %s</string>
+    <string name="about_app_text">The information presented in this app about Arkham Horror: The Card Game, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.\n\nThis application was created by Eugene Karelin as a fan project to help support the Arkham Horror: The Card Game community, with design from %s. If you find yourself browsing cards, managing lots of decks and campaigns, I\'m hoping it proves useful.\n\nFeedback and bug reports are welcome by email at arkhamcompanion@gmail.com\n\nMany thanks to ArkhamCards and arkham.build for providing the structured data, API access and access to card images. Without their continued support, this project wouldn\'t be possible.</string>
+    <string name="app_translations_text">&lt;b&gt;Translation:&lt;/b&gt;\n• Spanish: %s\n• French: %s\n• German: %s\n• Korean: %s\n• Chinese (Simplified): %s</string>
+    <string name="app_contributions_text">&lt;b&gt;Additional Contributions:&lt;/b&gt;\n• Visual Design: %s</string>
+    <string name="app_icons_attribution_text">&lt;b&gt;Icon Attribution:&lt;/b&gt;\n• Original icon designs: %s</string>
 </resources>

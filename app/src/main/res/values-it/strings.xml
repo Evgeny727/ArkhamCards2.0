@@ -482,13 +482,13 @@
     <string name="ally_arcane">Alleato. Arcano</string>
     <string name="things0_and_things1">%s e %s</string>
     <string name="list_and_last">%s, e %s</string>
-    <string name="name_subname">%s <i>(%s)</i></string>
+    <string name="name_subname">%s &lt;i&gt;(%s)&lt;/i&gt;</string>
     <string name="campaign_setup">Preparazione della Campagna</string>
     <string name="choose_lead_investigator">Scegliere l’investigatore capo</string>
     <string name="lead_investigator">Investigatore capo</string>
     <string name="alive">Vivo</string>
     <string name="resigned">Abbandonato</string>
-    <string name="proceed_to_next_scenario">Proseguite con <b>%s</b>.</string>
+    <string name="proceed_to_next_scenario">Proseguite con &lt;b&gt;%s&lt;/b&gt;.</string>
     <string name="mark_played_scenarios_to_add_results">Seleziona gli scenari che hai già giocato affinché comincino a comparire nei risultati di ricerca.</string>
     <string name="loading">Caricamento</string>
     <string name="label_all">%s: Tutti</string>
@@ -522,15 +522,15 @@
     <string name="select_deck">Seleziona il mazzo</string>
     <string name="view_deck">Mostra mazzo</string>
     <string name="update_decks_with_scenario_results">Aggiornare i mazzi con i risultati</string>
-    <string name="in_your_campaign_log_cross_out">Nel Diario della Campagna, cancellate <i>%s</i></string>
-    <string name="in_your_campaign_log_record_log_text">Annotate nel Diario della Campagna che <i>%s</i></string>
+    <string name="in_your_campaign_log_cross_out">Nel Diario della Campagna, cancellate &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_record_log_text">Annotate nel Diario della Campagna che &lt;i&gt;%s&lt;/i&gt;</string>
     <string name="remove_card_length">Rimuovete %s (%s)</string>
-    <string name="suffer_physical_or_mental_trauma_your_choice">Subite 1 trauma fisico o mentale <i>(a vostra scelta)</i>.</string>
+    <string name="suffer_physical_or_mental_trauma_your_choice">Subite 1 trauma fisico o mentale &lt;i&gt;(a vostra scelta)&lt;/i&gt;.</string>
     <string name="all_weaknesses_have_been_assigned">Tutte le debolezze sono state assegnate.</string>
     <string name="use_app_to_randomize_weaknesses_question">Volete utilizzare l’App per rendere casuali le debolezze?</string>
-    <string name="because_you_are_playing_on_difficulty">Poiché state giocando con la difficoltà <b>%s</b>:</string>
-    <string name="because_you_have_already_completed_scenario">Poiché avete già completato <b>%s</b>:</string>
-    <string name="because_you_not_completed_scenario">Poiché non avete ancora completato <b>%s</b>:</string>
+    <string name="because_you_are_playing_on_difficulty">Poiché state giocando con la difficoltà &lt;b&gt;%s&lt;/b&gt;:</string>
+    <string name="because_you_have_already_completed_scenario">Poiché avete già completato &lt;b&gt;%s&lt;/b&gt;:</string>
+    <string name="because_you_not_completed_scenario">Poiché non avete ancora completato &lt;b&gt;%s&lt;/b&gt;:</string>
     <plurals name="check_campaign_log_count_mark_section">
         <item quantity="one">Controllate il Diario della Campagna. Poiché c’è %s spunta alla voce ‘%s’</item>
         <item quantity="many">Controllate il Diario della Campagna. Poiché ci sono %s spunte alla voce ‘%s’</item>
@@ -541,11 +541,11 @@
         <item quantity="many">Controllate il Diario della Campagna. Poiché ci sono %s elementi alla voce ‘%s’</item>
         <item quantity="other">Controllate il Diario della Campagna. Poiché ci sono %s elementi alla voce ‘%s’</item>
     </plurals>
-    <string name="check_campaign_log_because_entry">Controllate il Diario della Campagna. Poiché <i>%s</i></string>
-    <string name="check_campaign_log_is_the_section_not_crossed_off">Controllate il Diario della Campagna, la voce <i>%s</i> è stata cancellata?</string>
+    <string name="check_campaign_log_because_entry">Controllate il Diario della Campagna. Poiché &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="check_campaign_log_is_the_section_not_crossed_off">Controllate il Diario della Campagna, la voce &lt;i&gt;%s&lt;/i&gt; è stata cancellata?</string>
     <plurals name="investigators_must_read_prompt_plural">
-        <item quantity="one">%s deve leggere <b>%s</b>.</item>
-        <item quantity="many">%s devono leggere <b>%s</b>.</item>
+        <item quantity="one">%s deve leggere &lt;b&gt;%s&lt;/b&gt;.</item>
+        <item quantity="many">%s devono leggere &lt;b&gt;%s&lt;/b&gt;.</item>
         <item quantity="other">%s devono leggere </item>
     </plurals>
     <string name="does_any_investigator_have_card_in_deck">Uno degli investigatori ha “%s” nel suo mazzo?</string>
@@ -556,9 +556,9 @@
         <item quantity="many">Poiché partecipano %s giocatori alla partita:</item>
         <item quantity="other">Poiché partecipano %s giocatori alla partita:</item>
     </plurals>
-    <string name="if_the_lead_investigator_was_killed">Se l’investigatore capo è <b>ucciso</b>.</string>
-    <string name="if_all_investigators_were_killed">Se tutti gli investigatori sono <b>uccisi</b>.</string>
-    <string name="check_section_if_text">Controllate gli %s. Se <i>%s</i></string>
+    <string name="if_the_lead_investigator_was_killed">Se l’investigatore capo è &lt;b&gt;ucciso&lt;/b&gt;.</string>
+    <string name="if_all_investigators_were_killed">Se tutti gli investigatori sono &lt;b&gt;uccisi&lt;/b&gt;.</string>
+    <string name="check_section_if_text">Controllate gli %s. Se &lt;i&gt;%s&lt;/i&gt;</string>
     <string name="are_you_sure_you_want_to_delete_the_campaign">Sei sicuro di voler eliminare la campagna: %s</string>
     <string name="scenario_attempt_count">%s (Tentativo %s)</string>
     <string name="add_investigator">Aggiungi un investigatore</string>
@@ -585,8 +585,8 @@
     <string name="draw_chaos_tokens">Pesca i segnalini caos</string>
     <string name="draw_random_basic_weakness">Pesca una debolezza base casuale</string>
     <string name="start_playing_the_scenario_now">Iniziate a giocare lo scenario.</string>
-    <string name="in_your_campaign_log_record_text">Annotate nel Diario della Campagna che <i>%s</i></string>
-    <string name="in_your_campaign_log_section_record_log_text">Annotate nel Diario della Campagna alla voce “%s”, che <i>%s</i>.</string>
+    <string name="in_your_campaign_log_record_text">Annotate nel Diario della Campagna che &lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_section_record_log_text">Annotate nel Diario della Campagna alla voce “%s”, che &lt;i&gt;%s&lt;/i&gt;.</string>
     <string name="add_token_to_the_chaos_bag">Aggiungete %s al Sacchetto del Caos.</string>
     <string name="remove_token_from_the_chaos_bag">Rimuovete %s dal Sacchetto del Caos.</string>
     <string name="odds_calculator">Calcolatore probabilità</string>
@@ -636,7 +636,7 @@
     <string name="defeated_physical_trauma">Sconfitto: trauma fisico</string>
     <string name="defeated_mental_trauma">Sconfitto: trauma mentale</string>
     <string name="defeated_no_trauma">Sconfitto: nessun trauma</string>
-    <string name="scenario_challenge_centers_around_investigator_prerequisites">Lo scenario sfida <i>%s</i> è incentrato sull’investigatore %s e pertanto ha i seguenti prerequisiti:</string>
+    <string name="scenario_challenge_centers_around_investigator_prerequisites">Lo scenario sfida &lt;i&gt;%s&lt;/i&gt; è incentrato sull’investigatore %s e pertanto ha i seguenti prerequisiti:</string>
     <string name="investigator_must_be_chosen_playing_this_scenario">%s deve essere uno degli investigatori scelti per giocare questo scenario.</string>
     <string name="app_not_enforce_challenge_scenario_prerequisites">L’App non obbliga a rispettare i prerequisiti dello scenario sfida, pertanto assicurati che siano applicati manualmente.</string>
     <string name="play_this_scenario">Gioca questo scenario</string>
@@ -649,12 +649,12 @@
     <string name="experience_cost_investigator_cost_other_investigator">Costo in punti esperienza: %s per %s, %s per tutti gli altri investigatori</string>
     <string name="side">Secondaria</string>
     <string name="challenge">Sfida</string>
-    <string name="challenge_scenarios_description">Gli scenari sfida sono scenari speciali “Print And Play” che utilizzano prodotti esistenti nella collezione di <i>Arkham Horror: Il Gioco di Carte</i>, insieme a carte “Print And Play” aggiuntive, per creare nuovi contenuti. Questi scenari sono progettati tenendo presenti alcuni prerequisiti, al fine di creare un’esperienza avvincente simile ad un mistero. Le carte stampabili possono essere scaricate da Fantasy Flight Games nella sezione “Parallel Investigators”.</string>
+    <string name="challenge_scenarios_description">Gli scenari sfida sono scenari speciali “Print And Play” che utilizzano prodotti esistenti nella collezione di &lt;i&gt;Arkham Horror: Il Gioco di Carte&lt;/i&gt;, insieme a carte “Print And Play” aggiuntive, per creare nuovi contenuti. Questi scenari sono progettati tenendo presenti alcuni prerequisiti, al fine di creare un’esperienza avvincente simile ad un mistero. Le carte stampabili possono essere scaricate da Fantasy Flight Games nella sezione “Parallel Investigators”.</string>
     <string name="download_printable_cards">Scarica le carte stampabili</string>
     <string name="return_to_threads_of_fate">Ritorno a… Trame del Fato</string>
     <string name="return_to_heart_of_the_elders">Ritorno a… Cuore degli Antichi</string>
     <string name="return_to_shattered_aeons">Ritorno a… Eoni Infranti</string>
-    <string name="confirm_included_automatically">%s <i>(incluso automaticamente)</i></string>
+    <string name="confirm_included_automatically">%s &lt;i&gt;(incluso automaticamente)&lt;/i&gt;</string>
     <string name="return_to_the_forgotten_age">Ritorno a… L’Era Dimenticata</string>
     <string name="return_to_the_untamed_wilds">Ritorno a… La Foresta Inviolata</string>
     <string name="return_to_the_doom_of_eztli">Ritorno a… La Maledizione di Eztli</string>
@@ -671,7 +671,7 @@
     <string name="scenario_or_interlude">Scenario o Interludio</string>
     <string name="alphabetize_guide_encounter_sets">Set incontri in ordine alfabetico</string>
     <string name="draw_weakness">Pescare una Debolezza</string>
-    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution"><b>Nota:</b> Il trauma derivante dalla sconfitta di un investigatore è gestito durante la risoluzione dello scenario.</string>
+    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution">&lt;b&gt;Nota:&lt;/b&gt; Il trauma derivante dalla sconfitta di un investigatore è gestito durante la risoluzione dello scenario.</string>
     <string name="contact_us">Contattaci</string>
     <plurals name="count_resupply">
         <item quantity="one">%s scorta</item>
@@ -800,8 +800,8 @@
         <item quantity="other">Verranno scelte due carte casuali tra le seguenti possibilità:\n\n%s</item>
     </plurals>
     <string name="edit_collection_in_settings">Puoi modificare la tua collezione nelle Impostazioni per correggere le scelte consentite.</string>
-    <string name="additional_options_upgrade_fortune_gambit_card"><b>Opzioni aggiuntive</b>: Quando migliori una carta [[Sorte]] o [[Azzardo]], puoi in alternativa pagare l’intero costo in punti esperienza per la versione di livello maggiore e lasciare la versione di livello inferiore nel tuo mazzo (non considerata per la dimensione del tuo mazzo o il numero di copie di quella carta nel tuo mazzo).</string>
-    <string name="shrewd_analysis_rule_text"><b>Analisi Accurata</b>: Se soddisfi le condizioni della campagna, puoi utilizzare “Analisi Accurata” per scegliere entrambi gli aggiornamenti in modo casuale e pagare il costo di uno solo.\n\n<i>Nota: l’App gestisce questo caso correggendo i punti esperienza per tenere conto dell’aggiornamento “gratuito”.</i></string>
+    <string name="additional_options_upgrade_fortune_gambit_card">&lt;b&gt;Opzioni aggiuntive&lt;/b&gt;: Quando migliori una carta [[Sorte]] o [[Azzardo]], puoi in alternativa pagare l’intero costo in punti esperienza per la versione di livello maggiore e lasciare la versione di livello inferiore nel tuo mazzo (non considerata per la dimensione del tuo mazzo o il numero di copie di quella carta nel tuo mazzo).</string>
+    <string name="shrewd_analysis_rule_text">&lt;b&gt;Analisi Accurata&lt;/b&gt;: Se soddisfi le condizioni della campagna, puoi utilizzare “Analisi Accurata” per scegliere entrambi gli aggiornamenti in modo casuale e pagare il costo di uno solo.\n\n&lt;i&gt;Nota: l’App gestisce questo caso correggendo i punti esperienza per tenere conto dell’aggiornamento “gratuito”.&lt;/i&gt;</string>
     <string name="upgrade_results">Risultati dell’aggiornamento</string>
     <string name="upgrade_with_shrewd_analysis">Aggiornamento con Shrewd Analysis</string>
     <string name="the_pit_of_despair">La Grotta della Disperazione</string>
@@ -885,7 +885,7 @@
     <string name="location">Luogo</string>
     <string name="actions">Azioni</string>
     <string name="undo_deck_upgrade">Annullare gli aggiornamenti del mazzo?</string>
-    <string name="additional_options_upgrade_spell"><b>Opzioni aggiuntive</b>: Quando migliori un [[Incantesimo]], puoi in alternativa pagare l’intero costo in punti esperienza per la versione di livello maggiore e lasciare la versione di livello inferiore nel tuo mazzo (non considerata per la dimensione del tuo mazzo o il numero di copie di quella carta nel tuo mazzo).</string>
+    <string name="additional_options_upgrade_spell">&lt;b&gt;Opzioni aggiuntive&lt;/b&gt;: Quando migliori un [[Incantesimo]], puoi in alternativa pagare l’intero costo in punti esperienza per la versione di livello maggiore e lasciare la versione di livello inferiore nel tuo mazzo (non considerata per la dimensione del tuo mazzo o il numero di copie di quella carta nel tuo mazzo).</string>
     <string name="spent_of_adjusted_xp">%s di %s PE spesi</string>
     <string name="upgrading">Aggiornamento</string>
     <string name="editing">Modifica</string>
@@ -1139,12 +1139,12 @@
     <string name="select_traits">Selezionare i Tratti</string>
     <string name="random_weaknesses_will_be_drawn_that_match_these_traits">Saranno pescate debolezze casuali che corrispondono a questi tratti.</string>
     <string name="edit_selection">Modifica la selezione</string>
-    <string name="check_campaign_log_if_text">Controllate il Diario della Campagna. <i>Se %s</i></string>
+    <string name="check_campaign_log_if_text">Controllate il Diario della Campagna. &lt;i&gt;Se %s&lt;/i&gt;</string>
     <string name="discord">Discord</string>
     <string name="vk">VK</string>
     <string name="telegram">Telegram</string>
     <string name="in_your_campaign_log_section_record_name">Nel Diario della Campagna, alla voce “%s”, annotate %s. </string>
-    <string name="in_your_campaign_log_section_cross_out">Nel Diario della Campagna, alla voce “%s”, cancellate <i>%s</i>.</string>
+    <string name="in_your_campaign_log_section_cross_out">Nel Diario della Campagna, alla voce “%s”, cancellate &lt;i&gt;%s&lt;/i&gt;.</string>
     <string name="unarchive_campaign">Ripristina la campagna</string>
     <string name="archive_campaign">Archivia la campagna</string>
     <string name="show_archived_campaigns">Mostra le campagne archiviate</string>
@@ -1242,16 +1242,16 @@
     <string name="in_the_section_of_the_campaign_log_write_mia_to_name">Alla voce %s del Diario della Campagna, scrivete “Disperso” accanto a %s.</string>
     <string name="in_the_section_of_the_campaign_log_cross_out_mia_to_name">Alla voce %s del Diario della Campagna, barrate “Disperso” accanto a %s.</string>
     <string name="in_section_campaign_log_draw_check_mark_next_to_partner">Alla voce %s del Diario della Campagna, segnate una spunta accanto a %s.</string>
-    <string name="heal_physical_or_mental_trauma_your_choice">Puoi curare 1 trauma fisico o mentale <i>(a tua scelta)</i></string>
+    <string name="heal_physical_or_mental_trauma_your_choice">Puoi curare 1 trauma fisico o mentale &lt;i&gt;(a tua scelta)&lt;/i&gt;</string>
     <string name="choose_heal_type">Scegli un tipo di cura</string>
     <string name="chosen_heal_type">Tipo di cura scelto</string>
-    <string name="if_the_lead_investigator_was_driven_insane">Se l’investigatore capo è <b>impazzito</b>.</string>
-    <string name="if_all_investigators_were_driven_insane">Se tutti gli investigatori sono <b>impazziti</b>.</string>
+    <string name="if_the_lead_investigator_was_driven_insane">Se l’investigatore capo è &lt;b&gt;impazzito&lt;/b&gt;.</string>
+    <string name="if_all_investigators_were_driven_insane">Se tutti gli investigatori sono &lt;b&gt;impazziti&lt;/b&gt;.</string>
     <string name="if_the_lead_investigator_is_still_alive">Se l’investigatore capo è ancora vivo.</string>
     <string name="if_all_investigators_are_still_alive">Se tutti gli investigatori sono ancora vivi.</string>
     <string name="the_entity">L’Entità</string>
     <string name="mia">Disperso</string>
-    <string name="sidestory_description">Una storia secondaria è uno scenario che può essere giocato tra due scenari qualsiasi di una campagna di <i>Arkham Horror: Il Gioco di Carte</i>.\n- Giocare una storia secondaria costa a ogni investigatore della campagna una certa quantità di esperienza, che dovrebbe essere pagata all’inizio dello scenario.\n- Debolezze, traumi, esperienza e ricompense ottenute giocando una storia secondaria restano con gli investigatori per il resto della campagna.\n- Ogni storia secondaria può essere giocata solo una volta per campagna.\n\n<b>Nota:</b> quando usi questa App, l’esperienza richiesta per giocare a questi scenari verrà automaticamente sottratta alla <b>fine dello scenario</b>, ma devi assicurarti di avere accumulato abbastanza esperienza per pagarla.</string>
+    <string name="sidestory_description">Una storia secondaria è uno scenario che può essere giocato tra due scenari qualsiasi di una campagna di &lt;i&gt;Arkham Horror: Il Gioco di Carte&lt;/i&gt;.\n- Giocare una storia secondaria costa a ogni investigatore della campagna una certa quantità di esperienza, che dovrebbe essere pagata all’inizio dello scenario.\n- Debolezze, traumi, esperienza e ricompense ottenute giocando una storia secondaria restano con gli investigatori per il resto della campagna.\n- Ogni storia secondaria può essere giocata solo una volta per campagna.\n\n&lt;b&gt;Nota:&lt;/b&gt; quando usi questa App, l’esperienza richiesta per giocare a questi scenari verrà automaticamente sottratta alla &lt;b&gt;fine dello scenario&lt;/b&gt;, ma devi assicurarti di avere accumulato abbastanza esperienza per pagarla.</string>
     <string name="tarot_card">Tarocco</string>
     <string name="judgement_xx">Il Giudizio · XX</string>
     <string name="judgement_xx_inverted">Il Giudizio · XX (Rovesciato)</string>
@@ -1381,9 +1381,6 @@
     <string name="add_card">Aggiungi %s:</string>
     <string name="select_name">Seleziona %s</string>
     <string name="note_selected_at_creation_time">Nota: Questo dovrebbe essere selezionato solo al momento della creazione del mazzo, non tra uno scenario e l\'altro.</string>
-    <string name="translation_credits"><b>Traduzione:</b>\n• Spagnolo: %s\n• Francese: %s\n• Tedesco: %s\n• Russo: %s\n• Coreano: %s</string>
-    <string name="contributions_credits"><b>Contributi Aggiuntivi:</b>\n• Visual Design: %s\n• Sacchetto del caos digitale + calcolatore probabilità: %s\n• Integrazione audio Dissonant Voices: %s\n• Strumenti e supporto alla compilazione: %s</string>
-    <string name="icon_design_credits"><b>Attribuzione Icone:</b>\n• Disegno di icone originali: %s</string>
     <string name="call_of_the_plaguebearer">Il Richiamo della Piaga</string>
     <string name="eliminated">Eliminato</string>
     <string name="locations">Luoghi</string>
@@ -1506,8 +1503,8 @@
     <string name="lucid_nightmare">Incubo Lucido</string>
     <string name="delete_your_account">Elimina il tuo account</string>
     <string name="loading_account_details">Caricamento dettagli account…</string>
-    <string name="delete_account_warning">Sei sicuro di voler rimuovere il tuo account in modo <b>permanente</b>? Questo <b>non può essere annullato</b>.</string>
-    <string name="you_are_currently_signed_in_as_handle">Ti sei autenticato come <b>%s</b>.</string>
+    <string name="delete_account_warning">Sei sicuro di voler rimuovere il tuo account in modo &lt;b&gt;permanente&lt;/b&gt;? Questo &lt;b&gt;non può essere annullato&lt;/b&gt;.</string>
+    <string name="you_are_currently_signed_in_as_handle">Ti sei autenticato come &lt;b&gt;%s&lt;/b&gt;.</string>
     <plurals name="the_friends_campaign_that_you_have_participated_in_will_have_your_decks_removed">
         <item quantity="one">La campagna del tuo amico in cui hai partecipato rimuoverà i tuoi mazzi:</item>
         <item quantity="many">La campagne dei tuoi amici in cui hai partecipato rimuoveranno i tuoi mazzi:</item>
@@ -1630,8 +1627,8 @@
     <string name="do_you_want_to_use_the_app_to_randomize_choices">Vuoi usare l\'App per rendere le scelte casuali?</string>
     <string name="the_cell_travels_from_depart_to_arrive">La cellula viaggia da %s a %s.</string>
     <plurals name="mark_time_in_your_campaign_log">
-        <item quantity="one">Spuntate %s <b>tempo</b> nel Diario della Campagna.</item>
-        <item quantity="many">Spuntate %s <b>tempi</b> nel Diario della Campagna.</item>
+        <item quantity="one">Spuntate %s &lt;b&gt;tempo&lt;/b&gt; nel Diario della Campagna.</item>
+        <item quantity="many">Spuntate %s &lt;b&gt;tempi&lt;/b&gt; nel Diario della Campagna.</item>
         <item quantity="other">Spuntate %s </item>
     </plurals>
     <string name="this_includes_the_cost_of_experience_cost_of_playing_the_sidestory">Questo include il costo in punti esperienza per giocare una storia secondaria.</string>
@@ -1655,7 +1652,7 @@
     <string name="use_expedited_ticket">Utilizzate il biglietto prioritario</string>
     <string name="time_cost_xp_cost">Costo del tempo: %s</string>
     <string name="additional_experience_cost_for_investigator_cost">Costo aggiuntivo dell\'esperienza per %s: %s</string>
-    <string name="side_story_description">Una storia secondaria è uno scenario che può essere giocato tra due scenari di una campagna di <i>Arkham Horror LCG</i>\n- Poiché state giocando la campagna <i>Le Chiavi Scarlatte</i>, una storia secondaria costa un certo ammontare di <b>tempo</b> invece dell\'esperienza.\n- Debolezze, traumi, esperienza e ricompense ottenute giocando una storia secondaria rimangono agli investigatori per il resto della campagna.\n- Ogni storia secondaria può essere giocata una sola volta per campagna.</string>
+    <string name="side_story_description">Una storia secondaria è uno scenario che può essere giocato tra due scenari di una campagna di &lt;i&gt;Arkham Horror LCG&lt;/i&gt;\n- Poiché state giocando la campagna &lt;i&gt;Le Chiavi Scarlatte&lt;/i&gt;, una storia secondaria costa un certo ammontare di &lt;b&gt;tempo&lt;/b&gt; invece dell\'esperienza.\n- Debolezze, traumi, esperienza e ricompense ottenute giocando una storia secondaria rimangono agli investigatori per il resto della campagna.\n- Ogni storia secondaria può essere giocata una sola volta per campagna.</string>
     <plurals name="mark_distance_time">
         <item quantity="one">Spunta %s tempo</item>
         <item quantity="many">Spunta %s tempo</item>
@@ -1712,8 +1709,8 @@
         <item quantity="other">Leggere rapporti sullo stato: %s</item>
     </plurals>
     <plurals name="mark_time_time_cell_travels_from_depart_to_arrive_on_the_way_to_somewhere_else">
-        <item quantity="one">Spunta %s <b>tempo</b> mentre la cellula si sposta da %s a %s in viaggio verso un altro luogo.</item>
-        <item quantity="many">Spunta %s <b>tempo</b> mentre la cellula si sposta da %s a %s in viaggio verso un altro luogo.</item>
+        <item quantity="one">Spunta %s &lt;b&gt;tempo&lt;/b&gt; mentre la cellula si sposta da %s a %s in viaggio verso un altro luogo.</item>
+        <item quantity="many">Spunta %s &lt;b&gt;tempo&lt;/b&gt; mentre la cellula si sposta da %s a %s in viaggio verso un altro luogo.</item>
         <item quantity="other">Spunta %s </item>
     </plurals>
     <string name="error_more_than_5_cards_not_seeker_neutral_paradox_traited">Non puoi avere più di 5 carte che non siano Studioso, Neutrale o Paradosso.</string>
@@ -1823,7 +1820,6 @@
     <string name="some_decks_may_not_load_fully_and_campaigns_might_appear_incomplete_until_this_is_fixed">Alcuni mazzi potrebbero non caricarsi completamente e le campagne potrebbero apparire incomplete fino a quando il problema non sarà risolto.</string>
     <string name="download_cards">Scarica le carte</string>
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">È passata più di una settimana da quando hai controllato per delle nuove carte.</string>
-    <string name="chinese_simplified_translators">Cinese (Simplified): %s</string>
     <string name="narration">Narrazione</string>
     <string name="these_cards_might_have_been_updated">Queste carte potrebbero essere state aggiornate, provenienti da un nuovo elenco di tabù, o contenere piccole correzioni.</string>
     <string name="fatigue">Stanchezza</string>

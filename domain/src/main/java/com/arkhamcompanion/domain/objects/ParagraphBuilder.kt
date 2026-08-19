@@ -1,4 +1,4 @@
-package com.arkhamcompanion.data.objects
+package com.arkhamcompanion.domain.objects
 
 import com.arkhamcompanion.domain.model.cards.CardTextParagraph
 import com.arkhamcompanion.domain.model.cards.CardTextSegment

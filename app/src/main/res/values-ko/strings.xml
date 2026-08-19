@@ -18,7 +18,7 @@
     <string name="weaver_of_the_cosmos">우주의 가닥을 엮는 자</string>
     <string name="things0_and_things1">%s 와 %s</string>
     <string name="list_and_last">%s, %s</string>
-    <string name="name_subname">%s <i>(%s)</i></string>
+    <string name="name_subname">%s &lt;i&gt;(%s)&lt;/i&gt;</string>
     <string name="none">없음</string>
     <string name="killed">사망한 조사자</string>
     <string name="insane">미친 조사자</string>
@@ -56,7 +56,7 @@
     <string name="lead_investigator">대표 조사자</string>
     <string name="alive">생존</string>
     <string name="resigned">후퇴</string>
-    <string name="proceed_to_next_scenario">다음으로 진행합니다: \'<b>%s</b>\'</string>
+    <string name="proceed_to_next_scenario">다음으로 진행합니다: \'&lt;b&gt;%s&lt;/b&gt;\'</string>
     <string name="available_weaknesses">접근가능 약점</string>
     <string name="saving">저장</string>
     <string name="draw_a_different_weakness">다른 약점 뽑기</string>
@@ -374,28 +374,28 @@
     <string name="edit_campaign_log">캠페인 기록지 수정</string>
     <string name="draw_chaos_tokens">혼돈 토큰 뽑기</string>
     <string name="start_playing_the_scenario_now">이제 시나리오를 시작합니다.</string>
-    <string name="in_your_campaign_log_record_text">당신의 캠페인 기록지에 <i>%s</i> 라고 기록합니다.</string>
-    <string name="in_your_campaign_log_cross_out">당신의 캠페인 기록지에 <i>%s</i> 항목에 취소선을 긋습니다.</string>
-    <string name="in_your_campaign_log_record_log_text">당신의 캠페인 기록지에 <i>%s</i> 라고 기록합니다.</string>
+    <string name="in_your_campaign_log_record_text">당신의 캠페인 기록지에 &lt;i&gt;%s&lt;/i&gt; 라고 기록합니다.</string>
+    <string name="in_your_campaign_log_cross_out">당신의 캠페인 기록지에 &lt;i&gt;%s&lt;/i&gt; 항목에 취소선을 긋습니다.</string>
+    <string name="in_your_campaign_log_record_log_text">당신의 캠페인 기록지에 &lt;i&gt;%s&lt;/i&gt; 라고 기록합니다.</string>
     <string name="add_token_to_the_chaos_bag">혼돈 주머니에 %s 토큰을 추가합니다.</string>
     <string name="remove_token_from_the_chaos_bag">혼돈 주머니에서 %s 토큰을 제거합니다.</string>
     <string name="remove_card_length">%s 카드를 제거합니다 (%s)</string>
-    <string name="suffer_physical_or_mental_trauma_your_choice">당신은 육체적 트라우마를 1 또는 정신적 트라우마를 1 받습니다<i>(당신이 선택합니다)</i>.</string>
+    <string name="suffer_physical_or_mental_trauma_your_choice">당신은 육체적 트라우마를 1 또는 정신적 트라우마를 1 받습니다&lt;i&gt;(당신이 선택합니다)&lt;/i&gt;.</string>
     <string name="all_weaknesses_have_been_assigned">모든 약점이 할당되어 있습니다.</string>
     <string name="use_app_to_randomize_weaknesses_question">앱을 이용해서 약점을 무작위로 선택하기를 원하십니까?</string>
-    <string name="because_you_are_playing_on_difficulty">당신이 <b>%s</b> 난이도를 즐기고 있다면:</string>
-    <string name="because_you_have_already_completed_scenario">당신이 <b>%s</b> 시나리오를 이미 완료했다면:</string>
-    <string name="because_you_not_completed_scenario">당신이 <b>%s</b> 시나리오를 아직 완료하지 않았다면:</string>
+    <string name="because_you_are_playing_on_difficulty">당신이 &lt;b&gt;%s&lt;/b&gt; 난이도를 즐기고 있다면:</string>
+    <string name="because_you_have_already_completed_scenario">당신이 &lt;b&gt;%s&lt;/b&gt; 시나리오를 이미 완료했다면:</string>
+    <string name="because_you_not_completed_scenario">당신이 &lt;b&gt;%s&lt;/b&gt; 시나리오를 아직 완료하지 않았다면:</string>
     <plurals name="check_campaign_log_count_mark_section">
         <item quantity="other">캠페인 기록지를 확인합니다. \'%s\' 아래에 표시된 빗금이 %s개입니까?</item>
     </plurals>
     <plurals name="check_campaign_log_count_entry_section">
         <item quantity="other">캠페인 기록지를 확인합니다. \'%s\' 아래에 표시된 항목이 %s개입니까?</item>
     </plurals>
-    <string name="check_campaign_log_because_entry">캠페인 기록지를 확인합니다. <i>%s</i> 항목이 있습니까?</string>
-    <string name="check_campaign_log_is_the_section_not_crossed_off">캠페인 기록지를 확인합니다. <i>%s</i> 항목이 X로 표기되어 있지 않습니까?</string>
+    <string name="check_campaign_log_because_entry">캠페인 기록지를 확인합니다. &lt;i&gt;%s&lt;/i&gt; 항목이 있습니까?</string>
+    <string name="check_campaign_log_is_the_section_not_crossed_off">캠페인 기록지를 확인합니다. &lt;i&gt;%s&lt;/i&gt; 항목이 X로 표기되어 있지 않습니까?</string>
     <plurals name="investigators_must_read_prompt_plural">
-        <item quantity="other">%s 조사자는 <b>%s</b> 항목을 읽어야만 합니다.</item>
+        <item quantity="other">%s 조사자는 &lt;b&gt;%s&lt;/b&gt; 항목을 읽어야만 합니다.</item>
     </plurals>
     <string name="does_any_investigator_have_card_in_deck">"%s" 카드를 덱에 넣은 있는 조사자가 있습니까?</string>
     <string name="was_investigator_with_card_in_deck_defeated">"%s" 카드를 덱에 넣은 조사자가 쓰러졌습니까?</string>
@@ -403,9 +403,9 @@
     <plurals name="because_there_is_player_count_in_game_plural">
         <item quantity="other">이 게임을 %s명의 조사자로 진행하고 있습니까?</item>
     </plurals>
-    <string name="if_the_lead_investigator_was_killed">대표 조사자가 <b>사망</b>했습니까?</string>
-    <string name="if_all_investigators_were_killed">모든 조사자가 <b>사망</b>했습니까?</string>
-    <string name="check_section_if_text">%s 항목을 확인합니다. <i>%s</i> 항목이 있습니까?</string>
+    <string name="if_the_lead_investigator_was_killed">대표 조사자가 &lt;b&gt;사망&lt;/b&gt;했습니까?</string>
+    <string name="if_all_investigators_were_killed">모든 조사자가 &lt;b&gt;사망&lt;/b&gt;했습니까?</string>
+    <string name="check_section_if_text">%s 항목을 확인합니다. &lt;i&gt;%s&lt;/i&gt; 항목이 있습니까?</string>
     <string name="choose_side_scenario">외전 시나리오 선택</string>
     <string name="add_side_scenario">외전 시나리오 추가</string>
     <string name="scenario_attempt_count">%s (시도 %s회)</string>
@@ -615,7 +615,7 @@
     <string name="defeated_physical_trauma">쓰러짐: 육체적 트라우마</string>
     <string name="defeated_mental_trauma">쓰러짐: 정신적 트라우마</string>
     <string name="defeated_no_trauma">쓰러짐: 트라우마 없음</string>
-    <string name="scenario_challenge_centers_around_investigator_prerequisites"><i>%s</i> 도전 시나리오는 %s 조사자가 중심이 되어 진행하는 시나리오이며, 다음 선행 조건을 만족해야 합니다:</string>
+    <string name="scenario_challenge_centers_around_investigator_prerequisites">&lt;i&gt;%s&lt;/i&gt; 도전 시나리오는 %s 조사자가 중심이 되어 진행하는 시나리오이며, 다음 선행 조건을 만족해야 합니다:</string>
     <string name="investigator_must_be_chosen_playing_this_scenario">%s 조사자는 이 시나리오를 플레이하는 조사자 중 하나로 선택되어야만 합니다.</string>
     <string name="app_not_enforce_challenge_scenario_prerequisites">앱에서는 도전 시나리오의 선행 조건을 강제하지 않습니다. 그러므로, 수동으로 조건 만족 여부를 확인해 주십시오.</string>
     <string name="play_this_scenario">이 시나리오 플레이</string>
@@ -633,7 +633,7 @@
     <string name="return_to_threads_of_fate">돌아온 운명의 실가닥</string>
     <string name="return_to_heart_of_the_elders">돌아온 고대 문명의 심장부</string>
     <string name="return_to_shattered_aeons">돌아온 산산조각난 영겁</string>
-    <string name="confirm_included_automatically">%s <i>(이 항목으로 얻는 경험치는 자동으로 포함됩니다.)</i></string>
+    <string name="confirm_included_automatically">%s &lt;i&gt;(이 항목으로 얻는 경험치는 자동으로 포함됩니다.)&lt;/i&gt;</string>
     <string name="return_to_the_forgotten_age">돌아온 잊힌 시대</string>
     <string name="return_to_the_untamed_wilds">돌아온 길들지 않은 야생</string>
     <string name="return_to_the_doom_of_eztli">돌아온 에스틀리의 몰락</string>
@@ -650,7 +650,7 @@
     <string name="scenario_or_interlude">시나리오 또는 막간</string>
     <string name="alphabetize_guide_encounter_sets">알파벳 순서로 조우 세트 안내</string>
     <string name="draw_weakness">약점 뽑기</string>
-    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution"><b>참고:</b> 조사자가 쓰러져서 발생한 트라우마는 시나리오 결말 도중 처리됩니다.</string>
+    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution">&lt;b&gt;참고:&lt;/b&gt; 조사자가 쓰러져서 발생한 트라우마는 시나리오 결말 도중 처리됩니다.</string>
     <string name="contact_us">연락하기</string>
     <plurals name="count_resupply">
         <item quantity="other">재보급 전용 %s</item>
@@ -768,8 +768,8 @@
         <item quantity="other">두 장의 카드 중에서 무작위로 고릅니다:\n\n%s</item>
     </plurals>
     <string name="edit_collection_in_settings">설정의 보유 게임을 수정하여 접근 가능한 선택지를 조정할 수 있습니다.</string>
-    <string name="additional_options_upgrade_fortune_gambit_card"><b>추가 선택지</b>: 당신이 [[행운]] 또는 [[도박수]] 카드를 향상할 때, 일반적인 향상 대신에 더 높은 레벨의 카드의 경험치 비용을 전부 지불하고 더 낮은 레벨의 카드를 당신의 덱에 남겨두어도 됩니다(이렇게 남겨둔 카드는 당신의 덱 크기를 계산하거나 당신의 덱에서 카드 사본 개수를 계산할 때 포함하지 않습니다).</string>
-    <string name="shrewd_analysis_rule_text"><b>재빠른 분석</b>: 캠페인 조건을 만족하면, \'재빠른 분석\'을 사용하여 두 향상을 모두 무작위로 진행하기로 결정하고 하나에 해당하는 경험치만 지불하여도 됩니다.\n\n<i>참고: 이 앱은 두번째 사본의 \'무료\' 향상을 위해 경험치를 조절합니다.</i></string>
+    <string name="additional_options_upgrade_fortune_gambit_card">&lt;b&gt;추가 선택지&lt;/b&gt;: 당신이 [[행운]] 또는 [[도박수]] 카드를 향상할 때, 일반적인 향상 대신에 더 높은 레벨의 카드의 경험치 비용을 전부 지불하고 더 낮은 레벨의 카드를 당신의 덱에 남겨두어도 됩니다(이렇게 남겨둔 카드는 당신의 덱 크기를 계산하거나 당신의 덱에서 카드 사본 개수를 계산할 때 포함하지 않습니다).</string>
+    <string name="shrewd_analysis_rule_text">&lt;b&gt;재빠른 분석&lt;/b&gt;: 캠페인 조건을 만족하면, \'재빠른 분석\'을 사용하여 두 향상을 모두 무작위로 진행하기로 결정하고 하나에 해당하는 경험치만 지불하여도 됩니다.\n\n&lt;i&gt;참고: 이 앱은 두번째 사본의 \'무료\' 향상을 위해 경험치를 조절합니다.&lt;/i&gt;</string>
     <string name="upgrade_results">향상 결과</string>
     <string name="upgrade_with_shrewd_analysis">\'재빠른 분석\'으로 향상하기</string>
     <string name="the_pit_of_despair">절망의 구렁</string>
@@ -847,7 +847,7 @@
     <string name="location">장소</string>
     <string name="actions">행동</string>
     <string name="undo_deck_upgrade">덱 향상을 되돌리겠습니까?</string>
-    <string name="additional_options_upgrade_spell"><b>추가 선택지</b>: 당신이 [[마법]] 카드를 향상할 때, 일반적인 향상 대신에 더 높은 레벨의 카드의 경험치 비용을 전부 지불하고 더 낮은 레벨의 카드를 당신의 덱에 남겨두어도 됩니다(이렇게 남겨둔 카드는 당신의 덱 크기를 계산하거나 당신의 덱에서 카드 사본 개수를 계산할 때 포함하지 않습니다).</string>
+    <string name="additional_options_upgrade_spell">&lt;b&gt;추가 선택지&lt;/b&gt;: 당신이 [[마법]] 카드를 향상할 때, 일반적인 향상 대신에 더 높은 레벨의 카드의 경험치 비용을 전부 지불하고 더 낮은 레벨의 카드를 당신의 덱에 남겨두어도 됩니다(이렇게 남겨둔 카드는 당신의 덱 크기를 계산하거나 당신의 덱에서 카드 사본 개수를 계산할 때 포함하지 않습니다).</string>
     <string name="spent_of_adjusted_xp">%s점 중 %s점 소비</string>
     <string name="upgrading">향상 중</string>
     <string name="editing">수정 중</string>
@@ -1089,13 +1089,13 @@
     <string name="select_traits">특성 선택</string>
     <string name="random_weaknesses_will_be_drawn_that_match_these_traits">이들 특성과 일치하는 무작위 약점을 뽑습니다.</string>
     <string name="edit_selection">선택 수정</string>
-    <string name="check_campaign_log_if_text">캠페인 기록지를 확인합니다. <i>만약 %s</i></string>
+    <string name="check_campaign_log_if_text">캠페인 기록지를 확인합니다. &lt;i&gt;만약 %s&lt;/i&gt;</string>
     <string name="discord">디스코드</string>
     <string name="vk">VK 메신저</string>
     <string name="telegram">텔레그램</string>
     <string name="in_your_campaign_log_section_record_name">캠페인 기록지 중 “%s” 아래에 %s 이름을 기록합니다.</string>
-    <string name="in_your_campaign_log_section_cross_out">캠페인 기록지 중 “%s” 아래의 <i>%s</i> 항목에 취소선을 긋습니다.</string>
-    <string name="in_your_campaign_log_section_record_log_text">캠페인 기록지 중 “%s” 아래에 <i>%s</i> 항목을 기록합니다.</string>
+    <string name="in_your_campaign_log_section_cross_out">캠페인 기록지 중 “%s” 아래의 &lt;i&gt;%s&lt;/i&gt; 항목에 취소선을 긋습니다.</string>
+    <string name="in_your_campaign_log_section_record_log_text">캠페인 기록지 중 “%s” 아래에 &lt;i&gt;%s&lt;/i&gt; 항목을 기록합니다.</string>
     <string name="unarchive_campaign">캠페인 보관 취소</string>
     <string name="archive_campaign">캠페인 보관</string>
     <string name="show_archived_campaigns">보관된 캠페인 및 독립 시나리오 보기</string>
@@ -1171,14 +1171,14 @@
     <string name="in_the_section_of_the_campaign_log_cross_out_name">캠페인 기록지 중 “%s” 항목 아래의 ‘%s’ 동행 이름에 취소선을 긋습니다.</string>
     <string name="in_the_section_of_the_campaign_log_write_mia_to_name">캠페인 기록지 중 “%s” 항목 아래의 ‘%s’ 동행 이름 옆에 “실종”을 기입합니다.</string>
     <string name="in_the_section_of_the_campaign_log_cross_out_mia_to_name">캠페인 기록지 중 “%s” 항목 아래의 ‘%s’ 동행 이름 옆의 “실종”에 취소선을 긋습니다.</string>
-    <string name="if_the_lead_investigator_was_driven_insane">대표 조사자가 <b>미쳤으면</b>.</string>
-    <string name="if_all_investigators_were_driven_insane">모든 조사자들이 <b>미쳤으면</b>.</string>
+    <string name="if_the_lead_investigator_was_driven_insane">대표 조사자가 &lt;b&gt;미쳤으면&lt;/b&gt;.</string>
+    <string name="if_all_investigators_were_driven_insane">모든 조사자들이 &lt;b&gt;미쳤으면&lt;/b&gt;.</string>
     <string name="if_the_lead_investigator_is_still_alive">대표 조사자가 아직 살아 있으면.</string>
     <string name="if_all_investigators_are_still_alive">모든 조사자들이 아직 살아 있으면.</string>
     <string name="the_entity">독기의 실체</string>
     <string name="resolute">결연한</string>
     <string name="mia">실종</string>
-    <string name="sidestory_description">외전 이야기는 &lt;아컴호러 카드게임&gt; 캠페인의 시나리오와 시나리오 사이에 본 확장판의 시나리오 하나를 진행하는 것을 일컫습니다.\n- 외전 이야기를 즐기려면 캠페인을 진행 중인 각 조사자가 경험치를 일정량 소비해야 합니다.\n- 외전 이야기에서 얻은 약점, 트라우마, 경험치, 보상은 캠페인을 마칠 때까지 조사자에게 남습니다.\n- 각 외전 이야기는 캠페인마다 1번씩만 즐길 수 있습니다.\n\n<b>중요:</b> 이 앱을 이용하는 경우, 이러한 시나리오를 즐기기 위해 요구되는 경험치는 <b>시나리오 종료 시</b> 자동으로 공제되지만, 시나리오를 시작하기 전에 지불할 충분한 경험치가 있는지 확인하여야 합니다.</string>
+    <string name="sidestory_description">외전 이야기는 &lt;아컴호러 카드게임&gt; 캠페인의 시나리오와 시나리오 사이에 본 확장판의 시나리오 하나를 진행하는 것을 일컫습니다.\n- 외전 이야기를 즐기려면 캠페인을 진행 중인 각 조사자가 경험치를 일정량 소비해야 합니다.\n- 외전 이야기에서 얻은 약점, 트라우마, 경험치, 보상은 캠페인을 마칠 때까지 조사자에게 남습니다.\n- 각 외전 이야기는 캠페인마다 1번씩만 즐길 수 있습니다.\n\n&lt;b&gt;중요:&lt;/b&gt; 이 앱을 이용하는 경우, 이러한 시나리오를 즐기기 위해 요구되는 경험치는 &lt;b&gt;시나리오 종료 시&lt;/b&gt; 자동으로 공제되지만, 시나리오를 시작하기 전에 지불할 충분한 경험치가 있는지 확인하여야 합니다.</string>
     <string name="ice_and_death_part_1">얼음과 죽음(1부)</string>
     <string name="ice_and_death_part_2">얼음과 죽음(2부)</string>
     <string name="ice_and_death_part_3">얼음과 죽음(3부)</string>
@@ -1318,9 +1318,6 @@
     <string name="add_card">%s 추가:</string>
     <string name="select_name">%s 선택</string>
     <string name="note_selected_at_creation_time">참고: 덱 생성 순간에만 선택할 수 있고 시나리오 사이에서는 선택이 불가능합니다.</string>
-    <string name="translation_credits"><b>번역:</b>\n• 스페인어: %s\n• 프랑스어: %s\n• 독일어: %s\n• 러시아어: %s\n• 한국어: %s</string>
-    <string name="contributions_credits"><b>추가 기여자:</b>\n• 시각 디자인: %s\n• 디지털 혼돈 주머니 + 확률 계산기: %s\n• Dissonant Voices 오디오 통합: %s\n• 도구 및 빌드 지원: %s</string>
-    <string name="icon_design_credits"><b>아이콘 속성:</b>\n• 원작 아이콘 디자인: %s</string>
     <string name="call_of_the_plaguebearer">역병전파자의 부름</string>
     <string name="eliminated">제거</string>
     <string name="locations">장소</string>
@@ -1440,8 +1437,8 @@
     <string name="lucid_nightmare">자각 악몽</string>
     <string name="delete_your_account">계정 삭제</string>
     <string name="loading_account_details">계정 세부사항을 불러오는 중…</string>
-    <string name="delete_account_warning">계정을 <b>영구적</b>으로 삭제하려는 것이 맞습니까? 이는 <b>취소가 불가능</b>합니다.</string>
-    <string name="you_are_currently_signed_in_as_handle">현재 ‘<b>%s</b>’ 유저로 로그인되어 있습니다.</string>
+    <string name="delete_account_warning">계정을 &lt;b&gt;영구적&lt;/b&gt;으로 삭제하려는 것이 맞습니까? 이는 &lt;b&gt;취소가 불가능&lt;/b&gt;합니다.</string>
+    <string name="you_are_currently_signed_in_as_handle">현재 ‘&lt;b&gt;%s&lt;/b&gt;’ 유저로 로그인되어 있습니다.</string>
     <string name="i_understand_that_all_data_will_be_deleted_permanently">모든 데이터가 영구적으로 삭제된다는 것을 이해했습니다.</string>
     <string name="confirm_account_deletion">계정 삭제 확인</string>
     <string name="if_you_choose_to_delete_this_account_the_following_data_will_be_removed">계정을 삭세하면, 다음의 데이터가 제거됩니다.</string>
@@ -1543,7 +1540,7 @@
     <string name="do_you_want_to_use_the_app_to_randomize_choices">앱을 이용하여 선택 항목을 무작위로 지정하시겠습니까?</string>
     <string name="the_cell_travels_from_depart_to_arrive">%s 위치에서 %s 위치로 이동합니다.</string>
     <plurals name="mark_time_in_your_campaign_log">
-        <item quantity="other">캠페인 기록지 아래에 %s<b>시간</b>을 기록하십시오.</item>
+        <item quantity="other">캠페인 기록지 아래에 %s&lt;b&gt;시간&lt;/b&gt;을 기록하십시오.</item>
     </plurals>
     <string name="this_includes_the_cost_of_experience_cost_of_playing_the_sidestory">여기에는 외전 이야기를 즐기기 위한 경험치 비용이 포함됩니다.</string>
     <string name="deck_owned_by_other_player_campaign_saving_changes">이 덱은 다른 플레이어가 소유하고 있습니다. 지금 변경점을 기록할 수 있으며, 소유주가 다음에 앱을 열 때 덱에 저장할 수 있는 기회가 주어집니다.</string>
@@ -1566,7 +1563,7 @@
     <string name="use_expedited_ticket">긴급 티켓 사용</string>
     <string name="time_cost_xp_cost">시간 비용: %s</string>
     <string name="additional_experience_cost_for_investigator_cost">‘%s’ 조사자의 추가 경험치 비용: %s점</string>
-    <string name="side_story_description">외전 이야기는 &lt;아컴호러 카드게임&gt; 캠페인에 속한 두 연속 시나리오 사이에 진행할 수 있는 별도의 시나리오입니다.\n- <i>진홍색 열쇠</i> 캠페인 확장을 플레이하고 있으므로, 외전 이야기를 즐기려면 경험치 대신 <b>시간</b>을 일정량 소비해야 합니다.\n- 외전 이야기에서 얻은 약점, 트라우마, 경험치, 보상은 캠페인을 마칠 때까지 조사자에게 남습니다. 캠페인 도중에 외전 이야기를 진행한다면, 이 시나리오를 현재 진행중인 캠페인의 다음 시나리오로 간주합니다. 즉, 혼돈 주머니, 약점, 트라우마, 기존에 획득한 이야기 자산이 외전이야기에 그대로 이어집니다.\n- 각 외전 이야기는 캠페인마다 1번씩만 즐길 수 있습니다.</string>
+    <string name="side_story_description">외전 이야기는 &lt;아컴호러 카드게임&gt; 캠페인에 속한 두 연속 시나리오 사이에 진행할 수 있는 별도의 시나리오입니다.\n- &lt;i&gt;진홍색 열쇠&lt;/i&gt; 캠페인 확장을 플레이하고 있으므로, 외전 이야기를 즐기려면 경험치 대신 &lt;b&gt;시간&lt;/b&gt;을 일정량 소비해야 합니다.\n- 외전 이야기에서 얻은 약점, 트라우마, 경험치, 보상은 캠페인을 마칠 때까지 조사자에게 남습니다. 캠페인 도중에 외전 이야기를 진행한다면, 이 시나리오를 현재 진행중인 캠페인의 다음 시나리오로 간주합니다. 즉, 혼돈 주머니, 약점, 트라우마, 기존에 획득한 이야기 자산이 외전이야기에 그대로 이어집니다.\n- 각 외전 이야기는 캠페인마다 1번씩만 즐길 수 있습니다.</string>
     <plurals name="mark_distance_time">
         <item quantity="other">%s시간 표시</item>
     </plurals>
@@ -1613,7 +1610,7 @@
         <item quantity="other">상태 보고서 읽기: %s</item>
     </plurals>
     <plurals name="mark_time_time_cell_travels_from_depart_to_arrive_on_the_way_to_somewhere_else">
-        <item quantity="other">셀이 다른 곳으로 이동하는 도중에 %s에서 %s으로 이동하는 경우 %s <b>시간</b>으로 표시합니다.</item>
+        <item quantity="other">셀이 다른 곳으로 이동하는 도중에 %s에서 %s으로 이동하는 경우 %s &lt;b&gt;시간&lt;/b&gt;으로 표시합니다.</item>
     </plurals>
     <string name="error_more_than_5_cards_not_seeker_neutral_paradox_traited">탐구자나 중립 카드도 아니고 [[역설]] 특성도 없는 카드를 5장보다 많이 포함할 수 없습니다.</string>
     <string name="min">최소</string>
@@ -1707,7 +1704,6 @@
     <string name="some_decks_may_not_load_fully_and_campaigns_might_appear_incomplete_until_this_is_fixed">일부 덱은 완전히 불러올 수 없으며, 이 문제가 해결될 때까지 캠페인이 불완전하게 표시될 수 있습니다.</string>
     <string name="download_cards">카드 내려받기</string>
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">새 카드를 확인하지 않은지 너무 오래되었습니다.</string>
-    <string name="chinese_simplified_translators">중국어(간체): %s</string>
     <string name="narration">나레이션</string>
     <string name="these_cards_might_have_been_updated">이러한 카드는 새로운 금기 목록에서 업데이트되었거나 사소한 수정 사항이 포함되어 있을 수 있습니다.</string>
     <string name="create_new_deck">새로운 덱 생성하기</string>

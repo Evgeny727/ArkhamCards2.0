@@ -475,13 +475,13 @@
     <string name="ally_arcane">盟友. 法术</string>
     <string name="things0_and_things1">%s和%s</string>
     <string name="list_and_last">%s，以及%s</string>
-    <string name="name_subname">%s<i>(%s)</i></string>
+    <string name="name_subname">%s&lt;i&gt;(%s)&lt;/i&gt;</string>
     <string name="campaign_setup">剧本设置</string>
     <string name="choose_lead_investigator">选择调查员队长</string>
     <string name="lead_investigator">调查员队长</string>
     <string name="alive">幸存</string>
     <string name="resigned">已撤退</string>
-    <string name="proceed_to_next_scenario">进入<b>%s</b>。</string>
+    <string name="proceed_to_next_scenario">进入&lt;b&gt;%s&lt;/b&gt;。</string>
     <string name="mark_played_scenarios_to_add_results">标记你已完成的冒险，使其可以出现在搜索结果中。</string>
     <string name="loading">读取中</string>
     <string name="label_all">%s: 全部</string>
@@ -508,25 +508,25 @@
     <string name="mental_trauma">精神创伤</string>
     <string name="view_deck">检视牌组</string>
     <string name="update_decks_with_scenario_results">以冒险结果更新牌组</string>
-    <string name="in_your_campaign_log_cross_out">在剧本日志中划去<i>%s</i></string>
-    <string name="in_your_campaign_log_record_log_text">在剧本日志中，记录下<i>%s</i></string>
+    <string name="in_your_campaign_log_cross_out">在剧本日志中划去&lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_record_log_text">在剧本日志中，记录下&lt;i&gt;%s&lt;/i&gt;</string>
     <string name="remove_card_length">移除%s (%s)</string>
-    <string name="suffer_physical_or_mental_trauma_your_choice">你受到1点肉体创伤或1点精神创伤<i>(自行选择)</i>。</string>
+    <string name="suffer_physical_or_mental_trauma_your_choice">你受到1点肉体创伤或1点精神创伤&lt;i&gt;(自行选择)&lt;/i&gt;。</string>
     <string name="all_weaknesses_have_been_assigned">所有弱点卡都已经被选择了。</string>
     <string name="use_app_to_randomize_weaknesses_question">你想使用APP来随机生成弱点吗？</string>
-    <string name="because_you_are_playing_on_difficulty">由于你正在进行的游戏难度为<b>%s</b>:</string>
-    <string name="because_you_have_already_completed_scenario">由于你已完成<b>%s</b>:</string>
-    <string name="because_you_not_completed_scenario">由于你尚未完成<b>%s</b>:</string>
+    <string name="because_you_are_playing_on_difficulty">由于你正在进行的游戏难度为&lt;b&gt;%s&lt;/b&gt;:</string>
+    <string name="because_you_have_already_completed_scenario">由于你已完成&lt;b&gt;%s&lt;/b&gt;:</string>
+    <string name="because_you_not_completed_scenario">由于你尚未完成&lt;b&gt;%s&lt;/b&gt;:</string>
     <plurals name="check_campaign_log_count_mark_section">
         <item quantity="other">检查剧本日志。由于“%s”底下有%s个标记</item>
     </plurals>
     <plurals name="check_campaign_log_count_entry_section">
         <item quantity="other">检查剧本日志。由于“%s”底下有%s个项目</item>
     </plurals>
-    <string name="check_campaign_log_because_entry">检查剧本日志。由于<i>%s</i></string>
-    <string name="check_campaign_log_is_the_section_not_crossed_off">检查剧本日志。是否<i>%s</i>没有被划掉？</string>
+    <string name="check_campaign_log_because_entry">检查剧本日志。由于&lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="check_campaign_log_is_the_section_not_crossed_off">检查剧本日志。是否&lt;i&gt;%s&lt;/i&gt;没有被划掉？</string>
     <plurals name="investigators_must_read_prompt_plural">
-        <item quantity="other">%s必须阅读<b>%s</b>。</item>
+        <item quantity="other">%s必须阅读&lt;b&gt;%s&lt;/b&gt;。</item>
     </plurals>
     <string name="does_any_investigator_have_card_in_deck">是否有任何调查员的牌组中持有“%s”？</string>
     <string name="was_investigator_with_card_in_deck_defeated">持有“%s”的调查员是否被击败了？</string>
@@ -534,9 +534,9 @@
     <plurals name="because_there_is_player_count_in_game_plural">
         <item quantity="other">由于总共有%s名玩家:</item>
     </plurals>
-    <string name="if_the_lead_investigator_was_killed">如果队长<b>阵亡</b>。</string>
-    <string name="if_all_investigators_were_killed">如果所有调查员都<b>阵亡</b>。</string>
-    <string name="check_section_if_text">检查%s。如果<i>%s</i></string>
+    <string name="if_the_lead_investigator_was_killed">如果队长&lt;b&gt;阵亡&lt;/b&gt;。</string>
+    <string name="if_all_investigators_were_killed">如果所有调查员都&lt;b&gt;阵亡&lt;/b&gt;。</string>
+    <string name="check_section_if_text">检查%s。如果&lt;i&gt;%s&lt;/i&gt;</string>
     <string name="are_you_sure_you_want_to_delete_the_campaign">你是否确定要删除剧本: %s</string>
     <string name="scenario_attempt_count">%s (尝试%s)</string>
     <string name="select_deck">选择牌组</string>
@@ -562,8 +562,8 @@
     <string name="edit_campaign_log">编辑剧本日志</string>
     <string name="draw_chaos_tokens">抽取混乱标记</string>
     <string name="start_playing_the_scenario_now">开始进行冒险。</string>
-    <string name="in_your_campaign_log_record_text">在剧本日志中，记录下<i>%s</i></string>
-    <string name="in_your_campaign_log_section_record_log_text">在剧本日志中，“%s”下，记录<i>%s</i>。</string>
+    <string name="in_your_campaign_log_record_text">在剧本日志中，记录下&lt;i&gt;%s&lt;/i&gt;</string>
+    <string name="in_your_campaign_log_section_record_log_text">在剧本日志中，“%s”下，记录&lt;i&gt;%s&lt;/i&gt;。</string>
     <string name="add_token_to_the_chaos_bag">将%s标记加入混乱袋。</string>
     <string name="remove_token_from_the_chaos_bag">将%s标记自混乱袋中移除。</string>
     <string name="odds_calculator">概率计算机</string>
@@ -630,7 +630,7 @@
     <string name="return_to_threads_of_fate">重返命运之线</string>
     <string name="return_to_heart_of_the_elders">重返久远腹地</string>
     <string name="return_to_shattered_aeons">重返破碎永世</string>
-    <string name="confirm_included_automatically">%s <i>(自动加入)</i></string>
+    <string name="confirm_included_automatically">%s &lt;i&gt;(自动加入)&lt;/i&gt;</string>
     <string name="return_to_the_forgotten_age">重返失落的时代</string>
     <string name="return_to_the_untamed_wilds">重返荒莽密林</string>
     <string name="return_to_the_doom_of_eztli">重返埃兹特里的覆灭</string>
@@ -647,7 +647,7 @@
     <string name="scenario_or_interlude">冒险或幕间故事</string>
     <string name="alphabetize_guide_encounter_sets">依字母顺序排序遭遇组</string>
     <string name="draw_weakness">抽取弱点</string>
-    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution"><b>注意</b>: 被击败的调查员的创伤在冒险结局的阶段处理。</string>
+    <string name="note_trauma_from_investigator_defeat_handled_during_scenario_resolution">&lt;b&gt;注意&lt;/b&gt;: 被击败的调查员的创伤在冒险结局的阶段处理。</string>
     <string name="contact_us">联络我们</string>
     <plurals name="count_resupply">
         <item quantity="other">%s重新补给</item>
@@ -767,8 +767,8 @@
         <item quantity="other">在以下选择中将随机挑选两张卡牌:\n\n%s</item>
     </plurals>
     <string name="edit_collection_in_settings">你可以在设置中编辑你的收藏库来调整可用的选项。</string>
-    <string name="additional_options_upgrade_fortune_gambit_card"><b>额外选项</b>: 当你升级[[幸运]]或[[局势]]卡牌时，你可以选择支付较高等卡牌的全额经验，并且将低等级卡牌留在你的牌组中(不计入卡牌张数限制或同名卡牌张数上限)。</string>
-    <string name="shrewd_analysis_rule_text"><b>老练分析</b>: 如果你已满足剧本的要求，可以使用老练分析从可用选项中随机选择该卡牌的2张升级版本，仅需支付1次经验。\n\n<i>注意: 此APP可以借由调整经验来处理“免费”的升级。</i></string>
+    <string name="additional_options_upgrade_fortune_gambit_card">&lt;b&gt;额外选项&lt;/b&gt;: 当你升级[[幸运]]或[[局势]]卡牌时，你可以选择支付较高等卡牌的全额经验，并且将低等级卡牌留在你的牌组中(不计入卡牌张数限制或同名卡牌张数上限)。</string>
+    <string name="shrewd_analysis_rule_text">&lt;b&gt;老练分析&lt;/b&gt;: 如果你已满足剧本的要求，可以使用老练分析从可用选项中随机选择该卡牌的2张升级版本，仅需支付1次经验。\n\n&lt;i&gt;注意: 此APP可以借由调整经验来处理“免费”的升级。&lt;/i&gt;</string>
     <string name="upgrade_results">升级结果</string>
     <string name="upgrade_with_shrewd_analysis">使用老练分析升级</string>
     <string name="the_pit_of_despair">绝望深坑</string>
@@ -846,7 +846,7 @@
     <string name="location">地点</string>
     <string name="actions">行动</string>
     <string name="undo_deck_upgrade">撤销牌组升级？</string>
-    <string name="additional_options_upgrade_spell"><b>额外选项</b>: 当你升级一个[[法术]]卡牌时，你可以选择支付较高等卡牌的全额经验，并且将低等级卡牌留在你的牌组中(不计入卡牌张数限制或同名卡牌张数上限)。</string>
+    <string name="additional_options_upgrade_spell">&lt;b&gt;额外选项&lt;/b&gt;: 当你升级一个[[法术]]卡牌时，你可以选择支付较高等卡牌的全额经验，并且将低等级卡牌留在你的牌组中(不计入卡牌张数限制或同名卡牌张数上限)。</string>
     <string name="spent_of_adjusted_xp">%s / %s点经验已花费</string>
     <string name="upgrading">升级中</string>
     <string name="editing">编辑中</string>
@@ -1088,12 +1088,12 @@
     <string name="select_traits">选择特性</string>
     <string name="random_weaknesses_will_be_drawn_that_match_these_traits">抽取符合这些特性的随机弱点。</string>
     <string name="edit_selection">编辑选择</string>
-    <string name="check_campaign_log_if_text">查看剧本日志。<i>如果%s</i></string>
+    <string name="check_campaign_log_if_text">查看剧本日志。&lt;i&gt;如果%s&lt;/i&gt;</string>
     <string name="discord">Discord</string>
     <string name="vk">VK</string>
     <string name="telegram">Telegram</string>
     <string name="in_your_campaign_log_section_record_name">在剧本日志中，"%s"下，纪录下%s。</string>
-    <string name="in_your_campaign_log_section_cross_out">在剧本日志中，"%s"下，划掉<i>%s</i>。</string>
+    <string name="in_your_campaign_log_section_cross_out">在剧本日志中，"%s"下，划掉&lt;i&gt;%s&lt;/i&gt;。</string>
     <string name="unarchive_campaign">未归档剧本</string>
     <string name="archive_campaign">归档剧本</string>
     <string name="show_archived_campaigns">显示已归档剧本</string>
@@ -1172,14 +1172,14 @@
     <string name="in_the_section_of_the_campaign_log_cross_out_name">在剧本日志中%s部分，划掉%s，</string>
     <string name="in_the_section_of_the_campaign_log_write_mia_to_name">在剧本日志中%s部分，在%s的名字旁写下“失踪”。</string>
     <string name="in_the_section_of_the_campaign_log_cross_out_mia_to_name">在剧本日志中%s部分，将%s旁的“失踪”划掉。</string>
-    <string name="if_the_lead_investigator_was_driven_insane">如果调查员队长<b>发疯</b>了。</string>
-    <string name="if_all_investigators_were_driven_insane">如果所有调查员都<b>发疯</b>了。</string>
+    <string name="if_the_lead_investigator_was_driven_insane">如果调查员队长&lt;b&gt;发疯&lt;/b&gt;了。</string>
+    <string name="if_all_investigators_were_driven_insane">如果所有调查员都&lt;b&gt;发疯&lt;/b&gt;了。</string>
     <string name="if_the_lead_investigator_is_still_alive">如果调查员队长仍存活。</string>
     <string name="if_all_investigators_are_still_alive">如果所有调查员都仍存活。</string>
     <string name="the_entity">实体</string>
     <string name="resolute">坚毅</string>
     <string name="mia">失踪</string>
-    <string name="sidestory_description">支线剧情是一种冒险，可在《诡镇奇谈：卡牌版》的任意两场冒险之间进行。\n- 参与剧本的每位调查员需要支付一定数量的经验值，才能进行支线剧情。\n- 调查员们保留在支线剧情中获得的弱点、创伤、经验、奖励，直到该剧本结束。\n- 在每个剧本中，每个支线剧情只能进行一次游戏。\n\n<b>注意：</b>使用此APP时，进行支线冒险所需要的经验值会自动在<b>冒险结束</b>时扣除，但你仍应该确保你能有足够的经验支付。</string>
+    <string name="sidestory_description">支线剧情是一种冒险，可在《诡镇奇谈：卡牌版》的任意两场冒险之间进行。\n- 参与剧本的每位调查员需要支付一定数量的经验值，才能进行支线剧情。\n- 调查员们保留在支线剧情中获得的弱点、创伤、经验、奖励，直到该剧本结束。\n- 在每个剧本中，每个支线剧情只能进行一次游戏。\n\n&lt;b&gt;注意：&lt;/b&gt;使用此APP时，进行支线冒险所需要的经验值会自动在&lt;b&gt;冒险结束&lt;/b&gt;时扣除，但你仍应该确保你能有足够的经验支付。</string>
     <string name="ice_and_death_part_1">亡命冰原：第1部分</string>
     <string name="ice_and_death_part_2">亡命冰原：第2部分</string>
     <string name="ice_and_death_part_3">亡命冰原：第3部分</string>
@@ -1197,7 +1197,7 @@
     <string name="ice_and_death_supplies_recovered">亡命冰原 - 已回收的补给品</string>
     <string name="the_heart_of_madness_seals_placed">疯狂之心 - 放置的封印</string>
     <string name="the_heart_of_madness_seals_recovered">疯狂之心 - 发现的封印</string>
-    <string name="heal_physical_or_mental_trauma_your_choice">你可以治愈1点肉体或精神创伤<i>(你的选择)</i></string>
+    <string name="heal_physical_or_mental_trauma_your_choice">你可以治愈1点肉体或精神创伤&lt;i&gt;(你的选择)&lt;/i&gt;</string>
     <string name="in_section_campaign_log_draw_check_mark_next_to_partner">在剧本日志中%s部分，在%s的名字旁打勾。</string>
     <string name="choose_heal_type">选择治愈类型</string>
     <string name="chosen_heal_type">选择的治愈类型</string>
@@ -1319,9 +1319,6 @@
     <string name="add_card">加入%s:</string>
     <string name="select_name">选择%s</string>
     <string name="note_selected_at_creation_time">注意：此卡牌应该在构建牌组时选择，而不是在两场冒险之间。</string>
-    <string name="translation_credits"><b>翻译: </b>\n• 西语: %s\n• 法语: %s\n• 德语: %s\n• 俄语: %s\n• 韩语: %s</string>
-    <string name="contributions_credits"><b>其他贡献:</b>\n• 视觉设计: %s\n• 数位混乱袋 + 概率计算机: %s\n• Dissonant Voices audio integration: %s\n• Tooling and build support: %s</string>
-    <string name="icon_design_credits"><b>图标来源:</b>\n• 原版图标设计: %s</string>
     <string name="call_of_the_plaguebearer">瘟疫使者的呼唤</string>
     <string name="eliminated">已退场</string>
     <string name="locations">地点</string>
@@ -1435,8 +1432,8 @@
     <string name="lucid_nightmare">清醒梦魇</string>
     <string name="delete_your_account">删除你的帐户</string>
     <string name="loading_account_details">读取帐户资料……</string>
-    <string name="delete_account_warning">你确定你要<b>永久</b>删除你的帐户？此操作<b>无法撤销</b>。</string>
-    <string name="you_are_currently_signed_in_as_handle">您当前以<b>%s</b>的身份登录。</string>
+    <string name="delete_account_warning">你确定你要&lt;b&gt;永久&lt;/b&gt;删除你的帐户？此操作&lt;b&gt;无法撤销&lt;/b&gt;。</string>
+    <string name="you_are_currently_signed_in_as_handle">您当前以&lt;b&gt;%s&lt;/b&gt;的身份登录。</string>
     <plurals name="the_friends_campaign_that_you_have_participated_in_will_have_your_decks_removed">
         <item quantity="other">你的牌组将从好友的剧本中移除：</item>
     </plurals>
@@ -1524,7 +1521,7 @@
     <string name="do_you_want_to_use_the_app_to_randomize_choices">你是否要让APP帮你随机选择？</string>
     <string name="the_cell_travels_from_depart_to_arrive">从%s旅行到%s。</string>
     <plurals name="mark_time_in_your_campaign_log">
-        <item quantity="other">在剧本日志中标记%s<b>时间</b>。</item>
+        <item quantity="other">在剧本日志中标记%s&lt;b&gt;时间&lt;/b&gt;。</item>
     </plurals>
     <string name="this_includes_the_cost_of_experience_cost_of_playing_the_sidestory">这包括进行支线剧情所需花费经验。</string>
     <string name="deck_owned_by_other_player_campaign_saving_changes">这副牌组属放另一位玩家。你可以现在记录升级，他们下次使用APP时可以选择保存对他们牌组的更改。</string>
@@ -1547,7 +1544,7 @@
     <string name="use_expedited_ticket">使用特快车票</string>
     <string name="time_cost_xp_cost">时间费用：%s</string>
     <string name="additional_experience_cost_for_investigator_cost">%s的额外经验花费：%s</string>
-    <string name="side_story_description">支线剧情是一种可以在《诡镇奇谈：卡牌版》的剧本中任意两场冒险之间进行的冒险。\n- 因为你正在进行《绯红密钥》剧本，支线剧情的费用改为使用<b>时间</b>，而不是经验值。\n- 进行支线剧情得到的弱点、创伤、经验值与奖励，在剩余的剧本中会跟着调查员。\n- 每个剧本中，每个支线剧情只能进行一次。</string>
+    <string name="side_story_description">支线剧情是一种可以在《诡镇奇谈：卡牌版》的剧本中任意两场冒险之间进行的冒险。\n- 因为你正在进行《绯红密钥》剧本，支线剧情的费用改为使用&lt;b&gt;时间&lt;/b&gt;，而不是经验值。\n- 进行支线剧情得到的弱点、创伤、经验值与奖励，在剩余的剧本中会跟着调查员。\n- 每个剧本中，每个支线剧情只能进行一次。</string>
     <plurals name="mark_distance_time">
         <item quantity="other">标记%s时间</item>
     </plurals>
@@ -1593,7 +1590,7 @@
         <item quantity="other">阅读近况报告：%s</item>
     </plurals>
     <plurals name="mark_time_time_cell_travels_from_depart_to_arrive_on_the_way_to_somewhere_else">
-        <item quantity="other">在去其他地方的旅途中从%s旅行到%s，标记%s<b>时间</b>。</item>
+        <item quantity="other">在去其他地方的旅途中从%s旅行到%s，标记%s&lt;b&gt;时间&lt;/b&gt;。</item>
     </plurals>
     <string name="error_more_than_5_cards_not_seeker_neutral_paradox_traited">你不能加入超过5张不是探求者、中立或悖论特性的卡牌。</string>
     <string name="min">最低</string>
@@ -1696,7 +1693,6 @@
     <string name="some_decks_may_not_load_fully_and_campaigns_might_appear_incomplete_until_this_is_fixed">有些牌组可能无法完全加载，剧本也可能显示不完整，此问题修复前该情况将持续存在。</string>
     <string name="download_cards">下载卡牌</string>
     <string name="it_has_been_more_than_a_week_since_you_checked_for_new_cards">你已经超过一周没有查看新卡牌了。</string>
-    <string name="chinese_simplified_translators">中文(简体): %s</string>
     <string name="narration">旁白</string>
     <string name="these_cards_might_have_been_updated">这些卡牌可能已根据新的禁卡表进行了更新，或是包含了一些细微的修正内容。</string>
     <string name="ages_unwound">纪元失序</string>

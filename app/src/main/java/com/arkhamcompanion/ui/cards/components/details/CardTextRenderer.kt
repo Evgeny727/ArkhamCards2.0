@@ -98,9 +98,7 @@ fun ParsedCardText(
 }
 
 @Composable
-fun rememberCardTextStyles(
-    flavorText: Boolean
-): CardTextStyles {
+internal fun rememberCardTextStyles(flavorText: Boolean): CardTextStyles {
     val colors = CustomTheme.colors
     val typography = CustomTheme.typography
 
@@ -126,7 +124,7 @@ fun rememberCardTextStyles(
     }
 }
 
-private fun CardTextParagraph.toAnnotatedString(
+internal fun CardTextParagraph.toAnnotatedString(
     text: String,
     styleResolver: CardTextStyleResolver
 ): AnnotatedString {
