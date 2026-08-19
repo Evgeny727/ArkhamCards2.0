@@ -245,7 +245,6 @@ class CardsRepositoryImpl @Inject constructor(
                 prefetchDistance = 140,
                 enablePlaceholders = true,
                 initialLoadSize = 300,
-                maxSize = 700
             ),
             pagingSourceFactory = {
                 LoggingPagingSource(

@@ -19,15 +19,12 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
@@ -49,7 +46,6 @@ import com.arkhamcompanion.ui.cards.components.PlaceholderCardListItem
 import com.arkhamcompanion.ui.cards.components.buildHeaderTitle
 import com.arkhamcompanion.ui.theme.CustomTheme
 import kotlinx.collections.immutable.ImmutableList
-import kotlin.collections.set
 
 @Composable
 fun LazyCardListWithStickHeaders(
@@ -62,7 +58,7 @@ fun LazyCardListWithStickHeaders(
     modifier: Modifier = Modifier,
     bottomButtons: LazyListScope.() -> Unit,
 ) {
-    val sectionBoundariesByCode by rememberSectionBoundaries(searchResults)
+    val derivedSectionBoundaries by rememberSectionBoundaries(searchResults)
     val codeToIndex by remember(searchResultCodes) {
         derivedStateOf {
             searchResultCodes
@@ -72,13 +68,14 @@ fun LazyCardListWithStickHeaders(
                 .toMap()
         }
     }
-    val sectionBoundaries by remember(sectionBoundariesByCode, codeToIndex) {
+    val sectionBoundaries by remember(derivedSectionBoundaries, codeToIndex) {
         derivedStateOf {
-            sectionBoundariesByCode
-                .mapNotNull { (code, header) ->
-                    codeToIndex[code]?.let { index ->
+            derivedSectionBoundaries
+                .mapNotNull { header ->
+                    codeToIndex[header.firstCardCode]?.let { index ->
                         SectionBoundary(
                             firstCardIndex = index,
+                            firstCardCode = header.firstCardCode,
                             header = header
                         )
                     }
@@ -102,6 +99,7 @@ fun LazyCardListWithStickHeaders(
                 findSection(
                     cardIndex = it,
                     boundaries = sectionBoundaries,
+                    codeToIndex = codeToIndex
                 )
             }
         }
@@ -283,32 +281,18 @@ fun LazyCardListWithStickHeaders(
 @Immutable
 private data class SectionBoundary(
     val firstCardIndex: Int,
+    val firstCardCode: String,
     val header: CardListItemUiModel.CategoryHeader,
 )
 
 @Composable
 private fun rememberSectionBoundaries(
-    searchResults: LazyPagingItems<CardListItemUiModel>,
-): State<Map<String, CardListItemUiModel.CategoryHeader>> {
-    val boundaries = remember {
-        mutableStateMapOf<String, CardListItemUiModel.CategoryHeader>()
-    }
-
-    LaunchedEffect(searchResults) {
-        snapshotFlow {
-            searchResults.itemSnapshotList.items
-        }.collect { items ->
-            items
-                .filterIsInstance<CardListItemUiModel.CategoryHeader>()
-                .forEach { header ->
-                    boundaries[header.firstCardCode] = header
-                }
-        }
-    }
-
+    searchResults: LazyPagingItems<CardListItemUiModel>
+): State<List<CardListItemUiModel.CategoryHeader>> {
     return remember {
         derivedStateOf {
-            boundaries.toMap()
+            searchResults.itemSnapshotList.items
+                .filterIsInstance<CardListItemUiModel.CategoryHeader>()
         }
     }
 }
@@ -316,17 +300,28 @@ private fun rememberSectionBoundaries(
 private fun findSection(
     cardIndex: Int,
     boundaries: List<SectionBoundary>,
+    codeToIndex: Map<String, Int>,
 ): CardListItemUiModel.CategoryHeader? {
-    if (cardIndex < 0 || boundaries.isEmpty()) return null
-
+    var low = 0
+    var high = boundaries.lastIndex
     var result: CardListItemUiModel.CategoryHeader? = null
 
-    for (boundary in boundaries) {
-        if (boundary.firstCardIndex > cardIndex) {
-            break
-        }
+    while (low <= high) {
+        val mid = (low + high) ushr 1
 
-        result = boundary.header
+        val boundaryIndex =
+            codeToIndex[boundaries[mid].firstCardCode]
+                ?: run {
+                    low = mid + 1
+                    continue
+                }
+
+        if (boundaryIndex <= cardIndex) {
+            result = boundaries[mid].header
+            low = mid + 1
+        } else {
+            high = mid - 1
+        }
     }
 
     return result
