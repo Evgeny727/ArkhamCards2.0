@@ -22,7 +22,7 @@ import com.arkhamcompanion.ui.components.ArkhamButton
 import com.arkhamcompanion.ui.components.ArkhamButtonSearchIcon
 import com.arkhamcompanion.ui.components.ArkhamSearchBox
 import com.arkhamcompanion.ui.components.CardsSearchOptions
-import com.arkhamcompanion.ui.components.LazyCardListWithStickHeaders
+import com.arkhamcompanion.ui.components.LazyCardListWithStickyHeaders
 import com.arkhamcompanion.ui.theme.CustomTheme
 import com.arkhamcompanion.ui.utils.applyScaffoldPaddings
 import kotlinx.coroutines.flow.collectLatest
@@ -89,7 +89,7 @@ fun CardsScreen(
             )
         }
 
-        LazyCardListWithStickHeaders(
+        LazyCardListWithStickyHeaders(
             searchQuery = searchOptions.searchQuery,
             searchResults = searchResults,
             searchResultCodes = searchResultCodes,

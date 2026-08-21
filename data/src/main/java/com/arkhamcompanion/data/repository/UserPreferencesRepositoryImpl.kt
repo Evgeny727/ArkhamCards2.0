@@ -9,7 +9,7 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.arkhamcompanion.domain.model.cards.CardsSearchPreferences
+import com.arkhamcompanion.domain.model.cards.CardSearchPreferences
 import com.arkhamcompanion.domain.model.settings.Collection
 import com.arkhamcompanion.domain.repository.AnalyticsRepository
 import com.arkhamcompanion.domain.repository.DEFAULT_MYTHOS_SORT_ORDER
@@ -162,7 +162,7 @@ class UserPreferencesRepositoryImpl @Inject constructor(
             preferences[CARDS_SORT_ORDER_MYTHOS]?.split(",")?.filter { it.isNotBlank() }
                 ?.toImmutableList() ?: DEFAULT_MYTHOS_SORT_ORDER
         }
-    override val cardsSearchPreferences: Flow<CardsSearchPreferences> = dataStore.data
+    override val cardSearchPreferences: Flow<CardSearchPreferences> = dataStore.data
         .catch {
             if (it is IOException) {
                 analyticsRepository.logMessage("Error reading cards search preferences.")
@@ -173,7 +173,7 @@ class UserPreferencesRepositoryImpl @Inject constructor(
                 throw it
             }
         }.map { preferences ->
-            CardsSearchPreferences(
+            CardSearchPreferences(
                 includeEnglish = preferences[INCLUDE_ENGLISH_SEARCH_RESULTS] ?: false,
                 showFanMade = preferences[FANMADE_CARDS] ?: false,
                 tabooSetId = preferences[TABOO] ?: 0,

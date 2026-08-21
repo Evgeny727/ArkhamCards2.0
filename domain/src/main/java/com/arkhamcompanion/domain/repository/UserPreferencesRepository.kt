@@ -1,6 +1,6 @@
 package com.arkhamcompanion.domain.repository
 
-import com.arkhamcompanion.domain.model.cards.CardsSearchPreferences
+import com.arkhamcompanion.domain.model.cards.CardSearchPreferences
 import com.arkhamcompanion.domain.model.settings.Collection
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -17,7 +17,7 @@ interface UserPreferencesRepository {
     val cardsUpdatedAt: Flow<String>
     val sortOrderPlayer: Flow<ImmutableList<String>>
     val sortOrderMythos: Flow<ImmutableList<String>>
-    val cardsSearchPreferences: Flow<CardsSearchPreferences>
+    val cardSearchPreferences: Flow<CardSearchPreferences>
 
     suspend fun saveThemePreference(theme: Int)
     suspend fun saveScaleFactorPreference(scaleFactor: Float)

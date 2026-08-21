@@ -25,9 +25,10 @@ import com.arkhamcompanion.data.objects.createSQLSearchQuery
 import com.arkhamcompanion.data.objects.normalizeForSearch
 import com.arkhamcompanion.data.remote.CardsRemoteDataSource
 import com.arkhamcompanion.domain.model.cards.CardDetailsWithRelations
+import com.arkhamcompanion.domain.model.cards.CardFilters
 import com.arkhamcompanion.domain.model.cards.CardListItemUiModel
-import com.arkhamcompanion.domain.model.cards.CardsSearchOptions
-import com.arkhamcompanion.domain.model.cards.CardsSearchPreferences
+import com.arkhamcompanion.domain.model.cards.CardSearchConfig
+import com.arkhamcompanion.domain.model.cards.CardSearchOptions
 import com.arkhamcompanion.domain.model.cards.CodeWithTaboo
 import com.arkhamcompanion.domain.objects.TimestampNormalizer.compareTimestamps
 import com.arkhamcompanion.domain.objects.TimestampNormalizer.getCurrentDateTime
@@ -233,11 +234,9 @@ class CardsRepositoryImpl @Inject constructor(
     }
 
     override fun searchPaginatedCardsFlow(
-        spoilerState: Boolean,
-        searchOptions: CardsSearchOptions,
-        searchPreferences: CardsSearchPreferences
+        searchConfig: CardSearchConfig
     ): Flow<PagingData<CardListItemUiModel>> {
-        val rawQuery = buildSearchCardsQuery(spoilerState, searchOptions, searchPreferences)
+        val rawQuery = buildSearchCardsQuery(searchConfig)
 
         return Pager(
             config = PagingConfig(
@@ -253,20 +252,18 @@ class CardsRepositoryImpl @Inject constructor(
                 )
             }
         ).flow.withCategoryHeaders(
-            if (spoilerState) searchPreferences.mythosSortOrder else searchPreferences.playerSortOrder,
-            spoilerState
+            with(searchConfig) {
+                if (spoiler) preferences.mythosSortOrder else preferences.playerSortOrder
+            },
+            searchConfig.spoiler
         )
     }
 
     override fun searchCardCodesFlow(
-        spoilerState: Boolean,
-        searchOptions: CardsSearchOptions,
-        searchPreferences: CardsSearchPreferences
+        searchConfig: CardSearchConfig
     ): Flow<ImmutableList<CodeWithTaboo>> {
         val rawQuery = buildSearchCardsQuery(
-            spoilerState,
-            searchOptions,
-            searchPreferences,
+            searchConfig,
             projection = "code, taboo_set_id"
         )
 
@@ -288,27 +285,29 @@ class CardsRepositoryImpl @Inject constructor(
     }
 
     private fun buildSearchCardsQuery(
-        spoilerState: Boolean,
-        searchOptions: CardsSearchOptions,
-        searchPreferences: CardsSearchPreferences,
+        searchConfig: CardSearchConfig,
         projection: String? = null
     ): RoomRawQuery {
         val sortClause = buildSortClause(
-            if (spoilerState) searchPreferences.mythosSortOrder else searchPreferences.playerSortOrder,
-            spoilerState
+            with(searchConfig) {
+                if (spoiler) preferences.mythosSortOrder else preferences.playerSortOrder
+            },
+            searchConfig.spoiler
         )
 
+        val filterClause = searchConfig.filters.buildFiltersQuery()
+
         val searchQuery = buildSearchQuery(
-            searchOptions,
-            searchPreferences.includeEnglish
+            searchConfig.options,
+            searchConfig.preferences.includeEnglish
         )
 
         val isQueryNotBlank = searchQuery.sqlQuery.isNotBlank()
 
-        val (packsQuery, reprintsQuery) = if (searchPreferences.ignoreCollection) "" to ""
+        val (packsQuery, reprintsQuery) = if (searchConfig.preferences.ignoreCollection) "" to ""
         else {
-            val packs = searchPreferences.collection.packs.joinToString(",") { "'$it'" }
-            val reprints = searchPreferences.collection.reprintPacks.joinToString(",") { "'$it'" }
+            val packs = searchConfig.preferences.collection.packs.joinToString(",") { "'$it'" }
+            val reprints = searchConfig.preferences.collection.reprintPacks.joinToString(",") { "'$it'" }
             packs to reprints
         }
 
@@ -346,7 +345,7 @@ class CardsRepositoryImpl @Inject constructor(
                 ON dc.winner_code = fc.code
         """.trimIndent()
 
-        val spoilerQueryPart = if (spoilerState) {
+        val spoilerQueryPart = if (searchConfig.spoiler) {
             if (supportsWindowFunctions) "SELECT ${projection ?: "*"}, MIN(pack_position) OVER (" +
                     "PARTITION BY encounter_code" +
                     ") AS encounter_group FROM ranked_cards "
@@ -452,14 +451,25 @@ class CardsRepositoryImpl @Inject constructor(
                     LEFT JOIN encounter_set e
                         ON c.encounter_code = e.code
                     CROSS JOIN selected_taboo taboo
-                    WHERE c.encounter_code IS ${if (spoilerState) "NOT NULL" else "NULL"} 
-                    ${ if (searchPreferences.ignoreCollection) "" 
+                    WHERE c.encounter_code IS ${if (searchConfig.spoiler) "NOT NULL" else "NULL"} 
+                    ${if (filterClause.isNotBlank())
+                        """ AND (
+                            $filterClause 
+                            OR EXISTS (
+                                SELECT 1
+                                FROM card back
+                                WHERE back.code = c.back_link_id AND $filterClause
+                            )
+                        )""".trimIndent() else ""
+                    }
+                    ${ if (searchConfig.preferences.ignoreCollection 
+                        || searchConfig.filters.packs == null) "" 
                     else """ AND (
                         c.pack_code IN ($packsQuery) 
                         OR c.reprint_pack_code IN ($reprintsQuery)
                     )""".trimIndent()
                     }
-                    ${ if (spoilerState) "" 
+                    ${ if (searchConfig.spoiler || searchConfig.filters.tabooSetId != null) "" 
                     else """ AND
                      (
                         -- No taboo selected -> originals only
@@ -485,11 +495,14 @@ class CardsRepositoryImpl @Inject constructor(
                      )
                     """.trimIndent() 
                     }
-                     AND c.hidden = 0 ${ if (searchPreferences.showFanMade) "" 
-                         else " AND (c.official = 1 AND c.preview = 0)" }
+                     AND c.hidden = 0 ${ if (searchConfig.preferences.showFanMade) "" 
+                         else { " AND (" +
+                            if (searchConfig.filters.officialFilter == null) "c.official = 1 AND " else ""} +
+                            "c.preview = 0)" 
+                         }
                     ${if (isQueryNotBlank)
                         """AND ((${searchQuery.searchFieldsQuery}) 
-                            ${if (searchOptions.searchBack)
+                            ${if (searchConfig.options.searchBack)
                                 """OR EXISTS (
                                     SELECT 1
                                     FROM card back
@@ -505,7 +518,7 @@ class CardsRepositoryImpl @Inject constructor(
             """.trimIndent(),
             onBindStatement = { statement ->
                 var index = 1
-                with(searchPreferences) {
+                with(searchConfig.preferences) {
                     repeat(3) {
                         statement.bindInt(index++, tabooSetId)
                     }
@@ -513,7 +526,7 @@ class CardsRepositoryImpl @Inject constructor(
                 if (isQueryNotBlank) {
                     repeat(searchQuery.searchFieldsAmount) {
                         statement.bindText(index++, searchQuery.sqlQuery)
-                        if (searchOptions.searchBack) {
+                        if (searchConfig.options.searchBack) {
                             statement.bindText(index++, searchQuery.sqlQuery)
                         }
                     }
@@ -523,7 +536,7 @@ class CardsRepositoryImpl @Inject constructor(
     }
 
     private fun buildSearchQuery(
-        searchOptions: CardsSearchOptions,
+        searchOptions: CardSearchOptions,
         includeEnglish: Boolean
     ): SqlSearchOptions {
         val language = Locale.getDefault().toLanguageTag().substringBefore("-")
@@ -548,7 +561,7 @@ class CardsRepositoryImpl @Inject constructor(
         )
     }
 
-    private fun CardsSearchOptions.buildSearchFields(
+    private fun CardSearchOptions.buildSearchFields(
         shouldIncludeRealFields: Boolean
     ): List<String> {
         val fields = buildList {
@@ -572,6 +585,315 @@ class CardsRepositoryImpl @Inject constructor(
                 if (shouldIncludeRealFields) add("search_real_$it")
             }
         }
+    }
+
+    private fun CardFilters.buildFiltersQuery(): String {
+        val filtersListBuilder = buildList {
+            var codes: MutableSet<String>? = null
+
+            fun applyCodes(otherCodes: Set<String>) {
+                if (codes == null) {
+                    codes = otherCodes.toMutableSet()
+                } else {
+                    if (codes.isNotEmpty()) codes.retainAll(otherCodes)
+                }
+            }
+
+            /*
+            *  First build filters with indexed fields
+            */
+
+            propertiesFilter?.let { properties ->
+                if (properties.fast) {
+                    applyCodes(CardCache.properties["fast"].orEmpty())
+                }
+                if (properties.healsDamage) {
+                    applyCodes(CardCache.tags["hd"].orEmpty())
+                }
+                if (properties.healsHorror) {
+                    applyCodes(CardCache.tags["hh"].orEmpty())
+                }
+                if (properties.seal) {
+                    applyCodes(CardCache.tags["se"].orEmpty())
+                }
+                if (properties.succeedBy) {
+                    applyCodes(CardCache.properties["succeeds_by"].orEmpty())
+                }
+            }
+
+            assetFilter?.let { asset ->
+                applyCodes(
+                    asset.skillBoosts.flatMap {
+                        CardCache.skillBoosts[it].orEmpty()
+                    }.toSet()
+                )
+
+                applyCodes(
+                    asset.uses.flatMap {
+                        CardCache.uses[it].orEmpty()
+                    }.toSet()
+                )
+
+                applyCodes(
+                    asset.slots.flatMap {
+                        CardCache.slots[it].orEmpty()
+                    }.toSet()
+                )
+            }
+
+            if (actions.isNotEmpty()) {
+                applyCodes(
+                    actions.flatMap {
+                        CardCache.actions[it].orEmpty()
+                    }.toSet()
+                )
+            }
+
+            if (traits.isNotEmpty()) {
+                applyCodes(
+                    traits.flatMap {
+                        CardCache.traits[it].orEmpty()
+                    }.toSet()
+                )
+            }
+
+            codes?.let { codes ->
+                if (codes.isEmpty()) {
+                    add("1 = 0")
+                    return@buildList
+                }
+                val cardCodesString = codes.joinToString(",") { "'$it'" }
+                add("c.code IN ($cardCodesString)")
+            }
+
+            if (factions.isNotEmpty()) {
+                val factionsString = factions.joinToString(",") { "'${it.name.lowercase()}'" }
+                add("""
+                    (
+                        c.faction_code IN ($factionsString) 
+                        OR c.faction2_code IN ($factionsString) 
+                        OR c.faction3_code IN ($factionsString)
+                    )
+                """.trimIndent())
+            }
+
+            levelFilter?.let { level ->
+                val (min, max) = level.range
+                add("""
+                    (
+                        (${if (min == null) "c.xp IS NULL OR " else ""} c.xp >= ${min})
+                        AND (${if (max == null) "c.xp IS NULL OR " else ""} c.xp <= ${max})
+                    )
+                """.trimIndent())
+            }
+
+            if (types.isNotEmpty()) {
+                val typesString = types.joinToString(",") { "'${it.code}'" }
+                add("c.type_code IN ($typesString)")
+            }
+
+            if (subTypes.isNotEmpty()) {
+                val nonNullable = subTypes.filterNotNull()
+                val haveNull = null in subTypes
+                val nonNullableString = nonNullable.joinToString(",") { "'${it.name.lowercase()}'" }
+                add("""
+                    (
+                        ${if (haveNull) "c.subtype_code IS NULL" else ""}
+                        ${if (nonNullable.isNotEmpty()) {
+                            (if (haveNull) " OR " else "") +
+                            "c.subtype_code IN ($nonNullableString)"
+                        } else ""}
+                    )
+                """.trimIndent())
+
+            }
+
+            if (encounterSets.isNotEmpty()) {
+                val encounterSetsString = encounterSets.joinToString(",") { "'$it'" }
+                add("c.encounter_code IN ($encounterSetsString)")
+            }
+
+            packs?.let { collection ->
+                val packsString = collection.packs.joinToString(",") { "'$it'" }
+                val reprintsString = collection.reprintPacks.joinToString(",") { "'$it'" }
+                add("""
+                    (
+                        c.pack_code IN ($packsString) 
+                        OR c.reprint_pack_code IN ($reprintsString)
+                    )
+                """.trimIndent())
+            }
+
+            tabooSetId?.let {
+                add("(c.taboo_set_id = $it AND c.taboo_placeholder = 0)")
+            }
+
+            /*
+            *  Non-indexed filters
+            */
+
+            costFilter?.let { cost ->
+                val (min, max) = cost.range
+                add("""
+                    (
+                        ${if (cost.xCost) "c.cost = -2 OR " else ""}
+                        (
+                            (
+                                (${
+                                    if (min == null) "c.cost IS NULL OR " 
+                                    else ""
+                                } c.cost >= ${min}) 
+                                AND (${
+                                    if (max == null) "c.cost IS NULL OR " 
+                                    else ""
+                                } c.cost <= ${max})
+                            ) 
+                            ${if (cost.evenCost || cost.oddCost) """
+                                AND c.cost % 2 = ${if (cost.evenCost) "0" else "1"}
+                            """.trimIndent() else ""}
+                        )
+                    )
+                """.trimIndent())
+            }
+
+            skillsFilter?.let { skills ->
+                skills.willpower?.let { add("c.skill_willpower >= $it") }
+                skills.intellect?.let { add("c.skill_intellect >= $it") }
+                skills.combat?.let { add("c.skill_combat >= $it") }
+                skills.agility?.let { add("c.skill_agility >= $it") }
+                skills.wild?.let { add("c.skill_wild >= $it") }
+                skills.any?.let {
+                    add("""
+                        (
+                            c.skill_willpower >= $it
+                            OR c.skill_intellect >= $it
+                            OR c.skill_combat >= $it
+                            OR c.skill_agility >= $it
+                            OR c.skill_wild >= $it
+                        )
+                    """.trimIndent())
+                }
+            }
+
+            healthSanityFilter?.let { (health, sanity, includeX, healthPerInvestigator) ->
+                health.run {
+                    add("""
+                        (
+                            ${if (includeX) "c.health = -2 OR " else ""}
+                            (
+                                ${if (min == null) "c.health IS NULL OR " else ""}
+                                (c.health >= $min AND c.health <= $max ${
+                                    if (healthPerInvestigator) "AND c.health_per_investigator = 1" else ""
+                                })
+                            )
+                        )
+                    """.trimIndent())
+                }
+
+                sanity.run {
+                    add("""
+                        (
+                            ${if (includeX) "c.sanity = -2 OR " else ""}
+                            (
+                                ${if (min == null) "c.sanity IS NULL OR " else ""}
+                                (c.sanity >= $min AND c.sanity <= $max)
+                            )
+                        )
+                    """.trimIndent())
+                }
+            }
+
+            propertiesFilter?.let { properties ->
+                with(properties) {
+                    if (customizable) add("c.customization_text IS NOT NULL")
+                    if (exile) add("c.exile = 1")
+                    if (exceptional) add("c.exceptional = 1")
+                    if (multiclass) add("c.faction2_code IS NOT NULL")
+                    if (myriad) add("c.myriad = 1")
+                    if (permanent) add("c.permanent = 1")
+                    if (specialist) add("c.restrictions LIKE '{\"trait\":%'")
+                    if (unique) add("c.is_unique = 1")
+                    if (victory) add("c.victory IS NOT NULL")
+                }
+            }
+
+            enemyFilter?.let { enemy ->
+                enemy.fight.run {
+                    add("""
+                        (
+                            ${if (min == null) "c.enemy_fight IS NULL OR " else ""}
+                            (c.enemy_fight >= $min AND c.enemy_fight <= $max)
+                        )
+                    """.trimIndent())
+                }
+
+                enemy.evade.run {
+                    add("""
+                        (
+                            ${if (min == null) "c.enemy_evade IS NULL OR " else ""}
+                            (c.enemy_evade >= $min AND c.enemy_evade <= $max)
+                        )
+                    """.trimIndent())
+                }
+
+                enemy.damage.run {
+                    add("""
+                        (
+                            ${if (min == null) "c.enemy_damage IS NULL OR " else ""}
+                            (c.enemy_damage >= $min AND c.enemy_damage <= $max)
+                        )
+                    """.trimIndent())
+                }
+
+                enemy.horror.run {
+                    add("""
+                        (
+                            ${if (min == null) "c.enemy_horror IS NULL OR " else ""}
+                            (c.enemy_horror >= $min AND c.enemy_horror <= $max)
+                        )
+                    """.trimIndent())
+                }
+
+                if (enemy.vengeance) add("c.vengeance IS NOT NULL")
+            }
+
+            locationFilter?.let { location ->
+                location.shroud.run {
+                    add("""
+                        (
+                            ${if (location.xShroud) "c.shroud = -2 OR " else ""}
+                            (
+                                ${if (min == null) "c.shroud IS NULL OR " else ""}
+                                (c.shroud >= $min AND c.shroud <= $max)
+                            )
+                        )
+                    """.trimIndent())
+                }
+
+                location.clues.run {
+                    add("""
+                        (
+                            ${if (min == null) "c.clues IS NULL OR " else ""}
+                            (c.clues >= $min AND c.clues <= $max ${
+                                if (location.perInvestigatorClues) "AND c.clues_fixed = 0" else ""
+                            })
+                        )
+                    """.trimIndent())
+                }
+            }
+
+            officialFilter?.let { official ->
+                if (official) add("c.official = 1")
+                else add("c.official = 0")
+            }
+
+            if (illustrators.isNotEmpty()) {
+                val illustratorsString = illustrators.joinToString(",") { "'$it'" }
+                add("(c.illustrator IN ($illustratorsString) OR c.back_illustrator IN ($illustratorsString))")
+            }
+        }
+
+        return filtersListBuilder.joinToString(" AND ")
     }
 }
 

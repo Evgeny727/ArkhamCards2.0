@@ -39,6 +39,8 @@ object CardCache {
         private set
     var uses: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
+    var slots: MutableMap<String, MutableSet<String>> = mutableMapOf()
+        private set
     var chaosTokens: MutableMap<String, MutableSet<String>> = mutableMapOf()
         private set
     var tags: MutableMap<String, MutableSet<String>> = mutableMapOf()
@@ -104,6 +106,7 @@ object CardCache {
         properties = mutableMapOf()
         skillBoosts = mutableMapOf()
         uses = mutableMapOf()
+        slots = mutableMapOf()
         chaosTokens = mutableMapOf()
         tags = mutableMapOf()
         requiredCards = mutableMapOf()
@@ -391,8 +394,8 @@ object CardCache {
 
             if (card.typeCode == "asset") {
                 indexBySkillBoosts(card, text)
-
                 indexByUses(card, text)
+                indexBySlots(card)
             }
         }
     }
@@ -415,6 +418,7 @@ object CardCache {
         val cardTraits = (card.realTraits ?: "") + (card.realBackTraits ?: "")
         if (cardTraits.isBlank()) return
         for (trait in cardTraits.split(".")) {
+            if (trait.isBlank()) continue
             traits.addToSet(trait.trim(), card.id)
         }
     }
@@ -466,6 +470,13 @@ object CardCache {
         }
     }
 
+    private fun indexBySlots(card: CardEntity) {
+        if (card.realSlot == null) return
+        for (slot in card.realSlot.split(".")) {
+            slots.addToSet(slot.trim().lowercase(), card.id)
+        }
+    }
+
     private fun indexByChaosTokens(card: CardEntity, cardText: String) {
         if (cardText.isBlank()) return
         CHAOS_REGEX.findAll(cardText).forEach { match ->
@@ -474,13 +485,12 @@ object CardCache {
     }
 
     private fun indexByTags(card: CardEntity, cardText: String) {
-        if (card.official) {
-            if (card.tags !is JsonArray) return
+        if (card.tags is JsonArray) {
             val parsedTags = card.tags.jsonArray.map { it.jsonPrimitive.content }
             for (tag in parsedTags) {
                 tags.addToSet(tag, card.id)
             }
-        } else {
+        } else if (!card.official) {
             for ((tag, regex) in TAG_REGEX_FALLBACKS) {
                 if (regex.containsMatchIn(cardText)) {
                     tags.addToSet(tag, card.id)
@@ -499,6 +509,7 @@ object CardCache {
         properties = data.properties.mapValues { it.value.toMutableSet() }.toMutableMap()
         skillBoosts = data.skillBoosts.mapValues { it.value.toMutableSet() }.toMutableMap()
         uses = data.uses.mapValues { it.value.toMutableSet() }.toMutableMap()
+        slots = data.slots.mapValues { it.value.toMutableSet() }.toMutableMap()
         chaosTokens = data.chaosTokens.mapValues { it.value.toMutableSet() }.toMutableMap()
         tags = data.tags.mapValues { it.value.toMutableSet() }.toMutableMap()
         requiredCards = data.requiredCards.mapValues { it.value.toMutableSet() }.toMutableMap()

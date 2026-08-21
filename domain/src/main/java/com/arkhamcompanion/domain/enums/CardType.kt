@@ -1,25 +1,23 @@
 package com.arkhamcompanion.domain.enums
 
-enum class CardType {
-    Act, Agenda, Asset, Enemy, EnemyLocation, Event, Investigator, Key, Location, Scenario, Skill, Story, Treachery, Unknown;
+enum class CardType(val code: String) {
+    Act("act"),
+    Agenda("agenda"),
+    Asset("asset"),
+    Enemy("enemy"),
+    EnemyLocation("enemy_location"),
+    Event("event"),
+    Investigator("investigator"),
+    Key("key"),
+    Location("location"),
+    Scenario("scenario"),
+    Skill("skill"),
+    Story("story"),
+    Treachery("treachery"),
+    Unknown("unknown");
 
     companion object {
-        fun byType(type: String) = when (type) {
-            "act" -> Act
-            "agenda" -> Agenda
-            "asset" -> Asset
-            "enemy" -> Enemy
-            "enemy_location" -> EnemyLocation
-            "event" -> Event
-            "investigator" -> Investigator
-            "key" -> Key
-            "location" -> Location
-            "scenario" -> Scenario
-            "skill" -> Skill
-            "story" -> Story
-            "treachery" -> Treachery
-            else -> Unknown
-        }
+        fun byType(type: String) = CardType.entries.find { it.code == type } ?: Unknown
     }
 
     fun isLocationLike(): Boolean {

@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.arkhamcompanion.UiErrorState
-import com.arkhamcompanion.domain.model.cards.CardsSearchOptions
-import com.arkhamcompanion.domain.model.cards.CardsSearchPreferences
+import com.arkhamcompanion.domain.model.cards.CardFilters
+import com.arkhamcompanion.domain.model.cards.CardSearchConfig
+import com.arkhamcompanion.domain.model.cards.CardSearchOptions
+import com.arkhamcompanion.domain.model.cards.CardSearchPreferences
 import com.arkhamcompanion.domain.repository.CardsRepository
 import com.arkhamcompanion.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,11 +48,11 @@ class CardsViewModel @Inject constructor(
         _spoilerState.value = value
     }
 
-    private val _searchOptions = MutableStateFlow(CardsSearchOptions())
+    private val _searchOptions = MutableStateFlow(CardSearchOptions())
     val searchOptions = _searchOptions.asStateFlow()
 
     fun updateSearchQuery(query: String) {
-        _searchOptions.update { it.copy(searchQuery = query) }
+        _searchOptions.update { it.copy(searchQuery = query.trim()) }
     }
 
     fun clearSearchQuery() {
@@ -69,35 +71,40 @@ class CardsViewModel @Inject constructor(
         _searchOptions.update { it.copy(searchBack = state) }
     }
 
-    private val _cardsSearchPreferences = userPreferencesRepository.cardsSearchPreferences.stateIn(
+    private val _cardSearchPreferences = userPreferencesRepository.cardSearchPreferences.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000L),
-        initialValue = CardsSearchPreferences()
+        initialValue = CardSearchPreferences()
     )
+
+    private val _cardFilters = MutableStateFlow(CardFilters())
+    val cardFilters = _cardFilters.asStateFlow()
 
     @OptIn(FlowPreview::class)
     private val _searchConfig = combine(
         _spoilerState,
         _searchOptions,
-        _cardsSearchPreferences
-    ) { spoilerState, searchOptions, cardsSearchPreferences ->
-        Triple(
+        _cardSearchPreferences,
+        cardFilters
+    ) { spoilerState, searchOptions, cardsSearchPreferences, cardFilters ->
+        CardSearchConfig(
             spoilerState,
-            searchOptions.copy(searchQuery = searchOptions.searchQuery.trim()),
-            cardsSearchPreferences
+            searchOptions,
+            cardsSearchPreferences,
+            cardFilters
         )
     }.debounce(200.milliseconds)
         .distinctUntilChanged()
 
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val searchResults = _searchConfig.flatMapLatest { (spoilerState, searchOptions, searchPreferences) ->
-        cardsRepository.searchPaginatedCardsFlow(spoilerState, searchOptions, searchPreferences)
+    val searchResults = _searchConfig.flatMapLatest { searchConfig ->
+        cardsRepository.searchPaginatedCardsFlow(searchConfig)
     }.cachedIn(viewModelScope)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val searchResultCodes = _searchConfig.flatMapLatest { (spoilerState, searchOptions, searchPreferences) ->
-        cardsRepository.searchCardCodesFlow(spoilerState, searchOptions, searchPreferences)
+    val searchResultCodes = _searchConfig.flatMapLatest { searchConfig ->
+        cardsRepository.searchCardCodesFlow(searchConfig)
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000L),

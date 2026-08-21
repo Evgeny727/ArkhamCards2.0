@@ -48,7 +48,7 @@ import com.arkhamcompanion.ui.theme.CustomTheme
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
-fun LazyCardListWithStickHeaders(
+fun LazyCardListWithStickyHeaders(
     searchQuery: String,
     searchResults: LazyPagingItems<CardListItemUiModel>,
     searchResultCodes: ImmutableList<CodeWithTaboo>,
